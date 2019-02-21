@@ -20,9 +20,7 @@ import javax.persistence.Temporal;
 @Entity
 public class EventoEntity extends BaseEntity implements Serializable {
     
-     public  enum Categoria{
- 
-}
+     
     //Atributos
    
      /**
@@ -50,7 +48,7 @@ public class EventoEntity extends BaseEntity implements Serializable {
      /**
      * Representa la categoria de un evento
      */
-    private Categoria categoria;
+    private String categoria;
      /**
      * Representa la privacidad de un evento
      */
@@ -67,12 +65,12 @@ public class EventoEntity extends BaseEntity implements Serializable {
      /**
      * Representa los contenido multimedia de un evento
      */
- //    @javax.persistence.OneToMany(
- //       mappedBy = "evento",
- //       fetch = javax.persistence.FetchType.LAZY,
- //               cascade = CascadeType.ALL
- //   )
- //   List<MultimediaEntity> multimedia;
+     @javax.persistence.OneToMany(
+        mappedBy = "evento",
+        fetch = javax.persistence.FetchType.LAZY,
+                cascade = CascadeType.ALL
+    )
+    List<MultimediaEntity> multimedia;
      
       /**
      * Representa la lista de patrocinadores de un evento
@@ -102,17 +100,22 @@ public class EventoEntity extends BaseEntity implements Serializable {
      /**
      * Representa la lista de usuarios  de un evento
      */
- //    @javax.persistence.ManyToMany(
- //       mappedBy ="evento",
- //       fetch = javax.persistence.FetchType.LAZY
- //          )
- //   List<UsuarioEntity> usuarios;
+     @javax.persistence.ManyToMany(
+        mappedBy ="evento",
+        fetch = javax.persistence.FetchType.LAZY
+           )
+    List<UsuarioEntity> usuarios;
+     
+     /**
+     * Representa la lista de usuarios  de un evento
+     */
+     @javax.persistence.OneToMany(
+        mappedBy ="evento",
+        fetch = javax.persistence.FetchType.LAZY
+           )
+    private List<EntradaEntity> entradas;
     
     
-    
-    
-    
-
     /**
      * @return the nombre
      */
@@ -186,14 +189,14 @@ public class EventoEntity extends BaseEntity implements Serializable {
     /**
      * @return the categoria
      */
-    public Categoria getCategoria() {
+    public String getCategoria() {
         return categoria;
     }
 
     /**
      * @param categoria the categoria to set
      */
-    public void setCategoria(Categoria categoria) {
+    public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 
@@ -273,6 +276,27 @@ public class EventoEntity extends BaseEntity implements Serializable {
 
     public void setAgenda(List<AgendaEntity> agenda) {
         this.agenda = agenda;
+    }
+    public List<MultimediaEntity> getMultimedia() {
+        return multimedia;
+    }
+
+    public void setMultimedia(List<MultimediaEntity> agenda) {
+        this.multimedia = multimedia;
+    }
+
+    /**
+     * @return the entradas
+     */
+    public List<EntradaEntity> getEntradas() {
+        return entradas;
+    }
+
+    /**
+     * @param entradas the entradas to set
+     */
+    public void setEntradas(List<EntradaEntity> entradas) {
+        this.entradas = entradas;
     }
     
 }

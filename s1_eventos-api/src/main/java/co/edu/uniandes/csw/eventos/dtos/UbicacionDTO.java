@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.eventos.dtos;
 
+import co.edu.uniandes.csw.eventos.entities.UbicacionEntity;
 import java.io.Serializable;
 
 /**
@@ -15,14 +16,30 @@ public class UbicacionDTO implements Serializable {
     //Atributos
     private double latitud;
     private double longitud;
-    private String edificio;
-    private String salon;
+    private String nombre;
     
-    /**
-     * constructor
-     */
     public UbicacionDTO(){
         
+    }
+    /**
+     * constructor
+     * @param entity
+     */
+    public UbicacionDTO(UbicacionEntity entity){
+        if(entity!=null){
+            this.latitud=entity.getLatitud();
+            this.longitud=entity.getLongitud();
+            this.nombre=entity.getNombre();
+        }
+
+    }
+    
+    public UbicacionEntity toEntity(){
+        UbicacionEntity entity=new UbicacionEntity();
+        entity.setLatitud(this.latitud);
+        entity.setLongitud(this.longitud);
+        entity.setNombre(this.nombre);
+        return entity;
     }
 
     /**
@@ -56,32 +73,15 @@ public class UbicacionDTO implements Serializable {
     /**
      * @return the edificio
      */
-    public String getEdificio() {
-        return edificio;
+    public String getNombre() {
+        return nombre;
     }
 
     /**
-     * @param edificio the edificio to set
+     * @param nombre the edificio to set
      */
-    public void setEdificio(String edificio) {
-        this.edificio = edificio;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    /**
-     * @return the salon
-     */
-    public String getSalon() {
-        return salon;
-    }
-
-    /**
-     * @param salon the salon to set
-     */
-    public void setSalon(String salon) {
-        this.salon = salon;
-    }
-   
-    
-    
-    
 }

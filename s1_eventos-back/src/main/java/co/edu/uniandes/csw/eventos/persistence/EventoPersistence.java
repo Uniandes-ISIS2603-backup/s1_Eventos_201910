@@ -45,7 +45,7 @@ public class EventoPersistence {
      * @param id 
      */
     public void delete(Long id){
-        EventoEntity eliminar=find(id);
+        EventoEntity eliminar=em.find(EventoEntity.class, id);
         em.remove(eliminar);
     }
     
@@ -73,7 +73,7 @@ public class EventoPersistence {
      */
     
     public void update(EventoEntity entity){
-       em.refresh(entity);
+       em.merge(entity);
     }
     
     

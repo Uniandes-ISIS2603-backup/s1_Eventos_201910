@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.eventos.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -15,11 +16,8 @@ import javax.persistence.Entity;
 @Entity
 public class UbicacionEntity extends BaseEntity implements Serializable {
     
-    /**
-     * Representa el id de una ubicacion , es la llave principal de la base de datos
-     */
-    @javax.persistence.Id
-    private Long id;
+        @PodamExclude
+
     
      /**
      * Representa la latitud de una ubicacion
@@ -30,16 +28,9 @@ public class UbicacionEntity extends BaseEntity implements Serializable {
      */
     private double longitud;
     /**
-     * Representa el edificio de una ubicacion
+     * Representa el nombre de una ubicacion
      */
-    private String edificio;
-    /**
-     * Representa el salon de una ubicacion
-     */
-    private String salon;
-     
-    
-
+    private String nombre;
     /**
      * @return the latitud
      */
@@ -71,32 +62,14 @@ public class UbicacionEntity extends BaseEntity implements Serializable {
     /**
      * @return the edificio
      */
-    public String getEdificio() {
-        return edificio;
+    public String getNombre() {
+        return nombre;
     }
 
     /**
-     * @param edificio the edificio to set
+     * @param nombre the edificio to set
      */
-    public void setEdificio(String edificio) {
-        this.edificio = edificio;
-    }
-
-    /**
-     * @return the salon
-     */
-    public String getSalon() {
-        return salon;
-    }
-
-    /**
-     * @param salon the salon to set
-     */
-    public void setSalon(String salon) {
-        this.salon = salon;
-    }
-
-    
-    
-    
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }   
 }

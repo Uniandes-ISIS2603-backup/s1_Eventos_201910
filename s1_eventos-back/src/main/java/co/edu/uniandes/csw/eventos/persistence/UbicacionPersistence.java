@@ -47,7 +47,7 @@ public class UbicacionPersistence {
      * @param id 
      */
     public void delete(Long id){
-        UbicacionEntity eliminar=find(id);
+        UbicacionEntity eliminar=em.find(UbicacionEntity.class,id);
         em.remove(eliminar);
     }
     
@@ -65,7 +65,7 @@ public class UbicacionPersistence {
      * @return todas las ubicaciones
      */
     public List<UbicacionEntity> findAll(){
-        TypedQuery query = em.createQuery("select u from EventoEntity u",UbicacionEntity.class);
+        TypedQuery query = em.createQuery("select u from UbicacionEntity u",UbicacionEntity.class);
     return query.getResultList();
     }
     
@@ -75,6 +75,6 @@ public class UbicacionPersistence {
      */
     public void update(UbicacionEntity entity){
         
-        em.refresh(entity);
+        em.merge(entity);
     }
 }
