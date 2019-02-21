@@ -35,6 +35,16 @@ public EventoDetailDTO(EventoEntity entity){
     this.multimedias=entity.getMultimedia();
     this.entradas=entity.getEntradas();
 }
+public EventoEntity toEntity(){
+   EventoEntity entity=new EventoEntity();
+   entity.setAgenda(this.agendas);
+   entity.setOrganizadores(this.organizadores);
+   entity.setPatrocinadores(this.patrocinadores);
+   entity.setMultimedia(this.multimedias);
+   entity.setEntradas(this.entradas);
+   return entity;
+   
+}
 
     /**
      * @return the agendas
