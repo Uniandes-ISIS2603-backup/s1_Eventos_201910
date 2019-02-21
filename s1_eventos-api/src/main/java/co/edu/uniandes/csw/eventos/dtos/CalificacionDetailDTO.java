@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.csw.eventos.dtos;
 
+import co.edu.uniandes.csw.eventos.entities.CalificacionEntity;
+
 /**
  *
  * @author Juan David Díaz
@@ -13,8 +15,9 @@ public class CalificacionDetailDTO extends CalificacionDTO {
     
     private EventoDTO evento;
     private UsuarioDTO usuario;
-    public CalificacionDetailDTO()
-    {
-        //Falta todo
+
+    public CalificacionDetailDTO(CalificacionEntity calificacionEntity) {
+        super(calificacionEntity);
     }
+    
 }
