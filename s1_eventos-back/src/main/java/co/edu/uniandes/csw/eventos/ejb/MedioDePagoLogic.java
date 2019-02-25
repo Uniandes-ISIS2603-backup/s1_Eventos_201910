@@ -45,6 +45,7 @@ public class MedioDePagoLogic {
     {
         if(persistencia.find(medioDePago.getId())==null)
            throw new BusinessLogicException("No existe un medio de pago con el id \""+medioDePago.getId() + "\"");
+         persistencia.update(medioDePago);
     }
     
     public MedioDePagoEntity find(Long medioDePagoId)

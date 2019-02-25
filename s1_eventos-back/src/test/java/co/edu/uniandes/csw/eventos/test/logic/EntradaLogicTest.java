@@ -112,7 +112,7 @@ public class EntradaLogicTest {
     }
     
     @Test
-    public void updateEntradaTest() throws Exception{
+    public void updateEntradaTest() throws Exception {
         EntradaEntity entity = data.get(0);
         EntradaEntity pojoEntity = factory.manufacturePojo(EntradaEntity.class);
 

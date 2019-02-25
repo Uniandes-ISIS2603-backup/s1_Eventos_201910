@@ -47,13 +47,13 @@ public class CalificacionPersistence {
     
     public List<CalificacionEntity> findAll()
     {
-        TypedQuery<CalificacionEntity> query = em.createQuery("select u from EventoEntity u",CalificacionEntity.class);
+        TypedQuery query = em.createQuery("select u from EventoEntity u",CalificacionEntity.class);
         return query.getResultList();
     }
     
     public void update(CalificacionEntity entity)
     {
-        em.refresh(entity);
+        em.merge(entity);
     }
     
     public CalificacionEntity findByName(String nombre)

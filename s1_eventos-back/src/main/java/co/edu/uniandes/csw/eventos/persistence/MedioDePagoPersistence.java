@@ -53,7 +53,7 @@ public class MedioDePagoPersistence {
     
     public void update(MedioDePagoEntity entity)
     {
-        em.refresh(entity);
+        em.merge(entity);
     }
     
 }

@@ -38,7 +38,7 @@ public class UsuarioLogic {
             throw new BusinessLogicException("Ya existe un usuario con el correo \"" + usuarioEntity.getCorreoElectronico() + "\"");
         }
         //La contrasenia es de 8 a 40 caracteres, contiene al menos un digito, una letra minuscula, una letra mayuscula y un caracter especial.
-        Pattern ptrContrasenia = Pattern.compile("((?=.*[a-z])(?=.*\\\\d)(?=.*[A-Z])(?=.*[@#$%!]).{8,40})El ");
+        Pattern ptrContrasenia = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
         if(!ptrContrasenia.matcher(usuarioEntity.getContrasenia()).matches()){
             throw new BusinessLogicException("El formato de la contrasena no es correcto");
         }

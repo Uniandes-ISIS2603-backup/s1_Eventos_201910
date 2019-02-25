@@ -231,7 +231,7 @@ public class UsuarioLogicTest {
      */
     @Test
     public void deleteUsuarioTest() throws BusinessLogicException {
-        UsuarioEntity entity = data.get(1);
+        UsuarioEntity entity = data.get(0);
         usuarioLogic.deleteUsuario(entity.getId());
         UsuarioEntity deleted = em.find(UsuarioEntity.class, entity.getId());
         Assert.assertNull(deleted);

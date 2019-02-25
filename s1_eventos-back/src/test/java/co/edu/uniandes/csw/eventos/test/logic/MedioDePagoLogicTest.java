@@ -77,7 +77,8 @@ public class MedioDePagoLogicTest {
     }
     
     private void clearData() {
-        em.createQuery("delete from PrizeEntity").executeUpdate();
+        em.createQuery("delete from EventoEntity").executeUpdate();
+        em.createQuery("delete from MedioDePagoEntity").executeUpdate();
     }
 
     /**

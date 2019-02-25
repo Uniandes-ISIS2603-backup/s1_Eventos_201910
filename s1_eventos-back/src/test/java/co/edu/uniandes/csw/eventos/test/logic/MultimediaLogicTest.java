@@ -79,6 +79,7 @@ public class MultimediaLogicTest {
         try {
             utx.begin();
             clearData();
+            insertData();
             utx.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,6 +96,18 @@ public class MultimediaLogicTest {
      */
     private void clearData() {
         em.createQuery("delete from MultimediaEntity").executeUpdate();
+    }
+    /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     */
+    private void insertData() {
+        MultimediaEntity entity = factory.manufacturePojo(MultimediaEntity.class);
+        entity.setNombre("Prueba-Multimedia00");
+        entity.setTipo("TipoPrueba00");
+        entity.setUrl("https://uniandes.edu.co/desarrollo/test00.txt");
+        em.persist(entity);
+        data.add(entity);
     }
 
 
@@ -122,6 +135,7 @@ public class MultimediaLogicTest {
     @Test (expected = BusinessLogicException.class)
     public void createMultimediaMalFormatoNombreTest() throws BusinessLogicException {
         MultimediaEntity newEntity = factory.manufacturePojo(MultimediaEntity.class);
+        newEntity.setNombre(newEntity.getNombre()+"-");
         newEntity.setTipo("TipoPrueba02");
         newEntity.setUrl("https://uniandes.edu.co/desarrollo/test2.txt");
         multimediaLogic.createMultimedia(newEntity);
@@ -136,6 +150,7 @@ public class MultimediaLogicTest {
     public void createMultimediaMalFormatoTipoTest() throws BusinessLogicException {
         MultimediaEntity newEntity = factory.manufacturePojo(MultimediaEntity.class);
         newEntity.setNombre("Prueba-Multimedia01");
+        newEntity.setTipo(newEntity.getTipo()+"-");
         newEntity.setUrl("https://uniandes.edu.co/desarrollo/test2.txt");
         multimediaLogic.createMultimedia(newEntity);
     }
@@ -186,7 +201,7 @@ public class MultimediaLogicTest {
      */
     @Test
     public void deleteMultimediaTest() throws BusinessLogicException {
-        MultimediaEntity entity = data.get(1);
+        MultimediaEntity entity = data.get(0);
         multimediaLogic.deleteMultimedia(entity.getId());
         MultimediaEntity deleted = em.find(MultimediaEntity.class, entity.getId());
         Assert.assertNull(deleted);

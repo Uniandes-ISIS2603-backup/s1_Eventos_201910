@@ -51,7 +51,7 @@ public class EntradaPersistence {
     
      public void update(EntradaEntity entity)
     {
-        em.refresh(entity);
+        em.merge(entity);
     }
      
      public EntradaEntity findByName(String nombre)
