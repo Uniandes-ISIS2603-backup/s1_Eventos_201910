@@ -5,7 +5,10 @@
  */
 package co.edu.uniandes.csw.eventos.dtos;
 
+import co.edu.uniandes.csw.eventos.entities.EntradaEntity;
 import java.io.Serializable;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
@@ -24,7 +27,7 @@ public class EntradaDTO implements Serializable {
     /*
         Atributo de tipo double que representa el precio de la entrada
     */
-    private Double precio ;
+    private int precio ;
     /*
     Atributo de tipo String que representa la locacion de la entrada
     */
@@ -49,9 +52,19 @@ public class EntradaDTO implements Serializable {
     /*
         Constructor 
     */
-    public EntradaDTO()
+    public EntradaDTO(EntradaEntity entradaEntity)
     {
-        
+        if(entradaEntity!=null){
+            this.QR=entradaEntity.getQR();
+            this.descripcion=entradaEntity.getDescripcion();
+            this.precio=entradaEntity.getPrecio();
+            this.locacion=entradaEntity.getLocacion();
+            this.numero=entradaEntity.getNumero();
+            this.disponible=entradaEntity.isDisponible();
+            this.checkIn=entradaEntity.isCheckIn();
+            this.reservado=entradaEntity.isReservada();
+            
+        }
     }
     /**
         @return QR. Retorna el QR
@@ -68,7 +81,7 @@ public class EntradaDTO implements Serializable {
     /**
      *  @return precio. Retorna el precio
     **/
-    public Double getPrecio() {
+    public int getPrecio() {
         return precio;
     }
     /**
@@ -116,7 +129,7 @@ public class EntradaDTO implements Serializable {
     /**
      *@param precio. Reinicializa el valor del precio
     **/
-    public void setPrecio(Double precio) {
+    public void setPrecio(int precio) {
         this.precio = precio;
     }
     /**
@@ -136,6 +149,24 @@ public class EntradaDTO implements Serializable {
     **/
     public void setReservado(boolean reservado) {
         this.reservado = reservado;
+    }
+    
+    public EntradaEntity toEntity()
+    {
+        EntradaEntity entradaEntity = new EntradaEntity();
+        entradaEntity.setDescripcion(this.descripcion);
+        entradaEntity.setPrecio(this.precio);
+        entradaEntity.setLocacion(this.locacion);
+        entradaEntity.setNumero(this.numero);
+        entradaEntity.setDisponible(this.disponible);
+        entradaEntity.setCheckInm(this.checkIn);
+        entradaEntity.setReservada(this.reservado);
+        return entradaEntity;
+    }
+    
+    public String toString()
+    {
+        return ToStringBuilder.reflectionToString(this,ToStringStyle.MULTI_LINE_STYLE);
     }
     
     

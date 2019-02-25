@@ -22,9 +22,9 @@ public class OrganizadorEntity extends BaseEntity implements Serializable {
     @ManyToMany(mappedBy = "organizadores")
     private List<EventoEntity> eventos = new ArrayList<>();
     
-    @PodamExclude
-    @OneToMany(mappedBy = "organizador",fetch=FetchType.LAZY)
-    private List<MemoriaEntity> memorias = new ArrayList<>();
+//    @PodamExclude
+//    @OneToMany(mappedBy = "organizadores",fetch=FetchType.LAZY)
+//    private List<MemoriaEntity> memorias = new ArrayList<>();
     
     private String nombre;
     private String telefono;
@@ -44,19 +44,19 @@ public class OrganizadorEntity extends BaseEntity implements Serializable {
         this.eventos = eventos;
     }
 
-    /**
-     * @return the memorias
-     */
-    public List<MemoriaEntity> getMemorias() {
-        return memorias;
-    }
-
-    /**
-     * @param memorias the memorias to set
-     */
-    public void setMemorias(List<MemoriaEntity> memorias) {
-        this.memorias = memorias;
-    }
+//    /**
+//     * @return the memorias
+//     */
+//    public List<MemoriaEntity> getMemorias() {
+//        return memorias;
+//    }
+//
+//    /**
+//     * @param memorias the memorias to set
+//     */
+//    public void setMemorias(List<MemoriaEntity> memorias) {
+//        this.memorias = memorias;
+//    }
 
     /**
      * @return the nombre

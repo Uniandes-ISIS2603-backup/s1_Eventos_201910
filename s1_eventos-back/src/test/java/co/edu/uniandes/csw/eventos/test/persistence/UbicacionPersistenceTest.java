@@ -8,25 +8,29 @@ package co.edu.uniandes.csw.eventos.test.persistence;
 import co.edu.uniandes.csw.eventos.entities.EventoEntity;
 import co.edu.uniandes.csw.eventos.entities.UbicacionEntity;
 import co.edu.uniandes.csw.eventos.persistence.UbicacionPersistence;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 
 /**
  *
- * @author estudiante
+ * @author Mateo Vallejo
  */
+@RunWith(Arquillian.class)
 public class UbicacionPersistenceTest {
     
      /**
@@ -55,7 +59,7 @@ public class UbicacionPersistenceTest {
     /**
       * Collecion de Objetos de la clase que se va a probar
       */
-    private List<UbicacionEntity> data;
+    private List<UbicacionEntity> data= new ArrayList<>();
    
          
     /**
@@ -68,7 +72,7 @@ public class UbicacionPersistenceTest {
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(UbicacionEntity.class.getPackage())
-                .addPackage(UbicacionEntity.class.getPackage())
+                .addPackage(UbicacionPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml"); 
 }
@@ -118,7 +122,7 @@ public class UbicacionPersistenceTest {
      * test de crear un objeto de UbicacionEntity
      */
   @Test
-public void createEventoEntityTest() {
+public void createUbicacionEntityTest() {
     PodamFactory factory = new PodamFactoryImpl();
     UbicacionEntity newEntity = factory.manufacturePojo(UbicacionEntity.class);
     
@@ -136,9 +140,9 @@ public void createEventoEntityTest() {
      * test de obtener todos los objetos de tipo  UbicacionEntity
      */
 @Test
-public void findAllEventoEntityTest() {
+public void findAllUbicacionEntityTest() {
     List<UbicacionEntity> list = up.findAll();
-    Assert.assertEquals(data.size(), list.size());
+    Assert.assertEquals(list.size(),data.size());
     for (UbicacionEntity ent : list) {
         boolean found = false;
         for (UbicacionEntity entity : data) {
@@ -155,7 +159,7 @@ public void findAllEventoEntityTest() {
      * test de obtener un objeto de UbicacionEntity
      */
 @Test
-public void findEventoEntityTest() {
+public void findUbicacionEntityTest() {
     UbicacionEntity entity = data.get(0);
     UbicacionEntity newEntity = up.find(entity.getId());
     Assert.assertNotNull(newEntity);
@@ -163,7 +167,7 @@ public void findEventoEntityTest() {
 }
 
 /**
-     * test de actualizar un objeto de EventoEntity
+     * test de actualizar un objeto de UbicacionEntity
      */
 @Test
 public void updateUbicacionEntityTest() {
@@ -185,10 +189,10 @@ public void updateUbicacionEntityTest() {
      */
 
 @Test
-public void deleteEventoEntityTest() {
+public void deleteUbicacionEntityTest() {
     UbicacionEntity entity = data.get(0);
     up.delete(entity.getId());
-    EventoEntity deleted = em.find(EventoEntity.class, entity.getId());
+    UbicacionEntity deleted = em.find(UbicacionEntity.class, entity.getId());
     Assert.assertNull(deleted);
 }
 }

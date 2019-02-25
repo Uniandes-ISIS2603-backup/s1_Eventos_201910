@@ -5,7 +5,10 @@
  */
 package co.edu.uniandes.csw.eventos.dtos;
 
+import co.edu.uniandes.csw.eventos.entities.CalificacionEntity;
 import java.io.Serializable;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
@@ -15,7 +18,7 @@ public class CalificacionDTO implements Serializable {
     /*
         Atributo de tipo int que indica la cantidad de estrellas de la calificacion
     */
-   
+   //probando git
     private int estrellas;
     /*
         Atributo de  tipo String que contiene el comentario de la calificacion
@@ -29,9 +32,14 @@ public class CalificacionDTO implements Serializable {
     /*
         Constructor
     */
-      public CalificacionDTO()
+      public CalificacionDTO(CalificacionEntity calificacionEntity)
     {
-        
+        if(calificacionEntity !=null)
+        {
+            this.comentario=calificacionEntity.getComentarios();
+            this.estrellas=calificacionEntity.getEstrellas();
+            this.recomendado=calificacionEntity.getRecomendado();
+        }
     }
       /**
        * @return estrellas.  Retorna las estrellas
@@ -70,5 +78,18 @@ public class CalificacionDTO implements Serializable {
         this.recomendado = recomendado;
     }
     
+    public CalificacionEntity toEntity()
+    {
+        CalificacionEntity calificacionEntity = new CalificacionEntity();
+        calificacionEntity.setComentarios(this.comentario);
+        calificacionEntity.setEstrellas(this.estrellas);
+        calificacionEntity.setRecomendado(this.recomendado);
+        return calificacionEntity;
+    }
     
+     @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+
 }

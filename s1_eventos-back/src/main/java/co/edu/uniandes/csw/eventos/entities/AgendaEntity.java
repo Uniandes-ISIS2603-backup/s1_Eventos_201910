@@ -22,9 +22,16 @@ public class AgendaEntity extends BaseEntity implements Serializable{
     @PodamExclude
     @ManyToOne
     private EventoEntity eventos = new EventoEntity();
-     
+    
+        @javax.persistence.ManyToMany(
+        fetch = javax.persistence.FetchType.LAZY
+           )
+    List<InvitadoEspecialEntity> invitadosEspeciales = new ArrayList<>();
+    
     private String nombre;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date horaInicio;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date rango;
     private String actividad;
      
@@ -81,4 +88,13 @@ public class AgendaEntity extends BaseEntity implements Serializable{
     public void setEventos(EventoEntity eventos) {
         this.eventos = eventos;
     }
+
+    public List<InvitadoEspecialEntity> getInvitadosEspeciales() {
+        return invitadosEspeciales;
+    }
+
+    public void setInvitadosEspeciales(List<InvitadoEspecialEntity> invitadosEspeciales) {
+        this.invitadosEspeciales = invitadosEspeciales;
+    }
+    
 }

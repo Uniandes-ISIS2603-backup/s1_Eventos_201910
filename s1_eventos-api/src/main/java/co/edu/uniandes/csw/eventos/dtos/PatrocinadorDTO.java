@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.eventos.dtos;
 
-import co.edu.uniandes.csw.eventos.entities.OrganizadorEntity;
 import co.edu.uniandes.csw.eventos.entities.PatrocinadorEntity;
 import java.io.Serializable;
 

@@ -5,6 +5,12 @@
  */
 package co.edu.uniandes.csw.eventos.dtos;
 
+
+import co.edu.uniandes.csw.eventos.entities.CalificacionEntity;
+import co.edu.uniandes.csw.eventos.entities.UsuarioEntity;
+
+import co.edu.uniandes.csw.eventos.entities.EventoEntity;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,26 +18,38 @@ import java.util.Date;
  *
  * @author estudiante
  */
-public class EventoDTO implements Serializable{
-     
-    public  enum Categoria{
- 
-}
+public class EventoDTO implements Serializable {
+
+   
     //Atributos
-    
+
     private String nombre;
     private String descripcion;
     private Date fechaInicio;
     private Date fechaFin;
     private String detalles;
-    private Categoria categoria;
+    private String categoria;
     private boolean privado;
     private int capacidadMaxima;
     private int boletasDisponibles;
     private long id;
     
-    public EventoDTO(){
-        
+    
+
+    public EventoDTO() {
+
+    }
+
+    public EventoDTO(EventoEntity entity) {
+        this.nombre = entity.getNombre();
+        this.descripcion = entity.getDescripcion();
+        this.fechaInicio = entity.getFechaInicio();
+        this.fechaFin = entity.getFechaFin();
+        this.detalles = entity.getDetalles();
+        this.privado = entity.isPrivado();
+        this.capacidadMaxima = entity.getCapacidadMaxima();
+        this.boletasDisponibles = entity.getBoletasDisponibles();
+        this.categoria = entity.getCategoria();
     }
 
     /**
@@ -107,14 +125,14 @@ public class EventoDTO implements Serializable{
     /**
      * @return the categoria
      */
-    public Categoria getCategoria() {
+    public String getCategoria() {
         return categoria;
     }
 
     /**
      * @param categoria the categoria to set
      */
-    public void setCategoria(Categoria categoria) {
+    public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 
@@ -160,18 +178,6 @@ public class EventoDTO implements Serializable{
         this.boletasDisponibles = boletasDisponibles;
     }
 
-    /**
-     * @return the id
-     */
-    public long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(long id) {
-        this.id = id;
-    }
     
+
 }

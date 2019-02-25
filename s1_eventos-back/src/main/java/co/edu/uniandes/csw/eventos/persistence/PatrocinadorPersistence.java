@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.eventos.persistence;
 
 import co.edu.uniandes.csw.eventos.entities.PatrocinadorEntity;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,13 +16,15 @@ import javax.persistence.TypedQuery;
 
 /**
  *
- * @author estudiante
+ * @author Paula Molina 
  */
 @Stateless
 public class PatrocinadorPersistence {
     
     @PersistenceContext(unitName = "eventosPU")
     protected EntityManager em;
+    
+    private static final Logger LOGGER = Logger.getLogger(PatrocinadorPersistence.class.getName());
     
     /**
      * Crea un patrovinador en la base de datos
@@ -76,5 +80,32 @@ public class PatrocinadorPersistence {
 
         PatrocinadorEntity patrocinadorEntity = em.find(PatrocinadorEntity.class, patrocinadoresId);
         em.remove(patrocinadorEntity);
+    }
+    
+    /**
+     * Busca si hay algun Patrociandor con el nombre que se envía de argumento
+     *
+     * @param nombre: Nombre del patrocinador que se está buscando
+     * @return null si no existe ninguna patrocinador con el nombre del argumento.
+     * Si existe alguna devuelve la primera.
+     */
+    public PatrocinadorEntity findByName(String nombre) {
+        LOGGER.log(Level.INFO, "Consultando patrocinador por nombre ", nombre);
+        // Se crea un query para buscar editoriales con el nombre que recibe el método como argumento. ":name" es un placeholder que debe ser remplazado
+        TypedQuery query = em.createQuery("Select e From PatrocinadorEntity e where e.nombre = :nombre", PatrocinadorEntity.class);
+        // Se remplaza el placeholder ":name" con el valor del argumento 
+        query = query.setParameter("nombre", nombre);
+        // Se invoca el query se obtiene la lista resultado
+        List<PatrocinadorEntity> sameNombre = query.getResultList();
+        PatrocinadorEntity result;
+        if (sameNombre == null) {
+            result = null;
+        } else if (sameNombre.isEmpty()) {
+            result = null;
+        } else {
+            result = sameNombre.get(0);
+        }
+        LOGGER.log(Level.INFO, "Saliendo de consultar patrocinador por nombre ", nombre);
+        return result;
     }
 }

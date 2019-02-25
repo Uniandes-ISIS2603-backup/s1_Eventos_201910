@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.eventos.dtos;
 
+import co.edu.uniandes.csw.eventos.entities.UsuarioEntity;
 import java.io.Serializable;
 
 /**
@@ -20,6 +21,24 @@ public class UsuarioDTO implements Serializable{
     
     public UsuarioDTO(){
         
+    }
+    public UsuarioDTO(UsuarioEntity usuarioEntity){
+        if(usuarioEntity != null){
+            this.correoElectronico = usuarioEntity.getCorreoElectronico();
+            this.contrasenia = usuarioEntity.getContrasenia();
+            this.latitud = usuarioEntity.getLatitud();
+            this.longitud = usuarioEntity.getLongitud();
+            this.unialpino = usuarioEntity.isUnialpino();
+        }
+    }
+    public UsuarioEntity toEntity(){
+        UsuarioEntity usuarioEntity = new UsuarioEntity();
+        usuarioEntity.setCorreoElectronico(this.correoElectronico);
+        usuarioEntity.setContrasenia(this.contrasenia);
+        usuarioEntity.setLatitud(this.latitud);
+        usuarioEntity.setLongitud(this.longitud);
+        usuarioEntity.setUnialpino(this.unialpino);
+        return usuarioEntity;
     }
 
     /**

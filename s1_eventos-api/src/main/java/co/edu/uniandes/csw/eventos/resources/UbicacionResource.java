@@ -9,9 +9,12 @@ package co.edu.uniandes.csw.eventos.resources;
  * @author estudiante
  */
 import co.edu.uniandes.csw.eventos.dtos.UbicacionDTO;
+//import co.edu.uniandes.csw.eventos.ejb.UbicacionLogic;
+//import co.edu.uniandes.csw.eventos.entities.UbicacionEntity;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+//import javax.inject.Inject;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -36,10 +39,17 @@ public class UbicacionResource {
     
    private static final Logger LOGGER = Logger.getLogger(UbicacionResource.class.getName());
    
+   //@Inject
+   //private UbicacionLogic ubicacionLogic;
+           
    @POST
    public UbicacionDTO createUbicacion(UbicacionDTO ubicacion)
    {
-   return ubicacion;
+//       UbicacionEntity ubicacionEntity = ubicacion.toEntity();
+//        UbicacionEntity  nuevaUbicacionEntity = ubicacionLogic.createUbicacion(ubicacionEntity);
+//        UbicacionDTO nuevaUbicacionDTO = new UbicacionDTO(nuevaUbicacionEntity);
+        
+        return ubicacion;
    }
   
    
@@ -55,13 +65,13 @@ public class UbicacionResource {
    }
    
    @PUT
-   @Path("(eventosId: \\d+")
+   @Path("(ubicacionesId: \\d+")
    public UbicacionDTO updateUbicacion (@PathParam("ubicacionesID") Long ubicacionesId, UbicacionDTO ubicacion){
        return ubicacion;
    }
    
    @DELETE
-   @Path("(eventosId: \\d+)")
+   @Path("(ubicacionesId: \\d+)")
    public void deleteUbicacion (@PathParam("ubicacionesID") Long ubicacionesId){
        
    }

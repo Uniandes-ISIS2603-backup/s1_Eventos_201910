@@ -54,19 +54,8 @@ public class FacturaPersistence {
     public FacturaEntity find(Long facturasId) {
         
         return em.find(FacturaEntity.class, facturasId);
-    }
-
-    /**
-     * Actualiza un Factura.
-     *
-     * @param facturaEntity: el organizador que viene con los nuevos cambios. 
-     * @return un Factura con los cambios aplicados.
-     */
-    public FacturaEntity update(FacturaEntity facturaEntity) {
-
-        return em.merge(facturaEntity);
-    }
-
+    }    
+    
     /**
      * Borra un Factura de la base de datos recibiendo como argumento el id de Factura
      *
