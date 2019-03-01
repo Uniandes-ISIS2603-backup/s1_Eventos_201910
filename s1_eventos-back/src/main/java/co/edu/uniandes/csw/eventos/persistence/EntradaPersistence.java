@@ -26,6 +26,7 @@ public class EntradaPersistence {
     @PersistenceContext(unitName="eventosPU")
     protected EntityManager em;
     
+    
     public EntradaEntity create(EntradaEntity entity)
     {
         em.persist(entity);

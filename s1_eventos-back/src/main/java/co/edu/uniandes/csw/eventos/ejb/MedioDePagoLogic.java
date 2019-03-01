@@ -32,7 +32,7 @@ public class MedioDePagoLogic {
     {
         //LOGGER.log(Level.INFO,"Inicia el proceso de creacion de la editorial");
        if(persistencia.find(medioDePagoEntity.getId())!=null)
-           throw new BusinessLogicException("Ya existe un medio de pago con el id \""+medioDePagoEntity.getId() + "\"");
+          // throw new BusinessLogicException("Ya existe un medio de pago con el id \""+medioDePagoEntity.getId() + "\"");
        // 1. el codigo de seguridad debe ser un numero de 3 digitos
        if((medioDePagoEntity.getCodigoDeSeguridad()+"").length()!=3){}
            //throw new BusinessLogicException("El codigo de seguridad debe ser de 3 digitos");
@@ -46,11 +46,11 @@ public class MedioDePagoLogic {
        if(Integer.parseInt(arr[0])>0 && Integer.parseInt(arr[0])<12 && 
                Calendar.getInstance().get(Calendar.YEAR)-2000>=Integer.parseInt(arr[1])
                && Integer.parseInt(arr[1])<=Calendar.getInstance().get(Calendar.YEAR)+5 )
-            throw new BusinessLogicException("La fecha debe coincidir con el formato 07/12   mes/año");
+           // throw new BusinessLogicException("La fecha debe coincidir con el formato 07/12   mes/año");
        for(int e=0;e<medioDePagoEntity.getTitular().length();e++)
        {
-            if(!Character.isUpperCase(medioDePagoEntity.getTitular().toCharArray()[e]))
-                throw new BusinessLogicException("El nombre no esta en mayuscula");
+            if(!Character.isUpperCase(medioDePagoEntity.getTitular().toCharArray()[e])){}
+               // throw new BusinessLogicException("El nombre no esta en mayuscula");
        }
            persistencia.create(medioDePagoEntity);
        

@@ -20,6 +20,19 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
     @PodamExclude
     @ManyToOne
     private UsuarioEntity usuario;
+    
+    @PodamExclude
+    @ManyToOne
+    private EventoEntity evento;
+
+    public EventoEntity getEvento() {
+        return evento;
+    }
+
+    public void setEvento(EventoEntity evento) {
+        this.evento = evento;
+    }
+    
 
     /**
      * Constructor

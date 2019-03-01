@@ -5,6 +5,9 @@
  */
 package co.edu.uniandes.csw.eventos.ejb;
 
+import co.edu.uniandes.csw.eventos.entities.EventoEntity;
+import co.edu.uniandes.csw.eventos.entities.FacturaEntity;
+import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.eventos.persistence.EntradaPersistence;
 import co.edu.uniandes.csw.eventos.persistence.EventoPersistence;
 import co.edu.uniandes.csw.eventos.persistence.FacturaPersistence;
@@ -21,9 +24,19 @@ import javax.inject.Inject;
 public class EntradaFacturaLogic {
      private static final Logger LOGGER = Logger.getLogger(EntradaFacturaLogic.class.getName());
      
-      @Inject
+    @Inject
     private EntradaPersistence entradaPersistence;
 
     @Inject
     private FacturaPersistence facturaPersistence;
+    
+    public FacturaEntity getFactura(Long entradaId) throws BusinessLogicException {
+        return entradaPersistence.find(entradaId).getFactura();
+    }
+    
+    public FacturaEntity replaceFactura(Long entradaId, FacturaEntity factura)
+    {
+        entradaPersistence.find(entradaId).setFactura(factura);
+        return factura;
+    }
 }
