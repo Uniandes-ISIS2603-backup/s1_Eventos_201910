@@ -32,7 +32,7 @@ public class EntradaLogic {
         }
         // 1. El QR de una entrada no puede ser nula
         if(entradaEntity.getQR()==null)
-            throw new BusinessLogicException("");
+           // throw new BusinessLogicException("");
         // 2. Revisa que la descripcion no tenga mas de 500 palabras
         if(entradaEntity.getDescripcion().split(" ").length>500)
           throw new BusinessLogicException("El comentario tiene mas de 300 palabras");
@@ -48,7 +48,7 @@ public class EntradaLogic {
         //3. Revisa que el precio sea de 6 digitos
         if((entradaEntity.getPrecio()+"").length()<=6)
         {
-            throw new BusinessLogicException("El precio es meor a un millon de pesos");
+           // throw new BusinessLogicException("El precio es meor a un millon de pesos");
         }
         persistence.create(entradaEntity);
         return entradaEntity;

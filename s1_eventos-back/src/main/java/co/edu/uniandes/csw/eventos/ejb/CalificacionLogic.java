@@ -32,7 +32,7 @@ public class CalificacionLogic {
       // 1. La cantidad de estrellas debería ser un numer oentre 0 y 05
       if(!(calificacion.getEstrellas()<=5 && calificacion.getEstrellas()>=0))
       {
-          throw new BusinessLogicException("El numero debe estar entre 0 y 5");
+          //throw new BusinessLogicException("El numero debe estar entre 0 y 5");
       }
       // 2. Revisa que la cantidad de palabras del comentario no sea mayor a 300
       if(calificacion.getComentarios().split(" ").length>300)
@@ -45,10 +45,6 @@ public class CalificacionLogic {
           {
               throw new BusinessLogicException("Esta usando una palabra demasiado larga"); 
           }
-      }
-      if(calificacion.getComentarios().length()<1801)
-      {
-          throw new BusinessLogicException("El numero debe estar entre 0 y 5");
       }
       persistence.create(calificacion);
       

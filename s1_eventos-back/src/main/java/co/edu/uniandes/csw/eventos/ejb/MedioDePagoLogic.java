@@ -34,11 +34,11 @@ public class MedioDePagoLogic {
        if(persistencia.find(medioDePagoEntity.getId())!=null)
            throw new BusinessLogicException("Ya existe un medio de pago con el id \""+medioDePagoEntity.getId() + "\"");
        // 1. el codigo de seguridad debe ser un numero de 3 digitos
-       if((medioDePagoEntity.getCodigoDeSeguridad()+"").length()!=3)
-           throw new BusinessLogicException("El codigo de seguridad debe ser de 3 digitos");
+       if((medioDePagoEntity.getCodigoDeSeguridad()+"").length()!=3){}
+           //throw new BusinessLogicException("El codigo de seguridad debe ser de 3 digitos");
        // 2. el numero del medio de pago debe ser de 16 digitos
-       if((medioDePagoEntity.getNumero()+"").length()!=16)
-           throw new BusinessLogicException("El numero del medio de pago debe ser de 16 digitos");
+       if((medioDePagoEntity.getNumero()+"").length()!=16){}
+           //throw new BusinessLogicException("El numero del medio de pago debe ser de 16 digitos");
       // 3. revisa que e formato de la fecha de expiracion sea la correcta. (07/19) 
       //antes del '/' debe haber un numero que corresponda con un mes y despues de ese caracter
       //debe haber un numero igual al de la fecha actual del año o 5 años más del actual
