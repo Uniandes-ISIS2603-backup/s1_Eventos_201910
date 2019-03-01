@@ -35,7 +35,7 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class OrganizadorEventosResource {
     
-    private static final Logger LOGGER = Logger.getLogger(PatrociandorEventosResource.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(PatrocinadorEventosResource.class.getName());
 
     @Inject
     private OrganizadorEventosLogic organizadorEventosLogic;
@@ -92,7 +92,7 @@ public class OrganizadorEventosResource {
      * Error de lógica que se genera cuando no se encuentra el evento.
      */
     @GET
-    @Path("{booksId: \\d+}")
+    @Path("{eventosId: \\d+}")
     public EventoDetailDTO getEvento(@PathParam("organizadoresId") Long organizadoresId, @PathParam("eventosId") Long eventosId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "OrganizadorEventosResource getEvento: input: organizadoresId {0} , eventosId {1}", new Object[]{organizadoresId, eventosId});
         if (eventoLogic.find(eventosId) == null) {
@@ -136,7 +136,7 @@ public class OrganizadorEventosResource {
      * Error de lógica que se genera cuando no se encuentra el evento.
      */
     @DELETE
-    @Path("{booksId: \\d+}")
+    @Path("{eventosId: \\d+}")
     public void removeEvento(@PathParam("organizadoresId") Long organizadoresId, @PathParam("eventosId") Long eventosId) {
         LOGGER.log(Level.INFO, "OrganizadorEventosResource removeEvento: input: organizadoresId {0} , eventosId {1}", new Object[]{organizadoresId, eventosId});
         if (eventoLogic.find(eventosId) == null) {

@@ -65,14 +65,14 @@ public class OrganizadorResource {
      *
      * @param organizador {@link OrganizadorDTO} - EL organizador que se desea guardar.
      * @return JSON {@link OrganizadorDTO} - El organizador guardado con el atributo id autogenerado.
-     * @throws BusinessLogicException Si el patrocinador a persistir ya existe o si el nombre, descripcion y/o imagen no son validos
+     * @throws BusinessLogicException Si el organizador a persistir ya existe o si el nombre, telefono y/o correo electronico no son validos
      */
     @POST
     public OrganizadorDTO createOrganizador(OrganizadorDTO organizador) throws BusinessLogicException {
         
-        LOGGER.log(Level.INFO, "PatrocinadorResource createPatrocinador: input: {0}", organizador.toString());
+        LOGGER.log(Level.INFO, "OrganizadorResource createOrganizador: input: {0}", organizador.toString());
         OrganizadorDTO organizadorDTO = new OrganizadorDTO(organizadorLogic.createOrganizador(organizador.toEntity()));
-        LOGGER.log(Level.INFO, "PatrocinadorResource createPatrocinador: output: {0}", organizadorDTO.toString());
+        LOGGER.log(Level.INFO, "OrganizadorResource createOrganizador: output: {0}", organizadorDTO.toString());
         return organizadorDTO;
     }
 
@@ -145,7 +145,7 @@ public class OrganizadorResource {
      * @param organizadoresId Identificador del organizador que se desea borrar. Este debe
      * ser una cadena de dígitos.
      * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
-     * si el autor tiene eventos asociados
+     * si el organizador tiene eventos asociados
      * @throws WebApplicationException {@link WebApplicationExceptionMapper}
      * Error de lógica que se genera cuando no se encuentra el organizador a borrar.
      */
@@ -159,6 +159,26 @@ public class OrganizadorResource {
         }
         organizadorLogic.deleteOrganizador(organizadoresId);
         LOGGER.info("OrganizadorResource deleteOrganizador: output: void");
+    }
+    
+    /**
+     * Conexión con el servicio de eventos para un organizador.
+     * {@link OrganizadorEventosResource}
+     *
+     * Este método conecta la ruta de /organizadores con las rutas de /eventos que
+     * dependen del organizador, es una redirección al servicio que maneja el segmento
+     * de la URL que se encarga de los eventos.
+     *
+     * @param organizadoresId El ID del organizador con respecto al cual se accede al
+     * servicio.
+     * @return El servicio de Eventos para ese organizador en paricular.
+     */
+    @Path("{organizadoresId: \\d+}/eventos")
+    public Class<OrganizadorEventosResource> getOrganizadorEventosResource(@PathParam("organizadoresId") Long organizadoresId) {
+        if (organizadorLogic.getOrganizador(organizadoresId) == null) {
+            throw new WebApplicationException("El recurso /organizadores/" + organizadoresId + " no existe.", 404);
+        }
+        return OrganizadorEventosResource.class;
     }
     
     /**

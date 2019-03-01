@@ -52,7 +52,7 @@ import javax.ws.rs.WebApplicationException;
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
-public class PatrociandorResource {
+public class PatrocinadorResource {
     
     private static final Logger LOGGER = Logger.getLogger(OrganizadorResource.class.getName());
 
@@ -93,7 +93,7 @@ public class PatrociandorResource {
     }
 
     /**
-     * Busca el autor con el id asociado recibido en la URL y lo devuelve.
+     * Busca el patrocinador con el id asociado recibido en la URL y lo devuelve.
      *
      * @param patrocinadoresId Identificador del patrocinador que se esta buscando. Este debe
      * ser una cadena de dígitos.
@@ -148,7 +148,7 @@ public class PatrociandorResource {
      * @param patrocinadoresId Identificador del patrocinador que se desea borrar. Este debe
      * ser una cadena de dígitos.
      * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
-     * si el autor tiene eventos asociados
+     * si el patrocinador tiene eventos asociados
      * @throws WebApplicationException {@link WebApplicationExceptionMapper}
      * Error de lógica que se genera cuando no se encuentra el patrocinador a borrar.
      */
@@ -162,6 +162,26 @@ public class PatrociandorResource {
         }
         patrocinadorLogic.deletePatrocinador(patrocinadoresId);
         LOGGER.info("PatrocinadorResource deletePatrocinador: output: void");
+    }
+    
+    /**
+     * Conexión con el servicio de eventos para un patrocinador.
+     * {@link PatrocinadorEventosResource}
+     *
+     * Este método conecta la ruta de /patrocinadores con las rutas de /eventos que
+     * dependen del patrocinador, es una redirección al servicio que maneja el segmento
+     * de la URL que se encarga de los eventos.
+     *
+     * @param patrocinadoresId El ID del patrocinador con respecto al cual se accede al
+     * servicio.
+     * @return El servicio de Eventos para ese patrocinador en paricular.
+     */
+    @Path("{patrocinadoresId: \\d+}/eventos")
+    public Class<PatrocinadorEventosResource> getPatrocinadorEventosResource(@PathParam("patrocinadoresId") Long patrocinadoresId) {
+        if (patrocinadorLogic.getPatrocinador(patrocinadoresId) == null) {
+            throw new WebApplicationException("El recurso /patrocinadores/" + patrocinadoresId + " no existe.", 404);
+        }
+        return PatrocinadorEventosResource.class;
     }
     
     /**

@@ -33,9 +33,9 @@ import javax.ws.rs.core.MediaType;
  */
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class PatrociandorEventosResource {
+public class PatrocinadorEventosResource {
     
-    private static final Logger LOGGER = Logger.getLogger(PatrociandorEventosResource.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(PatrocinadorEventosResource.class.getName());
 
     @Inject
     private PatrocinadorEventosLogic patrocinadorEventosLogic;
