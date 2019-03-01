@@ -1,11 +1,30 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+MIT License
+
+Copyright (c) 2017 Universidad de los Andes - ISIS2603
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
  */
 package co.edu.uniandes.csw.eventos.resources;
 
 import co.edu.uniandes.csw.eventos.dtos.OrganizadorDTO;
+import co.edu.uniandes.csw.eventos.dtos.OrganizadorDetailDTO;
 import co.edu.uniandes.csw.eventos.ejb.OrganizadorLogic;
 import co.edu.uniandes.csw.eventos.entities.OrganizadorEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
@@ -51,11 +70,10 @@ public class OrganizadorResource {
     @POST
     public OrganizadorDTO createOrganizador(OrganizadorDTO organizador) throws BusinessLogicException {
         
-        OrganizadorEntity organizadorEntity = organizador.toEntity();
-        OrganizadorEntity nuevoOrganizadorEntity = organizadorLogic.createOrganizador(organizadorEntity);
-        OrganizadorDTO nuevoOrganizadorDTO = new OrganizadorDTO(nuevoOrganizadorEntity);
-        
-        return nuevoOrganizadorDTO;
+        LOGGER.log(Level.INFO, "PatrocinadorResource createPatrocinador: input: {0}", organizador.toString());
+        OrganizadorDTO organizadorDTO = new OrganizadorDTO(organizadorLogic.createOrganizador(organizador.toEntity()));
+        LOGGER.log(Level.INFO, "PatrocinadorResource createPatrocinador: output: {0}", organizadorDTO.toString());
+        return organizadorDTO;
     }
 
     /**
@@ -65,10 +83,10 @@ public class OrganizadorResource {
      * aplicación. Si no hay ninguno retorna una lista vacía.
      */
     @GET
-    public List<OrganizadorDTO> getOrganizadores() {
+    public List<OrganizadorDetailDTO> getOrganizadores() {
         
         LOGGER.info("OrganizadorResource getOrganizadores: input: void");
-        List<OrganizadorDTO> listaOrganizadores = listEntity2DTO(organizadorLogic.getOrganizadores());
+        List<OrganizadorDetailDTO> listaOrganizadores = listEntity2DTO(organizadorLogic.getOrganizadores());
         LOGGER.log(Level.INFO, "OrganizadorResource getOrganizadores: output: {0}", listaOrganizadores.toString());
         return listaOrganizadores;
     }
@@ -84,14 +102,14 @@ public class OrganizadorResource {
      */
     @GET
     @Path("{organizadoresId: \\d+}")
-    public OrganizadorDTO getOrganizador(@PathParam("organizadoresId") Long organizadoresId) throws WebApplicationException {
+    public OrganizadorDetailDTO getOrganizador(@PathParam("organizadoresId") Long organizadoresId) throws WebApplicationException {
         
         LOGGER.log(Level.INFO, "OrganizadorResource getOrganizador: input: {0}", organizadoresId);
         OrganizadorEntity organizadorEntity = organizadorLogic.getOrganizador(organizadoresId);
         if (organizadorEntity == null) {
             throw new WebApplicationException("El recurso /organizadores/" + organizadoresId + " no existe.", 404);
         }
-        OrganizadorDTO detailDTO = new OrganizadorDTO(organizadorEntity);
+        OrganizadorDetailDTO detailDTO = new OrganizadorDetailDTO(organizadorEntity);
         LOGGER.log(Level.INFO, "OrganizadorResource getOrganizador: output: {0}", detailDTO.toString());
         return detailDTO;
     }
@@ -110,13 +128,13 @@ public class OrganizadorResource {
      */
     @PUT
     @Path("{organizadoresId: \\d+}")
-    public OrganizadorDTO updateOrganizador(@PathParam("organizadoresId") Long organizadoresId, OrganizadorDTO organizador) throws WebApplicationException {
+    public OrganizadorDetailDTO updateOrganizador(@PathParam("organizadoresId") Long organizadoresId, OrganizadorDetailDTO organizador) throws WebApplicationException {
         LOGGER.log(Level.INFO, "OrganizadorResource updateOrganizador: input: id:{0} , editorial: {1}", new Object[]{organizadoresId, organizador.toString()});
         organizador.setId(organizadoresId);
         if (organizadorLogic.getOrganizador(organizadoresId) == null) {
             throw new WebApplicationException("El recurso /organizadores/" + organizadoresId + " no existe.", 404);
         }
-        OrganizadorDTO detailDTO = new OrganizadorDTO(organizadorLogic.updateOrganizador(organizadoresId, organizador.toEntity()));
+        OrganizadorDetailDTO detailDTO = new OrganizadorDetailDTO(organizadorLogic.updateOrganizador(organizadoresId, organizador.toEntity()));
         LOGGER.log(Level.INFO, "OrganizadorResource updateOrganizador: output: {0}", detailDTO.toString());
         return detailDTO;
     }
@@ -149,10 +167,10 @@ public class OrganizadorResource {
      * @param entityList Lista de OrganizadorEntity a convertir.
      * @return Lista de OrganizadorDTO convertida.
      */
-    private List<OrganizadorDTO> listEntity2DTO(List<OrganizadorEntity> entityList) {
-        List<OrganizadorDTO> list = new ArrayList<>();
+    private List<OrganizadorDetailDTO> listEntity2DTO(List<OrganizadorEntity> entityList) {
+        List<OrganizadorDetailDTO> list = new ArrayList<>();
         for (OrganizadorEntity entity : entityList) {
-            list.add(new OrganizadorDTO(entity));
+            list.add(new OrganizadorDetailDTO(entity));
         }
         return list;
     }

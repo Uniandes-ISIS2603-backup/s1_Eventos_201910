@@ -1,11 +1,30 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+MIT License
+
+Copyright (c) 2017 Universidad de los Andes - ISIS2603
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
  */
 package co.edu.uniandes.csw.eventos.resources;
 
 import co.edu.uniandes.csw.eventos.dtos.PatrocinadorDTO;
+import co.edu.uniandes.csw.eventos.dtos.PatrocinadorDetailDTO;
 import co.edu.uniandes.csw.eventos.ejb.PatrocinadorLogic;
 import co.edu.uniandes.csw.eventos.entities.PatrocinadorEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
@@ -52,11 +71,10 @@ public class PatrociandorResource {
     @POST
     public PatrocinadorDTO createPatrocinador(PatrocinadorDTO patrocinador) throws BusinessLogicException {
         
-        PatrocinadorEntity patrocinadorEntity = patrocinador.toEntity();
-        PatrocinadorEntity nuevoPatrocinadorEntity = patrocinadorLogic.createPatrocinador(patrocinadorEntity);
-        PatrocinadorDTO nuevoOrganizadorDTO = new PatrocinadorDTO(nuevoPatrocinadorEntity);
-        
-        return nuevoOrganizadorDTO;
+        LOGGER.log(Level.INFO, "PatrocinadorResource createPatrocinador: input: {0}", patrocinador.toString());
+        PatrocinadorDTO patrocinadorDTO = new PatrocinadorDTO(patrocinadorLogic.createPatrocinador(patrocinador.toEntity()));
+        LOGGER.log(Level.INFO, "PatrocinadorResource createPatrocinador: output: {0}", patrocinadorDTO.toString());
+        return patrocinadorDTO;
     }
 
     /**
@@ -66,10 +84,10 @@ public class PatrociandorResource {
      * aplicación. Si no hay ninguno retorna una lista vacía.
      */
     @GET
-    public List<PatrocinadorDTO> getPatrocinadores() {
+    public List<PatrocinadorDetailDTO> getPatrocinadores() {
         
         LOGGER.info("PatrocinadorResource getPatrocinadores: input: void");
-        List<PatrocinadorDTO> listaPatrocinadores = listEntity2DTO(patrocinadorLogic.getPatrocinadores());
+        List<PatrocinadorDetailDTO> listaPatrocinadores = listEntity2DTO(patrocinadorLogic.getPatrocinadores());
         LOGGER.log(Level.INFO, "PatrocinadorResource getPatrocinadores: output: {0}", listaPatrocinadores.toString());
         return listaPatrocinadores;
     }
@@ -85,14 +103,14 @@ public class PatrociandorResource {
      */
     @GET
     @Path("{patrocinadoresId: \\d+}")
-    public PatrocinadorDTO getPatrocinador(@PathParam("patrocinadoresId") Long patrocinadoresId) throws WebApplicationException {
+    public PatrocinadorDetailDTO getPatrocinador(@PathParam("patrocinadoresId") Long patrocinadoresId) throws WebApplicationException {
         
         LOGGER.log(Level.INFO, "PatrocinadorResource getPatrocinador: input: {0}", patrocinadoresId);
         PatrocinadorEntity entity = patrocinadorLogic.getPatrocinador(patrocinadoresId);
         if (entity == null) {
             throw new WebApplicationException("El recurso /patrocinadores/" + patrocinadoresId + " no existe.", 404);
         }
-        PatrocinadorDTO patrocinadorDTO = new PatrocinadorDTO(patrocinadorLogic.getPatrocinador(patrocinadoresId));
+        PatrocinadorDetailDTO patrocinadorDTO = new PatrocinadorDetailDTO(patrocinadorLogic.getPatrocinador(patrocinadoresId));
         LOGGER.log(Level.INFO, "PatrocinadorResource getPatrocinador: output: {0}", patrocinadorDTO.toString());
         return patrocinadorDTO;
     }
@@ -111,7 +129,7 @@ public class PatrociandorResource {
      */
     @PUT
     @Path("{patrocinadoresId: \\d+}")
-    public PatrocinadorDTO updatePatrocinador(@PathParam("patrocinadoresId") Long patrocinadoresId, PatrocinadorDTO patrocinador) throws BusinessLogicException {
+    public PatrocinadorDetailDTO updatePatrocinador(@PathParam("patrocinadoresId") Long patrocinadoresId, PatrocinadorDetailDTO patrocinador) throws BusinessLogicException {
         
         LOGGER.log(Level.INFO, "PatrocinadorResource updatePatrocinador: input: patrocinadoresId: {0} , patrocinador: {1}", new Object[]{patrocinadoresId, patrocinador.toString()});
         patrocinador.setId(patrocinadoresId);
@@ -119,7 +137,7 @@ public class PatrociandorResource {
         if (entity == null) {
             throw new WebApplicationException("El recurso /patrocinadores/" + patrocinadoresId + " no existe.", 404);
         }
-        PatrocinadorDTO detailDTO = new PatrocinadorDTO(patrocinadorLogic.updatePatrocinador(patrocinadoresId, patrocinador.toEntity()));
+        PatrocinadorDetailDTO detailDTO = new PatrocinadorDetailDTO(patrocinadorLogic.updatePatrocinador(patrocinadoresId, patrocinador.toEntity()));
         LOGGER.log(Level.INFO, "PatrocinadorResource updatePatrocinador: output: {0}", detailDTO.toString());
         return detailDTO;    
     }
@@ -152,10 +170,10 @@ public class PatrociandorResource {
      * @param entityList Lista de PatrocinadorEntity a convertir.
      * @return Lista de PatrocinadorDTO convertida.
      */
-    private List<PatrocinadorDTO> listEntity2DTO(List<PatrocinadorEntity> entityList) {
-        List<PatrocinadorDTO> list = new ArrayList();
+    private List<PatrocinadorDetailDTO> listEntity2DTO(List<PatrocinadorEntity> entityList) {
+        List<PatrocinadorDetailDTO> list = new ArrayList();
         for (PatrocinadorEntity entity : entityList) {
-            list.add(new PatrocinadorDTO(entity));
+            list.add(new PatrocinadorDetailDTO(entity));
         }
         return list;
     }

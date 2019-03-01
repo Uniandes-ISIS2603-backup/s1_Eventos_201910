@@ -23,9 +23,10 @@ SOFTWARE.
  */
 package co.edu.uniandes.csw.eventos.dtos;
 
-//import co.edu.uniandes.csw.eventos.entities.EventoEntity;
-//import co.edu.uniandes.csw.eventos.entities.PatrocinadorEntity;
-//import java.util.ArrayList;
+import co.edu.uniandes.csw.eventos.entities.EventoEntity;
+import co.edu.uniandes.csw.eventos.entities.PatrocinadorEntity;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -34,11 +35,11 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author Paula Molina
  */
-public class PatrocinadorDetailDTO {
+public class PatrocinadorDetailDTO extends PatrocinadorDTO implements Serializable {
     
-    /*
+   /*
     * Esta lista de tipo EventoDTO contiene los eventos que estan asociados a un patrocinador
-     */
+    */
     private List<EventoDTO> eventos;
 
     public PatrocinadorDetailDTO() {
@@ -46,39 +47,46 @@ public class PatrocinadorDetailDTO {
         super();
     }
 
-//    /**
-//     * Constructor para transformar un Entity a un DTO
-//     *
-//     * @param patrocinadorEntity La entidad del patrocinador para transformar a DTO.
-//     */
-//    public PatrocinadorDetailDTO(PatrocinadorEntity patrocinadorEntity) {
-//        super(patrocinadorEntity);
-//        if (patrocinadorEntity != null) {
-//            eventos = new ArrayList<>();
-//            for (EventoEntity entityEventos : patrocinadorEntity.getEventos()) {
-//                eventos.add(new EventoDTO(entityEventos));
-//            }
-//        }
-//    }
-//
-//    /**
-//     * Transformar un DTO a un Entity
-//     *
-//     * @return El DTO de la editorial para transformar a Entity
-//     */
-//    @Override
-//    public PatrocinadorEntity toEntity() {
-//        PatrocinadorEntity patrocinadorEntity = super.toEntity();
-//        if (eventos != null) {
-//            List<EventoEntity> eventosEntity = new ArrayList<>();
-//            for (EventoDTO dtoEvento : eventos) {
-//                eventosEntity.add(dtoEvento.toEntity());
-//            }
-//            patrocinadorEntity.setEventos(eventosEntity);
-//        }
-//        return patrocinadorEntity;
-//    }
+       /**
+     * Crea un objeto PatrocinadorDetailDTO a partir de un objeto PatrocinadorEntity
+     * incluyendo los atributos de PatrocinadorDTO.
+     *
+     * @param patrocinadorEntity Entidad PatrocinadorEntity desde la cual se va a crear el
+     * nuevo objeto.
+     *
+     */
+    public PatrocinadorDetailDTO(PatrocinadorEntity patrocinadorEntity) {
+        super(patrocinadorEntity);
+        if (patrocinadorEntity != null) {
+            eventos = new ArrayList<>();
+            for (EventoEntity entityEventos : patrocinadorEntity.getEventos()) {
+                eventos.add(new EventoDTO(entityEventos));
+            }
+        }
+    }
 
+    /**
+     * Convierte un objeto PatrocinadorDetailDTO a PatrocinadorEntity incluyendo los
+     * atributos de PatrocinadorDTO.
+     *
+     * @return Nuevo objeto PatrocinadorEntity.
+     *
+     */
+    @Override
+    public PatrocinadorEntity toEntity() {
+        PatrocinadorEntity patrocinadorEntity = super.toEntity();
+        if (eventos != null) {
+            List<EventoEntity> eventosEntity = new ArrayList<>();
+            for (EventoDTO dtoEvento : eventos) {
+                eventosEntity.add(dtoEvento.toEntity());
+            }
+            patrocinadorEntity.setEventos(eventosEntity);
+        }
+        
+        return patrocinadorEntity;
+    }
+
+    
     /**
      * Obtiene la lista de eventos del patrocinador
      *
