@@ -29,6 +29,27 @@ public class CalificacionLogic {
    public CalificacionEntity createCalificacion(CalificacionEntity calificacion) throws BusinessLogicException{
       if(persistence.find(calificacion.getId())!=null)
           throw new BusinessLogicException("Ya existe una calificacion con el id \""+calificacion.getId() + "\"");
+      // 1. La cantidad de estrellas debería ser un numer oentre 0 y 05
+      if(!(calificacion.getEstrellas()<=5 && calificacion.getEstrellas()>=0))
+      {
+          throw new BusinessLogicException("El numero debe estar entre 0 y 5");
+      }
+      // 2. Revisa que la cantidad de palabras del comentario no sea mayor a 300
+      if(calificacion.getComentarios().split(" ").length>300)
+          throw new BusinessLogicException("El comentario tiene mas de 300 palabras");
+      
+      //2. Revisa que cada palabra no exceda 20 caracteres
+      for(int e=0;e<calificacion.getComentarios().split(" ").length;e++)
+      {
+          if(!(calificacion.getComentarios().split(" ")[e].length()<20))
+          {
+              throw new BusinessLogicException("Esta usando una palabra demasiado larga"); 
+          }
+      }
+      if(calificacion.getComentarios().length()<1801)
+      {
+          throw new BusinessLogicException("El numero debe estar entre 0 y 5");
+      }
       persistence.create(calificacion);
       
       return calificacion;

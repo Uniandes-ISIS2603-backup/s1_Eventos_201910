@@ -47,7 +47,7 @@ public class CalificacionPersistence {
     
     public List<CalificacionEntity> findAll()
     {
-        TypedQuery query = em.createQuery("select u from EventoEntity u",CalificacionEntity.class);
+        TypedQuery query = em.createQuery("select u from CalificacionEntity u",CalificacionEntity.class);
         return query.getResultList();
     }
     
