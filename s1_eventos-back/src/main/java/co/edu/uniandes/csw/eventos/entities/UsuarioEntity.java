@@ -53,12 +53,11 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
         fetch = javax.persistence.FetchType.LAZY
     )
     private Collection<MedioDePagoEntity> mediosdepago;
-//    @PodamExclude
-//    @javax.persistence.OneToMany(
-//        mappedBy = "usuario",
-//        fetch = javax.persistence.FetchType.LAZY
-//    )
-//    private Collection<EventoEntity> eventos;
+    @PodamExclude
+    @javax.persistence.OneToMany(
+        fetch = javax.persistence.FetchType.LAZY
+    )
+    private Collection<EventoEntity> eventos;
     /**
      * @return the correoElectronico
      */

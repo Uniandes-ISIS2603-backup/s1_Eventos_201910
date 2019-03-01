@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.eventos.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import java.util.Date;
 import uk.co.jemos.podam.common.PodamExclude;
 import javax.persistence.ManyToOne;
 
@@ -22,6 +21,10 @@ public class EntradaEntity extends BaseEntity implements Serializable{
       @PodamExclude
       @ManyToOne
       private UsuarioEntity usuario;
+      
+       @PodamExclude
+    @ManyToOne
+    private EventoEntity evento;
 
     public UsuarioEntity getUsuario() {
         return usuario;
@@ -64,6 +67,7 @@ public class EntradaEntity extends BaseEntity implements Serializable{
      */
     private boolean reservada;
     
+   
     /**
      * Constructor 
      */

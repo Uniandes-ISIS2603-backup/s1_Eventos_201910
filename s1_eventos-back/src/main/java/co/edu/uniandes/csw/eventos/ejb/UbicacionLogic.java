@@ -23,10 +23,18 @@ import javax.inject.Inject;
 public class UbicacionLogic {
 
     private static final Logger LOGGER = Logger.getLogger(UbicacionLogic.class.getName());
-
+/**
+ * persistencia de la ubicacion
+ */
     @Inject
     private UbicacionPersistence up;
 
+    /**
+     * crear ubicacion con reglas de negocio
+     * @param ubicacionEntity
+     * @return ubicacion creada
+     * @throws BusinessLogicException 
+     */
     public UbicacionEntity createUbicacion(UbicacionEntity ubicacionEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de ubicacion");
 
@@ -54,10 +62,22 @@ public class UbicacionLogic {
 
     }
 
+    /**
+     * otiene una ubicacion
+     * @param ubicacionId a buscar
+     * @return 
+     */
     public UbicacionEntity findUbicacion(Long ubicacionId) {
         return up.find(ubicacionId);
     }
 
+    /**
+     * actualiza una ubicacion segun las reglas de negocio
+     * @param UbicacionId
+     * @param ubicacionEntity
+     * @return
+     * @throws BusinessLogicException 
+     */
     public UbicacionEntity updateUbicacion(Long UbicacionId, UbicacionEntity ubicacionEntity) throws BusinessLogicException {
         
         if (ubicacionEntity.getLatitud() > 90 || ubicacionEntity.getLatitud() < -90) {
@@ -74,6 +94,11 @@ public class UbicacionLogic {
         return ubicacionEntity;
     }
 
+    /**
+     * elimina una ubicacion
+     * @param ubicacionId
+     * @throws BusinessLogicException 
+     */
     public void deleteUbicacion(Long ubicacionId) throws BusinessLogicException {
         up.delete(ubicacionId);
     }

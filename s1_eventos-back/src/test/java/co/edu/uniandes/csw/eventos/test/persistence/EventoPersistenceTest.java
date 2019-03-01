@@ -26,7 +26,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @author estudiante
+ * @author Mateo Vallejo
  */
 @RunWith(Arquillian.class)
 public class EventoPersistenceTest {
@@ -97,7 +97,7 @@ public class EventoPersistenceTest {
      * Inserta los datos iniciales para el correcto funcionamiento de las
      * pruebas.
      */
-     private void insertData() {
+    private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
             EventoEntity entity = factory.manufacturePojo(EventoEntity.class);
@@ -133,7 +133,7 @@ public class EventoPersistenceTest {
     @Test
     public void findAllEventoEntityTest() {
         List<EventoEntity> list = ep.findAll();
-        Assert.assertEquals(data.size(),list.size());
+        Assert.assertEquals(data.size(), list.size());
         for (EventoEntity ent : list) {
             boolean found = false;
             for (EventoEntity entity : data) {
