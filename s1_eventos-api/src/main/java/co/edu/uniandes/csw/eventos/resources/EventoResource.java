@@ -89,6 +89,14 @@ public class EventoResource {
         logica.deleteEvento(eventosId);
     }
 
+    @Path("{eventosId: \\d+}/organizadores")
+    public Class<EventoOrganizadoresResource> getEventoOrganizadoresResource(@PathParam("eventosId") Long eventosId) {
+        if (logica.find(eventosId) == null) {
+            throw new WebApplicationException("El recurso /eventos/" + eventosId + " no existe.", 404);
+        }
+        return EventoOrganizadoresResource.class;
+    }
+
     private List<EventoDetailDTO> listEntity2DetailDTO(List<EventoEntity> entityList) {
         List<EventoDetailDTO> list = new ArrayList<>();
         for (EventoEntity entity : entityList) {

@@ -23,9 +23,10 @@ SOFTWARE.
  */
 package co.edu.uniandes.csw.eventos.dtos;
 
-//import co.edu.uniandes.csw.eventos.entities.EventoEntity;
-//import co.edu.uniandes.csw.eventos.entities.OrganizadorEntity;
-//import java.util.ArrayList;
+import co.edu.uniandes.csw.eventos.entities.EventoEntity;
+import co.edu.uniandes.csw.eventos.entities.OrganizadorEntity;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -34,7 +35,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author Paula Molina
  */
-public class OrganizadorDetailDTO {
+public class OrganizadorDetailDTO extends OrganizadorDTO implements Serializable {
     
     // relación  cero o muchos eventos
     private List<EventoDTO> eventos;
@@ -43,42 +44,44 @@ public class OrganizadorDetailDTO {
         super();
     }
 
-//    /**
-//     * Crea un objeto OrganizadorDetailDTO a partir de un objeto OrganizadorEntity
-//     * incluyendo los atributos de OrganizadorDTO.
-//     *
-//     * @param organizadorEntity Entidad OrganizadorEntity desde la cual se va a crear el
-//     * nuevo objeto.
-//     *
-//     */
-//    public OrganizadorDetailDTO(OrganizadorEntity organizadorEntity) {
-//        super(organizadorEntity);
-//        if (organizadorEntity != null) {
-//            eventos = new ArrayList<>();
-//            for (EventoEntity entityBooks : organizadorEntity.getEventos()) {
-//                eventos.add(new EventoDTO(entityBooks));
-//            }
-//        }
-//    }
+    /**
+     * Crea un objeto OrganizadorDetailDTO a partir de un objeto OrganizadorEntity
+     * incluyendo los atributos de OrganizadorDTO.
+     *
+     * @param organizadorEntity Entidad OrganizadorEntity desde la cual se va a crear el
+     * nuevo objeto.
+     *
+     */
+    public OrganizadorDetailDTO(OrganizadorEntity organizadorEntity) {
+        super(organizadorEntity);
+        if (organizadorEntity != null) {
+            eventos = new ArrayList<>();
+            for (EventoEntity entityEventos : organizadorEntity.getEventos()) {
+                eventos.add(new EventoDTO(entityEventos));
+            }
+        }
+    }
 
-//    /**
-//     * Convierte un objeto OrganizadorDetailDTO a OrganizadorEntity incluyendo los
-//     * atributos de OrganizadorDTO.
-//     *
-//     * @return Nueva objeto OrganizadorEntity.
-//     *
-//     */
-//    public OrganizadorEntity toEntity() {
-//        OrganizadorEntity organizadorEntity = super.toEntity();
-//        if (eventos != null) {
-//            List<EventoEntity> eventosEntity = new ArrayList<>();
-//            for (EventoDTO dtoEvento : eventos) {
-//                eventosEntity.add(dtoEvento.toEntity());
-//            }
-//            organizadorEntity.setEventos(eventosEntity);
-//        }
-//        return organizadorEntity;
-//    }
+    /**
+     * Convierte un objeto OrganizadorDetailDTO a OrganizadorEntity incluyendo los
+     * atributos de OrganizadorDTO.
+     *
+     * @return Nuevo objeto OrganizadorEntity.
+     *
+     */
+    @Override
+    public OrganizadorEntity toEntity() {
+        OrganizadorEntity organizadorEntity = super.toEntity();
+        if (eventos != null) {
+            List<EventoEntity> eventosEntity = new ArrayList<>();
+            for (EventoDTO dtoEvento : eventos) {
+                eventosEntity.add(dtoEvento.toEntity());
+            }
+            organizadorEntity.setEventos(eventosEntity);
+        }
+        
+        return organizadorEntity;
+    }
 
     /**
      * Obtiene la lista de eventos del organizador
