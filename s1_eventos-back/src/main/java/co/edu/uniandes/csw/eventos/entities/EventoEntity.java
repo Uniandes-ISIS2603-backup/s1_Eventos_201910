@@ -125,6 +125,13 @@ public class EventoEntity extends BaseEntity implements Serializable {
     )
     private List<EntradaEntity> entradas = new ArrayList<>();
 
+     @PodamExclude
+    @javax.persistence.OneToMany(
+            mappedBy = "evento",
+            fetch = javax.persistence.FetchType.LAZY
+    )
+    private List<CalificacionEntity> calificaciones = new ArrayList<>();
+    
     /**
      * constructor por defecto
      */
@@ -219,7 +226,7 @@ public class EventoEntity extends BaseEntity implements Serializable {
      * @return the privado
      */
     public Boolean isPrivado() {
-        return privado;
+        return getPrivado();
     }
 
     /**
@@ -332,6 +339,27 @@ public class EventoEntity extends BaseEntity implements Serializable {
      */
     public void setUsuarios(List<UsuarioEntity> usuarios) {
         this.usuarios = usuarios;
+    }
+
+    /**
+     * @return the privado
+     */
+    public Boolean getPrivado() {
+        return privado;
+    }
+
+    /**
+     * @return the calificaciones
+     */
+    public List<CalificacionEntity> getCalificaciones() {
+        return calificaciones;
+    }
+
+    /**
+     * @param calificaciones the calificaciones to set
+     */
+    public void setCalificaciones(List<CalificacionEntity> calificaciones) {
+        this.calificaciones = calificaciones;
     }
 
 }

@@ -21,6 +21,10 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
     @ManyToOne
     private UsuarioEntity usuario;
 
+    @PodamExclude
+    @ManyToOne
+    private EventoEntity evento;
+    
     /**
      * Constructor
      */
@@ -104,6 +108,20 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
      */
     public void setRecomendado(Boolean recomendado) {
         this.recomendado = recomendado;
+    }
+
+    /**
+     * @return the evento
+     */
+    public EventoEntity getEvento() {
+        return evento;
+    }
+
+    /**
+     * @param evento the evento to set
+     */
+    public void setEvento(EventoEntity evento) {
+        this.evento = evento;
     }
     
     
