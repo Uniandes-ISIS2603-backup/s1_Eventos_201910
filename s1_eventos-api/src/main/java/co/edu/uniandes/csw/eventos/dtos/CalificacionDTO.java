@@ -29,6 +29,9 @@ public class CalificacionDTO implements Serializable {
     */
     private boolean recomendado;
 
+    
+    private Long id;
+    
     /*
         Constructor
     */
@@ -81,15 +84,29 @@ public class CalificacionDTO implements Serializable {
     public CalificacionEntity toEntity()
     {
         CalificacionEntity calificacionEntity = new CalificacionEntity();
-        calificacionEntity.setComentarios(this.comentario);
-        calificacionEntity.setEstrellas(this.estrellas);
-        calificacionEntity.setRecomendado(this.recomendado);
+        calificacionEntity.setComentarios(this.getComentario());
+        calificacionEntity.setEstrellas(this.getEstrellas());
+        calificacionEntity.setRecomendado(this.isRecomendado());
         return calificacionEntity;
     }
     
      @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }
