@@ -29,22 +29,37 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @author estudiante
+ * @author Mateo Vallejo
  */
 @RunWith(Arquillian.class)
 public class UbicacionLogicTest {
 
+    /**
+     * generador de datos aleatoreos
+     */
     private PodamFactory factory = new PodamFactoryImpl();
 
+    /**
+     * logica de la ubicacion
+     */
     @Inject
     private UbicacionLogic ubicacionLogic;
 
+    /**
+     * manejador de entidades
+     */
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     * maenjador de transacciones
+     */
     @Inject
     private UserTransaction utx;
 
+    /**
+     * datos de prueba
+     */
     private List<UbicacionEntity> data = new ArrayList<>();
 
     /**
@@ -86,7 +101,7 @@ public class UbicacionLogicTest {
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
-        em.createQuery("delete from EventoEntity").executeUpdate();
+        em.createQuery("delete from UbicacionEntity").executeUpdate();
     }
 
     /**
@@ -104,8 +119,12 @@ public class UbicacionLogicTest {
 
     }
 
+    /**
+     * test de que se crea bien una ubicacion
+     * @throws BusinessLogicException 
+     */
     @Test
-    public void createEventoTest() throws BusinessLogicException {
+    public void createUbicaiconTest() throws BusinessLogicException {
         UbicacionEntity newEntity = factory.manufacturePojo(UbicacionEntity.class);
         UbicacionEntity result = ubicacionLogic.createUbicacion(newEntity);
         Assert.assertNotNull(result);
@@ -114,6 +133,10 @@ public class UbicacionLogicTest {
         Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
     }
 
+    /**
+     * test nombre correcto
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void createUbicacionNombre() throws BusinessLogicException {
         UbicacionEntity newEntity = factory.manufacturePojo(UbicacionEntity.class);
@@ -124,6 +147,10 @@ public class UbicacionLogicTest {
     }
     //1. Latitud: debe ser un número decimal entre +90 y -90.
 
+    /**
+     * test latitud incorrecta
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
     public void createUbicacioLatitudIncorrecta() throws BusinessLogicException {
         UbicacionEntity newEntity = factory.manufacturePojo(UbicacionEntity.class);
@@ -135,11 +162,15 @@ public class UbicacionLogicTest {
             }
             latitud = generarNumeroAleatoreo();
         }
-        newEntity.setLatitud(latitud);
+        newEntity.setLatitud((double) latitud);
         ubicacionLogic.createUbicacion(newEntity);
 
     }
 
+    /**
+     * test longitus incorrecta
+     * @throws BusinessLogicException 
+     */
     //1. Latitud: debe ser un número decimal entre +180 y 180
     @Test(expected = BusinessLogicException.class)
     public void createUbicacioLongitudIncorrecta() throws BusinessLogicException {
@@ -152,16 +183,24 @@ public class UbicacionLogicTest {
             }
             longitud = generarNumeroAleatoreo();
         }
-        newEntity.setLongitud(longitud);
+        newEntity.setLongitud((double) longitud);
         ubicacionLogic.createUbicacion(newEntity);
 
     }
 
+    /**
+     * genera numero aleatoreo entre 0 y 500
+     * @return 
+     */
     private int generarNumeroAleatoreo() {
         Random rnd = new Random();
-        return rnd.nextInt();
+        return rnd.nextInt(500);
     }
 
+    /**
+     * test se actualiza bien una ubicacion
+     * @throws BusinessLogicException 
+     */
     @Test
     public void updateUbicacionEntityTest() throws BusinessLogicException {
         UbicacionEntity entity = data.get(0);
@@ -177,61 +216,24 @@ public class UbicacionLogicTest {
         Assert.assertEquals(newEntity.getId(), resp.getId());
     }
 
-    @Test(expected = BusinessLogicException.class)
-    public void updateUbicacionNombre() throws BusinessLogicException {
-        UbicacionEntity newEntity = factory.manufacturePojo(UbicacionEntity.class);
-        //nombre mas grande que 50 caracteres
-        newEntity.setNombre("lgrhjfgkkfjdhfcgjfjkjhgfdxcvbjhggcvefgjcvebfhjcefdvcehjdvdncvdnc");
-        ubicacionLogic.updateUbicacion(newEntity.getId(), newEntity);
-
-    }
-    //1. Latitud: debe ser un número decimal entre +90 y -90.
-
-    @Test(expected = BusinessLogicException.class)
-    public void updateUbicacioLatitudIncorrecta() throws BusinessLogicException {
-        UbicacionEntity newEntity = factory.manufacturePojo(UbicacionEntity.class);
-        int latitud = generarNumeroAleatoreo();
-        boolean salir = false;
-        while (!salir) {
-            if (latitud >= -90 || 90 >= latitud) {
-                salir = true;
+   /**
+    * test de encontrar todas las ubicaciones
+    */
+    @Test
+    public void findAllUbicacionEntityTest() {
+        List<UbicacionEntity> list = ubicacionLogic.findAllUbicacion();
+        Assert.assertEquals(list.size(), data.size());
+        for (UbicacionEntity ent : list) {
+            boolean found = false;
+            for (UbicacionEntity entity : data) {
+                if (ent.getId().equals(entity.getId())) {
+                    found = true;
+                }
             }
-            latitud = generarNumeroAleatoreo();
+            Assert.assertTrue(found);
         }
-        newEntity.setLatitud(latitud);
-        ubicacionLogic.updateUbicacion(newEntity.getId(), newEntity);
-    }
 
-    //1. Latitud: debe ser un número decimal entre +90 y -90.
-    @Test(expected = BusinessLogicException.class)
-    public void UpdateUbicacioLongitudIncorrecta() throws BusinessLogicException {
-        UbicacionEntity newEntity = factory.manufacturePojo(UbicacionEntity.class);
-        int longitud = generarNumeroAleatoreo();
-        boolean salir = false;
-        while (!salir) {
-            if (longitud >= -90 || 90 >= longitud) {
-                salir = true;
-            }
-            longitud = generarNumeroAleatoreo();
-        }
-        newEntity.setLongitud(longitud);
-        ubicacionLogic.updateUbicacion(newEntity.getId(), newEntity);
     }
-//    @Test
-//    public void findAllUbicacionEntityTest() {
-//        List<UbicacionEntity> list = ubicacionLogic.findAllUbicacion();
-//        Assert.assertEquals(list.size(), data.size());
-//        for (UbicacionEntity ent : list) {
-//            boolean found = false;
-//            for (UbicacionEntity entity : data) {
-//                if (ent.getId().equals(entity.getId())) {
-//                    found = true;
-//                }
-//            }
-//            Assert.assertTrue(found);
-//        }
-//
-//    }
 
     /**
      * test de obtener un objeto de UbicacionEntity
@@ -243,6 +245,7 @@ public class UbicacionLogicTest {
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getId(), newEntity.getId());
     }
+
     /**
      * test de borrar un objeto de UbicacionEntity
      */

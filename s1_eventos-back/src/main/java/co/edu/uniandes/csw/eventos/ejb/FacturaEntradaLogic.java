@@ -46,10 +46,10 @@ public class FacturaEntradaLogic {
     private static final Logger LOGGER = Logger.getLogger(FacturaEntradaLogic.class.getName());
 
     @Inject
-    private EntradaPersistence EntradaPersistence;
+    private EntradaPersistence entradaPersistence;
 
     @Inject
-    private FacturaPersistence FacturaPersistence;
+    private FacturaPersistence facturaPersistence;
 
     /**
      * Agregar un Entrada a la Factura
@@ -61,8 +61,8 @@ public class FacturaEntradaLogic {
      */
     public EntradaEntity addEntrada(Long entradasId, Long facturasId) {
         LOGGER.log(Level.INFO, "Inicia proceso de agregarle un libro a la Factura con id = {0}", facturasId);
-        FacturaEntity facturaEntity = FacturaPersistence.find(facturasId);
-        EntradaEntity entradaEntity = EntradaPersistence.find(entradasId);
+        FacturaEntity facturaEntity = facturaPersistence.find(facturasId);
+        EntradaEntity entradaEntity = entradaPersistence.find(entradasId);
 //        EntradaEntity.setFactura(facturaEntity);
         LOGGER.log(Level.INFO, "Termina proceso de agregarle un libro a la Factura con id = {0}", facturasId);
         return entradaEntity;
@@ -71,29 +71,29 @@ public class FacturaEntradaLogic {
     /**
      * Retorna todos los Entradas asociados a una Factura
      *
-     * @param FacturasId El ID de la Factura buscada
+     * @param facturasId El ID de la Factura buscada
      * @return La lista de libros de la Factura
      */
-    public List<EntradaEntity> getEntradas(Long FacturasId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar los libros asociados a la Factura con id = {0}", FacturasId);
-        return FacturaPersistence.find(FacturasId).getEntradas();
+    public List<EntradaEntity> getEntradas(Long facturasId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar los libros asociados a la Factura con id = {0}", facturasId);
+        return facturaPersistence.find(facturasId).getEntradas();
     }
 
     /**
      * Retorna un Entrada asociado a una Factura
      *
-     * @param FacturasId El id de la Factura a buscar.
-     * @param EntradasId El id dla entrada a buscar
+     * @param facturasId El id de la Factura a buscar.
+     * @param entradasId El id dla entrada a buscar
      * @return la entrada encontrado dentro de la Factura.
      * @throws BusinessLogicException Si la entrada no se encuentra en la
      * Factura
      */
-    public EntradaEntity getEntrada(Long FacturasId, Long EntradasId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar la entrada con id = {0} de la Factura con id = " + FacturasId, EntradasId);
-        List<EntradaEntity> Entradas = FacturaPersistence.find(FacturasId).getEntradas();
-        EntradaEntity EntradaEntity = EntradaPersistence.find(EntradasId);
+    public EntradaEntity getEntrada(Long facturasId, Long entradasId) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar la entrada con id = {0} de la Factura con id = " + facturasId, entradasId);
+        List<EntradaEntity> Entradas = facturaPersistence.find(facturasId).getEntradas();
+        EntradaEntity EntradaEntity = entradaPersistence.find(entradasId);
         int index = Entradas.indexOf(EntradaEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de consultar la entrada con id = {0} de la Factura con id = " + FacturasId, EntradasId);
+        LOGGER.log(Level.INFO, "Termina proceso de consultar la entrada con id = {0} de la Factura con id = " + facturasId, entradasId);
         if (index >= 0) {
             return Entradas.get(index);
         }

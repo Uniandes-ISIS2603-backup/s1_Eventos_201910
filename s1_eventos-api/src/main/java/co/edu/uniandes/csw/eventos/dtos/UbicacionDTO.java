@@ -10,19 +10,38 @@ import java.io.Serializable;
 
 /**
  *
- * @author estudiante
+ * @author Mateo Vallejo
  */
 public class UbicacionDTO implements Serializable {
-    //Atributos
-    private double latitud;
-    private double longitud;
+  
+    /**
+     * Latitud de una ubicacion
+     */
+    private Double latitud;
+    
+    /**
+     * Longitud de una ubicacion
+     */
+    private Double longitud;
+    
+    /**
+     * Nombre de una ubicacion
+     */
     private String nombre;
     
+    /**
+     * Id de una ubicacion
+     */
+    private Long id;
+    
+    /**
+     * constructor por defecto
+     */
     public UbicacionDTO(){
         
     }
     /**
-     * constructor
+     * constructor basado en una entity
      * @param entity
      */
     public UbicacionDTO(UbicacionEntity entity){
@@ -34,6 +53,10 @@ public class UbicacionDTO implements Serializable {
 
     }
     
+    /**
+     * transformar de Dto a Entity
+     * @return 
+     */
     public UbicacionEntity toEntity(){
         UbicacionEntity entity=new UbicacionEntity();
         entity.setLatitud(this.latitud);
@@ -45,28 +68,28 @@ public class UbicacionDTO implements Serializable {
     /**
      * @return the latitud
      */
-    public double getLatitud() {
+    public Double getLatitud() {
         return latitud;
     }
 
     /**
      * @param latitud the latitud to set
      */
-    public void setLatitud(double latitud) {
+    public void setLatitud(Double latitud) {
         this.latitud = latitud;
     }
 
     /**
      * @return the longitud
      */
-    public double getLongitud() {
+    public Double getLongitud() {
         return longitud;
     }
 
     /**
      * @param longitud the longitud to set
      */
-    public void setLongitud(double longitud) {
+    public void setLongitud(Double longitud) {
         this.longitud = longitud;
     }
 
@@ -82,6 +105,20 @@ public class UbicacionDTO implements Serializable {
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }

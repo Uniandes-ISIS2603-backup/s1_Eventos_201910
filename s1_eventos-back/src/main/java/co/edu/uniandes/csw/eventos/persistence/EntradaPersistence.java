@@ -26,6 +26,7 @@ public class EntradaPersistence {
     @PersistenceContext(unitName="eventosPU")
     protected EntityManager em;
     
+    
     public EntradaEntity create(EntradaEntity entity)
     {
         em.persist(entity);
@@ -45,7 +46,7 @@ public class EntradaPersistence {
      
      public List<EntradaEntity> findAll()
     {
-        TypedQuery query = em.createQuery("select u from EventoEntity u",EntradaEntity.class);
+        TypedQuery query = em.createQuery("select u from EntradaEntity u",EntradaEntity.class);
         return query.getResultList();
     }
     

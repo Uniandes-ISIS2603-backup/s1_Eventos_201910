@@ -6,8 +6,7 @@
 package co.edu.uniandes.csw.eventos.entities;
 
 import java.io.Serializable;
-import java.sql.Date;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -28,6 +27,7 @@ public class FacturaEntity extends BaseEntity implements Serializable{
     )
     private List<EntradaEntity> entradas;
     private String nombre;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
     private Float total;
     private Float iva;
@@ -80,10 +80,10 @@ public class FacturaEntity extends BaseEntity implements Serializable{
      }
  
      /**
-      * @param Usuarios the Usuarios to set
+      * @param usuarios the Usuarios to set
       */
-     public void setUsuario(UsuarioEntity Usuarios) {
-         this.usuario = Usuarios;
+     public void setUsuario(UsuarioEntity usuarios) {
+         this.usuario = usuarios;
      }
 
     public List<EntradaEntity> getEntradas() {

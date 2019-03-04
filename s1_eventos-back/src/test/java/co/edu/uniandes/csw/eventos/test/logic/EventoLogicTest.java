@@ -24,13 +24,10 @@ SOFTWARE.
 package co.edu.uniandes.csw.eventos.test.logic;
 
 import co.edu.uniandes.csw.eventos.ejb.EventoLogic;
-import co.edu.uniandes.csw.eventos.ejb.PatrocinadorLogic;
 import co.edu.uniandes.csw.eventos.entities.EntradaEntity;
 import co.edu.uniandes.csw.eventos.entities.EventoEntity;
-import co.edu.uniandes.csw.eventos.entities.PatrocinadorEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.eventos.persistence.EventoPersistence;
-import co.edu.uniandes.csw.eventos.persistence.PatrocinadorPersistence;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -52,23 +49,35 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @author Paula Molina Ruiz
+ * @author Mateo Vallejo
  */
 @RunWith(Arquillian.class)
 public class EventoLogicTest {
-    
-     private PodamFactory factory = new PodamFactoryImpl();
 
+    private PodamFactory factory = new PodamFactoryImpl();
+
+    /**
+     * Logica del evento
+     */
     @Inject
     private EventoLogic eventoLogic;
 
+    /**
+     * manejador de entidades
+     */
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     * manejador de transacciones
+     */
     @Inject
     private UserTransaction utx;
 
-        private List<EventoEntity> data = new ArrayList<>();
+    /**
+     * conjunto de datos de prueba
+     */
+    private List<EventoEntity> data = new ArrayList<>();
 
     /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
@@ -110,7 +119,6 @@ public class EventoLogicTest {
      */
     private void clearData() {
         em.createQuery("delete from EventoEntity").executeUpdate();
-        em.createQuery("delete from PatrocinadorEntity").executeUpdate();
     }
 
     /**
@@ -120,16 +128,16 @@ public class EventoLogicTest {
     private void insertData() {
         for (int i = 0; i < 3; i++) {
             EventoEntity entity = factory.manufacturePojo(EventoEntity.class);
-            EntradaEntity entradas= factory.manufacturePojo(EntradaEntity.class);
-           
+            EntradaEntity entradas = factory.manufacturePojo(EntradaEntity.class);
+
             em.persist(entity);
             data.add(entity);
         }
-       
+
     }
 
     /**
-     * Prueba para crear un Patrocinador.
+     * Prueba para crear un Evento.
      */
     @Test(expected = BusinessLogicException.class)
     public void createEventoTest() throws BusinessLogicException {
@@ -140,150 +148,127 @@ public class EventoLogicTest {
         Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
     }
-    
+
+    /**
+     * test crear 2 eventos mismo nombre
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
-    public void createEventoMismoNombre() throws BusinessLogicException{
-        EventoEntity newEntity= factory.manufacturePojo(EventoEntity.class);
+    public void createEventoMismoNombre() throws BusinessLogicException {
+        EventoEntity newEntity = factory.manufacturePojo(EventoEntity.class);
         newEntity.setNombre(data.get(0).getNombre());
         eventoLogic.createEvento(newEntity);
-        
+
     }
-    
+
+    /**
+     * test crear mal evento con fecha inicio
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
-    public void createEventoFechaInicio() throws BusinessLogicException{
-        EventoEntity newEntity= factory.manufacturePojo(EventoEntity.class);
-        Date antesActual=new Date();
+    public void createEventoFechaInicio() throws BusinessLogicException {
+        EventoEntity newEntity = factory.manufacturePojo(EventoEntity.class);
+        Date antesActual = new Date();
         antesActual.setYear(1990);
         newEntity.setFechaInicio(antesActual);
         eventoLogic.createEvento(newEntity);
-        
+
     }
-      @Test(expected = BusinessLogicException.class)
-    public void createEventoFechasFin() throws BusinessLogicException{
-        EventoEntity newEntity= factory.manufacturePojo(EventoEntity.class);
-        Date fechaFin=new Date();
-        Date fechaInicio=new Date();
+
+    /**
+     * creacion con fecha de fin mal
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void createEventoFechasFin() throws BusinessLogicException {
+        EventoEntity newEntity = factory.manufacturePojo(EventoEntity.class);
+        Date fechaFin = new Date();
+        Date fechaInicio = new Date();
         fechaFin.setYear(2018);
         fechaInicio.setYear(2019);
         newEntity.setFechaInicio(fechaInicio);
         newEntity.setFechaFin(fechaFin);
         eventoLogic.createEvento(newEntity);
-        
+
     }
-     @Test(expected = BusinessLogicException.class)
-    public void createEventoboletasDisponiblesNeg() throws BusinessLogicException{
-        EventoEntity newEntity= factory.manufacturePojo(EventoEntity.class);
-     newEntity.setBoletasDisponibles((int)Math.random()*-8+1);
-        eventoLogic.createEvento(newEntity);
-    }
-     @Test(expected = BusinessLogicException.class)
-    public void createEventoCantidadMaxNeg() throws BusinessLogicException{
-        EventoEntity newEntity= factory.manufacturePojo(EventoEntity.class);
-     newEntity.setCapacidadMaxima((int)Math.random()*-8+1);
-        eventoLogic.createEvento(newEntity);
-    }
-     @Test(expected = BusinessLogicException.class)
-    public void createEventoboletasDispCAntMax() throws BusinessLogicException{
-        EventoEntity newEntity= factory.manufacturePojo(EventoEntity.class);
-        int boletasDisp=generarNumeroAleatoreo();
-        int cantmax=generarNumeroAleatoreo();
-        while(boletasDisp<cantmax){
-           cantmax=generarNumeroAleatoreo();
-        }
-     newEntity.setBoletasDisponibles(boletasDisp);
-     newEntity.setCapacidadMaxima(cantmax);
+
+    /**
+     * creacion evento boletas disponibles mal
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void createEventoboletasDisponiblesNeg() throws BusinessLogicException {
+        EventoEntity newEntity = factory.manufacturePojo(EventoEntity.class);
+        newEntity.setBoletasDisponibles((int) Math.random() * -8 + 1);
         eventoLogic.createEvento(newEntity);
     }
 
-    private int generarNumeroAleatoreo(){
-        Random rnd=new Random();
-       return  rnd.nextInt(500);
-    }
-    
-       /**
-     * Prueba para crear un Patrocinador.
+    /**
+     * creacion evento cantidad maxima mal
+     * @throws BusinessLogicException 
      */
-  
-    
     @Test(expected = BusinessLogicException.class)
-    public void UpdateEventoMismoNombre() throws BusinessLogicException{
-        EventoEntity newEntity= factory.manufacturePojo(EventoEntity.class);
-        newEntity.setNombre(data.get(0).getNombre());
-         eventoLogic.update(newEntity);
-        
+    public void createEventoCantidadMaxNeg() throws BusinessLogicException {
+        EventoEntity newEntity = factory.manufacturePojo(EventoEntity.class);
+        newEntity.setCapacidadMaxima((int) Math.random() * -8 + 1);
+        eventoLogic.createEvento(newEntity);
     }
-    
+
+    /**
+     * creacion evento boletas disponibles y cantidad max mal
+     * @throws BusinessLogicException 
+     */
     @Test(expected = BusinessLogicException.class)
-    public void updateEventoFechaInicio() throws BusinessLogicException{
-        EventoEntity newEntity= factory.manufacturePojo(EventoEntity.class);
-        Date antesActual=new Date();
-        antesActual.setYear(1990);
-        newEntity.setFechaInicio(antesActual);
- eventoLogic.update(newEntity);        
-    }
-    
-      @Test(expected = BusinessLogicException.class)
-    public void updateEventoFechasFin() throws BusinessLogicException{
-        EventoEntity newEntity= factory.manufacturePojo(EventoEntity.class);
-        Date fechaFin=new Date();
-        Date fechaInicio=new Date();
-        fechaFin.setYear(2018);
-        fechaInicio.setYear(2019);
-        newEntity.setFechaInicio(fechaInicio);
-        newEntity.setFechaFin(fechaFin);
- eventoLogic.update(newEntity);        
-    }
-     @Test(expected = BusinessLogicException.class)
-    public void updateEventoboletasDisponiblesNeg() throws BusinessLogicException{
-        EventoEntity newEntity= factory.manufacturePojo(EventoEntity.class);
-     newEntity.setBoletasDisponibles((int)Math.random()*-8+1);
- eventoLogic.update(newEntity);    }
-    
-    
-     @Test(expected = BusinessLogicException.class)
-    public void updateEventoCantidadMaxNeg() throws BusinessLogicException{
-        EventoEntity newEntity= factory.manufacturePojo(EventoEntity.class);
-     newEntity.setCapacidadMaxima((int)Math.random()*-8+1);
- eventoLogic.update(newEntity);    }
-    
-    
-     @Test(expected = BusinessLogicException.class)
-    public void updateEventoboletasDispCAntMax() throws BusinessLogicException{
-        EventoEntity newEntity= factory.manufacturePojo(EventoEntity.class);
-        int boletasDisp=generarNumeroAleatoreo();
-        int cantmax=generarNumeroAleatoreo();
-        while(boletasDisp<cantmax){
-           cantmax=generarNumeroAleatoreo();
+    public void createEventoboletasDispCAntMax() throws BusinessLogicException {
+        EventoEntity newEntity = factory.manufacturePojo(EventoEntity.class);
+        int boletasDisp = generarNumeroAleatoreo();
+        int cantmax = generarNumeroAleatoreo();
+        while (boletasDisp < cantmax) {
+            cantmax = generarNumeroAleatoreo();
         }
-        
-     newEntity.setBoletasDisponibles(boletasDisp);
-     newEntity.setCapacidadMaxima(cantmax);
-         eventoLogic.update(newEntity);
+        newEntity.setBoletasDisponibles(boletasDisp);
+        newEntity.setCapacidadMaxima(cantmax);
+        eventoLogic.createEvento(newEntity);
     }
-    
-       public void deleteEventoEntityTest() throws BusinessLogicException {
+
+    /**
+     * genera un numero aleatorio entre 0 y 500
+     * @return 
+     */
+    private int generarNumeroAleatoreo() {
+        Random rnd = new Random();
+        return rnd.nextInt(500);
+    }
+
+    /**
+     * TEstelimina un evento
+     * @throws BusinessLogicException 
+     */
+    @Test
+    public void deleteEventoEntityTest() throws BusinessLogicException {
         EventoEntity entity = data.get(0);
         eventoLogic.deleteEvento(entity.getId());
         EventoEntity deleted = em.find(EventoEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
 
- 
-//    
-//       @Test
-//    public void findAllEventoEntityTest() {
-//        List<EventoEntity> list = eventoLogic.findAllEvento();
-//        Assert.assertEquals(list.size(), data.size());
-//        for (EventoEntity ent : list) {
-//            boolean found = false;
-//            for (EventoEntity entity : data) {
-//                if (ent.getId().equals(entity.getId())) {
-//                    found = true;
-//                }
-//            }
-//            Assert.assertTrue(found);
-//        }
-//    }
+    /**
+     * Test encontrar todos los eventos
+     */
+    @Test
+    public void findAllEventoEntityTest() {
+        List<EventoEntity> list = eventoLogic.findAllEvento();
+        Assert.assertEquals(list.size(), data.size());
+        for (EventoEntity ent : list) {
+            boolean found = false;
+            for (EventoEntity entity : data) {
+                if (ent.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
 
     /**
      * test de obtener un objeto de EventoEntity
@@ -297,5 +282,3 @@ public class EventoLogicTest {
     }
 
 }
-
-

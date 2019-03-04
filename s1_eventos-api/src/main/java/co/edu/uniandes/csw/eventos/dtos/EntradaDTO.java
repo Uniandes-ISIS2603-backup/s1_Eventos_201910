@@ -48,6 +48,8 @@ public class EntradaDTO implements Serializable {
         Atributo de tipo booleano que indica si la boleta esta reservada
     */
     private boolean reservado;
+    
+    private Long id;
 
     /*
         Constructor 
@@ -154,19 +156,47 @@ public class EntradaDTO implements Serializable {
     public EntradaEntity toEntity()
     {
         EntradaEntity entradaEntity = new EntradaEntity();
-        entradaEntity.setDescripcion(this.descripcion);
-        entradaEntity.setPrecio(this.precio);
-        entradaEntity.setLocacion(this.locacion);
-        entradaEntity.setNumero(this.numero);
-        entradaEntity.setDisponible(this.disponible);
-        entradaEntity.setCheckInm(this.checkIn);
-        entradaEntity.setReservada(this.reservado);
+        entradaEntity.setDescripcion(this.getDescripcion());
+        entradaEntity.setPrecio(this.getPrecio());
+        entradaEntity.setLocacion(this.getLocacion());
+        entradaEntity.setNumero(this.getNumero());
+        entradaEntity.setDisponible(this.isDisponible());
+        entradaEntity.setCheckInm(this.isCheckIn());
+        entradaEntity.setReservada(this.isReservado());
         return entradaEntity;
     }
     
     public String toString()
     {
         return ToStringBuilder.reflectionToString(this,ToStringStyle.MULTI_LINE_STYLE);
+    }
+
+    /**
+     * @param locacion the locacion to set
+     */
+    public void setLocacion(String locacion) {
+        this.locacion = locacion;
+    }
+
+    /**
+     * @param numero the numero to set
+     */
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
     
     

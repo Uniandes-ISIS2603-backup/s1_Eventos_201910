@@ -5,51 +5,109 @@
  */
 package co.edu.uniandes.csw.eventos.dtos;
 
-
-import co.edu.uniandes.csw.eventos.entities.CalificacionEntity;
-import co.edu.uniandes.csw.eventos.entities.UsuarioEntity;
-
 import co.edu.uniandes.csw.eventos.entities.EventoEntity;
-
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
- * @author estudiante
+ * @author Mateo Vallejo
  */
 public class EventoDTO implements Serializable {
 
-   
-    //Atributos
-
+    /**
+     * Nombre de un evento
+     */
     private String nombre;
-    private String descripcion;
-    private Date fechaInicio;
-    private Date fechaFin;
-    private String detalles;
-    private String categoria;
-    private boolean privado;
-    private int capacidadMaxima;
-    private int boletasDisponibles;
-    private long id;
-    
-    
 
+    /**
+     * Descripcionde un evento
+     */
+    private String descripcion;
+
+    /**
+     * Fecha de inicio de un evento
+     */
+    private Date fechaInicio;
+
+    /**
+     * Fecha de fin de un evento
+     */
+    private Date fechaFin;
+
+    /**
+     * Detalles de un evento
+     */
+    private String detalles;
+
+    /**
+     * Categoria de un evento
+     */
+    private String categoria;
+
+    /**
+     * Privacidad de un evento
+     */
+    private Boolean privado;
+
+    /**
+     * Capacidad maxima de personas en un evento
+     */
+    private Integer capacidadMaxima;
+
+    /**
+     * Boletas disponibles de un evento
+     */
+    private Integer boletasDisponibles;
+
+    /**
+     * Id de un evento
+     */
+    private Long id;
+
+    /**
+     * Constructor por defecto
+     */
     public EventoDTO() {
 
     }
 
+    /**
+     * Consructo de Dto basado en una entity
+     *
+     * @param entity , entity a tranformar
+     */
     public EventoDTO(EventoEntity entity) {
-        this.nombre = entity.getNombre();
-        this.descripcion = entity.getDescripcion();
-        this.fechaInicio = entity.getFechaInicio();
-        this.fechaFin = entity.getFechaFin();
-        this.detalles = entity.getDetalles();
-        this.privado = entity.isPrivado();
-        this.capacidadMaxima = entity.getCapacidadMaxima();
-        this.boletasDisponibles = entity.getBoletasDisponibles();
-        this.categoria = entity.getCategoria();
+        if (entity != null) {
+            this.nombre = entity.getNombre();
+            this.descripcion = entity.getDescripcion();
+            this.fechaInicio = entity.getFechaInicio();
+            this.fechaFin = entity.getFechaFin();
+            this.detalles = entity.getDetalles();
+            this.privado = entity.isPrivado();
+            this.capacidadMaxima = entity.getCapacidadMaxima();
+            this.boletasDisponibles = entity.getBoletasDisponibles();
+            this.categoria = entity.getCategoria();
+        }
+    }
+
+    /**
+     * metodo para pasar de dto a entity
+     *
+     * @return entity creada
+     */
+    public EventoEntity toEntity() {
+        EventoEntity ent = new EventoEntity();
+        ent.setBoletasDisponibles(this.boletasDisponibles);
+        ent.setCapacidadMaxima(this.capacidadMaxima);
+        ent.setCategoria(this.categoria);
+        ent.setDescripcion(this.descripcion);
+        ent.setDetalles(this.detalles);
+        ent.setFechaFin(this.fechaFin);
+        ent.setFechaInicio(this.fechaInicio);
+        ent.setNombre(this.nombre);
+        ent.setPrivado(this.privado);
+        return ent;
     }
 
     /**
@@ -139,45 +197,57 @@ public class EventoDTO implements Serializable {
     /**
      * @return the privado
      */
-    public boolean isPrivado() {
+    public Boolean isPrivado() {
         return privado;
     }
 
     /**
      * @param privado the privado to set
      */
-    public void setPrivado(boolean privado) {
+    public void setPrivado(Boolean privado) {
         this.privado = privado;
     }
 
     /**
      * @return the capacidadMaxima
      */
-    public int getCapacidadMaxima() {
+    public Integer getCapacidadMaxima() {
         return capacidadMaxima;
     }
 
     /**
      * @param capacidadMaxima the capacidadMaxima to set
      */
-    public void setCapacidadMaxima(int capacidadMaxima) {
+    public void setCapacidadMaxima(Integer capacidadMaxima) {
         this.capacidadMaxima = capacidadMaxima;
     }
 
     /**
      * @return the boletasDisponibles
      */
-    public int getBoletasDisponibles() {
+    public Integer getBoletasDisponibles() {
         return boletasDisponibles;
     }
 
     /**
      * @param boletasDisponibles the boletasDisponibles to set
      */
-    public void setBoletasDisponibles(int boletasDisponibles) {
+    public void setBoletasDisponibles(Integer boletasDisponibles) {
         this.boletasDisponibles = boletasDisponibles;
     }
 
-    
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 }

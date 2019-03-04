@@ -47,7 +47,7 @@ public class MedioDePagoPersistence {
     
     public List<MedioDePagoEntity> findAll()
     {
-        TypedQuery query = em.createQuery("select u from EventoEntity u",MedioDePagoEntity.class);
+        TypedQuery query = em.createQuery("select u from MedioDePagoEntity u",MedioDePagoEntity.class);
         return query.getResultList();
     }
     
