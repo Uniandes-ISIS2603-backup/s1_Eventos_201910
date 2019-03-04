@@ -23,6 +23,7 @@ SOFTWARE.
  */
 package co.edu.uniandes.csw.eventos.dtos;
 
+import co.edu.uniandes.csw.eventos.entities.AgendaEntity;
 import java.io.Serializable;
 import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -38,17 +39,19 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
     public class AgendaDTO implements Serializable {
     
-    private Long id;
     private Date horaInicio;
     private Date horaFinal;
     private String actividad;
-
-    public Long getId() {
-        return id;
+    
+    public AgendaDTO()
+    {
+        
     }
-
-    public void setId(Long id) {
-        this.id = id;
+    public AgendaDTO(AgendaEntity agendaEntity)
+    {
+        this.horaFinal = agendaEntity.getHoraFinal();
+        this.horaInicio = agendaEntity.getHoraInicio();
+        this.actividad = agendaEntity.getActividad();
     }
 
     public Date getHoraInicio() {
@@ -75,6 +78,14 @@ import org.apache.commons.lang3.builder.ToStringStyle;
         this.actividad = actividad;
     }
     
+    public AgendaEntity toEntity()
+    {
+        AgendaEntity a = new AgendaEntity();
+        a.setActividad(this.actividad);
+        a.setHoraFinal(horaFinal);
+        a.setHoraInicio(horaInicio);
+        return a;
+    }
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);

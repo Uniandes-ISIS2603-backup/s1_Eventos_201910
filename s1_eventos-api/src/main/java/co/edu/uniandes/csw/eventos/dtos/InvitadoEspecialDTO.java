@@ -23,6 +23,7 @@ SOFTWARE.
  */
 package co.edu.uniandes.csw.eventos.dtos;
 
+import co.edu.uniandes.csw.eventos.entities.InvitadoEspecialEntity;
 import java.io.Serializable;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -36,17 +37,18 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @author Juan Pablo Hidalgo
  */
 public class InvitadoEspecialDTO implements Serializable {
-   private Long id;
    private String info;
    private String nombre;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+   
+   public InvitadoEspecialDTO()
+   {
+       
+   }
+   public InvitadoEspecialDTO(InvitadoEspecialEntity invitadoEspecialEntity)
+   {
+       this.info = invitadoEspecialEntity.getInfo();
+       this.nombre = invitadoEspecialEntity.getNombre();
+   }
 
     public String getInfo() {
         return info;
@@ -63,7 +65,13 @@ public class InvitadoEspecialDTO implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-   
+   public InvitadoEspecialEntity toEntity()
+   {
+       InvitadoEspecialEntity i = new InvitadoEspecialEntity();
+       i.setInfo(this.info);
+       i.setNombre(this.nombre);
+       return i;
+   }
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);

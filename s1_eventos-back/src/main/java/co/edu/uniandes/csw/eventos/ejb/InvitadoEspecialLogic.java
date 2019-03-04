@@ -49,21 +49,21 @@ public class InvitadoEspecialLogic {
     /**
      * Crea una InvitadoEspecial en la persistencia.
      *
-     * @param InvitadoEspecialEntity La entidad que representa la InvitadoEspecial a
+     * @param invitadoEspecialEntity La entidad que representa la InvitadoEspecial a
      * persistir.
      * @return La entiddad de la InvitadoEspecial luego de persistirla.
      * @throws BusinessLogicException Si la InvitadoEspecial a persistir ya existe.
      */
-    public InvitadoEspecialEntity createInvitadoEspecial(InvitadoEspecialEntity InvitadoEspecialEntity) throws BusinessLogicException {
+    public InvitadoEspecialEntity createInvitadoEspecial(InvitadoEspecialEntity invitadoEspecialEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la InvitadoEspecial");
         // Verifica la regla de negocio que dice que no puede haber dos InvitadoEspeciales con el mismo nombre
-        if (persistence.find(InvitadoEspecialEntity.getId()) != null) {
-            throw new BusinessLogicException("Ya existe una InvitadoEspecial con el nombre \"" + InvitadoEspecialEntity.getNombre()+ "\"");
+        if (persistence.find(invitadoEspecialEntity.getId()) != null) {
+            throw new BusinessLogicException("Ya existe una InvitadoEspecial con el nombre \"" + invitadoEspecialEntity.getNombre()+ "\"");
         }
         // Invoca la persistencia para crear la InvitadoEspecial
-        persistence.create(InvitadoEspecialEntity);
+        persistence.create(invitadoEspecialEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación de la InvitadoEspecial");
-        return InvitadoEspecialEntity;
+        return invitadoEspecialEntity;
     }
 
     /**
@@ -84,17 +84,17 @@ public class InvitadoEspecialLogic {
      *
      * Obtener una InvitadoEspecial por medio de su id.
      *
-     * @param InvitadoEspecialsId: id de la InvitadoEspecial para ser buscada.
+     * @param invitadoEspecialsId: id de la InvitadoEspecial para ser buscada.
      * @return la InvitadoEspecial solicitada por medio de su id.
      */
-    public InvitadoEspecialEntity getInvitadoEspecial(Long InvitadoEspecialsId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar la InvitadoEspecial con id = {0}", InvitadoEspecialsId);
+    public InvitadoEspecialEntity getInvitadoEspecial(Long invitadoEspecialsId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar la InvitadoEspecial con id = {0}", invitadoEspecialsId);
         // Note que, por medio de la inyección de dependencias se llama al método "find(id)" que se encuentra en la persistencia.
-        InvitadoEspecialEntity InvitadoEspecialEntity = persistence.find(InvitadoEspecialsId);
+        InvitadoEspecialEntity InvitadoEspecialEntity = persistence.find(invitadoEspecialsId);
         if (InvitadoEspecialEntity == null) {
-            LOGGER.log(Level.SEVERE, "La InvitadoEspecial con el id = {0} no existe", InvitadoEspecialsId);
+            LOGGER.log(Level.SEVERE, "La InvitadoEspecial con el id = {0} no existe", invitadoEspecialsId);
         }
-        LOGGER.log(Level.INFO, "Termina proceso de consultar la InvitadoEspecial con id = {0}", InvitadoEspecialsId);
+        LOGGER.log(Level.INFO, "Termina proceso de consultar la InvitadoEspecial con id = {0}", invitadoEspecialsId);
         return InvitadoEspecialEntity;
     }
 
@@ -102,30 +102,29 @@ public class InvitadoEspecialLogic {
      *
      * Actualizar una InvitadoEspecial.
      *
-     * @param InvitadoEspecialsId: id de la InvitadoEspecial para buscarla en la base de
+     * @param invitadoEspecialsId: id de la InvitadoEspecial para buscarla en la base de
      * datos.
-     * @param InvitadoEspecialEntity: InvitadoEspecial con los cambios para ser actualizada,
+     * @param invitadoEspecialEntity: InvitadoEspecial con los cambios para ser actualizada,
      * por ejemplo el nombre.
      * @return la InvitadoEspecial con los cambios actualizados en la base de datos.
      */
-    public InvitadoEspecialEntity updateInvitadoEspecial(Long InvitadoEspecialsId, InvitadoEspecialEntity InvitadoEspecialEntity) {
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar la InvitadoEspecial con id = {0}", InvitadoEspecialsId);
+    public InvitadoEspecialEntity updateInvitadoEspecial(Long invitadoEspecialsId, InvitadoEspecialEntity invitadoEspecialEntity) {
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar la InvitadoEspecial con id = {0}", invitadoEspecialsId);
         // Note que, por medio de la inyección de dependencias se llama al método "update(entity)" que se encuentra en la persistencia.
-        InvitadoEspecialEntity newEntity = persistence.update(InvitadoEspecialEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de actualizar la InvitadoEspecial con id = {0}", InvitadoEspecialEntity.getId());
+        InvitadoEspecialEntity newEntity = persistence.update(invitadoEspecialEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar la InvitadoEspecial con id = {0}", invitadoEspecialEntity.getId());
         return newEntity;
     }
 
     /**
      * Borrar un InvitadoEspecial
      *
-     * @param InvitadoEspecialsId: id de la InvitadoEspecial a borrar
-     * @throws BusinessLogicException Si la InvitadoEspecial a eliminar tiene libros.
+     * @param invitadoEspecialsId: id de la InvitadoEspecial a borrar
      */
-    public void deleteInvitadoEspecial(Long InvitadoEspecialsId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de borrar la InvitadoEspecial con id = {0}", InvitadoEspecialsId);
+    public void deleteInvitadoEspecial(Long invitadoEspecialsId)  {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar la InvitadoEspecial con id = {0}", invitadoEspecialsId);
         
-        persistence.delete(InvitadoEspecialsId);
-        LOGGER.log(Level.INFO, "Termina proceso de borrar la InvitadoEspecial con id = {0}", InvitadoEspecialsId);
+        persistence.delete(invitadoEspecialsId);
+        LOGGER.log(Level.INFO, "Termina proceso de borrar la InvitadoEspecial con id = {0}", invitadoEspecialsId);
     }
 }
