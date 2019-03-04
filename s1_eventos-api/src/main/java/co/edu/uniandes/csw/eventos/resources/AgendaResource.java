@@ -27,6 +27,8 @@ import co.edu.uniandes.csw.eventos.dtos.AgendaDTO;
 import co.edu.uniandes.csw.eventos.ejb.AgendaLogic;
 import co.edu.uniandes.csw.eventos.entities.AgendaEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
@@ -115,11 +117,24 @@ public class AgendaResource {
        AgendaDTO agendaDTO = new AgendaDTO(agendaEntity);
        return agendaDTO;
    }
+    @GET 
+   public List<AgendaDTO> getAgendaes(){
+        List<AgendaDTO> listaAgendaes = listEntity2DetailDTO(agendaLogic.getAgendas());
+       return listaAgendaes;
+   }
    @PUT
    @Path("(agendaID: \\d+")
    public AgendaDTO updateAgenda (@PathParam("agendaID") Long agendaId, AgendaDTO agenda){
        if(agenda ==null)
             throw new WebApplicationException("El recurso /Agendaes/" + agendaId + " no existe.", 404);
        return agenda;
+   }
+    private List<AgendaDTO> listEntity2DetailDTO(List<AgendaEntity> entityList)
+   {
+       List<AgendaDTO> list = new ArrayList<>();
+       for(AgendaEntity entity : entityList){
+           list.add(new AgendaDTO(entity));
+       }
+       return list;
    }
 }
