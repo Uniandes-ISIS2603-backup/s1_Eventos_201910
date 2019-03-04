@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.eventos.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.*;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -93,6 +94,13 @@ public class FacturaEntity extends BaseEntity implements Serializable{
     public void setEntradas(List<EntradaEntity> entradas) {
         this.entradas = entradas;
     }
-
+    @Override
+    public boolean equals(Object o)
+    {
+        if(o ==this)
+            return true;
+        FacturaEntity a = (FacturaEntity)o;
+        return Objects.equals(a.getId(), this.getId());
+    }
     
 }

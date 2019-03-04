@@ -72,14 +72,14 @@ public class AgendaResource {
      */
     @POST
     public AgendaDTO createAgenda(AgendaDTO agenda) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "AgendaResource createAgenda: input: {0}", agenda.toString());
+        LOGGER.log(Level.INFO, "AgendaResource createAgenda: input: {0}", agenda);
         // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
-        AgendaEntity AgendaEntity = agenda.toEntity();
+        AgendaEntity agendaEntity = agenda.toEntity();
         // Invoca la lógica para crear la Agenda nueva
-        AgendaEntity nuevoAgendaEntity = agendaLogic.createAgenda(AgendaEntity);
+        AgendaEntity nuevoAgendaEntity = agendaLogic.createAgenda(agendaEntity);
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
         AgendaDTO nuevoAgendaDTO = new AgendaDTO(nuevoAgendaEntity);
-        LOGGER.log(Level.INFO, "AgendaResource createAgenda: output: {0}", nuevoAgendaDTO.toString());
+        LOGGER.log(Level.INFO, "AgendaResource createAgenda: output: {0}", nuevoAgendaDTO);
         return new AgendaDTO();
     }
 
@@ -100,7 +100,7 @@ public class AgendaResource {
         }
         catch(Exception e)
         {
-            
+            e.printStackTrace();
         }
         LOGGER.info("AgendaResource deleteAgenda: output: void");
     }

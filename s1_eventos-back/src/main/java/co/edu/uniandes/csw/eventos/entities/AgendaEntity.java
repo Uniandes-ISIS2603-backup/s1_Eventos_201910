@@ -98,4 +98,12 @@ public class AgendaEntity extends BaseEntity implements Serializable{
     public void setInvitadosEspeciales(List<InvitadoEspecialEntity> invitadosEspeciales) {
         this.invitadosEspeciales = invitadosEspeciales;
     }
+    @Override
+    public boolean equals(Object o)
+    {
+        if(o ==this)
+            return true;
+        AgendaEntity a = (AgendaEntity)o;
+        return a.getId()==this.getId();
+    }
 }

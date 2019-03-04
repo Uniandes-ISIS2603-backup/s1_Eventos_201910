@@ -92,12 +92,12 @@ public class AgendaInvitadoLogic {
      */
     public InvitadoEspecialEntity getInvitadoEspecial(Long agendasId, Long invitadoEspecialsId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar la InvitadoEspecial con id = {0} de la Agenda con id = " + agendasId, invitadoEspecialsId);
-        List<InvitadoEspecialEntity> InvitadoEspecials = agendaPersistence.find(agendasId).getInvitadosEspeciales();
-        InvitadoEspecialEntity InvitadoEspecialEntity = invitadoEspecialPersistence.find(invitadoEspecialsId);
-        int index = InvitadoEspecials.indexOf(InvitadoEspecialEntity);
+        List<InvitadoEspecialEntity> invitadoEspeciales = agendaPersistence.find(agendasId).getInvitadosEspeciales();
+        InvitadoEspecialEntity invitadoEspecialEntity = invitadoEspecialPersistence.find(invitadoEspecialsId);
+        int index = invitadoEspeciales.indexOf(invitadoEspecialEntity);
         LOGGER.log(Level.INFO, "Termina proceso de consultar la InvitadoEspecial con id = {0} de la Agenda con id = " + agendasId, invitadoEspecialsId);
         if (index >= 0) {
-            return InvitadoEspecials.get(index);
+            return invitadoEspeciales.get(index);
         }
         throw new BusinessLogicException("la InvitadoEspecial no está asociado a la Agenda");
     }

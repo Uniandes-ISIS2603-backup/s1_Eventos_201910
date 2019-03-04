@@ -11,7 +11,6 @@ import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.eventos.persistence.AgendaPersistence;
 import co.edu.uniandes.csw.eventos.persistence.EventoPersistence;
 import java.util.List;
-import java.util.function.UnaryOperator;
 import javax.inject.Inject;
 
 /**

@@ -75,9 +75,9 @@ public class AgendaLogic {
     public List<AgendaEntity> getAgendas() {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar todas las Agendaes");
         // Note que, por medio de la inyección de dependencias se llama al método "findAll()" que se encuentra en la persistencia.
-        List<AgendaEntity> Agendas = persistence.findAll();
+        List<AgendaEntity> agendas = persistence.findAll();
         LOGGER.log(Level.INFO, "Termina proceso de consultar todas las Agendaes");
-        return Agendas;
+        return agendas;
     }
 
     /**
@@ -90,12 +90,12 @@ public class AgendaLogic {
     public AgendaEntity getAgenda(Long agendasId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar la Agenda con id = {0}", agendasId);
         // Note que, por medio de la inyección de dependencias se llama al método "find(id)" que se encuentra en la persistencia.
-        AgendaEntity AgendaEntity = persistence.find(agendasId);
-        if (AgendaEntity == null) {
+        AgendaEntity agendaEntity = persistence.find(agendasId);
+        if (agendaEntity == null) {
             LOGGER.log(Level.SEVERE, "La Agenda con el id = {0} no existe", agendasId);
         }
         LOGGER.log(Level.INFO, "Termina proceso de consultar la Agenda con id = {0}", agendasId);
-        return AgendaEntity;
+        return agendaEntity;
     }
 
     /**
