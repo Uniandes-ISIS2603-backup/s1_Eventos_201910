@@ -15,7 +15,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class InvitadoEspecialEntity extends BaseEntity implements Serializable{
 
     @PodamExclude
-    @ManyToMany(mappedBy = "invitadosEspeciales")
+    @ManyToMany(mappedBy = "invitadosEspeciales",cascade = CascadeType.PERSIST)
     private List<AgendaEntity> agenda = new ArrayList<>();
      
     private String info;

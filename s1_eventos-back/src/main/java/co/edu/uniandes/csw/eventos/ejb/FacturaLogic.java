@@ -49,21 +49,21 @@ public class FacturaLogic {
     /**
      * Crea una Factura en la persistencia.
      *
-     * @param FacturaEntity La entidad que representa la Factura a
+     * @param facturaEntity La entidad que representa la Factura a
      * persistir.
      * @return La entiddad de la Factura luego de persistirla.
      * @throws BusinessLogicException Si la Factura a persistir ya existe.
      */
-    public FacturaEntity createFactura(FacturaEntity FacturaEntity) throws BusinessLogicException {
+    public FacturaEntity createFactura(FacturaEntity facturaEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la Factura");
         // Verifica la regla de negocio que dice que no puede haber dos Facturaes con el mismo nombre
-        if (persistence.find(FacturaEntity.getId()) != null) {
-            throw new BusinessLogicException("Ya existe una Factura con el nombre \"" + FacturaEntity.getNombre()+ "\"");
+        if (persistence.find(facturaEntity.getId()) != null) {
+            throw new BusinessLogicException("Ya existe una Factura con el nombre \"" + facturaEntity.getNombre()+ "\"");
         }
         // Invoca la persistencia para crear la Factura
-        persistence.create(FacturaEntity);
+        persistence.create(facturaEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación de la Factura");
-        return FacturaEntity;
+        return facturaEntity;
     }
 
     /**
@@ -84,17 +84,17 @@ public class FacturaLogic {
      *
      * Obtener una Factura por medio de su id.
      *
-     * @param FacturasId: id de la Factura para ser buscada.
+     * @param facturasId: id de la Factura para ser buscada.
      * @return la Factura solicitada por medio de su id.
      */
-    public FacturaEntity getFactura(Long FacturasId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar la Factura con id = {0}", FacturasId);
+    public FacturaEntity getFactura(Long facturasId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar la Factura con id = {0}", facturasId);
         // Note que, por medio de la inyección de dependencias se llama al método "find(id)" que se encuentra en la persistencia.
-        FacturaEntity FacturaEntity = persistence.find(FacturasId);
+        FacturaEntity FacturaEntity = persistence.find(facturasId);
         if (FacturaEntity == null) {
-            LOGGER.log(Level.SEVERE, "La Factura con el id = {0} no existe", FacturasId);
+            LOGGER.log(Level.SEVERE, "La Factura con el id = {0} no existe", facturasId);
         }
-        LOGGER.log(Level.INFO, "Termina proceso de consultar la Factura con id = {0}", FacturasId);
+        LOGGER.log(Level.INFO, "Termina proceso de consultar la Factura con id = {0}", facturasId);
         return FacturaEntity;
     }
 

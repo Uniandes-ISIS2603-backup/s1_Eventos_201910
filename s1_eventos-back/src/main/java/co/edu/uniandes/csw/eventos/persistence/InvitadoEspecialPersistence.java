@@ -48,33 +48,33 @@ public class InvitadoEspecialPersistence {
     /**
      * Busca si hay algun organizador con el id que se envía de argumento
      *
-     * @param InvitadoEspecialesId: id correspondiente al organizador buscado.
+     * @param invitadoEspecialesId: id correspondiente al organizador buscado.
      * @return un InvitadoEspecial.
      */
-    public InvitadoEspecialEntity find(Long InvitadoEspecialesId) {
+    public InvitadoEspecialEntity find(Long invitadoEspecialesId) {
         
-        return em.find(InvitadoEspecialEntity.class, InvitadoEspecialesId);
+        return em.find(InvitadoEspecialEntity.class, invitadoEspecialesId);
     }
 
     /**
      * Actualiza un InvitadoEspecial.
      *
-     * @param InvitadoEspecialEntity: el organizador que viene con los nuevos cambios. 
+     * @param invitadoEspecialEntity: el organizador que viene con los nuevos cambios. 
      * @return un InvitadoEspecial con los cambios aplicados.
      */
-    public InvitadoEspecialEntity update(InvitadoEspecialEntity InvitadoEspecialEntity) {
+    public InvitadoEspecialEntity update(InvitadoEspecialEntity invitadoEspecialEntity) {
 
-        return em.merge(InvitadoEspecialEntity);
+        return em.merge(invitadoEspecialEntity);
     }
 
     /**
      * Borra un InvitadoEspecial de la base de datos recibiendo como argumento el id de InvitadoEspecial
      *
-     * @param InvitadoEspecialesId: id correspondiente al InvitadoEspecial a borrar.
+     * @param invitadoEspecialesId: id correspondiente al InvitadoEspecial a borrar.
      */
-    public void delete(Long InvitadoEspecialesId) {
+    public void delete(Long invitadoEspecialesId) {
 
-        InvitadoEspecialEntity InvitadoEspecialEntity = em.find(InvitadoEspecialEntity.class, InvitadoEspecialesId);
+        InvitadoEspecialEntity InvitadoEspecialEntity = em.find(InvitadoEspecialEntity.class, invitadoEspecialesId);
         em.remove(InvitadoEspecialEntity);
     }
 }

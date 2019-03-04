@@ -4,13 +4,13 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.eventos.test.logic;
-import co.edu.uniandes.csw.eventos.ejb.AgendaLogic;
+import co.edu.uniandes.csw.eventos.ejb.InvitadoEspecialLogic;
 import co.edu.uniandes.csw.eventos.ejb.OrganizadorLogic;
-import co.edu.uniandes.csw.eventos.entities.AgendaEntity;
+import co.edu.uniandes.csw.eventos.entities.InvitadoEspecialEntity;
 import co.edu.uniandes.csw.eventos.entities.EventoEntity;
 import co.edu.uniandes.csw.eventos.entities.OrganizadorEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
-import co.edu.uniandes.csw.eventos.persistence.AgendaPersistence;
+import co.edu.uniandes.csw.eventos.persistence.InvitadoEspecialPersistence;
 import co.edu.uniandes.csw.eventos.persistence.OrganizadorPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +35,11 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author Juan David Diaz
  */
 @RunWith(Arquillian.class)
-public class AgendaLogicTest {
+public class InvitadoEspecialLogicTest {
     private PodamFactory factory = new PodamFactoryImpl();
     
     @Inject
-    private AgendaLogic AgendaLogic;
+    private InvitadoEspecialLogic InvitadoEspecialLogic;
     
     @PersistenceContext
     private EntityManager em;
@@ -47,14 +47,14 @@ public class AgendaLogicTest {
     @Inject
     private UserTransaction utx;
     
-    private List<AgendaEntity> data = new ArrayList<AgendaEntity>();
+    private List<InvitadoEspecialEntity> data = new ArrayList<InvitadoEspecialEntity>();
     
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addPackage(AgendaEntity.class.getPackage())
-                .addPackage(AgendaLogic.class.getPackage())
-                .addPackage(AgendaPersistence.class.getPackage())
+                .addPackage(InvitadoEspecialEntity.class.getPackage())
+                .addPackage(InvitadoEspecialLogic.class.getPackage())
+                .addPackage(InvitadoEspecialPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -84,7 +84,7 @@ public class AgendaLogicTest {
      */
     private void clearData() {
         em.createQuery("delete from EventoEntity").executeUpdate();
-        em.createQuery("delete from AgendaEntity").executeUpdate();
+        em.createQuery("delete from InvitadoEspecialEntity").executeUpdate();
     }
     
     /**
@@ -93,11 +93,11 @@ public class AgendaLogicTest {
      */
     private void insertData() {
         for (int i = 0; i < 3; i++) {
-            AgendaEntity entity = factory.manufacturePojo(AgendaEntity.class);
+            InvitadoEspecialEntity entity = factory.manufacturePojo(InvitadoEspecialEntity.class);
             em.persist(entity);
             data.add(entity);
         }
-        AgendaEntity Agenda = data.get(2);
+        InvitadoEspecialEntity InvitadoEspecial = data.get(2);
         EventoEntity entity = factory.manufacturePojo(EventoEntity.class);
        
         em.persist(entity);
@@ -105,41 +105,41 @@ public class AgendaLogicTest {
     }
     
     @Test
-    public void createAgendaTest()throws Exception
+    public void createInvitadoEspecialTest()throws Exception
     {
-        AgendaEntity newEntity = factory.manufacturePojo(AgendaEntity.class);
-        AgendaEntity result = AgendaLogic.createAgenda(newEntity);
+        InvitadoEspecialEntity newEntity = factory.manufacturePojo(InvitadoEspecialEntity.class);
+        InvitadoEspecialEntity result = InvitadoEspecialLogic.createInvitadoEspecial(newEntity);
         Assert.assertNotNull(result);
-        AgendaEntity entity = em.find(AgendaEntity.class,result.getId());
+        InvitadoEspecialEntity entity = em.find(InvitadoEspecialEntity.class,result.getId());
          Assert.assertEquals(newEntity.getId(), entity.getId());
     }
     
     @Test
-    public void getAgendaTest(){
-        AgendaEntity entity = data.get(0);
-        AgendaEntity resultEntity = AgendaLogic.getAgenda(entity.getId());
+    public void getInvitadoEspecialTest(){
+        InvitadoEspecialEntity entity = data.get(0);
+        InvitadoEspecialEntity resultEntity = InvitadoEspecialLogic.getInvitadoEspecial(entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
     }
     
     @Test
-    public void updateAgendaTest() throws Exception {
-        AgendaEntity entity = data.get(0);
-        AgendaEntity pojoEntity = factory.manufacturePojo(AgendaEntity.class);
+    public void updateInvitadoEspecialTest() throws Exception {
+        InvitadoEspecialEntity entity = data.get(0);
+        InvitadoEspecialEntity pojoEntity = factory.manufacturePojo(InvitadoEspecialEntity.class);
         
         pojoEntity.setId(entity.getId());
         
-        AgendaLogic.updateAgenda(pojoEntity.getId(),pojoEntity);
+        InvitadoEspecialLogic.updateInvitadoEspecial(pojoEntity.getId(),pojoEntity);
         
-        AgendaEntity resp = em.find(AgendaEntity.class,entity.getId());
+        InvitadoEspecialEntity resp = em.find(InvitadoEspecialEntity.class,entity.getId());
         
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
     }
     @Test
-    public void deleteAgendaTest() throws BusinessLogicException{
-        AgendaEntity entity = data.get(0);
-        AgendaLogic.deleteAgenda(entity.getId());
-        AgendaEntity deleted = em.find(AgendaEntity.class, entity.getId());
+    public void deleteInvitadoEspecialTest() throws BusinessLogicException{
+        InvitadoEspecialEntity entity = data.get(0);
+        InvitadoEspecialLogic.deleteInvitadoEspecial(entity.getId());
+        InvitadoEspecialEntity deleted = em.find(InvitadoEspecialEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }    
     

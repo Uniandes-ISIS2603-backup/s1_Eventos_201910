@@ -49,21 +49,21 @@ public class AgendaLogic {
     /**
      * Crea una Agenda en la persistencia.
      *
-     * @param AgendaEntity La entidad que representa la Agenda a
+     * @param agendaEntity La entidad que representa la Agenda a
      * persistir.
      * @return La entiddad de la Agenda luego de persistirla.
      * @throws BusinessLogicException Si la Agenda a persistir ya existe.
      */
-    public AgendaEntity createAgenda(AgendaEntity AgendaEntity) throws BusinessLogicException {
+    public AgendaEntity createAgenda(AgendaEntity agendaEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la Agenda");
         // Verifica la regla de negocio que dice que no puede haber dos Agendaes con el mismo nombre
-        if (persistence.find(AgendaEntity.getId()) != null) {
-            throw new BusinessLogicException("Ya existe una Agenda con el nombre \"" + AgendaEntity.getNombre()+ "\"");
+        if (persistence.find(agendaEntity.getId()) != null) {
+            throw new BusinessLogicException("Ya existe una Agenda con el nombre \"" + agendaEntity.getNombre()+ "\"");
         }
         // Invoca la persistencia para crear la Agenda
-        persistence.create(AgendaEntity);
+        persistence.create(agendaEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación de la Agenda");
-        return AgendaEntity;
+        return agendaEntity;
     }
 
     /**
@@ -84,17 +84,17 @@ public class AgendaLogic {
      *
      * Obtener una Agenda por medio de su id.
      *
-     * @param AgendasId: id de la Agenda para ser buscada.
+     * @param agendasId: id de la Agenda para ser buscada.
      * @return la Agenda solicitada por medio de su id.
      */
-    public AgendaEntity getAgenda(Long AgendasId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar la Agenda con id = {0}", AgendasId);
+    public AgendaEntity getAgenda(Long agendasId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar la Agenda con id = {0}", agendasId);
         // Note que, por medio de la inyección de dependencias se llama al método "find(id)" que se encuentra en la persistencia.
-        AgendaEntity AgendaEntity = persistence.find(AgendasId);
+        AgendaEntity AgendaEntity = persistence.find(agendasId);
         if (AgendaEntity == null) {
-            LOGGER.log(Level.SEVERE, "La Agenda con el id = {0} no existe", AgendasId);
+            LOGGER.log(Level.SEVERE, "La Agenda con el id = {0} no existe", agendasId);
         }
-        LOGGER.log(Level.INFO, "Termina proceso de consultar la Agenda con id = {0}", AgendasId);
+        LOGGER.log(Level.INFO, "Termina proceso de consultar la Agenda con id = {0}", agendasId);
         return AgendaEntity;
     }
 
@@ -102,17 +102,17 @@ public class AgendaLogic {
      *
      * Actualizar una Agenda.
      *
-     * @param AgendasId: id de la Agenda para buscarla en la base de
+     * @param agendasId: id de la Agenda para buscarla en la base de
      * datos.
-     * @param AgendaEntity: Agenda con los cambios para ser actualizada,
+     * @param agendaEntity: Agenda con los cambios para ser actualizada,
      * por ejemplo el nombre.
      * @return la Agenda con los cambios actualizados en la base de datos.
      */
-    public AgendaEntity updateAgenda(Long AgendasId, AgendaEntity AgendaEntity) {
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar la Agenda con id = {0}", AgendasId);
+    public AgendaEntity updateAgenda(Long agendasId, AgendaEntity agendaEntity) {
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar la Agenda con id = {0}", agendasId);
         // Note que, por medio de la inyección de dependencias se llama al método "update(entity)" que se encuentra en la persistencia.
-        AgendaEntity newEntity = persistence.update(AgendaEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de actualizar la Agenda con id = {0}", AgendaEntity.getId());
+        AgendaEntity newEntity = persistence.update(agendaEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar la Agenda con id = {0}", agendaEntity.getId());
         return newEntity;
     }
 

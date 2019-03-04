@@ -46,54 +46,56 @@ public class AgendaInvitadoLogic {
     private static final Logger LOGGER = Logger.getLogger(AgendaInvitadoLogic.class.getName());
 
     @Inject
-    private InvitadoEspecialPersistence InvitadoEspecialPersistence;
+    private InvitadoEspecialPersistence invitadoEspecialPersistence;
 
     @Inject
-    private AgendaPersistence AgendaPersistence;
+    private AgendaPersistence agendaPersistence;
 
     /**
      * Agregar un InvitadoEspecial a la Agenda
      *
-     * @param InvitadoEspecialsId El id libro a guardar
-     * @param AgendasId El id de la Agenda en la cual se va a guardar el
+     * @param invitadoEspecialsId El id libro a guardar
+     * @param agendasId El id de la Agenda en la cual se va a guardar el
      * libro.
      * @return la InvitadoEspecial creado.
      */
-    public InvitadoEspecialEntity addInvitadoEspecial(Long InvitadoEspecialsId, Long AgendasId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de agregarle un libro a la Agenda con id = {0}", AgendasId);
-        AgendaEntity AgendaEntity = AgendaPersistence.find(AgendasId);
-        InvitadoEspecialEntity InvitadoEspecialEntity = InvitadoEspecialPersistence.find(InvitadoEspecialsId);
-//        InvitadoEspecialEntity.setAgenda(AgendaEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de agregarle un libro a la Agenda con id = {0}", AgendasId);
-        return InvitadoEspecialEntity;
+    public InvitadoEspecialEntity addInvitadoEspecial(Long invitadoEspecialsId, Long agendasId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de agregarle un libro a la Agenda con id = {0}", agendasId);
+        AgendaEntity agendaEntity = agendaPersistence.find(agendasId);
+        InvitadoEspecialEntity invitadoEspecialEntity = invitadoEspecialPersistence.find(invitadoEspecialsId);
+        List<AgendaEntity> lista = invitadoEspecialEntity.getAgenda();
+        lista.add(agendaEntity);
+        invitadoEspecialEntity.setAgenda(lista);
+        LOGGER.log(Level.INFO, "Termina proceso de agregarle un invitado especial a la Agenda con id = {0}", agendasId);
+        return invitadoEspecialEntity;
     }
 
     /**
      * Retorna todos los InvitadoEspecials asociados a una Agenda
      *
-     * @param AgendasId El ID de la Agenda buscada
+     * @param agendasId El ID de la Agenda buscada
      * @return La lista de libros de la Agenda
      */
-    public List<InvitadoEspecialEntity> getInvitadoEspecials(Long AgendasId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar los libros asociados a la Agenda con id = {0}", AgendasId);
-        return AgendaPersistence.find(AgendasId).getInvitadosEspeciales();
+    public List<InvitadoEspecialEntity> getInvitadoEspecials(Long agendasId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar los libros asociados a la Agenda con id = {0}", agendasId);
+        return agendaPersistence.find(agendasId).getInvitadosEspeciales();
     }
 
     /**
      * Retorna un InvitadoEspecial asociado a una Agenda
      *
-     * @param AgendasId El id de la Agenda a buscar.
-     * @param InvitadoEspecialsId El id dla InvitadoEspecial a buscar
+     * @param agendasId El id de la Agenda a buscar.
+     * @param invitadoEspecialsId El id dla InvitadoEspecial a buscar
      * @return la InvitadoEspecial encontrado dentro de la Agenda.
      * @throws BusinessLogicException Si la InvitadoEspecial no se encuentra en la
      * Agenda
      */
-    public InvitadoEspecialEntity getInvitadoEspecial(Long AgendasId, Long InvitadoEspecialsId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar la InvitadoEspecial con id = {0} de la Agenda con id = " + AgendasId, InvitadoEspecialsId);
-        List<InvitadoEspecialEntity> InvitadoEspecials = AgendaPersistence.find(AgendasId).getInvitadosEspeciales();
-        InvitadoEspecialEntity InvitadoEspecialEntity = InvitadoEspecialPersistence.find(InvitadoEspecialsId);
+    public InvitadoEspecialEntity getInvitadoEspecial(Long agendasId, Long invitadoEspecialsId) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar la InvitadoEspecial con id = {0} de la Agenda con id = " + agendasId, invitadoEspecialsId);
+        List<InvitadoEspecialEntity> InvitadoEspecials = agendaPersistence.find(agendasId).getInvitadosEspeciales();
+        InvitadoEspecialEntity InvitadoEspecialEntity = invitadoEspecialPersistence.find(invitadoEspecialsId);
         int index = InvitadoEspecials.indexOf(InvitadoEspecialEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de consultar la InvitadoEspecial con id = {0} de la Agenda con id = " + AgendasId, InvitadoEspecialsId);
+        LOGGER.log(Level.INFO, "Termina proceso de consultar la InvitadoEspecial con id = {0} de la Agenda con id = " + agendasId, invitadoEspecialsId);
         if (index >= 0) {
             return InvitadoEspecials.get(index);
         }
