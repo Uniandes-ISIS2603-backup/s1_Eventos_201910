@@ -27,7 +27,7 @@ import javax.ws.rs.WebApplicationException;
 
 /**
  *
- * @author estudiante
+ * @author Mateo Vallejo
  */
 @Path("eventos")
 @Produces("application/json")
@@ -38,9 +38,19 @@ public class EventoResource {
 
     private static final Logger LOGGER = Logger.getLogger(EventoResource.class.getName());
 
+    /**
+     * Logica del evento
+     */
     @Inject
     private EventoLogic logica;
 
+    /**
+     * Servicio que crea un evento
+     *
+     * @param evento a crear
+     * @return el evento creado
+     * @throws BusinessLogicException
+     */
     @POST
     public EventoDTO createEvento(EventoDTO evento) throws BusinessLogicException {
 
@@ -50,12 +60,24 @@ public class EventoResource {
         return nuevoEventoDTO;
     }
 
+    /**
+     * Servicio de obtener todos los eventos
+     *
+     * @return todos los eventos
+     */
     @GET
     public List<EventoDetailDTO> getEventos() {
         List<EventoDetailDTO> listaEventos = listEntity2DetailDTO(logica.findAllEvento());
         return listaEventos;
     }
 
+    /**
+     * Servicio para obtener un evento
+     *
+     * @param eventosId id del evento
+     * @return el evento bucado
+     * @throws WebApplicationException
+     */
     @GET
     @Path("{eventosId: \\d+}")
     public EventoDTO getEvento(@PathParam("eventosId") Long eventosId) throws WebApplicationException {
@@ -67,6 +89,15 @@ public class EventoResource {
         return detailDTO;
     }
 
+    /**
+     * servicio para actualizar un evento
+     *
+     * @param eventosId id del evento a actualizar
+     * @param evento evento de remplazo
+     * @return evento actualizado
+     * @throws WebApplicationException
+     * @throws BusinessLogicException
+     */
     @PUT
     @Path("(eventosId: \\d+")
     public EventoDTO updateEvento(@PathParam("eventosId") Long eventosId, EventoDetailDTO evento) throws WebApplicationException, BusinessLogicException {
@@ -80,6 +111,12 @@ public class EventoResource {
 
     }
 
+    /**
+     * Servicio para eliminar un evento
+     *
+     * @param eventosId id del evento a eliminar
+     * @throws BusinessLogicException
+     */
     @DELETE
     @Path("(eventosId: \\d+)")
     public void deleteEvento(@PathParam("eventosId") Long eventosId) throws BusinessLogicException {
@@ -89,6 +126,11 @@ public class EventoResource {
         logica.deleteEvento(eventosId);
     }
 
+    /**
+     *
+     * @param eventosId
+     * @return
+     */
     @Path("{eventosId: \\d+}/organizadores")
     public Class<EventoOrganizadoresResource> getEventoOrganizadoresResource(@PathParam("eventosId") Long eventosId) {
         if (logica.find(eventosId) == null) {
@@ -97,6 +139,12 @@ public class EventoResource {
         return EventoOrganizadoresResource.class;
     }
 
+    /**
+     * cambia los entities por dtos
+     *
+     * @param entityList Entities a cambiar
+     * @return
+     */
     private List<EventoDetailDTO> listEntity2DetailDTO(List<EventoEntity> entityList) {
         List<EventoDetailDTO> list = new ArrayList<>();
         for (EventoEntity entity : entityList) {

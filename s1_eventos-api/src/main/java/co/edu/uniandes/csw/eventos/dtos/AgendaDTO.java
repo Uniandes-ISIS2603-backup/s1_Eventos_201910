@@ -37,7 +37,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author ISIS2603
  */
-public class AgendaDTO implements Serializable {
+    public class AgendaDTO implements Serializable {
     
     private Date horaInicio;
     private Date horaFinal;

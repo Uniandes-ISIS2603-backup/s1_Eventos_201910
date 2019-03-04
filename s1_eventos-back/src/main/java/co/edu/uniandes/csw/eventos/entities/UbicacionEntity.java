@@ -7,55 +7,62 @@ package co.edu.uniandes.csw.eventos.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import uk.co.jemos.podam.common.PodamExclude;
-
 /**
  *
- * @author estudiante
+ * @author Mateo Vallejo
  */
 @Entity
 public class UbicacionEntity extends BaseEntity implements Serializable {
     
-        @PodamExclude
 
     
      /**
      * Representa la latitud de una ubicacion
      */
-     private double latitud;
+     private Double latitud;
+     
      /**
      * Representa la longitud de una ubicacion
      */
-    private double longitud;
+    private Double longitud;
+    
     /**
      * Representa el nombre de una ubicacion
      */
     private String nombre;
+    
+    /**
+     * constructor por defecto
+     */
+    public UbicacionEntity(){
+        
+    }
+            
     /**
      * @return the latitud
      */
-    public double getLatitud() {
+    public Double getLatitud() {
         return latitud;
     }
 
     /**
      * @param latitud the latitud to set
      */
-    public void setLatitud(double latitud) {
+    public void setLatitud(Double latitud) {
         this.latitud = latitud;
     }
 
     /**
      * @return the longitud
      */
-    public double getLongitud() {
+    public Double getLongitud() {
         return longitud;
     }
 
     /**
      * @param longitud the longitud to set
      */
-    public void setLongitud(double longitud) {
+    public void setLongitud(Double longitud) {
         this.longitud = longitud;
     }
 

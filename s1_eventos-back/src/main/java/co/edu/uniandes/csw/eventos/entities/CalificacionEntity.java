@@ -32,8 +32,8 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
     public void setEvento(EventoEntity evento) {
         this.evento = evento;
     }
+   
     
-
     /**
      * Constructor
      */
@@ -118,6 +118,6 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
     public void setRecomendado(Boolean recomendado) {
         this.recomendado = recomendado;
     }
-    
-    
+
+   
 }
