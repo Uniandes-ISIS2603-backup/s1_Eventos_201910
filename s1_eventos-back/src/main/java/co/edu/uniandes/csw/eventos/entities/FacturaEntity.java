@@ -6,8 +6,8 @@
 package co.edu.uniandes.csw.eventos.entities;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 import uk.co.jemos.podam.common.PodamExclude;

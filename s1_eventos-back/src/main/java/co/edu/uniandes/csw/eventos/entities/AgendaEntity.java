@@ -23,8 +23,8 @@ public class AgendaEntity extends BaseEntity implements Serializable{
     @ManyToOne
     private EventoEntity eventos = new EventoEntity();
     
-        @javax.persistence.ManyToMany(
-        fetch = javax.persistence.FetchType.LAZY
+    @ManyToMany(
+        fetch = javax.persistence.FetchType.LAZY,cascade = CascadeType.PERSIST
            )
     List<InvitadoEspecialEntity> invitadosEspeciales = new ArrayList<>();
     
@@ -32,7 +32,7 @@ public class AgendaEntity extends BaseEntity implements Serializable{
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date horaInicio;
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date rango;
+    private Date horaFinal;
     private String actividad;
      
     /**
@@ -59,13 +59,15 @@ public class AgendaEntity extends BaseEntity implements Serializable{
         this.horaInicio = horaInicio;
     }
 
-    public Date getRango() {
-        return rango;
+    public Date getHoraFinal() {
+        return horaFinal;
     }
 
-    public void setRango(Date rango) {
-        this.rango = rango;
+    public void setHoraFinal(Date horaFinal) {
+        this.horaFinal = horaFinal;
     }
+
+    
 
     public String getActividad() {
         return actividad;

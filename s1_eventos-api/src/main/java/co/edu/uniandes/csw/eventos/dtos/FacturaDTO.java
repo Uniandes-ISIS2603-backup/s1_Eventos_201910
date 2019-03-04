@@ -23,6 +23,7 @@ SOFTWARE.
  */
 package co.edu.uniandes.csw.eventos.dtos;
 
+import co.edu.uniandes.csw.eventos.entities.FacturaEntity;
 import java.io.Serializable;
 import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -37,17 +38,23 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @author ISIS2603
  */
 public class FacturaDTO implements Serializable {
-    private Long id;
     private Date fechaDePago;
     private Float montoTotal;
     private Float iva;
+    
 
-    public Long getId() {
-        return id;
+      public FacturaDTO(FacturaEntity facturaEntity)
+    {
+        if(facturaEntity !=null)
+        {
+            this.fechaDePago=facturaEntity.getFecha();
+            this.montoTotal=facturaEntity.getTotal();
+            this.iva=facturaEntity.getIva();
+        }
     }
-
-    public void setId(Long id) {
-        this.id = id;
+    public FacturaDTO()
+    {
+        
     }
 
     public Date getFechaDePago() {
@@ -73,7 +80,14 @@ public class FacturaDTO implements Serializable {
     public void setIva(Float iva) {
         this.iva = iva;
     }
-            
+    public FacturaEntity toEntity()
+    {
+        FacturaEntity f = new FacturaEntity();
+        f.setFecha(this.fechaDePago);
+        f.setTotal(montoTotal);
+        f.setIva(iva);
+        return f;
+    }
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);

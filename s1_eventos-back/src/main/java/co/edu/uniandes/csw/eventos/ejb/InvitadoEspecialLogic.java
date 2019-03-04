@@ -120,9 +120,8 @@ public class InvitadoEspecialLogic {
      * Borrar un InvitadoEspecial
      *
      * @param InvitadoEspecialsId: id de la InvitadoEspecial a borrar
-     * @throws BusinessLogicException Si la InvitadoEspecial a eliminar tiene libros.
      */
-    public void deleteInvitadoEspecial(Long InvitadoEspecialsId) throws BusinessLogicException {
+    public void deleteInvitadoEspecial(Long InvitadoEspecialsId)  {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la InvitadoEspecial con id = {0}", InvitadoEspecialsId);
         
         persistence.delete(InvitadoEspecialsId);

@@ -25,6 +25,8 @@ package co.edu.uniandes.csw.eventos.resources;
 
 import co.edu.uniandes.csw.eventos.dtos.AgendaDTO;
 import co.edu.uniandes.csw.eventos.dtos.CalificacionDTO;
+import co.edu.uniandes.csw.eventos.ejb.AgendaLogic;
+import co.edu.uniandes.csw.eventos.entities.AgendaEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,6 +40,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 /**
  * Clase que implementa el recurso "agendas".
@@ -53,8 +56,8 @@ public class AgendaResource {
 
     private static final Logger LOGGER = Logger.getLogger(AgendaResource.class.getName());
 
-//    @Inject
-//    AgendaLogic AgendaLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
+    @Inject
+    AgendaLogic agendaLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
 
     /**
      * Crea una nueva Agenda con la informacion que se recibe en el cuerpo de
@@ -70,14 +73,14 @@ public class AgendaResource {
      */
     @POST
     public AgendaDTO createAgenda(AgendaDTO Agenda) throws BusinessLogicException {
-//        LOGGER.log(Level.INFO, "AgendaResource createAgenda: input: {0}", Agenda.toString());
-//        // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
-//        AgendaEntity AgendaEntity = Agenda.toEntity();
-//        // Invoca la lógica para crear la Agenda nueva
-//        AgendaEntity nuevoAgendaEntity = AgendaLogic.createAgenda(AgendaEntity);
-//        // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
-//        AgendaDTO nuevoAgendaDTO = new AgendaDTO(nuevoAgendaEntity);
-//        LOGGER.log(Level.INFO, "AgendaResource createAgenda: output: {0}", nuevoAgendaDTO.toString());
+        LOGGER.log(Level.INFO, "AgendaResource createAgenda: input: {0}", Agenda.toString());
+        // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
+        AgendaEntity AgendaEntity = Agenda.toEntity();
+        // Invoca la lógica para crear la Agenda nueva
+        AgendaEntity nuevoAgendaEntity = agendaLogic.createAgenda(AgendaEntity);
+        // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
+        AgendaDTO nuevoAgendaDTO = new AgendaDTO(nuevoAgendaEntity);
+        LOGGER.log(Level.INFO, "AgendaResource createAgenda: output: {0}", nuevoAgendaDTO.toString());
         return new AgendaDTO();
     }
 
@@ -90,19 +93,34 @@ public class AgendaResource {
     @DELETE
     @Path("{agendasId: \\d+}")
     public void deleteAgenda(@PathParam("agendasId") Long agendasId) {
-//        LOGGER.log(Level.INFO, "AgendaResource deleteAgenda: input: {0}", agendasId);
-//        // Invoca la lógica para borrar la Agenda
-//        AgendaLogic.deleteAgenda(agendasId);
-//        LOGGER.info("AgendaResource deleteAgenda: output: void");
+        LOGGER.log(Level.INFO, "AgendaResource deleteAgenda: input: {0}", agendasId);
+        // Invoca la lógica para borrar la Agenda
+        try{
+            
+        agendaLogic.deleteAgenda(agendasId);
+        }
+        catch(Exception e)
+        {
+            
+        }
+        LOGGER.info("AgendaResource deleteAgenda: output: void");
     }
     @GET
    @Path("{agendaID: \\d+}")
-   public AgendaDTO getCalificacion(@PathParam("agendaID") Long agendaID){
-       return null;
+   public AgendaDTO getAgenda(@PathParam("agendaID") Long agendaID){
+       AgendaEntity agendaEntity = agendaLogic.getAgenda(agendaID);
+       if(agendaEntity == null)
+       {
+           throw new WebApplicationException("El recurso /Agendaes/" + agendaID + " no existe.", 404);
+       }
+       AgendaDTO agendaDTO = new AgendaDTO(agendaEntity);
+       return agendaDTO;
    }
    @PUT
    @Path("(agendaID: \\d+")
-   public AgendaDTO updateAgenda (@PathParam("agendaID") Long calificacionId, AgendaDTO agenda){
+   public AgendaDTO updateAgenda (@PathParam("agendaID") Long agendaId, AgendaDTO agenda){
+       if(agenda ==null)
+            throw new WebApplicationException("El recurso /Agendaes/" + agendaId + " no existe.", 404);
        return agenda;
    }
 }
