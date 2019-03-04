@@ -19,31 +19,31 @@ import javax.inject.Inject;
  * @author estudiante
  */
 public class EventoAgendaLogic {
-    
+
     @Inject
     private EventoPersistence ep;
     @Inject
     private AgendaPersistence ap;
-    
+
     /**
-     * 
+     *
      * @param eventoId
      * @param agendaId
-     * @return 
+     * @return
      */
-    public AgendaEntity addAgenda(Long eventoId, Long agendaId){
+    public AgendaEntity addAgenda(Long eventoId, Long agendaId) {
         EventoEntity eventoEntity = ep.find(eventoId);
         AgendaEntity agendaEntity = ap.find(agendaId);
         eventoEntity.getAgendas().add(agendaEntity);
         return ap.find(agendaId);
     }
-    
-    public List<AgendaEntity> getAgendas(Long eventoId){
-                return ep.find(eventoId).getAgendas();
+
+    public List<AgendaEntity> getAgendas(Long eventoId) {
+        return ep.find(eventoId).getAgendas();
 
     }
-    
-    public AgendaEntity getAgenda(Long eventoId, Long agendaId) throws BusinessLogicException{
+
+    public AgendaEntity getAgenda(Long eventoId, Long agendaId) throws BusinessLogicException {
         List<AgendaEntity> agendas = ep.find(eventoId).getAgendas();
         AgendaEntity agendaEntity = ap.find(agendaId);
         int index = agendas.indexOf(agendaEntity);
@@ -52,21 +52,24 @@ public class EventoAgendaLogic {
         }
         throw new BusinessLogicException("La ageda  no está asociada al evento");
     }
-    
-     public void removeAgenda(Long eventoId, Long agendaId) {
+
+    public void removeAgenda(Long eventoId, Long agendaId) {
         EventoEntity eventoEntity = ep.find(eventoId);
         AgendaEntity agendaEntity = ap.find(agendaId);
         eventoEntity.getAgendas().remove(agendaEntity);
     }
-     
-     public List<AgendaEntity> replaceAgendas( Long eventoId , List<AgendaEntity> agendas){
+
+    public List<AgendaEntity> replaceAgendas(Long eventoId, List<AgendaEntity> agendas) {
         EventoEntity eventoEntity = ep.find(eventoId);
-        List<AgendaEntity> agendasEntity = eventoEntity.getAgendas();
-      agendasEntity.replaceAll((UnaryOperator<AgendaEntity>) agendas);
-         return agendasEntity;
-     }
-     
-    
-     
-    
+        List<AgendaEntity> agendaList = ap.findAll();
+        for (AgendaEntity agenda : agendaList) {
+            if (agendas.contains(agenda)) {
+                agenda.setEventos(eventoEntity);
+            } else if (agenda.getEventos()!= null && agenda.getEventos().equals(eventoEntity)) {
+                agenda.setEventos(null);
+            }
+        }
+        return agendas;
+    }
+
 }

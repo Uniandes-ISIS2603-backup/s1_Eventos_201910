@@ -54,10 +54,16 @@ public class EventoEntradaLogic {
         eventoEntity.getEntradas().remove(entradaEntity);
     }
      
-     public List<EntradaEntity> replaceEntradas( Long eventoId , List<EntradaEntity> entradas){
-        EventoEntity eventoEntity = eventop.find(eventoId);
-        List<EntradaEntity> entradaEntity = eventoEntity.getEntradas();
-      entradaEntity.replaceAll((UnaryOperator<EntradaEntity>) entradas);
-         return entradaEntity;
-     }
+    public List<EntradaEntity> replaceEntradas(Long editorialsId, List<EntradaEntity> entradas) {
+        EventoEntity editorialEntity = eventop.find(editorialsId);
+        List<EntradaEntity> entradaList = entradap.findAll();
+        for (EntradaEntity entrada : entradaList) {
+            if (entradas.contains(entrada)) {
+                entrada.setEvento(editorialEntity);
+            } else if (entrada.getEvento() != null && entrada.getEvento().equals(editorialEntity)) {
+                entrada.setEvento(null);
+            }
+        }
+        return entradas;
+    }
 }

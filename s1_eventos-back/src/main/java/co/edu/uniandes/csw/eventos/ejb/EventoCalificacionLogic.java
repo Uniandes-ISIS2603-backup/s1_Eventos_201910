@@ -16,7 +16,7 @@ import javax.inject.Inject;
 
 /**
  *
- * @author Mateo Vallejo
+ * @evento Mateo Vallejo
  */
 public class EventoCalificacionLogic {
 
@@ -55,11 +55,17 @@ public class EventoCalificacionLogic {
         eventoEntity.getCalificaciones().remove(calificacionEntity);
     }
      
-     public List<CalificacionEntity> replaceAgendas( Long eventoId , List<CalificacionEntity> calificaciones){
-        EventoEntity eventoEntity = ep.find(eventoId);
-        List<CalificacionEntity> calificacionesEntity = eventoEntity.getCalificaciones();
-      calificacionesEntity.replaceAll((UnaryOperator<CalificacionEntity>) calificaciones);
-         return calificacionesEntity;
-     }
+    public List<CalificacionEntity> replaceCalificacions(Long eventoId, List<CalificacionEntity> calificaciones) {
+        EventoEntity editorialEntity = ep.find(eventoId);
+        List<CalificacionEntity> calificacionList = cp.findAll();
+        for (CalificacionEntity calificacion : calificacionList) {
+            if (calificaciones.contains(calificacion)) {
+                calificacion.setEvento(editorialEntity);
+            } else if (calificacion.getEvento() != null && calificacion.getEvento().equals(editorialEntity)) {
+                calificacion.setEvento(null);
+            }
+        }
+        return calificaciones;
+    }
      
 }

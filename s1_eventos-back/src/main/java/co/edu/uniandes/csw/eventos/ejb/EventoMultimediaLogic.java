@@ -54,10 +54,16 @@ public class EventoMultimediaLogic {
         eventoEntity.getMultimedia().remove(entity);
     }
 
-    public List<MultimediaEntity> replaceMultimedia(Long eventoId, List<MultimediaEntity> multimedias) {
+   public List<MultimediaEntity> replaceMultimedias(Long eventoId, List<MultimediaEntity> multimedias) {
         EventoEntity eventoEntity = ep.find(eventoId);
-        List<MultimediaEntity> entity = eventoEntity.getMultimedia();
-        entity.replaceAll((UnaryOperator<MultimediaEntity>) multimedias);
-        return entity;
+        List<MultimediaEntity> multimediaList = mp.findAll();
+        for (MultimediaEntity multimedia : multimediaList) {
+            if (multimedias.contains(multimedia)) {
+                multimedia.setEvento(eventoEntity);
+            } else if (multimedia.getEvento() != null && multimedia.getEvento().equals(eventoEntity)) {
+                multimedia.setEvento(null);
+            }
+        }
+        return multimedias;
     }
 }

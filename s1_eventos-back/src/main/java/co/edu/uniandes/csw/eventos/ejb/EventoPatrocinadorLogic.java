@@ -47,16 +47,15 @@ public class EventoPatrocinadorLogic {
         throw new BusinessLogicException("el patrocinador no está asociado al evento");
     }
 
-    public void removeMultimedia(Long eventoId, Long multimediaId) {
+    public void removePatrocinador(Long eventoId, Long multimediaId) {
         EventoEntity eventoEntity = ep.find(eventoId);
         PatrocinadorEntity entity = pp.find(multimediaId);
         eventoEntity.getPatrocinadores().remove(entity);
     }
-
-    public List<PatrocinadorEntity> replaceMultimedia(Long eventoId, List<PatrocinadorEntity> patrocinadores) {
-        EventoEntity eventoEntity = ep.find(eventoId);
-        List<PatrocinadorEntity> entity = eventoEntity.getPatrocinadores();
-        entity.replaceAll((UnaryOperator<PatrocinadorEntity>) patrocinadores);
-        return entity;
+    
+     public List<PatrocinadorEntity> replacePatrocinadores(Long eventosId, List<PatrocinadorEntity> list) {
+        EventoEntity eventoEntity = ep.find(eventosId);
+        eventoEntity.setPatrocinadores(list);
+        return ep.find(eventosId).getPatrocinadores();
     }
 }

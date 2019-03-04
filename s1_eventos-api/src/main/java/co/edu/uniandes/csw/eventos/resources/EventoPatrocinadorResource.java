@@ -71,7 +71,7 @@ public class EventoPatrocinadorResource {
             }
         }
 
-        List<PatrocinadorDTO> lista = listEntity2DTO(logica.replacePatrocinador(eventosId, listDTO2Entity(patrocinadores)));
+        List<PatrocinadorDTO> lista = listEntity2DTO(logica.replacePatrocinadores(eventosId, listDTO2Entity(patrocinadores)));
         return lista;
     }
 

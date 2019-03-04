@@ -22,9 +22,31 @@ public class EntradaEntity extends BaseEntity implements Serializable{
       @ManyToOne
       private UsuarioEntity usuario;
       
-       @PodamExclude
-    @ManyToOne
-    private EventoEntity evento;
+      @PodamExclude
+      @ManyToOne
+      private EventoEntity evento;
+      
+      @PodamExclude
+      @ManyToOne
+      private FacturaEntity factura;
+
+    public FacturaEntity getFactura() {
+        return factura;
+    }
+
+    public void setFactura(FacturaEntity factura) {
+        this.factura = factura;
+    }
+
+    public EventoEntity getEvento() {
+        return evento;
+    }
+
+    public void setEvento(EventoEntity evento) {
+        this.evento = evento;
+    }
+      
+      
 
     public UsuarioEntity getUsuario() {
         return usuario;
