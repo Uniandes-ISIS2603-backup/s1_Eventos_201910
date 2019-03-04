@@ -24,7 +24,6 @@ SOFTWARE.
 package co.edu.uniandes.csw.eventos.resources;
 
 import co.edu.uniandes.csw.eventos.dtos.AgendaDTO;
-import co.edu.uniandes.csw.eventos.dtos.CalificacionDTO;
 import co.edu.uniandes.csw.eventos.ejb.AgendaLogic;
 import co.edu.uniandes.csw.eventos.entities.AgendaEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
@@ -64,7 +63,7 @@ public class AgendaResource {
      * la petición y se regresa un objeto identico con un id auto-generado por
      * la base de datos.
      *
-     * @param Agenda {@link AgendaDTO} - La Agenda que se desea
+     * @param agenda {@link AgendaDTO} - La Agenda que se desea
      * guardar.
      * @return JSON {@link AgendaDTO} - La Agenda guardada con el atributo
      * id autogenerado.
@@ -72,10 +71,10 @@ public class AgendaResource {
      * Error de lógica que se genera cuando ya existe la Agenda.
      */
     @POST
-    public AgendaDTO createAgenda(AgendaDTO Agenda) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "AgendaResource createAgenda: input: {0}", Agenda.toString());
+    public AgendaDTO createAgenda(AgendaDTO agenda) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "AgendaResource createAgenda: input: {0}", agenda.toString());
         // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
-        AgendaEntity AgendaEntity = Agenda.toEntity();
+        AgendaEntity AgendaEntity = agenda.toEntity();
         // Invoca la lógica para crear la Agenda nueva
         AgendaEntity nuevoAgendaEntity = agendaLogic.createAgenda(AgendaEntity);
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
