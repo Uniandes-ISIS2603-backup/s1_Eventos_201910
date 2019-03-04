@@ -43,7 +43,7 @@ public class CalificacionEventoResource {
     
     @GET
     @Path("{eventosId: \\d+}")
-    public EventoDetailDTO getEvento(@PathParam("entradasId") Long calificacionesId, @PathParam("eventosId") Long eventosId)
+    public EventoDetailDTO getEvento(@PathParam("calificacionesId") Long calificacionesId, @PathParam("eventosId") Long eventosId)
     throws BusinessLogicException{
         LOGGER.log(Level.INFO,"CalificacionEventoResource getEvento: input : calificacionesId {0} , eventosId {1}",new Object[]{calificacionesId, eventosId});
         if (eventoLogic.find(eventosId) == null) {
