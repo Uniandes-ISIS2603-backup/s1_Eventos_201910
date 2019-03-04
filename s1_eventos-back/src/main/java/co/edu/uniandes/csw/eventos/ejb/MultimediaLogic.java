@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.eventos.ejb;
 import co.edu.uniandes.csw.eventos.entities.MultimediaEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.eventos.persistence.MultimediaPersistence;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -61,5 +62,32 @@ public class MultimediaLogic {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la multimedia con id = {0}", multimediaId);
         persistence.delete(multimediaId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar la multimedia con id = {0}", multimediaId);
+    }
+    
+    public List<MultimediaEntity> getMultimedias() {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar todas las multimedias");
+        List<MultimediaEntity> lista = persistence.findAll();
+        LOGGER.log(Level.INFO, "Termina proceso de consultar todas las multimedias");
+        return lista;
+    }
+    
+    
+    public MultimediaEntity getMultimedia(Long multimediaId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar la multimedia con id = {0}", multimediaId);
+        MultimediaEntity multimediaEntity = persistence.find(multimediaId);
+        if (multimediaEntity == null) {
+            LOGGER.log(Level.SEVERE, "La multimedia con el id = {0} no existe", multimediaId);
+        }
+        LOGGER.log(Level.INFO, "Termina proceso de consultar la multimedia con id = {0}", multimediaId);
+        return multimediaEntity;
+    }
+    
+     
+    public MultimediaEntity updateMultimedia(Long multimediaId, MultimediaEntity multimediaEntity) {
+        
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar la multimedia con id = {0}", multimediaId);
+        MultimediaEntity newMultimediaEntity = persistence.update(multimediaEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar la multimedia con id = {0}", multimediaId);
+        return newMultimediaEntity;
     }
 }

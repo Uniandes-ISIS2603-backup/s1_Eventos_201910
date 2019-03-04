@@ -8,7 +8,6 @@ package co.edu.uniandes.csw.eventos.entities;
 import java.io.Serializable;
 
 import java.util.List;
-import java.util.Collection;
 import javax.persistence.Entity;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -24,7 +23,7 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     private String contrasenia;
     private Double longitud;
     private Double latitud;
-    private boolean unialpino;
+    private Boolean unialpino;
 
     public UsuarioEntity(){
         
@@ -34,31 +33,33 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
         mappedBy = "usuario",
         fetch = javax.persistence.FetchType.LAZY
     )
-    private Collection<CalificacionEntity> calificaciones;
+    private List<CalificacionEntity> calificaciones;
     @PodamExclude
     @javax.persistence.OneToMany(
         mappedBy = "usuario",
         fetch = javax.persistence.FetchType.LAZY
     )
-    private Collection<FacturaEntity> facturas;
+    private List<FacturaEntity> facturas;
     @PodamExclude
     @javax.persistence.OneToMany(
         mappedBy = "usuario",
         fetch = javax.persistence.FetchType.LAZY
     )
-    private Collection<EntradaEntity> entrada;
+    private List<EntradaEntity> entradas;
     @PodamExclude
     @javax.persistence.OneToMany(
         mappedBy = "usuario",
         fetch = javax.persistence.FetchType.LAZY
     )
-    private Collection<MedioDePagoEntity> mediosdepago;
-//    @PodamExclude
-//    @javax.persistence.OneToMany(
-//        mappedBy = "usuario",
-//        fetch = javax.persistence.FetchType.LAZY
-//    )
-//    private Collection<EventoEntity> eventos;
+    private List<MedioDePagoEntity> mediosdepago;
+    @PodamExclude
+    @javax.persistence.OneToMany(
+        mappedBy = "usuario",
+        fetch = javax.persistence.FetchType.LAZY
+    )
+    private List<EventoEntity> eventos;
+
+
     /**
      * @return the correoElectronico
      */
@@ -118,84 +119,85 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     /**
      * @return the unialpino
      */
-    public boolean isUnialpino() {
+    public Boolean getUnialpino() {
         return unialpino;
     }
 
     /**
      * @param unialpino the unialpino to set
      */
-    public void setUnialpino(boolean unialpino) {
+    public void setUnialpino(Boolean unialpino) {
         this.unialpino = unialpino;
     }
 
     /**
      * @return the calificaciones
      */
-    public Collection<CalificacionEntity> getCalificaciones() {
+    public List<CalificacionEntity> getCalificaciones() {
         return calificaciones;
     }
 
     /**
      * @param calificaciones the calificaciones to set
      */
-    public void setCalificaciones(Collection<CalificacionEntity> calificaciones) {
+    public void setCalificaciones(List<CalificacionEntity> calificaciones) {
         this.calificaciones = calificaciones;
     }
 
     /**
      * @return the facturas
      */
-    public Collection<FacturaEntity> getFacturas() {
+    public List<FacturaEntity> getFacturas() {
         return facturas;
     }
 
     /**
      * @param facturas the facturas to set
      */
-    public void setFacturas(Collection<FacturaEntity> facturas) {
+    public void setFacturas(List<FacturaEntity> facturas) {
         this.facturas = facturas;
     }
 
     /**
-     * @return the entrada
+     * @return the entradas
      */
-    public Collection<EntradaEntity> getEntrada() {
-        return entrada;
+    public List<EntradaEntity> getEntradas() {
+        return entradas;
     }
 
     /**
-     * @param entrada the entrada to set
+     * @param entradas the entradas to set
      */
-    public void setEntrada(Collection<EntradaEntity> entrada) {
-        this.entrada = entrada;
+    public void setEntradas(List<EntradaEntity> entradas) {
+        this.entradas = entradas;
     }
 
     /**
      * @return the mediosdepago
      */
-    public Collection<MedioDePagoEntity> getMediosdepago() {
+    public List<MedioDePagoEntity> getMediosdepago() {
         return mediosdepago;
     }
 
     /**
      * @param mediosdepago the mediosdepago to set
      */
-    public void setMediosdepago(Collection<MedioDePagoEntity> mediosdepago) {
+    public void setMediosdepago(List<MedioDePagoEntity> mediosdepago) {
         this.mediosdepago = mediosdepago;
     }
 
-//    /**
-//     * @return the eventos
-//     */
-//    public Collection<EventoEntity> getEventos() {
-//        return eventos;
-//    }
-//
-//    /**
-//     * @param eventos the eventos to set
-//     */
-//    public void setEventos(Collection<EventoEntity> eventos) {
-//        this.eventos = eventos;
-//    }
+    /**
+     * @return the eventos
+     */
+    public List<EventoEntity> getEventos() {
+        return eventos;
+    }
+
+    /**
+     * @param eventos the eventos to set
+     */
+    public void setEventos(List<EventoEntity> eventos) {
+        this.eventos = eventos;
+    }
+    
 }

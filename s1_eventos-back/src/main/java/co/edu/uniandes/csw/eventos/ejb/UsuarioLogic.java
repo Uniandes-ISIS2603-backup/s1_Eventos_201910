@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.eventos.ejb;
 import co.edu.uniandes.csw.eventos.entities.UsuarioEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.eventos.persistence.UsuarioPersistence;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -52,10 +53,10 @@ public class UsuarioLogic {
         }
         //Unialpino es verdadero si el dominio del correo es unialpes.edu.co
         String[] correo = usuarioEntity.getCorreoElectronico().split("@");
-        if((!correo[1].equalsIgnoreCase("unialpes.edu.co"))&& usuarioEntity.isUnialpino()){
+        if((!correo[1].equalsIgnoreCase("unialpes.edu.co"))&& usuarioEntity.getUnialpino()){
             throw new BusinessLogicException("Unialpino deberia ser falso");
         }
-        if((correo[1].equalsIgnoreCase("unialpes.edu.co"))&& !usuarioEntity.isUnialpino()){
+        if((correo[1].equalsIgnoreCase("unialpes.edu.co"))&& !usuarioEntity.getUnialpino()){
             throw new BusinessLogicException("Unialpino deberia ser verdadero");
         }
         
@@ -68,5 +69,32 @@ public class UsuarioLogic {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el usuario con id = {0}", usuarioId);
         persistence.delete(usuarioId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el usuario con id = {0}", usuarioId);
+    }
+    
+    public List<UsuarioEntity> getUsuarios() {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los usuarios");
+        List<UsuarioEntity> lista = persistence.findAll();
+        LOGGER.log(Level.INFO, "Termina proceso de consultar todos los usuarios");
+        return lista;
+    }
+    
+    
+    public UsuarioEntity getUsuario(Long usuarioId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar el usuario con id = {0}", usuarioId);
+        UsuarioEntity usuarioEntity = persistence.find(usuarioId);
+        if (usuarioEntity == null) {
+            LOGGER.log(Level.SEVERE, "El usuario con el id = {0} no existe", usuarioId);
+        }
+        LOGGER.log(Level.INFO, "Termina proceso de consultar el usuario con id = {0}", usuarioId);
+        return usuarioEntity;
+    }
+    
+     
+    public UsuarioEntity updateUsuario(Long usuarioId, UsuarioEntity usuarioEntity) {
+        
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar el usuario con id = {0}", usuarioId);
+        UsuarioEntity newUsuarioEntity = persistence.update(usuarioEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar el usuario con id = {0}", usuarioId);
+        return newUsuarioEntity;
     }
 }

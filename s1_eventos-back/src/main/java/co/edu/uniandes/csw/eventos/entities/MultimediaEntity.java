@@ -21,17 +21,10 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class MultimediaEntity extends BaseEntity implements Serializable{
         
-    private static long serialVersionUID = 1L;
-    
     private String url;
     private String nombre;
     private String tipo;
-
-    
-    
-     
-     
-    private boolean memoria;
+    private Boolean memoria;
 
 
    
@@ -40,6 +33,7 @@ public class MultimediaEntity extends BaseEntity implements Serializable{
      */
     public MultimediaEntity(){
     }
+    
     @PodamExclude
     @javax.persistence.ManyToOne()
     private EventoEntity evento;
@@ -93,14 +87,14 @@ public class MultimediaEntity extends BaseEntity implements Serializable{
 
      * @return the memoria
      */
-    public boolean isMemoria() {
+    public Boolean isMemoria() {
         return memoria;
     }
 
     /**
      * @param memoria the memoria to set
      */
-    public void setMemoria(boolean memoria) {
+    public void setMemoria(Boolean memoria) {
         this.memoria = memoria;
     }
 

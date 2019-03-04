@@ -106,16 +106,13 @@ public class EventoEntity extends BaseEntity implements Serializable {
 //          )
 //    List<AgendaEntity> agenda= new ArrayList<>();
     
-//     /**
-//     * Representa la lista de usuarios  de un evento
-//     */
-//                @PodamExclude
-//
-//     @javax.persistence.ManyToMany(
-//        mappedBy ="evento",
-//        fetch = javax.persistence.FetchType.LAZY
-//           )
-//    List<UsuarioEntity> usuarios= new ArrayList<>();
+    /**
+    * Representa la lista de usuarios  de un evento
+    */
+    @PodamExclude
+     @javax.persistence.ManyToOne(       
+    )
+    private UsuarioEntity usuario;
      
      /**
      * Representa la lista de usuarios  de un evento
@@ -311,5 +308,19 @@ public class EventoEntity extends BaseEntity implements Serializable {
 //    public void setEntradas(List<EntradaEntity> entradas) {
 //        this.entradas = entradas;
 //    }
+
+    /**
+     * @return the usuario
+     */
+    public UsuarioEntity getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuario = usuario;
+    }
     
 }

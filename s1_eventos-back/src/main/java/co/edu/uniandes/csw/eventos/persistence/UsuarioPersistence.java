@@ -67,4 +67,9 @@ public class UsuarioPersistence {
         LOGGER.log(Level.INFO, "Saliendo de consultar usuario por email ", email);
         return result;
     }
+    
+    public UsuarioEntity update(UsuarioEntity usuarioEntity) {
+
+        return em.merge(usuarioEntity);
+    }
 }
