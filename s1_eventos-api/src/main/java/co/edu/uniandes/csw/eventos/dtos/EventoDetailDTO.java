@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.eventos.dtos;
+
 import co.edu.uniandes.csw.eventos.entities.AgendaEntity;
 import co.edu.uniandes.csw.eventos.entities.EntradaEntity;
 import co.edu.uniandes.csw.eventos.entities.EventoEntity;
@@ -16,20 +17,47 @@ import java.util.List;
 
 /**
  *
- * @author estudiante
+ * @author Mateo Vallejo
  */
 public class EventoDetailDTO extends EventoDTO implements Serializable {
 
+    /**
+     * Lista de agendas de un evento
+     */
     private List<AgendaDTO> agendas;
+
+    /**
+     * Lista de patrocinadores de un evento
+     */
     private List<PatrocinadorDTO> patrocinadores;
+
+    /**
+     * Lista de organizadores de un evento
+     */
     private List<OrganizadorDTO> organizadores;
+
+    /**
+     * Lista de multimedias de un evento
+     */
     private List<MultimediaDTO> multimedias;
+
+    /**
+     * Lista de entradas de un evento
+     */
     private List<EntradaDTO> entradas;
 
+    /**
+     * constructor por defecto
+     */
     public EventoDetailDTO() {
-
+        super();
     }
 
+    /**
+     * Creacion de dto a partir de entity
+     *
+     * @param evento
+     */
     public EventoDetailDTO(EventoEntity evento) {
 
         super(evento);
@@ -38,38 +66,36 @@ public class EventoDetailDTO extends EventoDTO implements Serializable {
         organizadores = new ArrayList<>();
         multimedias = new ArrayList<>();
         entradas = new ArrayList<>();
-//        if (evento != null) {
+        if (evento != null) {
 //            if (evento.getAgendas != null) {
 //        for (AgendaEntity agenda : evento.getAgendas()) {
 //            agendas.add(new AgendaDTO(agenda));
 //        }
-//            }
-            if (evento.getPatrocinadores() != null) {
-                for (PatrocinadorEntity patrocinador : evento.getPatrocinadores()) {
-                    patrocinadores.add(new PatrocinadorDTO(patrocinador));
-                }
-            }
-            if (evento.getOrganizadores() != null) {
-
-                for (OrganizadorEntity organizador : evento.getOrganizadores()) {
-                    organizadores.add(new OrganizadorDTO(organizador));
-                }
-            }
-            if (evento.getMultimedia() != null) {
-
-                for (MultimediaEntity multimedia : evento.getMultimedia()) {
-                    multimedias.add(new MultimediaDTO(multimedia));
-                }
-            }
-//            if (evento.getEntradas() != null) {
-//
-//        for (EntradaEntity entrada : evento.getEntradas()) {
-//            entradas.add(new EntradaDTO(entrada));
-//        }
-//            }
         }
+        if (evento.getPatrocinadores() != null) {
+            for (PatrocinadorEntity patrocinador : evento.getPatrocinadores()) {
+                patrocinadores.add(new PatrocinadorDTO(patrocinador));
+            }
+        }
+        if (evento.getOrganizadores() != null) {
 
-    
+            for (OrganizadorEntity organizador : evento.getOrganizadores()) {
+                organizadores.add(new OrganizadorDTO(organizador));
+            }
+        }
+        if (evento.getMultimedia() != null) {
+
+            for (MultimediaEntity multimedia : evento.getMultimedia()) {
+                multimedias.add(new MultimediaDTO(multimedia));
+            }
+        }
+        if (evento.getEntradas() != null) {
+
+            for (EntradaEntity entrada : evento.getEntradas()) {
+                entradas.add(new EntradaDTO(entrada));
+            }
+        }
+    }
 
     public EventoEntity toEntity() {
 
@@ -106,13 +132,13 @@ public class EventoDetailDTO extends EventoDTO implements Serializable {
             ent.setMultimedia(multimediasEntity);
         }
 
-//        if (entradas != null) {
-//            List<EntradaEntity> entradasEntity = new ArrayList<>();
-//            for (EntradaDTO dtoEntrada : entradas) {
-//                entradasEntity.add(dtoEntrada.toEntity());
-//            }
-//            ent.setEntradas(entradasEntity);
-//        }
+        if (entradas != null) {
+            List<EntradaEntity> entradasEntity = new ArrayList<>();
+            for (EntradaDTO dtoEntrada : entradas) {
+                entradasEntity.add(dtoEntrada.toEntity());
+            }
+            ent.setEntradas(entradasEntity);
+        }
         return ent;
 
     }
@@ -186,6 +212,5 @@ public class EventoDetailDTO extends EventoDTO implements Serializable {
     public void setEntradas(List<EntradaDTO> entradas) {
         this.entradas = entradas;
     }
-
 
 }

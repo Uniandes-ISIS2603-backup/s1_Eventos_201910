@@ -22,8 +22,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 package co.edu.uniandes.csw.eventos.resources;
-import co.edu.uniandes.csw.eventos.dtos.FacturaDTO;
 import co.edu.uniandes.csw.eventos.dtos.InvitadoEspecialDTO;
+import co.edu.uniandes.csw.eventos.dtos.InvitadoEspecialDTO;
+import co.edu.uniandes.csw.eventos.ejb.InvitadoEspecialLogic;
+import co.edu.uniandes.csw.eventos.entities.InvitadoEspecialEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,6 +39,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 /**
  * Clase que implementa el recurso "agendas".
@@ -52,15 +55,15 @@ public class InvitadoEspecialResource {
 
     private static final Logger LOGGER = Logger.getLogger(InvitadoEspecialResource.class.getName());
 
-//    @Inject
-//    InvitadoEspecialLogic InvitadoEspecialLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
+    @Inject
+    InvitadoEspecialLogic invitadoEspecialLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
 
     /**
      * Crea una nueva InvitadoEspecial con la informacion que se recibe en el cuerpo de
      * la petición y se regresa un objeto identico con un id auto-generado por
      * la base de datos.
      *
-     * @param InvitadoEspecial {@link InvitadoEspecialDTO} - La InvitadoEspecial que se desea
+     * @param invitadoEspecial {@link InvitadoEspecialDTO} - La InvitadoEspecial que se desea
      * guardar.
      * @return JSON {@link InvitadoEspecialDTO} - La InvitadoEspecial guardada con el atributo
      * id autogenerado.
@@ -68,17 +71,16 @@ public class InvitadoEspecialResource {
      * Error de lógica que se genera cuando ya existe la InvitadoEspecial.
      */
     @POST
-    public InvitadoEspecialDTO createInvitadoEspecial(InvitadoEspecialDTO InvitadoEspecial) throws BusinessLogicException {
-//        LOGGER.log(Level.INFO, "InvitadoEspecialResource createInvitadoEspecial: input: {0}", InvitadoEspecial.toString());
-//        // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
-//        InvitadoEspecialEntity InvitadoEspecialEntity = InvitadoEspecial.toEntity();
-//        // Invoca la lógica para crear la InvitadoEspecial nueva
-//        InvitadoEspecialEntity nuevoInvitadoEspecialEntity = InvitadoEspecialLogic.createInvitadoEspecial(InvitadoEspecialEntity);
-//        // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
-//        InvitadoEspecialDTO nuevoInvitadoEspecialDTO = new InvitadoEspecialDTO(nuevoInvitadoEspecialEntity);
-//        LOGGER.log(Level.INFO, "InvitadoEspecialResource createInvitadoEspecial: output: {0}", nuevoInvitadoEspecialDTO.toString());
-//        return nuevoInvitadoEspecialDTO;
-          return new InvitadoEspecialDTO();
+    public InvitadoEspecialDTO createInvitadoEspecial(InvitadoEspecialDTO invitadoEspecial) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "InvitadoEspecialResource createInvitadoEspecial: input: {0}", invitadoEspecial.toString());
+        // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
+        InvitadoEspecialEntity invitadoEspecialEntity = invitadoEspecial.toEntity();
+        // Invoca la lógica para crear la InvitadoEspecial nueva
+        InvitadoEspecialEntity nuevoInvitadoEspecialEntity = invitadoEspecialLogic.createInvitadoEspecial(invitadoEspecialEntity);
+        // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
+        InvitadoEspecialDTO nuevoInvitadoEspecialDTO = new InvitadoEspecialDTO(nuevoInvitadoEspecialEntity);
+        LOGGER.log(Level.INFO, "InvitadoEspecialResource createInvitadoEspecial: output: {0}", nuevoInvitadoEspecialDTO.toString());
+        return nuevoInvitadoEspecialDTO;
     }
 
     /**
@@ -89,16 +91,22 @@ public class InvitadoEspecialResource {
      */
     @DELETE
     @Path("{invitadoespecialId: \\d+}")
-    public void deleteInvitadoEspecial(@PathParam("invitadoespecialId") Long agendasId) {
-//        LOGGER.log(Level.INFO, "InvitadoEspecialResource deleteInvitadoEspecial: input: {0}", agendasId);
-//        // Invoca la lógica para borrar la InvitadoEspecial
-//        InvitadoEspecialLogic.deleteInvitadoEspecial(agendasId);
-//        LOGGER.info("InvitadoEspecialResource deleteInvitadoEspecial: output: void");
+    public void deleteInvitadoEspecial(@PathParam("invitadoespecialId") Long invitadoEspecialId) {
+        LOGGER.log(Level.INFO, "InvitadoEspecialResource deleteInvitadoEspecial: input: {0}", invitadoEspecialId);
+        // Invoca la lógica para borrar la InvitadoEspecial
+        invitadoEspecialLogic.deleteInvitadoEspecial(invitadoEspecialId);
+        LOGGER.info("InvitadoEspecialResource deleteInvitadoEspecial: output: void");
     }
      @GET
    @Path("{invitadoespecialId: \\d+}")
-   public InvitadoEspecialDTO getInvitadoEspecial(@PathParam("invitadoespecialId") Long agendaID){
-       return null;
+   public InvitadoEspecialDTO getInvitadoEspecial(@PathParam("invitadoespecialId") Long invitadoEspecialId){
+       InvitadoEspecialEntity invitadoEspecialEntity = invitadoEspecialLogic.getInvitadoEspecial(invitadoEspecialId);
+       if(invitadoEspecialEntity == null)
+       {
+           throw new WebApplicationException("El recurso /InvitadoEspeciales/" + invitadoEspecialId + " no existe.", 404);
+       }
+       InvitadoEspecialDTO InvitadoEspecialDTO = new InvitadoEspecialDTO(invitadoEspecialEntity);
+       return InvitadoEspecialDTO;
    }
    @PUT
    @Path("(invitadoespecialId: \\d+")

@@ -55,6 +55,8 @@ import javax.ws.rs.WebApplicationException;
 public class PatrocinadorResource {
     
     private static final Logger LOGGER = Logger.getLogger(OrganizadorResource.class.getName());
+    private static final String NO_EXISTE = " no existe.";
+    private static final String RECURSO_PATROCINADOR = "El recurso /patrocinadores/";
 
     @Inject 
     private PatrocinadorLogic patrocinadorLogic;
@@ -71,9 +73,9 @@ public class PatrocinadorResource {
     @POST
     public PatrocinadorDTO createPatrocinador(PatrocinadorDTO patrocinador) throws BusinessLogicException {
         
-        LOGGER.log(Level.INFO, "PatrocinadorResource createPatrocinador: input: {0}", patrocinador.toString());
+        LOGGER.log(Level.INFO, "PatrocinadorResource createPatrocinador: input: {0}", patrocinador);
         PatrocinadorDTO patrocinadorDTO = new PatrocinadorDTO(patrocinadorLogic.createPatrocinador(patrocinador.toEntity()));
-        LOGGER.log(Level.INFO, "PatrocinadorResource createPatrocinador: output: {0}", patrocinadorDTO.toString());
+        LOGGER.log(Level.INFO, "PatrocinadorResource createPatrocinador: output: {0}", patrocinadorDTO);
         return patrocinadorDTO;
     }
 
@@ -88,7 +90,7 @@ public class PatrocinadorResource {
         
         LOGGER.info("PatrocinadorResource getPatrocinadores: input: void");
         List<PatrocinadorDetailDTO> listaPatrocinadores = listEntity2DTO(patrocinadorLogic.getPatrocinadores());
-        LOGGER.log(Level.INFO, "PatrocinadorResource getPatrocinadores: output: {0}", listaPatrocinadores.toString());
+        LOGGER.log(Level.INFO, "PatrocinadorResource getPatrocinadores: output: {0}", listaPatrocinadores);
         return listaPatrocinadores;
     }
 
@@ -103,15 +105,15 @@ public class PatrocinadorResource {
      */
     @GET
     @Path("{patrocinadoresId: \\d+}")
-    public PatrocinadorDetailDTO getPatrocinador(@PathParam("patrocinadoresId") Long patrocinadoresId) throws WebApplicationException {
+    public PatrocinadorDetailDTO getPatrocinador(@PathParam("patrocinadoresId") Long patrocinadoresId){
         
         LOGGER.log(Level.INFO, "PatrocinadorResource getPatrocinador: input: {0}", patrocinadoresId);
         PatrocinadorEntity entity = patrocinadorLogic.getPatrocinador(patrocinadoresId);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /patrocinadores/" + patrocinadoresId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO_PATROCINADOR + patrocinadoresId + NO_EXISTE, 404);
         }
         PatrocinadorDetailDTO patrocinadorDTO = new PatrocinadorDetailDTO(patrocinadorLogic.getPatrocinador(patrocinadoresId));
-        LOGGER.log(Level.INFO, "PatrocinadorResource getPatrocinador: output: {0}", patrocinadorDTO.toString());
+        LOGGER.log(Level.INFO, "PatrocinadorResource getPatrocinador: output: {0}", patrocinadorDTO);
         return patrocinadorDTO;
     }
 
@@ -131,14 +133,14 @@ public class PatrocinadorResource {
     @Path("{patrocinadoresId: \\d+}")
     public PatrocinadorDetailDTO updatePatrocinador(@PathParam("patrocinadoresId") Long patrocinadoresId, PatrocinadorDetailDTO patrocinador) throws BusinessLogicException {
         
-        LOGGER.log(Level.INFO, "PatrocinadorResource updatePatrocinador: input: patrocinadoresId: {0} , patrocinador: {1}", new Object[]{patrocinadoresId, patrocinador.toString()});
+        LOGGER.log(Level.INFO, "PatrocinadorResource updatePatrocinador: input: patrocinadoresId: {0} , patrocinador: {1}", new Object[]{patrocinadoresId, patrocinador});
         patrocinador.setId(patrocinadoresId);
         PatrocinadorEntity entity = patrocinadorLogic.getPatrocinador(patrocinadoresId);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /patrocinadores/" + patrocinadoresId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO_PATROCINADOR + patrocinadoresId + NO_EXISTE, 404);
         }
         PatrocinadorDetailDTO detailDTO = new PatrocinadorDetailDTO(patrocinadorLogic.updatePatrocinador(patrocinadoresId, patrocinador.toEntity()));
-        LOGGER.log(Level.INFO, "PatrocinadorResource updatePatrocinador: output: {0}", detailDTO.toString());
+        LOGGER.log(Level.INFO, "PatrocinadorResource updatePatrocinador: output: {0}", detailDTO);
         return detailDTO;    
     }
 
@@ -158,7 +160,7 @@ public class PatrocinadorResource {
         
         LOGGER.log(Level.INFO, "PatrocinadorResource deletePatrocinador: input: {0}", patrocinadoresId);
         if (patrocinadorLogic.getPatrocinador(patrocinadoresId) == null) {
-            throw new WebApplicationException("El recurso /patrocinadores/" + patrocinadoresId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO_PATROCINADOR + patrocinadoresId + NO_EXISTE, 404);
         }
         patrocinadorLogic.deletePatrocinador(patrocinadoresId);
         LOGGER.info("PatrocinadorResource deletePatrocinador: output: void");
@@ -179,7 +181,7 @@ public class PatrocinadorResource {
     @Path("{patrocinadoresId: \\d+}/eventos")
     public Class<PatrocinadorEventosResource> getPatrocinadorEventosResource(@PathParam("patrocinadoresId") Long patrocinadoresId) {
         if (patrocinadorLogic.getPatrocinador(patrocinadoresId) == null) {
-            throw new WebApplicationException("El recurso /patrocinadores/" + patrocinadoresId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO_PATROCINADOR + patrocinadoresId + NO_EXISTE, 404);
         }
         return PatrocinadorEventosResource.class;
     }

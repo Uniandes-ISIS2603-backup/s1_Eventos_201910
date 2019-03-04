@@ -20,9 +20,19 @@ import javax.inject.Inject;
 @Stateless
 public class EventoLogic {
 
+    /**
+     * persistencia del evento
+     */
     @Inject
     private EventoPersistence ep;
 
+    /**
+     * generar evento cumpliendo reglas de negocio
+     *
+     * @param eventoEntity
+     * @return
+     * @throws BusinessLogicException
+     */
     public EventoEntity createEvento(EventoEntity eventoEntity) throws BusinessLogicException {
 //    1. dos eventos no pueden tener el mismo nombre
         if (ep.findByName(eventoEntity.getNombre()) != null) {
@@ -39,10 +49,11 @@ public class EventoLogic {
         }
 
 //4. el numero de boletas debe ser igual o menor capacidadMaxima
-//        if (eventoEntity.getEntradas() > eventoEntity.getCapacidadMaxima()) {
-//            throw new BusinessLogicException("Las boletas superan la capacidad maxima");
-//        }//5.el numero de boletasDisponibles , cantidadMaxima, y el numero de boletas deben ser numeros positivos
-        if (/*eventoEntity.getEntradas().size() < 0 ||*/eventoEntity.getBoletasDisponibles() < 0 || eventoEntity.getCapacidadMaxima() < 0) {
+        if (eventoEntity.getEntradas().size() > eventoEntity.getCapacidadMaxima()) {
+            throw new BusinessLogicException("Las boletas superan la capacidad maxima");
+        }
+//5.el numero de boletasDisponibles , cantidadMaxima, y el numero de boletas deben ser numeros positivos
+        if (eventoEntity.getEntradas().size() < 0 || eventoEntity.getBoletasDisponibles() < 0 || eventoEntity.getCapacidadMaxima() < 0) {
             throw new BusinessLogicException("Estos valores deben ser positivos");
 
         }
@@ -55,14 +66,32 @@ public class EventoLogic {
         return eventoEntity;
     }
 
+    /**
+     * Se retorna todos los eventos
+     *
+     * @return
+     */
     public List<EventoEntity> findAllEvento() {
         return ep.findAll();
     }
 
+    /**
+     * para buscar un evento
+     *
+     * @param id
+     * @return
+     */
     public EventoEntity find(Long id) {
         return ep.find(id);
     }
 
+    /**
+     * para actualizar un evento
+     *
+     * @param eventoEntity
+     * @return
+     * @throws BusinessLogicException
+     */
     public EventoEntity update(EventoEntity eventoEntity) throws BusinessLogicException {
 
 //    1. dos eventos no pueden tener el mismo nombre
@@ -80,11 +109,11 @@ public class EventoLogic {
         }
 
 //4. el numero de boletas debe ser igual o menor capacidadMaxima
-//        if (eventoEntity.getEntradas() > eventoEntity.getCapacidadMaxima()) {
-//            throw new BusinessLogicException("Las boletas superan la capacidad maxima");
-
-//        }//5.el numero de boletasDisponibles , cantidadMaxima, y el numero de boletas deben ser numeros positivos
-        if (/*eventoEntity.getEntradas().size() < 0 ||*/ eventoEntity.getBoletasDisponibles() < 0 || eventoEntity.getCapacidadMaxima() < 0) {
+        if (eventoEntity.getEntradas().size() > eventoEntity.getCapacidadMaxima()) {
+            throw new BusinessLogicException("Las boletas superan la capacidad maxima");
+        }
+//5.el numero de boletasDisponibles , cantidadMaxima, y el numero de boletas deben ser numeros positivos
+        if (eventoEntity.getEntradas().size() < 0 || eventoEntity.getBoletasDisponibles() < 0 || eventoEntity.getCapacidadMaxima() < 0) {
             throw new BusinessLogicException("Estos valores deben ser positivos");
 
         }
@@ -97,11 +126,13 @@ public class EventoLogic {
         return eventoEntity;
     }
 
+    /**
+     * eliminar un evento
+     * @param ubicacionId
+     * @throws BusinessLogicException 
+     */
     public void deleteEvento(Long ubicacionId) throws BusinessLogicException {
         ep.delete(ubicacionId);
     }
-     
-
-
 
 }

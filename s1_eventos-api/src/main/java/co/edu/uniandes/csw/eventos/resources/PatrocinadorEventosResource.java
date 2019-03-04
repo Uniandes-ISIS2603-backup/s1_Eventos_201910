@@ -36,6 +36,8 @@ import javax.ws.rs.core.MediaType;
 public class PatrocinadorEventosResource {
     
     private static final Logger LOGGER = Logger.getLogger(PatrocinadorEventosResource.class.getName());
+    private static final String NO_EXISTE = " no existe.";
+    private static final String RECURSO_EVENTO = "El recurso /eventos/";
 
     @Inject
     private PatrocinadorEventosLogic patrocinadorEventosLogic;
@@ -57,7 +59,7 @@ public class PatrocinadorEventosResource {
     public EventoDetailDTO addEvento(@PathParam("patrocinadoresId") Long patrocinadoresId, @PathParam("eventosId") Long eventosId) {
         LOGGER.log(Level.INFO, "PatrocinadorEventosResource addEvento: input: patrocinadoresId {0} , eventosId {1}", new Object[]{patrocinadoresId, eventosId});
         if (eventoLogic.find(eventosId) == null) {
-            throw new WebApplicationException("El recurso /eventos/" + eventosId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO_EVENTO + eventosId + NO_EXISTE, 404);
         }
         EventoDetailDTO detailDTO = new EventoDetailDTO(patrocinadorEventosLogic.addEvento(patrocinadoresId, eventosId));
         LOGGER.log(Level.INFO, "PatrocinadorEventosResource addEvento: output: {0}", detailDTO);
@@ -75,7 +77,7 @@ public class PatrocinadorEventosResource {
     public List<EventoDetailDTO> getEventos(@PathParam("patrocinadoresId") Long patrocinadoresId) {
         LOGGER.log(Level.INFO, "PatrocinadorEventosResource getEventos: input: {0}", patrocinadoresId);
         List<EventoDetailDTO> lista = eventosListEntity2DTO(patrocinadorEventosLogic.getEventos(patrocinadoresId));
-        LOGGER.log(Level.INFO, "PatrocinadorEventosResource getEventos: output: {0}", lista.toString());
+        LOGGER.log(Level.INFO, "PatrocinadorEventosResource getEventos: output: {0}", lista);
         return lista;
     }
 
@@ -96,7 +98,7 @@ public class PatrocinadorEventosResource {
     public EventoDetailDTO getEvento(@PathParam("patrocinadoresId") Long patrocinadoresId, @PathParam("eventosId") Long eventosId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "PatrocinadorEventosResource getEvento: input: patrocinadoresId {0} , eventosId {1}", new Object[]{patrocinadoresId, eventosId});
         if (eventoLogic.find(eventosId) == null) {
-            throw new WebApplicationException("El recurso /eventos/" + eventosId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO_EVENTO + eventosId + NO_EXISTE, 404);
         }
         EventoDetailDTO detailDTO = new EventoDetailDTO(patrocinadorEventosLogic.getEvento(patrocinadoresId, eventosId));
         LOGGER.log(Level.INFO, "PatrocinadorEventosResource getEvento: output: {0}", detailDTO);
@@ -116,14 +118,14 @@ public class PatrocinadorEventosResource {
      */
     @PUT
     public List<EventoDetailDTO> replaceEventos(@PathParam("patrocinadoresId") Long patrocinadoresId, List<EventoDetailDTO> eventos) {
-        LOGGER.log(Level.INFO, "PatrocinadorEventosResource replaceEventos: input: patrocinadoresId {0} , eventos {1}", new Object[]{patrocinadoresId, eventos.toString()});
+        LOGGER.log(Level.INFO, "PatrocinadorEventosResource replaceEventos: input: patrocinadoresId {0} , eventos {1}", new Object[]{patrocinadoresId, eventos});
         for (EventoDetailDTO evento : eventos) {
             if (eventoLogic.find(evento.getId()) == null) {
-                throw new WebApplicationException("El recurso /eventos/" + evento.getId() + " no existe.", 404);
+                throw new WebApplicationException(RECURSO_EVENTO + evento.getId() + NO_EXISTE, 404);
             }
         }
         List<EventoDetailDTO> lista = eventosListEntity2DTO(patrocinadorEventosLogic.replaceEventos(patrocinadoresId, eventosListDTO2Entity(eventos)));
-        LOGGER.log(Level.INFO, "PatrocinadorEventosResource replaceEventos: output: {0}", lista.toString());
+        LOGGER.log(Level.INFO, "PatrocinadorEventosResource replaceEventos: output: {0}", lista);
         return lista;
     }
 
@@ -140,7 +142,7 @@ public class PatrocinadorEventosResource {
     public void removeEvento(@PathParam("patrocinadoresId") Long patrocinadoresId, @PathParam("eventosId") Long eventosId) {
         LOGGER.log(Level.INFO, "PatrocinadorEventosResource removeEvento: input: patrocinadoresId {0} , eventosId {1}", new Object[]{patrocinadoresId, eventosId});
         if (eventoLogic.find(eventosId) == null) {
-            throw new WebApplicationException("El recurso /eventos/" + eventosId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO_EVENTO + eventosId + NO_EXISTE, 404);
         }
         patrocinadorEventosLogic.removeEvento(patrocinadoresId, eventosId);
         LOGGER.info("PatrocinadorEventosResource removeEvento: output: void");
