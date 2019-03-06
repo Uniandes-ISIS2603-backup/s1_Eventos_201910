@@ -93,17 +93,12 @@ public class AgendaResource {
      */
     @DELETE
     @Path("{agendasId: \\d+}")
-    public void deleteAgenda(@PathParam("agendasId") Long agendasId) {
+    public void deleteAgenda(@PathParam("agendasId") Long agendasId) throws BusinessLogicException{
         LOGGER.log(Level.INFO, "AgendaResource deleteAgenda: input: {0}", agendasId);
         // Invoca la lógica para borrar la Agenda
-        try{
-            
+       if(agendaLogic.getAgenda(agendasId)==null)
+           throw new BusinessLogicException("la agenda no existe");
         agendaLogic.deleteAgenda(agendasId);
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
         LOGGER.info("AgendaResource deleteAgenda: output: void");
     }
     @GET
