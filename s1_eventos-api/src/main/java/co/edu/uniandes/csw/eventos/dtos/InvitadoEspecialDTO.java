@@ -49,6 +49,7 @@ public class InvitadoEspecialDTO implements Serializable {
    {
        this.info = invitadoEspecialEntity.getInfo();
        this.nombre = invitadoEspecialEntity.getNombre();
+       this.id = invitadoEspecialEntity.getId();
    }
 
     public Long getId() {
