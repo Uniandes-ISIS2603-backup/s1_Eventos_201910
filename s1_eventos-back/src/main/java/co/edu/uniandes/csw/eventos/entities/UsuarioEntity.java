@@ -53,10 +53,7 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     )
     private List<MedioDePagoEntity> mediosdepago;
     @PodamExclude
-    @javax.persistence.OneToMany(
-        mappedBy = "usuario",
-        fetch = javax.persistence.FetchType.LAZY
-    )
+    @javax.persistence.ManyToMany(mappedBy = "usuarios")
     private List<EventoEntity> eventos;
 
 
