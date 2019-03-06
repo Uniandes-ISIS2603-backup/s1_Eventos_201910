@@ -53,6 +53,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
         this.horaFinal = agendaEntity.getHoraFinal();
         this.horaInicio = agendaEntity.getHoraInicio();
         this.actividad = agendaEntity.getActividad();
+        this.id = agendaEntity.getId();
     }
 
     public Long getId() {
