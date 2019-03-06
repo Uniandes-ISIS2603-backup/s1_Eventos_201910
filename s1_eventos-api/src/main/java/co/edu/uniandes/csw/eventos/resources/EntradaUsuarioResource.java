@@ -34,8 +34,8 @@ import javax.ws.rs.core.MediaType;
 public class EntradaUsuarioResource {
     private static final Logger LOGGER = Logger.getLogger(EntradaUsuarioResource.class.getName());
     
-    @Inject
-    private EntradaUsuarioResource facturaMedioDePagoLogic;
+//    @Inject
+//    private EntradaUsuarioResource facturaMedioDePagoLogic;
     
     @Inject
     private UsuarioLogic usuarioLogic;
