@@ -110,7 +110,6 @@ public class EventoEntity extends BaseEntity implements Serializable {
     @PodamExclude
 
     @javax.persistence.ManyToMany(
-            mappedBy = "eventos",
             fetch = javax.persistence.FetchType.LAZY
     )
     private List<UsuarioEntity> usuarios = new ArrayList<>();
