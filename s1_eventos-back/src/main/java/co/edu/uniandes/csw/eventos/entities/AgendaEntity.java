@@ -20,7 +20,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class AgendaEntity extends BaseEntity implements Serializable{
 
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private EventoEntity eventos = new EventoEntity();
     
     @ManyToMany(
