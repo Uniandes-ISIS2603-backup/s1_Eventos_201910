@@ -6,7 +6,10 @@
 package co.edu.uniandes.csw.eventos.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 import javax.persistence.ManyToOne;
 
@@ -21,6 +24,18 @@ public class EntradaEntity extends BaseEntity implements Serializable{
       @PodamExclude
       @ManyToOne
       private UsuarioEntity usuario;
+      
+       @PodamExclude
+       @ManyToMany(mappedBy = "entradas")
+    private List<EntradaEntity> entradas = new ArrayList<>();
+
+    public List<EntradaEntity> getEntradas() {
+        return entradas;
+    }
+
+    public void setEntradas(List<EntradaEntity> entradas) {
+        this.entradas = entradas;
+    }
       
       @PodamExclude
       @ManyToOne

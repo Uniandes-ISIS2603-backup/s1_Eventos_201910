@@ -56,11 +56,12 @@ public class CalificacionLogic {
        persistence.delete(calificacionId);
    }
    
-   public void updateCalificaion(CalificacionEntity calificacion)throws BusinessLogicException
+   public CalificacionEntity updateCalificaion(CalificacionEntity calificacion)throws BusinessLogicException
    {
        if(persistence.find(calificacion.getId())==null)
           throw new BusinessLogicException("No existe una calificacion con el id \""+calificacion.getId() + "\"");
-      persistence.update(calificacion);
+        persistence.update(calificacion);
+        return calificacion;
    }
    
    public CalificacionEntity findCalificacion(Long id)

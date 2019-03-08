@@ -51,6 +51,9 @@ public class EntradaDTO implements Serializable {
     
     private Long id;
 
+    public EntradaDTO(){
+        
+    }
     /*
         Constructor 
     */
