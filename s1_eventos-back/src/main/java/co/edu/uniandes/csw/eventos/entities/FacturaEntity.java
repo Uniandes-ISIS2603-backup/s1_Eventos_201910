@@ -20,11 +20,11 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class FacturaEntity extends BaseEntity implements Serializable{
 
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private UsuarioEntity usuario = new UsuarioEntity();
     
     @javax.persistence.ManyToMany(
-        fetch = javax.persistence.FetchType.LAZY
+        fetch = javax.persistence.FetchType.LAZY,cascade = CascadeType.PERSIST
     )
     private List<EntradaEntity> entradas;
     private String nombre;

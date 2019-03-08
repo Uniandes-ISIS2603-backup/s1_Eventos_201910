@@ -120,7 +120,7 @@ public class AgendaLogic {
      * Borrar un Agenda
      *
      * @param agendasId: id de la Agenda a borrar
-     * @throws BusinessLogicException Si la Agenda a eliminar tiene libros.
+     * @throws BusinessLogicException Si la Agenda a eliminar tiene invitados.
      */
     public void deleteAgenda(Long agendasId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la Agenda con id = {0}", agendasId);
