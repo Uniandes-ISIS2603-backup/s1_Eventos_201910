@@ -86,8 +86,10 @@ public class AgendaLogicTest {
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
+        em.createQuery("delete from InvitadoEspecialEntity").executeUpdate();
         em.createQuery("delete from AgendaEntity").executeUpdate();
         em.createQuery("delete from EventoEntity").executeUpdate();
+       
     }
 
     /**
@@ -103,10 +105,13 @@ public class AgendaLogicTest {
         AgendaEntity agenda = data.get(2);
         EventoEntity entity = factory.manufacturePojo(EventoEntity.class);
         entity.getAgendas().add(agenda);
-
         em.persist(entity);
         agenda.setEventos(entity);
 
+        InvitadoEspecialEntity inv = factory.manufacturePojo(InvitadoEspecialEntity.class);
+        inv.getAgenda().add(data.get(1));
+        em.persist(inv);
+        data.get(1).getInvitadosEspeciales().add(inv);
     }
 
     @Test
@@ -143,7 +148,6 @@ public class AgendaLogicTest {
     @Test
     public void deleteAgendaTest() throws BusinessLogicException {
         AgendaEntity entity = data.get(0);
-        entity.setInvitadosEspeciales(new ArrayList<>());
         AgendaLogic.deleteAgenda(entity.getId());
         AgendaEntity deleted = em.find(AgendaEntity.class, entity.getId());
         Assert.assertNull(deleted);
