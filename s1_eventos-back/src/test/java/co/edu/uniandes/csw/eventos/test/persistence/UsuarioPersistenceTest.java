@@ -111,11 +111,61 @@ public class UsuarioPersistenceTest {
         Assert.assertEquals(newEntity.getCorreoElectronico(), entity.getCorreoElectronico());
     }
     
+    /**
+     * Prueba para consultar la lista de Usuarioes.
+     */
+    @Test
+    public void getUsuariosTest() {
+        List<UsuarioEntity> list = usuarioPersistence.findAll();
+        Assert.assertEquals(data.size(), list.size());
+        for (UsuarioEntity ent : list) {
+            boolean found = false;
+            for (UsuarioEntity entity : data) {
+                if (ent.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+
+    /**
+     * Prueba para consultar una Usuario.
+     */
+    @Test
+    public void getUsuarioTest() {
+        UsuarioEntity entity = data.get(0);
+        UsuarioEntity newEntity = usuarioPersistence.find(entity.getId());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getCorreoElectronico(), newEntity.getCorreoElectronico());
+    }
+
+    /**
+     * Prueba para eliminar una Usuario.
+     */
     @Test
     public void deleteUsuarioTest() {
         UsuarioEntity entity = data.get(0);
         usuarioPersistence.delete(entity.getId());
         UsuarioEntity deleted = em.find(UsuarioEntity.class, entity.getId());
         Assert.assertNull(deleted);
+    }
+
+    /**
+     * Prueba para actualizar una Usuario.
+     */
+    @Test
+    public void updateUsuarioTest() {
+        UsuarioEntity entity = data.get(0);
+        PodamFactory factory = new PodamFactoryImpl();
+        UsuarioEntity newEntity = factory.manufacturePojo(UsuarioEntity.class);
+
+        newEntity.setId(entity.getId());
+
+        usuarioPersistence.update(newEntity);
+
+        UsuarioEntity resp = em.find(UsuarioEntity.class, entity.getId());
+
+        Assert.assertEquals(newEntity.getCorreoElectronico(), resp.getCorreoElectronico());
     }
 }
