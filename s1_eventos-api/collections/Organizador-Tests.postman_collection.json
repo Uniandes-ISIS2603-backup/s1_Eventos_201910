@@ -1,12 +1,13 @@
 {
 	"info": {
-		"_postman_id": "33ac65c7-637f-43e6-9baf-19902225128f",
-		"name": "PatrocinadorTest",
+		"_postman_id": "e9124ff4-8995-4273-bc13-2b0049f14467",
+		"name": "Organizador Tests",
+		"description": "Colección de pruebas sobre el recurso Organizador",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Crear un Patrocinador",
+			"name": "Crear un organizador",
 			"event": [
 				{
 					"listen": "test",
@@ -14,7 +15,7 @@
 						"id": "694741e6-4794-48fd-b32b-d790963ac9b0",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_p\",data.id);",
+							"postman.setGlobalVariable(\"new_id_o\",data.id);",
 							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
 							"console.log(data.id);"
 						],
@@ -32,10 +33,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"nombre\": \"Kupa\",\n        \"imagen\": \"https://www.kupa.co/assets/img/logo-kupa-negro-512.png\",\n        \"rango\": \"Silver\",\n        \"descripcion\": \"Kupa, un amigo que te acompaña\"\n    }"
+					"raw": "    {\n        \"nombre\": \"Empresas Públicas de Medellín E.S.P\",\n        \"telefono\": \"44 44 115\",\n        \"correoElectronico\": \"epm@epm.com.co\"\n    }"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/patrocinadores",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/organizadores",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -44,67 +45,24 @@
 					"path": [
 						"s1_eventos-api",
 						"api",
-						"patrocinadores"
+						"organizadores"
 					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crear Patrocinador Nombre Repetido",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "694741e6-4794-48fd-b32b-d790963ac9b0",
-						"exec": [
-							"tests[\"No se puede crear un patrocinador con un nombre que ya existe\"] = responseCode.code === 412;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"Ya existe un Patrocinador con el nombre\")",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "    {\n        \"nombre\": \"Kupa\",\n        \"imagen\": \"https://www.kupa.co/assets/img/logo-kupa-negro-512.png\",\n        \"rango\": \"Silver\",\n        \"descripcion\": \"Kupa, un amigo que te acompaña\"\n    }"
 				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/patrocinadores",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_eventos-api",
-						"api",
-						"patrocinadores"
-					]
-				}
+				"description": "Crea un nuevo organizador. El Id es inicializado por la BD y se debe ver en la respuesta.\r\nPara la prueba, se guarda el id en una variable que será utilizada en otras peticiones de la colección.\r\n\r\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
 		{
-			"name": "Obtener Patrocinadores",
+			"name": "Obtener todos los organizador",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "784ecdcc-a7bb-4385-9c65-43b2e1959aa6",
+						"id": "ffc24813-89a3-47fa-9d38-241d31b1e7c3",
 						"exec": [
 							"var data= JSON.parse(responseBody);",
-							"tests[\"No genera error en el Get\"] = responseCode.code == 200",
-							"tests[\"Patrocinadores count\"] = data.length >= 1;"
+							"tests[\"No genera error en el Gell All\"] = responseCode.code === 200;",
+							"tests[\"patrocinadores count\"] = data.length >= 1;"
 						],
 						"type": "text/javascript"
 					}
@@ -118,7 +76,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/patrocinadores",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/organizadores",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -127,14 +85,15 @@
 					"path": [
 						"s1_eventos-api",
 						"api",
-						"patrocinadores"
+						"organizadores"
 					]
-				}
+				},
+				"description": "Consulta todos los organizador de la aplicacion. \r\nLa petición no tiene cuerpo.\r\n\r\nPara la prueba, se verifica que el conjunto de organizador en la respuesta tenga mas de uno.\r\n\r\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
 		{
-			"name": "Obtener Patrocinador",
+			"name": "Obtener un organizador",
 			"event": [
 				{
 					"listen": "test",
@@ -157,7 +116,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/patrocinadores/{{new_id_p}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/organizadores/{{new_id_o}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -166,15 +125,16 @@
 					"path": [
 						"s1_eventos-api",
 						"api",
-						"patrocinadores",
-						"{{new_id_p}}"
+						"organizadores",
+						"{{new_id_o}}"
 					]
-				}
+				},
+				"description": "Consulta un organizador de la aplicación.  \r\nLa petición no tiene cuerpo.\r\nSe envía el id del organizador deseado por la URL de la petición.\r\n\r\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
 		{
-			"name": "Obtener Patrocinador que no Existe",
+			"name": "Obtener un organizadorque no existe",
 			"event": [
 				{
 					"listen": "test",
@@ -196,7 +156,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/patrocinadores/0",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/organizadores/0",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -205,15 +165,16 @@
 					"path": [
 						"s1_eventos-api",
 						"api",
-						"patrocinadores",
+						"organizadores",
 						"0"
 					]
-				}
+				},
+				"description": "Consulta un organizador que no existe en la aplicación.  \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /organizadores/0 no existe.\".\r\n\r\n**Código http esperado: 404**"
 			},
 			"response": []
 		},
 		{
-			"name": "Editar Patrocinador",
+			"name": "Editar un organizador",
 			"event": [
 				{
 					"listen": "test",
@@ -238,10 +199,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"nombre\": \"Kupa\",\n        \"imagen\": \"https://www.kupa.co/assets/img/logo-kupa-negro-512.png\",\n        \"rango\": \"Silver\",\n        \"descripcion\": \"Kupa, un amigo que te acompaña\"\n    }"
+					"raw": "    {\n        \"nombre\": \"Empresas Públicas de Medellín E.S.P\",\n        \"telefono\": \"44 44 115\",\n        \"correoElectronico\": \"epm@epm.com.co\"\n    }"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/patrocinadores/{{new_id_p}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/organizadores/{{new_id_o}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -250,15 +211,16 @@
 					"path": [
 						"s1_eventos-api",
 						"api",
-						"patrocinadores",
-						"{{new_id_p}}"
+						"organizadores",
+						"{{new_id_o}}"
 					]
-				}
+				},
+				"description": "Actualiza un patrocinador existente. \r\nse envía el Id en la URL de la petición.\r\n\r\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
 		{
-			"name": "Editar Patrocinador que no Existe",
+			"name": "Editar un organizador que no existe",
 			"event": [
 				{
 					"listen": "test",
@@ -282,10 +244,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"birthDate\": \"1927-03-03T00:00:00-05:00\",\n        \"description\": \"Fue un escritor, guionista, editor y periodista colombiano. En 1982 recibió el Premio Nobel de Literatura. Vivio gran parte de su vida en Mexico\",\n        \"image\": \"https://commons.wikimedia.org/wiki/File:Gabriel_Garcia_Marquez.jpg\",\n        \"name\": \"Gabriel José de la Concordia García Márquez\"\n    }"
+					"raw": "    {\n        \"nombre\": \"Empresas Públicas de Medellín E.S.P\",\n        \"telefono\": \"44 44 115\",\n        \"correoElectronico\": \"epm@epm.com.co\"\n    }"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/patrocinadores/0",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/organizadores/0",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -294,15 +256,55 @@
 					"path": [
 						"s1_eventos-api",
 						"api",
-						"patrocinadores",
+						"organizadores",
 						"0"
 					]
-				}
+				},
+				"description": "Actualiza un organizador que no existe. \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /organizadores/0 no existe.\".\r\n\r\n**Código HTTP esperado: 404**"
 			},
 			"response": []
 		},
 		{
-			"name": "Borrar Patrocinador que no Existe",
+			"name": "Borrar un organizador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d403e21b-3da3-4bbc-9b8a-9a2285ec0292",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/organizadores/{{new_id_o}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"organizadores",
+						"{{new_id_o}}"
+					]
+				},
+				"description": "Borra un organizador. Se envía el id del organizador creado anteriormente.\n\n**Código HTTP esperado: 204**"
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un organizadorque no existe",
 			"event": [
 				{
 					"listen": "test",
@@ -324,7 +326,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/patrocinadores/0",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/organizadores/0",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -333,50 +335,35 @@
 					"path": [
 						"s1_eventos-api",
 						"api",
-						"patrocinadores",
+						"organizadores",
 						"0"
 					]
-				}
+				},
+				"description": "Borra un organizador que no existe en la aplicación.  \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /organizadores/0 no existe.\".\r\n\r\n**Código http esperado: 404**"
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "9f629ffc-3644-4dca-a8af-f28ae4a4e739",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		},
 		{
-			"name": "Borrar Patrocinador",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "d403e21b-3da3-4bbc-9b8a-9a2285ec0292",
-						"exec": [
-							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/patrocinadores/{{new_id_p}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_eventos-api",
-						"api",
-						"patrocinadores",
-						"{{new_id_p}}"
-					]
-				}
-			},
-			"response": []
+			"listen": "test",
+			"script": {
+				"id": "b1e97bf7-3232-412f-96bc-7ac233e25ab5",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }

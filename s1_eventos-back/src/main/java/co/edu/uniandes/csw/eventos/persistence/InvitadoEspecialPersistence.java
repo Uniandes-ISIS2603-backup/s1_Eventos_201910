@@ -74,7 +74,7 @@ public class InvitadoEspecialPersistence {
      */
     public void delete(Long invitadoEspecialesId) {
 
-        InvitadoEspecialEntity InvitadoEspecialEntity = em.find(InvitadoEspecialEntity.class, invitadoEspecialesId);
-        em.remove(InvitadoEspecialEntity);
+        InvitadoEspecialEntity invitadoEspecialEntity = em.find(InvitadoEspecialEntity.class, invitadoEspecialesId);
+        em.remove(invitadoEspecialEntity);
     }
 }

@@ -28,7 +28,7 @@ public class MedioDePagoLogic {
     @Inject
     private MedioDePagoPersistence persistencia;
     
-    public MedioDePagoEntity createMedioDePago(MedioDePagoEntity medioDePagoEntity) throws BusinessLogicException
+    public MedioDePagoEntity createMedioDePago(MedioDePagoEntity medioDePagoEntity)// throws BusinessLogicException
     {
         //LOGGER.log(Level.INFO,"Inicia el proceso de creacion de la editorial");
        if(persistencia.find(medioDePagoEntity.getId())!=null)

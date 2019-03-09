@@ -17,6 +17,19 @@ import java.io.Serializable;
 public class CalificacionDetailDTO extends CalificacionDTO implements Serializable {
     
     private EventoDTO evento;
+    
+     public CalificacionDetailDTO()
+     {
+         super();
+     }
+
+    public EventoDTO getEvento() {
+        return evento;
+    }
+
+    public void setEvento(EventoDTO evento) {
+        this.evento = evento;
+    }
     private UsuarioDTO usuario;
 
     public CalificacionDetailDTO(CalificacionEntity calificacionEntity)

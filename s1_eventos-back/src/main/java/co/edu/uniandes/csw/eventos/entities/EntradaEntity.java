@@ -6,7 +6,10 @@
 package co.edu.uniandes.csw.eventos.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 import javax.persistence.ManyToOne;
 
@@ -25,6 +28,7 @@ public class EntradaEntity extends BaseEntity implements Serializable{
       @PodamExclude
       @ManyToOne
       private EventoEntity evento;
+      
       
       @PodamExclude
       @ManyToOne
@@ -87,7 +91,7 @@ public class EntradaEntity extends BaseEntity implements Serializable{
     /**
      * estado de la reserva de la entrada
      */
-    private boolean reservada;
+    private boolean reservado;
     
    
     /**
@@ -214,16 +218,16 @@ public class EntradaEntity extends BaseEntity implements Serializable{
      * Retorna si esta reservada
      * @return reservada
      */
-    public boolean isReservada() {
-        return reservada;
+    public boolean isReservado() {
+        return reservado;
     }
 
     /**
      * Modifica el estado de reserva
      * @param reservada 
      */
-    public void setReservada(boolean reservada) {
-        this.reservada = reservada;
+    public void setReservado(boolean reservada) {
+        this.reservado = reservada;
     }
     
     

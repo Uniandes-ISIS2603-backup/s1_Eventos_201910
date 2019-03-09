@@ -54,6 +54,8 @@ import javax.ws.rs.WebApplicationException;
 public class OrganizadorResource {
     
     private static final Logger LOGGER = Logger.getLogger(OrganizadorResource.class.getName());
+    private static final String NO_EXISTE = " no existe.";
+    private static final String RECURSO_ORGANIZADOR = "El recurso /organizadores/";
 
     @Inject
     private OrganizadorLogic organizadorLogic;
@@ -70,9 +72,9 @@ public class OrganizadorResource {
     @POST
     public OrganizadorDTO createOrganizador(OrganizadorDTO organizador) throws BusinessLogicException {
         
-        LOGGER.log(Level.INFO, "OrganizadorResource createOrganizador: input: {0}", organizador.toString());
+        LOGGER.log(Level.INFO, "OrganizadorResource createOrganizador: input: {0}", organizador);
         OrganizadorDTO organizadorDTO = new OrganizadorDTO(organizadorLogic.createOrganizador(organizador.toEntity()));
-        LOGGER.log(Level.INFO, "OrganizadorResource createOrganizador: output: {0}", organizadorDTO.toString());
+        LOGGER.log(Level.INFO, "OrganizadorResource createOrganizador: output: {0}", organizadorDTO);
         return organizadorDTO;
     }
 
@@ -87,7 +89,7 @@ public class OrganizadorResource {
         
         LOGGER.info("OrganizadorResource getOrganizadores: input: void");
         List<OrganizadorDetailDTO> listaOrganizadores = listEntity2DTO(organizadorLogic.getOrganizadores());
-        LOGGER.log(Level.INFO, "OrganizadorResource getOrganizadores: output: {0}", listaOrganizadores.toString());
+        LOGGER.log(Level.INFO, "OrganizadorResource getOrganizadores: output: {0}", listaOrganizadores);
         return listaOrganizadores;
     }
 
@@ -102,15 +104,15 @@ public class OrganizadorResource {
      */
     @GET
     @Path("{organizadoresId: \\d+}")
-    public OrganizadorDetailDTO getOrganizador(@PathParam("organizadoresId") Long organizadoresId) throws WebApplicationException {
+    public OrganizadorDetailDTO getOrganizador(@PathParam("organizadoresId") Long organizadoresId){
         
         LOGGER.log(Level.INFO, "OrganizadorResource getOrganizador: input: {0}", organizadoresId);
         OrganizadorEntity organizadorEntity = organizadorLogic.getOrganizador(organizadoresId);
         if (organizadorEntity == null) {
-            throw new WebApplicationException("El recurso /organizadores/" + organizadoresId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO_ORGANIZADOR + organizadoresId + NO_EXISTE, 404);
         }
         OrganizadorDetailDTO detailDTO = new OrganizadorDetailDTO(organizadorEntity);
-        LOGGER.log(Level.INFO, "OrganizadorResource getOrganizador: output: {0}", detailDTO.toString());
+        LOGGER.log(Level.INFO, "OrganizadorResource getOrganizador: output: {0}", detailDTO);
         return detailDTO;
     }
 
@@ -128,14 +130,14 @@ public class OrganizadorResource {
      */
     @PUT
     @Path("{organizadoresId: \\d+}")
-    public OrganizadorDetailDTO updateOrganizador(@PathParam("organizadoresId") Long organizadoresId, OrganizadorDetailDTO organizador) throws WebApplicationException {
-        LOGGER.log(Level.INFO, "OrganizadorResource updateOrganizador: input: id:{0} , editorial: {1}", new Object[]{organizadoresId, organizador.toString()});
+    public OrganizadorDetailDTO updateOrganizador(@PathParam("organizadoresId") Long organizadoresId, OrganizadorDetailDTO organizador){
+        LOGGER.log(Level.INFO, "OrganizadorResource updateOrganizador: input: id:{0} , editorial: {1}", new Object[]{organizadoresId, organizador});
         organizador.setId(organizadoresId);
         if (organizadorLogic.getOrganizador(organizadoresId) == null) {
-            throw new WebApplicationException("El recurso /organizadores/" + organizadoresId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO_ORGANIZADOR + organizadoresId + NO_EXISTE, 404);
         }
         OrganizadorDetailDTO detailDTO = new OrganizadorDetailDTO(organizadorLogic.updateOrganizador(organizadoresId, organizador.toEntity()));
-        LOGGER.log(Level.INFO, "OrganizadorResource updateOrganizador: output: {0}", detailDTO.toString());
+        LOGGER.log(Level.INFO, "OrganizadorResource updateOrganizador: output: {0}", detailDTO);
         return detailDTO;
     }
 
@@ -155,7 +157,7 @@ public class OrganizadorResource {
         
         LOGGER.log(Level.INFO, "OrganizadorResource deleteOrganizador: input: {0}", organizadoresId);
         if (organizadorLogic.getOrganizador(organizadoresId) == null) {
-            throw new WebApplicationException("El recurso /organizadores/" + organizadoresId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO_ORGANIZADOR + organizadoresId + NO_EXISTE, 404);
         }
         organizadorLogic.deleteOrganizador(organizadoresId);
         LOGGER.info("OrganizadorResource deleteOrganizador: output: void");
@@ -176,7 +178,7 @@ public class OrganizadorResource {
     @Path("{organizadoresId: \\d+}/eventos")
     public Class<OrganizadorEventosResource> getOrganizadorEventosResource(@PathParam("organizadoresId") Long organizadoresId) {
         if (organizadorLogic.getOrganizador(organizadoresId) == null) {
-            throw new WebApplicationException("El recurso /organizadores/" + organizadoresId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO_ORGANIZADOR + organizadoresId + NO_EXISTE, 404);
         }
         return OrganizadorEventosResource.class;
     }

@@ -38,6 +38,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 public class CalificacionLogicTest {
     private PodamFactory factory = new PodamFactoryImpl();
     
+    
     @Inject
     private CalificacionLogic calificacionLogic;
     

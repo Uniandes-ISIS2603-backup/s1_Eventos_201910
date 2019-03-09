@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.eventos.dtos;
 import co.edu.uniandes.csw.eventos.entities.MedioDePagoEntity;
+import java.io.Serializable;
 import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -13,7 +14,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author Juan David Diaz
  */
-public class MedioDePagoDTO {
+public class MedioDePagoDTO implements Serializable {
     
     /**
      * numero de un medio de pago
@@ -35,6 +36,10 @@ public class MedioDePagoDTO {
      */
     private Date fechaDeExpiracion;
 
+    public MedioDePagoDTO(){
+        
+    }
+    
     public MedioDePagoDTO(MedioDePagoEntity medioDePagoEntity)
     {
         if(medioDePagoEntity!=null)
