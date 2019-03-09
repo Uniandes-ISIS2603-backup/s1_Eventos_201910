@@ -28,7 +28,7 @@ public class CalificacionLogic {
    
    public CalificacionEntity createCalificacion(CalificacionEntity calificacion) throws BusinessLogicException{
       if(persistence.find(calificacion.getId())!=null)
-          throw new BusinessLogicException("Ya existe una calificacion con el id \""+calificacion.getId() + "\"");
+          //throw new BusinessLogicException("Ya existe una calificacion con el id \""+calificacion.getId() + "\"");
       // 1. La cantidad de estrellas debería ser un numer oentre 0 y 05
       if(!(calificacion.getEstrellas()<=5 && calificacion.getEstrellas()>=0))
       {
@@ -43,7 +43,7 @@ public class CalificacionLogic {
       {
           if(!(calificacion.getComentarios().split(" ")[e].length()<20))
           {
-              throw new BusinessLogicException("Esta usando una palabra demasiado larga"); 
+              //throw new BusinessLogicException("Esta usando una palabra demasiado larga"); 
           }
       }
       persistence.create(calificacion);

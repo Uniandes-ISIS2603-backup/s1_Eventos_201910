@@ -16,6 +16,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class EntradaDTO implements Serializable {
     
+    private Long id;
     /*
         Atributo de un tipo por definir que almacena el codigo QR
     */
@@ -48,8 +49,6 @@ public class EntradaDTO implements Serializable {
         Atributo de tipo booleano que indica si la boleta esta reservada
     */
     private boolean reservado;
-    
-    private Long id;
 
     public EntradaDTO(){
         
@@ -67,7 +66,7 @@ public class EntradaDTO implements Serializable {
             this.numero=entradaEntity.getNumero();
             this.disponible=entradaEntity.isDisponible();
             this.checkIn=entradaEntity.isCheckIn();
-            this.reservado=entradaEntity.isReservada();
+            this.reservado=entradaEntity.isReservado();
             
         }
     }
@@ -165,7 +164,7 @@ public class EntradaDTO implements Serializable {
         entradaEntity.setNumero(this.getNumero());
         entradaEntity.setDisponible(this.isDisponible());
         entradaEntity.setCheckInm(this.isCheckIn());
-        entradaEntity.setReservada(this.isReservado());
+        entradaEntity.setReservado(this.isReservado());
         return entradaEntity;
     }
     

@@ -3,6 +3,7 @@ delete from OrganizadorEntity;
 delete from AgendaEntity;
 delete from FacturaEntity;
 delete from InvitadoEspecialEntity;
+delete from EntradaEntity;
 
 insert into PatrocinadorEntity(id, nombre, imagen, rango, descripcion) values (100, 'El Espectador','https://www.elespectador.com/sites/default/files/f132055d336bdccca7332e9c54da0167.jpg', 'Gold', 'Noticias de Colombia y el mundo. El Espectador, el valor de la Información.' );
 insert into PatrocinadorEntity(id, nombre, imagen, rango, descripcion) values (200, 'Microsoft Corporation', 'https://cdn.vox-cdn.com/thumbor/NeSo4JAqv-fFJCIhb5K5eBqvXG4=/7x0:633x417/1200x800/filters:focal(7x0:633x417)/cdn.vox-cdn.com/assets/1311169/mslogo.jpg', 'Gold', 'Tu potencial, nuestra pasión.');
@@ -23,3 +24,5 @@ insert into AgendaEntity(id, nombre, horaInicio,horaFinal,actividad) values( 100
 insert into AgendaEntity(id, nombre, horaInicio,horaFinal,actividad) values( 200 , 'minuto', '2019-03-04 12:01:00','2019-03-04 12:02:01', 'minuto');
 insert into AgendaEntity(id, nombre, horaInicio,horaFinal,actividad) values( 300 , 'hora', '2019-03-04 12:01:00','2019-03-04 13:02:01', 'hora');
 insert into AgendaEntity(id, nombre, horaInicio,horaFinal,actividad) values( 400 , 'dia', '2019-03-04 12:01:00','2019-03-05 12:02:01', 'dia');
+
+insert into EntradaEntity(id,QR,descripcion, precio, locacion,numero,disponible,checkIn,reservado) values(100,'no','evento perruno',1000,'PU 301',123,0,1,0);

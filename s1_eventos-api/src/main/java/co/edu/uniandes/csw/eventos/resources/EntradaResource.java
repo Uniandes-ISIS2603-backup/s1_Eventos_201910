@@ -32,7 +32,7 @@ import javax.ws.rs.WebApplicationException;
  * @author Juan David Diaz
  */
 
-@Path("entrada")
+@Path("entradas")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped

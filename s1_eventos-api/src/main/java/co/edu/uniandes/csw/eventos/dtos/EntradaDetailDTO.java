@@ -19,7 +19,7 @@ import java.util.List;
 public class EntradaDetailDTO extends EntradaDTO implements Serializable {
     
     
-    private List<EntradaDTO> entradas;
+    private EventoEntity evento;
     /**
      * Constructor
      */
@@ -31,24 +31,13 @@ public class EntradaDetailDTO extends EntradaDTO implements Serializable {
     public EntradaDetailDTO(EntradaEntity entradaEntity){
         super(entradaEntity);
         if (entradaEntity != null) {
-            entradas = new ArrayList<>();
-            for (EntradaEntity entityEntradas : entradaEntity.getEntradas()) {
-                entradas.add(new EntradaDTO(entityEntradas));
-            }
+            evento = entradaEntity.getEvento();
         }
     }
     
     @Override
     public EntradaEntity toEntity() {
         EntradaEntity entradaEntity = super.toEntity();
-        if (entradas != null) {
-            List<EntradaEntity> entradasEntity = new ArrayList<>();
-            for (EntradaDTO dtoEntrada : entradas) {
-                entradasEntity.add(dtoEntrada.toEntity());
-            }
-            entradaEntity.setEntradas(entradasEntity);
-        }
-        
         return entradaEntity;
     }
 }

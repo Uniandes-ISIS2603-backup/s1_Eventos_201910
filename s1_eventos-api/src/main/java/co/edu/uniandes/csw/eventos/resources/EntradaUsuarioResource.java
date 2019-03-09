@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.eventos.resources;
 
 import co.edu.uniandes.csw.eventos.dtos.UsuarioDetailDTO;
+import co.edu.uniandes.csw.eventos.ejb.EntradaUsuarioLogic;
 import co.edu.uniandes.csw.eventos.ejb.UsuarioLogic;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
@@ -34,8 +35,8 @@ import javax.ws.rs.core.MediaType;
 public class EntradaUsuarioResource {
     private static final Logger LOGGER = Logger.getLogger(EntradaUsuarioResource.class.getName());
     
-//    @Inject
-//    private EntradaUsuarioResource facturaMedioDePagoLogic;
+    @Inject
+    private EntradaUsuarioLogic entradaUsuarioLogic;
     
     @Inject
     private UsuarioLogic usuarioLogic;
@@ -44,11 +45,11 @@ public class EntradaUsuarioResource {
     @Path("{usuariosId: \\d+}")
     public UsuarioDetailDTO getUsuario(@PathParam("entradasId") Long entradasId, @PathParam("usuariosId") Long usuariosId) throws BusinessLogicException{
         LOGGER.log(Level.INFO,"EntradaUsuarioResource getUsuario : input : entradasId {0} , usuariosId {1}", new Object[]{entradasId, usuariosId});
-        //if(usuarioLogic.find(eventosId==null)){
-           // throw new WebApplicationException("El recurso /eventos/" + eventosId + " no existe.", 404);
-            //UsuarioDetailsDTO detailDTO = new UsuarioDetailsDTO(entradaUsuario.getUsuario(entradasId));
-            //return detailDTO
-            return null;
+        if(usuarioLogic.getUsuario(usuariosId)==null){
+            throw new WebApplicationException("El recurso /eventos/" + usuariosId + " no existe.", 404);
+        }
+        UsuarioDetailDTO detailDTO = new UsuarioDetailDTO(entradaUsuarioLogic.getUsuario(entradasId));
+            return detailDTO;
         }
     
 }

@@ -25,21 +25,10 @@ public class EntradaEntity extends BaseEntity implements Serializable{
       @ManyToOne
       private UsuarioEntity usuario;
       
-       @PodamExclude
-       @ManyToMany(mappedBy = "entradas")
-    private List<EntradaEntity> entradas = new ArrayList<>();
-
-    public List<EntradaEntity> getEntradas() {
-        return entradas;
-    }
-
-    public void setEntradas(List<EntradaEntity> entradas) {
-        this.entradas = entradas;
-    }
-      
       @PodamExclude
       @ManyToOne
       private EventoEntity evento;
+      
       
       @PodamExclude
       @ManyToOne
@@ -102,7 +91,7 @@ public class EntradaEntity extends BaseEntity implements Serializable{
     /**
      * estado de la reserva de la entrada
      */
-    private boolean reservada;
+    private boolean reservado;
     
    
     /**
@@ -229,16 +218,16 @@ public class EntradaEntity extends BaseEntity implements Serializable{
      * Retorna si esta reservada
      * @return reservada
      */
-    public boolean isReservada() {
-        return reservada;
+    public boolean isReservado() {
+        return reservado;
     }
 
     /**
      * Modifica el estado de reserva
      * @param reservada 
      */
-    public void setReservada(boolean reservada) {
-        this.reservada = reservada;
+    public void setReservado(boolean reservada) {
+        this.reservado = reservada;
     }
     
     

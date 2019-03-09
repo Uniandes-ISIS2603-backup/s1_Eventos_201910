@@ -45,11 +45,10 @@ public class CalificacionUsuarioResource {
     @Path("{usuariosId: \\d+}")
     public UsuarioDetailDTO getUsuario(@PathParam("calificacionesId") Long calificacionesId, @PathParam("usuariosId") Long usuariosId) throws BusinessLogicException{
        if(usuarioLogic.find(usuariosId)==null){
-           throw new WebApplicationException("El recurso /eventos/" + usuariosId + " no existe.", 404);
+           throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
        }
-       
-      // UsuarioDetailsDTO detailDTO = new UsuarioDetailDTO(calificacionUsuarioLogic.getUsuario(calificacionesId));
-      //return detailDTO;
-      return null;
+       UsuarioDetailDTO detailDTO = new UsuarioDetailDTO(calificacionUsuarioLogic.getUsuario(calificacionesId));
+       return detailDTO;
+      
     } 
 }
