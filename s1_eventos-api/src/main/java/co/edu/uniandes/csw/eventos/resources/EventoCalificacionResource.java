@@ -73,7 +73,7 @@ public class EventoCalificacionResource {
 
        List<CalificacionEntity> entities=listDTO2Entity(calificaciones);
 
-        List<CalificacionDTO> lista = listEntity2DTO(logica.replaceCalificacions(eventosId, entities));
+        List<CalificacionDTO> lista = listEntity2DTO(logica.replaceCalificaciones(eventosId, entities));
                
         return lista;
     }

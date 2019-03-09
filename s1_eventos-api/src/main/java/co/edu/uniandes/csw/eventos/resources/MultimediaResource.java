@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.eventos.resources;
 
 import co.edu.uniandes.csw.eventos.dtos.MultimediaDTO;
 import co.edu.uniandes.csw.eventos.dtos.OrganizadorDTO;
+import co.edu.uniandes.csw.eventos.ejb.MultimediaEventoLogic;
 import co.edu.uniandes.csw.eventos.ejb.MultimediaLogic;
 import co.edu.uniandes.csw.eventos.entities.MultimediaEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
@@ -41,6 +42,8 @@ public class MultimediaResource {
     @Inject
     private MultimediaLogic multimediaLogic;
     
+    @Inject
+    private MultimediaEventoLogic multimediaEventoLogic;
     
     @POST
     public MultimediaDTO createMultimedia(MultimediaDTO multimedia) throws BusinessLogicException {
@@ -99,6 +102,7 @@ public class MultimediaResource {
         if (multimediaLogic.getMultimedia(multimediasId) == null) {
             throw new WebApplicationException("El recurso /multimedias/" + multimediasId + " no existe.", 404);
         }
+        multimediaEventoLogic.removeEvento(multimediasId);
         multimediaLogic.deleteMultimedia(multimediasId);
         LOGGER.info("MultimediaResource deleteMultimedia: output: void");
     }

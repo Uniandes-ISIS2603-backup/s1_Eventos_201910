@@ -112,11 +112,61 @@ public class MultimediaPersistenceTest {
         Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
     }
     
+    /**
+     * Prueba para consultar la lista de Multimediaes.
+     */
+    @Test
+    public void getMultimediasTest() {
+        List<MultimediaEntity> list = multimediaPersistence.findAll();
+        Assert.assertEquals(data.size(), list.size());
+        for (MultimediaEntity ent : list) {
+            boolean found = false;
+            for (MultimediaEntity entity : data) {
+                if (ent.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+
+    /**
+     * Prueba para consultar una Multimedia.
+     */
+    @Test
+    public void getMultimediaTest() {
+        MultimediaEntity entity = data.get(0);
+        MultimediaEntity newEntity = multimediaPersistence.find(entity.getId());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+    }
+
+    /**
+     * Prueba para eliminar una Multimedia.
+     */
     @Test
     public void deleteMultimediaTest() {
         MultimediaEntity entity = data.get(0);
         multimediaPersistence.delete(entity.getId());
         MultimediaEntity deleted = em.find(MultimediaEntity.class, entity.getId());
         Assert.assertNull(deleted);
+    }
+
+    /**
+     * Prueba para actualizar una Multimedia.
+     */
+    @Test
+    public void updateMultimediaTest() {
+        MultimediaEntity entity = data.get(0);
+        PodamFactory factory = new PodamFactoryImpl();
+        MultimediaEntity newEntity = factory.manufacturePojo(MultimediaEntity.class);
+
+        newEntity.setId(entity.getId());
+
+        multimediaPersistence.update(newEntity);
+
+        MultimediaEntity resp = em.find(MultimediaEntity.class, entity.getId());
+
+        Assert.assertEquals(newEntity.getNombre(), resp.getNombre());
     }
 }

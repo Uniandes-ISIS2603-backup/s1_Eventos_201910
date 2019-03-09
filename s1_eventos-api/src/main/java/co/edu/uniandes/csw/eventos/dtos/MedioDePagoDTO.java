@@ -19,7 +19,9 @@ public class MedioDePagoDTO implements Serializable {
     /**
      * numero de un medio de pago
      */
-    private Integer numero;
+   
+    private String numero;
+
     
     /**
      * nombre del titular del medio de pago
@@ -54,7 +56,8 @@ public class MedioDePagoDTO implements Serializable {
      * reotrna el numero del medio de pago
      * @return numero
      */
-    public Integer getNumero() {
+
+    public String getNumero() {
         return numero;
     }
 
@@ -62,7 +65,7 @@ public class MedioDePagoDTO implements Serializable {
      * modifica el numero de medio de pago
      * @param numero 
      */
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 

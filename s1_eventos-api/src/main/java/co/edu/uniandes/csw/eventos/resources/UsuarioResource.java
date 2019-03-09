@@ -129,13 +129,93 @@ public class UsuarioResource {
      * servicio.
      * @return El servicio de Eventos para ese usuario en paricular.
      */
-    //@Path("{usuariosId: \\d+}/eventos")
-    //public Class<UsuarioEventosResource> getUsuarioEventosResource(@PathParam("usuariosId") Long usuariosId) {
-    //    if (usuarioLogic.getUsuario(usuariosId) == null) {
-    //        throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
-    //    }
-    //    return UsuarioEventosResource.class;
-    //}
+    @Path("{usuariosId: \\d+}/eventos")
+    public Class<UsuarioEventosResource> getUsuarioEventosResource(@PathParam("usuariosId") Long usuariosId) {
+        if (usuarioLogic.getUsuario(usuariosId) == null) {
+            throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
+        }
+        return UsuarioEventosResource.class;
+    }
+    
+    /**
+     * Conexión con el servicio de entradas para un usuario.
+     * {@link UsuarioEntradasResource}
+     *
+     * Este método conecta la ruta de /usuarios con las rutas de /entradas que
+     * dependen del usuario, es una redirección al servicio que maneja el segmento
+     * de la URL que se encarga de las entradas.
+     *
+     * @param usuariosId El ID del usuario con respecto al cual se accede al
+     * servicio.
+     * @return El servicio de Entradas para ese usuario en paricular.
+     */
+    @Path("{usuariosId: \\d+}/entradas")
+    public Class<UsuarioEntradasResource> getUsuarioEntradasResource(@PathParam("usuariosId") Long usuariosId) {
+        if (usuarioLogic.getUsuario(usuariosId) == null) {
+            throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
+        }
+        return UsuarioEntradasResource.class;
+    }
+    
+    /**
+     * Conexión con el servicio de facturas para un usuario.
+     * {@link UsuarioFacturasResource}
+     *
+     * Este método conecta la ruta de /usuarios con las rutas de /facturas que
+     * dependen del usuario, es una redirección al servicio que maneja el segmento
+     * de la URL que se encarga de las facturas.
+     *
+     * @param usuariosId El ID del usuario con respecto al cual se accede al
+     * servicio.
+     * @return El servicio de Facturas para ese usuario en paricular.
+     */
+    @Path("{usuariosId: \\d+}/facturas")
+    public Class<UsuarioFacturasResource> getUsuarioFacturasResource(@PathParam("usuariosId") Long usuariosId) {
+        if (usuarioLogic.getUsuario(usuariosId) == null) {
+            throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
+        }
+        return UsuarioFacturasResource.class;
+    }
+    
+    /**
+     * Conexión con el servicio de calificaciones para un usuario.
+     * {@link UsuarioCalificacionesResource}
+     *
+     * Este método conecta la ruta de /usuarios con las rutas de /calificaciones que
+     * dependen del usuario, es una redirección al servicio que maneja el segmento
+     * de la URL que se encarga de las calificaciones.
+     *
+     * @param usuariosId El ID del usuario con respecto al cual se accede al
+     * servicio.
+     * @return El servicio de Calificaciones para ese usuario en paricular.
+     */
+    @Path("{usuariosId: \\d+}/calificaciones")
+    public Class<UsuarioCalificacionesResource> getUsuarioCalificacionesResource(@PathParam("usuariosId") Long usuariosId) {
+        if (usuarioLogic.getUsuario(usuariosId) == null) {
+            throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
+        }
+        return UsuarioCalificacionesResource.class;
+    }
+    
+    /**
+     * Conexión con el servicio de mediosDePago para un usuario.
+     * {@link UsuarioMediosDePagoResource}
+     *
+     * Este método conecta la ruta de /usuarios con las rutas de /mediosDePago que
+     * dependen del usuario, es una redirección al servicio que maneja el segmento
+     * de la URL que se encarga de las mediosDePago.
+     *
+     * @param usuariosId El ID del usuario con respecto al cual se accede al
+     * servicio.
+     * @return El servicio de MediosDePago para ese usuario en paricular.
+     */
+    @Path("{usuariosId: \\d+}/mediosDePago")
+    public Class<UsuarioMediosDePagoResource> getUsuarioMediosDePagoResource(@PathParam("usuariosId") Long usuariosId) {
+        if (usuarioLogic.getUsuario(usuariosId) == null) {
+            throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
+        }
+        return UsuarioMediosDePagoResource.class;
+    }
     
     /**
      * Convierte una lista de UsuarioEntity a una lista de UsuarioDTO.
