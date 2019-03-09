@@ -154,15 +154,7 @@ public class UbicacionLogicTest {
     @Test(expected = BusinessLogicException.class)
     public void createUbicacioLatitudIncorrecta() throws BusinessLogicException {
         UbicacionEntity newEntity = factory.manufacturePojo(UbicacionEntity.class);
-        int latitud = generarNumeroAleatoreo();
-        boolean salir = false;
-        while (!salir) {
-            if (latitud >= -90 || 90 >= latitud) {
-                salir = true;
-            }
-            latitud = generarNumeroAleatoreo();
-        }
-        newEntity.setLatitud((double) latitud);
+        newEntity.setLatitud( 100.00);
         ubicacionLogic.createUbicacion(newEntity);
 
     }
@@ -175,15 +167,7 @@ public class UbicacionLogicTest {
     @Test(expected = BusinessLogicException.class)
     public void createUbicacioLongitudIncorrecta() throws BusinessLogicException {
         UbicacionEntity newEntity = factory.manufacturePojo(UbicacionEntity.class);
-        int longitud = generarNumeroAleatoreo();
-        boolean salir = false;
-        while (!salir) {
-            if (longitud >= -90 || 90 >= longitud) {
-                salir = true;
-            }
-            longitud = generarNumeroAleatoreo();
-        }
-        newEntity.setLongitud((double) longitud);
+        newEntity.setLongitud(190.00);
         ubicacionLogic.createUbicacion(newEntity);
 
     }
