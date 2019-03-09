@@ -27,14 +27,16 @@ public class PatrocinadorPersistence {
     private static final Logger LOGGER = Logger.getLogger(PatrocinadorPersistence.class.getName());
     
     /**
-     * Crea un patrovinador en la base de datos
+     * Crea un patrocinador en la base de datos
      *
      * @param patrocinadorEntity objeto patrocinador que se creará en la base de datos
      * @return devuelve la entidad creada con un id dado por la base de datos.
      */
     public PatrocinadorEntity create(PatrocinadorEntity patrocinadorEntity)
     {
+        LOGGER.log(Level.INFO, "Creando un patrocinador nuevo");
         em.persist(patrocinadorEntity);
+        LOGGER.log(Level.INFO, "Patrocinador creado");
         return patrocinadorEntity;
     }
     
@@ -45,6 +47,7 @@ public class PatrocinadorPersistence {
      */
     public List<PatrocinadorEntity> findAll() {
         
+        LOGGER.log(Level.INFO, "Consultando todos los patrocinadores");
         TypedQuery query = em.createQuery("select u from PatrocinadorEntity u", PatrocinadorEntity.class);
         return query.getResultList();
     }
@@ -57,6 +60,7 @@ public class PatrocinadorPersistence {
      */
     public PatrocinadorEntity find(Long patrocinadoresId) {
         
+        LOGGER.log(Level.INFO, "Consultando el patrocinador con id={0}", patrocinadoresId);
         return em.find(PatrocinadorEntity.class, patrocinadoresId);
     }
 
@@ -68,6 +72,7 @@ public class PatrocinadorPersistence {
      */
     public PatrocinadorEntity update(PatrocinadorEntity patrocinadorEntity) {
 
+        LOGGER.log(Level.INFO, "Actualizando el patrocinador con id={0}", patrocinadorEntity.getId());
         return em.merge(patrocinadorEntity);
     }
 
@@ -78,6 +83,7 @@ public class PatrocinadorPersistence {
      */
     public void delete(Long patrocinadoresId) {
 
+        LOGGER.log(Level.INFO, "Borrando el patrocinador con id={0}", patrocinadoresId);
         PatrocinadorEntity patrocinadorEntity = em.find(PatrocinadorEntity.class, patrocinadoresId);
         em.remove(patrocinadorEntity);
     }

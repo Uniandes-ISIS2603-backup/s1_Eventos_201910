@@ -41,14 +41,6 @@ public class EntradaEventoResource {
     @Inject
     private EventoLogic eventoLogic;
     
-    //@POST
-    //@Path("{eventosId: \\d+}")
-    //public EventoDetailDTO addEvento(@PathParam("entradasId") Long entradasId, @PathParam("eventosId") Long eventoId){
-      //  if(eventoLogic.find(eventoId)==null)
-        //    throw new WebApplicationException("El recurso /eventos"+eventoId+" no existe.",404);
-        //EventoDetailDTO detailDTO = new EventoDetailDTO(entradaEventosLogic.addEvento())
-    //}
-    
     @GET
     @Path("{eventosId: \\d+}")
     public EventoDetailDTO getEvento(@PathParam("entradasId") Long entradasId, @PathParam("eventosId") Long eventosId)

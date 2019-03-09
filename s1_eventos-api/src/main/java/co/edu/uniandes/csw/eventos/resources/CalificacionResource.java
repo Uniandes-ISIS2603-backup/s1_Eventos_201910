@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.eventos.dtos.CalificacionDTO;
 import co.edu.uniandes.csw.eventos.dtos.CalificacionDetailDTO;
 import co.edu.uniandes.csw.eventos.dtos.EventoDTO;
 import co.edu.uniandes.csw.eventos.ejb.CalificacionLogic;
+import co.edu.uniandes.csw.eventos.ejb.UsuarioLogic;
 import co.edu.uniandes.csw.eventos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
@@ -42,8 +43,10 @@ public class CalificacionResource {
     @Inject
     private CalificacionLogic calificacionLogic;
     
-    //@Inject
-    //private UsuarioLogic usuarioLogic;
+    @Inject
+    private UsuarioLogic usuarioLogic;
+    
+    
     
    @POST
    public CalificacionDTO createCalificacion(CalificacionDTO calificacion) throws BusinessLogicException
@@ -72,15 +75,20 @@ public class CalificacionResource {
    
    @PUT
    @Path("(calificacionesId: \\d+")
-   public CalificacionDTO updateCalificacion (@PathParam("calificacionesId") Long calificacionId, CalificacionDTO calificacion){
-       
+   public CalificacionDTO updateCalificacion (@PathParam("calificacionesId") Long calificacionId, CalificacionDetailDTO calificacion)  throws BusinessLogicException{
+       calificacion.setId(calificacionId);
+       CalificacionEntity entity = calificacionLogic.findCalificacion(calificacionId);
+       if(entity==null){
+           throw new WebApplicationException("El recurso no existe",404);
+       }
+       CalificacionDetailDTO detailDTO = new CalificacionDetailDTO(calificacionLogic.updateCalificaion(calificacion.toEntity()));
        return calificacion;
    }
    
    @DELETE
    @Path("(calificacionesId: \\d+)")
    public void deleteCalificacion (@PathParam("calificacionesId") Long calificacionId){
-       
+       calificacionLogic.deleteCalificacion(calificacionId);
    }
    
    private List<CalificacionDetailDTO> listEntity2DetailDTO(List<CalificacionEntity> entityList)

@@ -10,9 +10,11 @@ import co.edu.uniandes.csw.eventos.entities.AgendaEntity;
 import co.edu.uniandes.csw.eventos.persistence.EventoPersistence;
 import co.edu.uniandes.csw.eventos.persistence.AgendaPersistence;
 import java.util.List;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
+
 import javax.inject.Inject;
 
 /**
@@ -111,4 +113,5 @@ public class EventoAgendaLogic {
         bookEntity.getAgendas().remove(authorEntity);
         LOGGER.log(Level.INFO, "Termina proceso de borrar un agenda del evento con id = {0}", eventosId);
     }
+
 }

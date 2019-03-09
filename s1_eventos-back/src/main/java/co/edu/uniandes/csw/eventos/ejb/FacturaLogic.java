@@ -75,9 +75,9 @@ public class FacturaLogic {
     public List<FacturaEntity> getFacturas() {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar todas las Facturaes");
         // Note que, por medio de la inyección de dependencias se llama al método "findAll()" que se encuentra en la persistencia.
-        List<FacturaEntity> Facturas = persistence.findAll();
+        List<FacturaEntity> facturas = persistence.findAll();
         LOGGER.log(Level.INFO, "Termina proceso de consultar todas las Facturaes");
-        return Facturas;
+        return facturas;
     }
 
     /**
@@ -90,12 +90,12 @@ public class FacturaLogic {
     public FacturaEntity getFactura(Long facturasId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar la Factura con id = {0}", facturasId);
         // Note que, por medio de la inyección de dependencias se llama al método "find(id)" que se encuentra en la persistencia.
-        FacturaEntity FacturaEntity = persistence.find(facturasId);
-        if (FacturaEntity == null) {
+        FacturaEntity facturaEntity = persistence.find(facturasId);
+        if (facturaEntity == null) {
             LOGGER.log(Level.SEVERE, "La Factura con el id = {0} no existe", facturasId);
         }
         LOGGER.log(Level.INFO, "Termina proceso de consultar la Factura con id = {0}", facturasId);
-        return FacturaEntity;
+        return facturaEntity;
     }
 
 }

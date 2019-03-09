@@ -27,6 +27,8 @@ import co.edu.uniandes.csw.eventos.dtos.AgendaDTO;
 import co.edu.uniandes.csw.eventos.ejb.AgendaLogic;
 import co.edu.uniandes.csw.eventos.entities.AgendaEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
@@ -72,14 +74,14 @@ public class AgendaResource {
      */
     @POST
     public AgendaDTO createAgenda(AgendaDTO agenda) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "AgendaResource createAgenda: input: {0}", agenda.toString());
+        LOGGER.log(Level.INFO, "AgendaResource createAgenda: input: {0}", agenda);
         // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
-        AgendaEntity AgendaEntity = agenda.toEntity();
+        AgendaEntity agendaEntity = agenda.toEntity();
         // Invoca la lógica para crear la Agenda nueva
-        AgendaEntity nuevoAgendaEntity = agendaLogic.createAgenda(AgendaEntity);
+        AgendaEntity nuevoAgendaEntity = agendaLogic.createAgenda(agendaEntity);
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
         AgendaDTO nuevoAgendaDTO = new AgendaDTO(nuevoAgendaEntity);
-        LOGGER.log(Level.INFO, "AgendaResource createAgenda: output: {0}", nuevoAgendaDTO.toString());
+        LOGGER.log(Level.INFO, "AgendaResource createAgenda: output: {0}", nuevoAgendaDTO);
         return new AgendaDTO();
     }
 
@@ -91,17 +93,12 @@ public class AgendaResource {
      */
     @DELETE
     @Path("{agendasId: \\d+}")
-    public void deleteAgenda(@PathParam("agendasId") Long agendasId) {
+    public void deleteAgenda(@PathParam("agendasId") Long agendasId) throws BusinessLogicException{
         LOGGER.log(Level.INFO, "AgendaResource deleteAgenda: input: {0}", agendasId);
         // Invoca la lógica para borrar la Agenda
-        try{
-            
+       if(agendaLogic.getAgenda(agendasId)==null)
+           throw new BusinessLogicException("la agenda no existe");
         agendaLogic.deleteAgenda(agendasId);
-        }
-        catch(Exception e)
-        {
-            
-        }
         LOGGER.info("AgendaResource deleteAgenda: output: void");
     }
     @GET
@@ -115,11 +112,24 @@ public class AgendaResource {
        AgendaDTO agendaDTO = new AgendaDTO(agendaEntity);
        return agendaDTO;
    }
+    @GET 
+   public List<AgendaDTO> getAgendaes(){
+        List<AgendaDTO> listaAgendaes = listEntity2DetailDTO(agendaLogic.getAgendas());
+       return listaAgendaes;
+   }
    @PUT
    @Path("(agendaID: \\d+")
    public AgendaDTO updateAgenda (@PathParam("agendaID") Long agendaId, AgendaDTO agenda){
        if(agenda ==null)
             throw new WebApplicationException("El recurso /Agendaes/" + agendaId + " no existe.", 404);
        return agenda;
+   }
+    private List<AgendaDTO> listEntity2DetailDTO(List<AgendaEntity> entityList)
+   {
+       List<AgendaDTO> list = new ArrayList<>();
+       for(AgendaEntity entity : entityList){
+           list.add(new AgendaDTO(entity));
+       }
+       return list;
    }
 }

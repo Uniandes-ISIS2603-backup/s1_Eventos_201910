@@ -63,7 +63,7 @@ public class FacturaEntradaLogic {
         LOGGER.log(Level.INFO, "Inicia proceso de agregarle un libro a la Factura con id = {0}", facturasId);
         FacturaEntity facturaEntity = facturaPersistence.find(facturasId);
         EntradaEntity entradaEntity = entradaPersistence.find(entradasId);
-//        EntradaEntity.setFactura(facturaEntity);
+        entradaEntity.setFactura(facturaEntity);
         LOGGER.log(Level.INFO, "Termina proceso de agregarle un libro a la Factura con id = {0}", facturasId);
         return entradaEntity;
     }
@@ -90,12 +90,12 @@ public class FacturaEntradaLogic {
      */
     public EntradaEntity getEntrada(Long facturasId, Long entradasId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar la entrada con id = {0} de la Factura con id = " + facturasId, entradasId);
-        List<EntradaEntity> Entradas = facturaPersistence.find(facturasId).getEntradas();
-        EntradaEntity EntradaEntity = entradaPersistence.find(entradasId);
-        int index = Entradas.indexOf(EntradaEntity);
+        List<EntradaEntity> entradas = facturaPersistence.find(facturasId).getEntradas();
+        EntradaEntity entradaEntity = entradaPersistence.find(entradasId);
+        int index = entradas.indexOf(entradaEntity);
         LOGGER.log(Level.INFO, "Termina proceso de consultar la entrada con id = {0} de la Factura con id = " + facturasId, entradasId);
         if (index >= 0) {
-            return Entradas.get(index);
+            return entradas.get(index);
         }
         throw new BusinessLogicException("la entrada no está asociado a la Factura");
     }

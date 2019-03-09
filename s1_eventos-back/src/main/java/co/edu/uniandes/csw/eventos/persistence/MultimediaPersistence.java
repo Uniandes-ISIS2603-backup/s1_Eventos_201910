@@ -51,4 +51,9 @@ public class MultimediaPersistence {
         LOGGER.log(Level.INFO, "Saliendo de buscar todas las multimedias");
         return query.getResultList();
     }
+    
+    public MultimediaEntity update(MultimediaEntity multimediaEntity) {
+
+        return em.merge(multimediaEntity);
+    }
 }

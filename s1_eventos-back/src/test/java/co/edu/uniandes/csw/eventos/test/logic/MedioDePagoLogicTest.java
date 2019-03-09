@@ -92,12 +92,12 @@ public class MedioDePagoLogicTest {
             data.add(entity);
         }
         MedioDePagoEntity organizador = data.get(2);
-        EventoEntity entity = factory.manufacturePojo(EventoEntity.class);
-        em.persist(entity);
+       // EventoEntity entity = factory.manufacturePojo(EventoEntity.class);
+        //em.persist(entity);
     }
     
     @Test
-    public void createMedioDePagoTest()throws BusinessLogicException
+    public void createMedioDePagoTest()//throws BusinessLogicException
     {
         MedioDePagoEntity newEntity = factory.manufacturePojo(MedioDePagoEntity.class);
         MedioDePagoEntity result = medioDePagoLogic.createMedioDePago(newEntity);

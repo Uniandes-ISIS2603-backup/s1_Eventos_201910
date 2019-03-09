@@ -199,7 +199,7 @@ public class EventoLogicTest {
     @Test(expected = BusinessLogicException.class)
     public void createEventoboletasDisponiblesNeg() throws BusinessLogicException {
         EventoEntity newEntity = factory.manufacturePojo(EventoEntity.class);
-        newEntity.setBoletasDisponibles((int) Math.random() * -8 + 1);
+        newEntity.setBoletasDisponibles(-1);
         eventoLogic.createEvento(newEntity);
     }
 
@@ -210,7 +210,7 @@ public class EventoLogicTest {
     @Test(expected = BusinessLogicException.class)
     public void createEventoCantidadMaxNeg() throws BusinessLogicException {
         EventoEntity newEntity = factory.manufacturePojo(EventoEntity.class);
-        newEntity.setCapacidadMaxima((int) Math.random() * -8 + 1);
+        newEntity.setCapacidadMaxima(-1);
         eventoLogic.createEvento(newEntity);
     }
 

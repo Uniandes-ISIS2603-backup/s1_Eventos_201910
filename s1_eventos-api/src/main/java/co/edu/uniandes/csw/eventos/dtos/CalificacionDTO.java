@@ -44,6 +44,10 @@ public class CalificacionDTO implements Serializable {
             this.recomendado=calificacionEntity.getRecomendado();
         }
     }
+      
+      public CalificacionDTO(){
+          
+      }
       /**
        * @return estrellas.  Retorna las estrellas
       **/

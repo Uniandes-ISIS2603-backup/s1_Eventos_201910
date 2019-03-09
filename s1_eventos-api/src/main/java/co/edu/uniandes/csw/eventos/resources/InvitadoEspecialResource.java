@@ -86,13 +86,18 @@ public class InvitadoEspecialResource {
     /**
      * Borra la InvitadoEspecial con el id asociado recibido en la URL.
      *
-     * @param invitadoespecialId Identificador de la InvitadoEspecial que se desea borrar.
+     * @param invitadoEspecialId Identificador de la InvitadoEspecial que se desea borrar.
      * Este debe ser una cadena de dígitos.
+     * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
      */
     @DELETE
     @Path("{invitadoespecialId: \\d+}")
-    public void deleteInvitadoEspecial(@PathParam("invitadoespecialId") Long invitadoEspecialId) {
+    public void deleteInvitadoEspecial(@PathParam("invitadoespecialId") Long invitadoEspecialId) throws BusinessLogicException{
         LOGGER.log(Level.INFO, "InvitadoEspecialResource deleteInvitadoEspecial: input: {0}", invitadoEspecialId);
+        if(invitadoEspecialLogic.getInvitadoEspecial(invitadoEspecialId)==null)
+        {
+            throw new BusinessLogicException("el invitado no existe");
+        }
         // Invoca la lógica para borrar la InvitadoEspecial
         invitadoEspecialLogic.deleteInvitadoEspecial(invitadoEspecialId);
         LOGGER.info("InvitadoEspecialResource deleteInvitadoEspecial: output: void");
@@ -110,7 +115,19 @@ public class InvitadoEspecialResource {
    }
    @PUT
    @Path("(invitadoespecialId: \\d+")
-   public InvitadoEspecialDTO updateInvitadoEspecial (@PathParam("invitadoespecialId") Long invitadoespecialId, InvitadoEspecialDTO invitadoespecia){
-       return invitadoespecia;
+   public InvitadoEspecialDTO updateInvitadoEspecial (@PathParam("invitadoespecialId") Long invitadoespecialId, InvitadoEspecialDTO invitadoespecial)throws BusinessLogicException{
+      LOGGER.log(Level.INFO, "InvitadoEspecialResource deleteInvitadoEspecial: input: {0}", invitadoespecialId);
+        if(invitadoEspecialLogic.getInvitadoEspecial(invitadoespecialId)==null)
+        {
+            throw new BusinessLogicException("el invitado no existe");
+        }
+        if(invitadoespecial== null)
+        {
+            throw new BusinessLogicException("el invitado no es valido");
+        }
+        // Invoca la lógica para borrar la InvitadoEspecial
+        invitadoEspecialLogic.updateInvitadoEspecial(invitadoespecialId,invitadoespecial.toEntity());
+        LOGGER.info("InvitadoEspecialResource deleteInvitadoEspecial: output: void");
+        return invitadoespecial;
    }
 }

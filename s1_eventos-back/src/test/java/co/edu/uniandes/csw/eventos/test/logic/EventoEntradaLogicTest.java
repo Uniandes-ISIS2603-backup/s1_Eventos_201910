@@ -123,7 +123,6 @@ public class EventoEntradaLogicTest {
         Assert.assertEquals(entradaEntity.getFactura(), newEntrada.getFactura());
         Assert.assertEquals(entradaEntity.isDisponible(), newEntrada.isDisponible());
         Assert.assertEquals(entradaEntity.isCheckIn(), newEntrada.isCheckIn());
-        Assert.assertEquals(entradaEntity.isReservada(), newEntrada.isReservada());
         Assert.assertEquals(entradaEntity.getLocacion(), newEntrada.getLocacion());
         Assert.assertEquals(entradaEntity.getNumero(), newEntrada.getNumero());
         Assert.assertEquals(entradaEntity.getDescripcion(), newEntrada.getDescripcion());
@@ -134,7 +133,6 @@ public class EventoEntradaLogicTest {
         Assert.assertEquals(lastEntrada.getFactura(), newEntrada.getFactura());
         Assert.assertEquals(lastEntrada.isDisponible(), newEntrada.isDisponible());
         Assert.assertEquals(lastEntrada.isCheckIn(), newEntrada.isCheckIn());
-        Assert.assertEquals(lastEntrada.isReservada(), newEntrada.isReservada());
         Assert.assertEquals(lastEntrada.getLocacion(), newEntrada.getLocacion());
         Assert.assertEquals(lastEntrada.getNumero(), newEntrada.getNumero());
         Assert.assertEquals(lastEntrada.getDescripcion(), newEntrada.getDescripcion());
@@ -161,7 +159,6 @@ public class EventoEntradaLogicTest {
         Assert.assertEquals(entradaEntity.getFactura(), entrada.getFactura());
         Assert.assertEquals(entradaEntity.isDisponible(), entrada.isDisponible());
         Assert.assertEquals(entradaEntity.isCheckIn(), entrada.isCheckIn());
-        Assert.assertEquals(entradaEntity.isReservada(), entrada.isReservada());
         Assert.assertEquals(entradaEntity.getLocacion(), entrada.getLocacion());
         Assert.assertEquals(entradaEntity.getNumero(), entrada.getNumero());
         Assert.assertEquals(entradaEntity.getDescripcion(), entrada.getDescripcion());
