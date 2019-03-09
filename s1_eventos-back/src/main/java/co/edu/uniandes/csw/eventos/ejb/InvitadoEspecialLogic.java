@@ -23,7 +23,6 @@ SOFTWARE.
  */
 package co.edu.uniandes.csw.eventos.ejb;
 import co.edu.uniandes.csw.eventos.entities.InvitadoEspecialEntity;
-import co.edu.uniandes.csw.eventos.entities.InvitadoEspecialEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.eventos.persistence.InvitadoEspecialPersistence;
 import java.util.List;
@@ -75,9 +74,9 @@ public class InvitadoEspecialLogic {
     public List<InvitadoEspecialEntity> getInvitadoEspecials() {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar todas las InvitadoEspeciales");
         // Note que, por medio de la inyección de dependencias se llama al método "findAll()" que se encuentra en la persistencia.
-        List<InvitadoEspecialEntity> InvitadoEspecials = persistence.findAll();
+        List<InvitadoEspecialEntity> invitadoEspecials = persistence.findAll();
         LOGGER.log(Level.INFO, "Termina proceso de consultar todas las InvitadoEspeciales");
-        return InvitadoEspecials;
+        return invitadoEspecials;
     }
 
     /**
@@ -90,12 +89,12 @@ public class InvitadoEspecialLogic {
     public InvitadoEspecialEntity getInvitadoEspecial(Long invitadoEspecialsId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar la InvitadoEspecial con id = {0}", invitadoEspecialsId);
         // Note que, por medio de la inyección de dependencias se llama al método "find(id)" que se encuentra en la persistencia.
-        InvitadoEspecialEntity InvitadoEspecialEntity = persistence.find(invitadoEspecialsId);
-        if (InvitadoEspecialEntity == null) {
+        InvitadoEspecialEntity invitadoEspecialEntity = persistence.find(invitadoEspecialsId);
+        if (invitadoEspecialEntity == null) {
             LOGGER.log(Level.SEVERE, "La InvitadoEspecial con el id = {0} no existe", invitadoEspecialsId);
         }
         LOGGER.log(Level.INFO, "Termina proceso de consultar la InvitadoEspecial con id = {0}", invitadoEspecialsId);
-        return InvitadoEspecialEntity;
+        return invitadoEspecialEntity;
     }
 
     /**

@@ -38,6 +38,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @author ISIS2603
  */
 public class FacturaDTO implements Serializable {
+    private Long id;
     private Date fechaDePago;
     private Float montoTotal;
     private Float iva;
@@ -67,6 +68,14 @@ public class FacturaDTO implements Serializable {
 
     public Float getMontoTotal() {
         return montoTotal;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setMontoTotal(Float montoTotal) {

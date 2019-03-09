@@ -92,14 +92,17 @@ public class MedioDePagoLogicTest {
             data.add(entity);
         }
         MedioDePagoEntity organizador = data.get(2);
-        EventoEntity entity = factory.manufacturePojo(EventoEntity.class);
-        em.persist(entity);
+       // EventoEntity entity = factory.manufacturePojo(EventoEntity.class);
+        //em.persist(entity);
     }
     
     @Test
     public void createMedioDePagoTest()throws BusinessLogicException
     {
         MedioDePagoEntity newEntity = factory.manufacturePojo(MedioDePagoEntity.class);
+        newEntity.setCodigoDeSeguridad(123);
+        newEntity.setNumero("1234567891234567");
+        newEntity.setTitular("A");
         MedioDePagoEntity result = medioDePagoLogic.createMedioDePago(newEntity);
         Assert.assertNotNull(result);
         MedioDePagoEntity entity = em.find(MedioDePagoEntity.class, result.getId());

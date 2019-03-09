@@ -56,14 +56,4 @@ public class FacturaPersistence {
         return em.find(FacturaEntity.class, facturasId);
     }    
     
-    /**
-     * Borra un Factura de la base de datos recibiendo como argumento el id de Factura
-     *
-     * @param facturaesId: id correspondiente al Factura a borrar.
-     */
-    public void delete(Long facturaesId) {
-
-        FacturaEntity facturaEntity = em.find(FacturaEntity.class, facturaesId);
-        em.remove(facturaEntity);
-    }
 }

@@ -24,9 +24,12 @@ SOFTWARE.
 package co.edu.uniandes.csw.eventos.resources;
 
 import co.edu.uniandes.csw.eventos.dtos.FacturaDTO;
+import co.edu.uniandes.csw.eventos.dtos.FacturaDetailDTO;
 import co.edu.uniandes.csw.eventos.ejb.FacturaLogic;
 import co.edu.uniandes.csw.eventos.entities.FacturaEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
@@ -94,4 +97,27 @@ public class FacturaResource {
        return facturaDTO;
    }
    
+   /**
+     * Servicio de obtener todos los Facturas
+     *
+     * @return todos los Facturas
+     */
+    @GET
+    public List<FacturaDetailDTO> getFacturas() {
+        List<FacturaDetailDTO> listaFacturas = listEntity2DetailDTO(facturaLogic.getFacturas());
+        return listaFacturas;
+    }
+     /**
+     * cambia los entities por dtos
+     *
+     * @param entityList Entities a cambiar
+     * @return
+     */
+    private List<FacturaDetailDTO> listEntity2DetailDTO(List<FacturaEntity> entityList) {
+        List<FacturaDetailDTO> list = new ArrayList<>();
+        for (FacturaEntity entity : entityList) {
+            list.add(new FacturaDetailDTO(entity));
+        }
+        return list;
+    }
 }

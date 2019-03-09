@@ -50,7 +50,7 @@ public class EventoMultimediaResource {
 
     @GET
     public List<MultimediaDTO> getMultimedias(@PathParam("eventosId") Long eventosId) {
-        List<MultimediaDTO> lista = listEntity2DTO(logica.getMultimedias(eventosId));
+        List<MultimediaDTO> lista = listEntity2DTO(logica.getMultimediaes(eventosId));
         return lista;
     }
 

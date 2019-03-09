@@ -37,6 +37,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @author Juan Pablo Hidalgo
  */
 public class InvitadoEspecialDTO implements Serializable {
+   private Long id;
    private String info;
    private String nombre;
    
@@ -48,7 +49,16 @@ public class InvitadoEspecialDTO implements Serializable {
    {
        this.info = invitadoEspecialEntity.getInfo();
        this.nombre = invitadoEspecialEntity.getNombre();
+       this.id = invitadoEspecialEntity.getId();
    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getInfo() {
         return info;

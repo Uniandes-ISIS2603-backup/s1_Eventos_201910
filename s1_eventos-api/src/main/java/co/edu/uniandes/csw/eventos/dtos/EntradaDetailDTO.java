@@ -5,19 +5,39 @@
  */
 package co.edu.uniandes.csw.eventos.dtos;
 
+import co.edu.uniandes.csw.eventos.entities.EntradaEntity;
+import co.edu.uniandes.csw.eventos.entities.EventoEntity;
+import co.edu.uniandes.csw.eventos.entities.PatrocinadorEntity;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Juan David Díaz
  */
-public class EntradaDetailDTO implements Serializable {
+public class EntradaDetailDTO extends EntradaDTO implements Serializable {
     
+    
+    private EventoEntity evento;
     /**
      * Constructor
      */
     public EntradaDetailDTO()
     {
-        
+        super();
+    }
+    
+    public EntradaDetailDTO(EntradaEntity entradaEntity){
+        super(entradaEntity);
+        if (entradaEntity != null) {
+            evento = entradaEntity.getEvento();
+        }
+    }
+    
+    @Override
+    public EntradaEntity toEntity() {
+        EntradaEntity entradaEntity = super.toEntity();
+        return entradaEntity;
     }
 }

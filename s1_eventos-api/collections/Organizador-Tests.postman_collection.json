@@ -1,12 +1,13 @@
 {
 	"info": {
-		"_postman_id": "6e89ed15-3d98-43be-8ddc-30484154d1b6",
-		"name": "OrganizadorTest",
+		"_postman_id": "e9124ff4-8995-4273-bc13-2b0049f14467",
+		"name": "Organizador Tests",
+		"description": "Colección de pruebas sobre el recurso Organizador",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Crear Organizador",
+			"name": "Crear un organizador",
 			"event": [
 				{
 					"listen": "test",
@@ -46,19 +47,22 @@
 						"api",
 						"organizadores"
 					]
-				}
+				},
+				"description": "Crea un nuevo organizador. El Id es inicializado por la BD y se debe ver en la respuesta.\r\nPara la prueba, se guarda el id en una variable que será utilizada en otras peticiones de la colección.\r\n\r\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
 		{
-			"name": "Obtener Organizadores",
+			"name": "Obtener todos los organizador",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "784ecdcc-a7bb-4385-9c65-43b2e1959aa6",
+						"id": "ffc24813-89a3-47fa-9d38-241d31b1e7c3",
 						"exec": [
-							"tests[\"No genera error en el Get\"] = responseCode.code == 200"
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Gell All\"] = responseCode.code === 200;",
+							"tests[\"patrocinadores count\"] = data.length >= 1;"
 						],
 						"type": "text/javascript"
 					}
@@ -83,12 +87,13 @@
 						"api",
 						"organizadores"
 					]
-				}
+				},
+				"description": "Consulta todos los organizador de la aplicacion. \r\nLa petición no tiene cuerpo.\r\n\r\nPara la prueba, se verifica que el conjunto de organizador en la respuesta tenga mas de uno.\r\n\r\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
 		{
-			"name": "Get Organizador",
+			"name": "Obtener un organizador",
 			"event": [
 				{
 					"listen": "test",
@@ -123,20 +128,21 @@
 						"organizadores",
 						"{{new_id_o}}"
 					]
-				}
+				},
+				"description": "Consulta un organizador de la aplicación.  \r\nLa petición no tiene cuerpo.\r\nSe envía el id del organizador deseado por la URL de la petición.\r\n\r\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
 		{
-			"name": "Obtener Organizador que no Existe",
+			"name": "Obtener un organizadorque no existe",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "39dc353d-ae0a-41c6-99a5-89218360c4d3",
 						"exec": [
-							"tests[\"No se deberia obtener un organizador con un id que no existe\"] = responseCode.code === 404;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /organizadores/0 no existe.\");"
+							"tests[\"No se deberia obtener un patrocinador con un id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /patrocinadores/0 no existe.\");"
 						],
 						"type": "text/javascript"
 					}
@@ -162,12 +168,13 @@
 						"organizadores",
 						"0"
 					]
-				}
+				},
+				"description": "Consulta un organizador que no existe en la aplicación.  \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /organizadores/0 no existe.\".\r\n\r\n**Código http esperado: 404**"
 			},
 			"response": []
 		},
 		{
-			"name": "Editar Organizador",
+			"name": "Editar un organizador",
 			"event": [
 				{
 					"listen": "test",
@@ -207,20 +214,21 @@
 						"organizadores",
 						"{{new_id_o}}"
 					]
-				}
+				},
+				"description": "Actualiza un patrocinador existente. \r\nse envía el Id en la URL de la petición.\r\n\r\n**Código http esperado: 200**"
 			},
 			"response": []
 		},
 		{
-			"name": "Editar Organizador que no Existe",
+			"name": "Editar un organizador que no existe",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "15a70f62-2a66-469a-9ca6-d1125b0c8774",
 						"exec": [
-							"tests[\"No se deberia actualizar un organizador con id que no existe\"] = responseCode.code === 404;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /organizadores/0 no existe.\");"
+							"tests[\"No se deberia actualizar un patrocinador con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /patrocinadores/0 no existe.\");"
 						],
 						"type": "text/javascript"
 					}
@@ -251,51 +259,13 @@
 						"organizadores",
 						"0"
 					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Eliminar Organizador que no Existe",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "c0905623-e468-4838-b24e-56e8402ea65c",
-						"exec": [
-							"tests[\"No se deberia borrar un organizador con un id que no existe\"] = responseCode.code === 404;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /organizadores/0 no existe.\");"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
 				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/organizadores/0",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_eventos-api",
-						"api",
-						"organizadores",
-						"0"
-					]
-				}
+				"description": "Actualiza un organizador que no existe. \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /organizadores/0 no existe.\".\r\n\r\n**Código HTTP esperado: 404**"
 			},
 			"response": []
 		},
 		{
-			"name": "Borrar Organizador",
+			"name": "Borrar un organizador",
 			"event": [
 				{
 					"listen": "test",
@@ -328,9 +298,72 @@
 						"organizadores",
 						"{{new_id_o}}"
 					]
-				}
+				},
+				"description": "Borra un organizador. Se envía el id del organizador creado anteriormente.\n\n**Código HTTP esperado: 204**"
 			},
 			"response": []
+		},
+		{
+			"name": "Borrar un organizadorque no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c0905623-e468-4838-b24e-56e8402ea65c",
+						"exec": [
+							"tests[\"No se deberia borrar un patrocinador con un id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /patrocinadores/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/organizadores/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"organizadores",
+						"0"
+					]
+				},
+				"description": "Borra un organizador que no existe en la aplicación.  \r\n\r\nPara la prueba se verifica que se genera el error y el mensaje \"El recurso /organizadores/0 no existe.\".\r\n\r\n**Código http esperado: 404**"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "9f629ffc-3644-4dca-a8af-f28ae4a4e739",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b1e97bf7-3232-412f-96bc-7ac233e25ab5",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }

@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import java.io.Serializable;
 import uk.co.jemos.podam.common.PodamExclude;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -23,7 +24,7 @@ public class MedioDePagoEntity extends BaseEntity implements Serializable {
     /**
      * id del medio de pago
      */
-    private int numero;
+    private String numero;
     
     /**
      * nombre del titular del medio de pago
@@ -32,10 +33,11 @@ public class MedioDePagoEntity extends BaseEntity implements Serializable {
     /**
      * codigo de seguridad del medio de pago
      */
-    private int codigoDeSeguridad;
+    private Integer codigoDeSeguridad;
     /**
      * fecha de expiracion del medio de pago
      */
+     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaDeExpiracion;
     
     /**
@@ -50,7 +52,7 @@ public class MedioDePagoEntity extends BaseEntity implements Serializable {
      * Retorna el id
      * @return id
      */
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
@@ -58,7 +60,7 @@ public class MedioDePagoEntity extends BaseEntity implements Serializable {
      * Modifica el id
      * @param id 
      */
-    public void setNumero(int id) {
+    public void setNumero(String id) {
         this.numero = id;
     }
 
@@ -82,7 +84,7 @@ public class MedioDePagoEntity extends BaseEntity implements Serializable {
      * Retorna el codigo 
      * @return codigoDeCelular
      */
-    public int getCodigoDeSeguridad() {
+    public Integer getCodigoDeSeguridad() {
         return codigoDeSeguridad;
     }
 
@@ -98,7 +100,7 @@ public class MedioDePagoEntity extends BaseEntity implements Serializable {
      * Modifica el codigo de celular
      * @param codigoDeSeguridad 
      */
-    public void setCodigoDeSeguridad(int codigoDeSeguridad) {
+    public void setCodigoDeSeguridad(Integer codigoDeSeguridad) {
         this.codigoDeSeguridad = codigoDeSeguridad;
     }
 

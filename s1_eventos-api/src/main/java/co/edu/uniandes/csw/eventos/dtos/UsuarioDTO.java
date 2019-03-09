@@ -13,101 +13,117 @@ import java.io.Serializable;
  * @author Nicolas Diaz
  */
 public class UsuarioDTO implements Serializable{
+    private Long id;
     private String correoElectronico;
     private String contrasenia;
     private Double longitud;
     private Double latitud;
-    private boolean unialpino;
+    private Boolean unialpino;
     
     public UsuarioDTO(){
         
     }
     public UsuarioDTO(UsuarioEntity usuarioEntity){
         if(usuarioEntity != null){
+            this.id = usuarioEntity.getId();
             this.correoElectronico = usuarioEntity.getCorreoElectronico();
             this.contrasenia = usuarioEntity.getContrasenia();
             this.latitud = usuarioEntity.getLatitud();
             this.longitud = usuarioEntity.getLongitud();
-            this.unialpino = usuarioEntity.isUnialpino();
+            this.unialpino = usuarioEntity.getUnialpino();
         }
     }
     public UsuarioEntity toEntity(){
         UsuarioEntity usuarioEntity = new UsuarioEntity();
-        usuarioEntity.setCorreoElectronico(this.correoElectronico);
-        usuarioEntity.setContrasenia(this.contrasenia);
-        usuarioEntity.setLatitud(this.latitud);
-        usuarioEntity.setLongitud(this.longitud);
-        usuarioEntity.setUnialpino(this.unialpino);
+        usuarioEntity.setCorreoElectronico(this.getCorreoElectronico());
+        usuarioEntity.setContrasenia(this.getContrasenia());
+        usuarioEntity.setLatitud(this.getLatitud());
+        usuarioEntity.setLongitud(this.getLongitud());
+        usuarioEntity.setUnialpino(this.getUnialpino());
         return usuarioEntity;
     }
 
     /**
-     * @return correoElectronico
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the correoElectronico
      */
     public String getCorreoElectronico() {
         return correoElectronico;
     }
 
     /**
-     * @param correoElectronico el nuevo correoElectronico
+     * @param correoElectronico the correoElectronico to set
      */
     public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
     }
 
     /**
-     * @return contraseña
+     * @return the contrasenia
      */
     public String getContrasenia() {
         return contrasenia;
     }
 
     /**
-     * @param contrasenia la nueva contraseña
+     * @param contrasenia the contrasenia to set
      */
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
 
     /**
-     * @return la longitud
+     * @return the longitud
      */
     public Double getLongitud() {
         return longitud;
     }
 
     /**
-     * @param longitud la nueva longitud
+     * @param longitud the longitud to set
      */
     public void setLongitud(Double longitud) {
         this.longitud = longitud;
     }
 
     /**
-     * @return la latitud
+     * @return the latitud
      */
     public Double getLatitud() {
         return latitud;
     }
 
     /**
-     * @param latitud la nueva latitud
+     * @param latitud the latitud to set
      */
     public void setLatitud(Double latitud) {
         this.latitud = latitud;
     }
 
     /**
-     * @return true si es unialpino
+     * @return the unialpino
      */
-    public boolean isUnialpino() {
+    public Boolean getUnialpino() {
         return unialpino;
     }
 
     /**
-     * @param unialpino nuevo valor de verdad
+     * @param unialpino the unialpino to set
      */
-    public void setUnialpino(boolean unialpino) {
+    public void setUnialpino(Boolean unialpino) {
         this.unialpino = unialpino;
     }
 }
