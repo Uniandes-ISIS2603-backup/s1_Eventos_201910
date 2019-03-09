@@ -65,11 +65,26 @@ public class InvitadoEspecialEntity extends BaseEntity implements Serializable{
         this.agenda = agenda;
     }
     @Override
-    public boolean equals(Object o)
-    {
-        if(o ==this)
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+
+        if (this.getClass() != o.getClass()) {
+            return false;
+        }
+        if (o == this) {
             return true;
-        InvitadoEspecialEntity a = (InvitadoEspecialEntity)o;
-        return Objects.equals(a.getId(), this.getId());
+        }
+        InvitadoEspecialEntity a = (InvitadoEspecialEntity) o;
+        return a.getId().equals( this.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + nombre.hashCode();
+        result = 31 * result + info.hashCode(); 
+        return result;
     }
 }
