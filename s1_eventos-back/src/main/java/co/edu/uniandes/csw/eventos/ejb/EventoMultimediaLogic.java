@@ -7,63 +7,108 @@ package co.edu.uniandes.csw.eventos.ejb;
 
 import co.edu.uniandes.csw.eventos.entities.EventoEntity;
 import co.edu.uniandes.csw.eventos.entities.MultimediaEntity;
-import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.eventos.persistence.EventoPersistence;
 import co.edu.uniandes.csw.eventos.persistence.MultimediaPersistence;
 import java.util.List;
-import java.util.function.UnaryOperator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
+ * *Clase que implementa la conexion con la persistencia para la relación entre
+ * la entidad de Evento y Multimedia.
  *
- * @author Mateo Vallejo
+ * @author Mateo Vallejo 
  */
+@Stateless
 public class EventoMultimediaLogic {
 
-    @Inject
-    private EventoPersistence ep;
+    private static final Logger LOGGER = Logger.getLogger(EventoMultimediaLogic.class.getName());
 
     @Inject
-    private MultimediaPersistence mp;
+    private EventoPersistence eventoPersistence;
 
-    public MultimediaEntity addMultimedia(Long eventoId, Long multimediaId) {
-        EventoEntity eventoEntity = ep.find(eventoId);
-        MultimediaEntity entity = mp.find(multimediaId);
-        eventoEntity.getMultimedia().add(entity);
-        return mp.find(multimediaId);
+    @Inject
+    private MultimediaPersistence multimediaPersistence;
+
+    /**
+     * Asocia un Multimedia existente a un Evento
+     *
+     * @param eventosId Identificador de la instancia de Evento
+     * @param multimediaesId Identificador de la instancia de Multimedia
+     * @return Instancia de MultimediaEntity que fue asociada a Evento
+     */
+    public MultimediaEntity addMultimedia(Long eventosId, Long multimediaesId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de asociarle un multimedia al evento con id = {0}", eventosId);
+        MultimediaEntity multimediaEntity = multimediaPersistence.find(multimediaesId);
+        EventoEntity eventoEntity = eventoPersistence.find(eventosId);
+        eventoEntity.getMultimedia().add(multimediaEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de asociarle un multimedia al evento con id = {0}", eventosId);
+        return multimediaPersistence.find(multimediaesId);
     }
 
-    public List<MultimediaEntity> getMultimedias(Long eventoId) {
-        return ep.find(eventoId).getMultimedia();
-
+    /**
+     * Obtiene una colección de instancias de MultimediaEntity asociadas a una
+     * instancia de Evento
+     *
+     * @param eventosId Identificador de la instancia de Evento
+     * @return Colección de instancias de MultimediaEntity asociadas a la
+     * instancia de Evento
+     */
+    public List<MultimediaEntity> getMultimediaes(Long eventosId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los multimediaes del libro con id = {0}", eventosId);
+        return eventoPersistence.find(eventosId).getMultimedia();
     }
 
-    public MultimediaEntity getMultimedia(Long eventoId, Long multimediaId) throws BusinessLogicException {
-        List<MultimediaEntity> multimedias = ep.find(eventoId).getMultimedia();
-        MultimediaEntity entity = mp.find(multimediaId);
-        int index = multimedias.indexOf(entity);
+    /**
+     * Obtiene una instancia de MultimediaEntity asociada a una instancia de
+     * Evento
+     *
+     * @param eventosId Identificador de la instancia de Evento
+     * @param multimediaesId Identificador de la instancia de Multimedia
+     * @return La entidad del Multimedia asociada al evento
+     */
+    public MultimediaEntity getMultimedia(Long eventosId, Long multimediaesId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar un multimedia del evento con id = {0}", eventosId);
+        List<MultimediaEntity> multimediaes = eventoPersistence.find(eventosId).getMultimedia();
+        MultimediaEntity multimediaEntity = multimediaPersistence.find(multimediaesId);
+        int index = multimediaes.indexOf(multimediaEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de consultar un multimedia del evento con id = {0}", eventosId);
         if (index >= 0) {
-            return multimedias.get(index);
+            return multimediaes.get(index);
         }
-        throw new BusinessLogicException("La multimedia no está asociada al evento");
+        return null;
     }
 
-    public void removeMultimedia(Long eventoId, Long multimediaId) {
-        EventoEntity eventoEntity = ep.find(eventoId);
-        MultimediaEntity entity = mp.find(multimediaId);
-        eventoEntity.getMultimedia().remove(entity);
+    /**
+     * Remplaza las instancias de Multimedia asociadas a una instancia de Evento
+     *
+     * @param eventosId Identificador de la instancia de Evento
+     * @param list Colección de instancias de MultimediaEntity a asociar a
+     * instancia de Evento
+     * @return Nueva colección de MultimediaEntity asociada a la instancia de
+     * Evento
+     */
+    public List<MultimediaEntity> replaceMultimediaes(Long eventosId, List<MultimediaEntity> list) {
+        LOGGER.log(Level.INFO, "Inicia proceso de reemplazar los multimediaes del libro con id = {0}", eventosId);
+        EventoEntity eventoEntity = eventoPersistence.find(eventosId);
+        eventoEntity.setMultimedia(list);
+        LOGGER.log(Level.INFO, "Termina proceso de reemplazar los multimediaes del libro con id = {0}", eventosId);
+        return eventoPersistence.find(eventosId).getMultimedia();
     }
 
-   public List<MultimediaEntity> replaceMultimedias(Long eventoId, List<MultimediaEntity> multimedias) {
-        EventoEntity eventoEntity = ep.find(eventoId);
-        List<MultimediaEntity> multimediaList = mp.findAll();
-        for (MultimediaEntity multimedia : multimediaList) {
-            if (multimedias.contains(multimedia)) {
-                multimedia.setEvento(eventoEntity);
-            } else if (multimedia.getEvento() != null && multimedia.getEvento().equals(eventoEntity)) {
-                multimedia.setEvento(null);
-            }
-        }
-        return multimedias;
+    /**
+     * Desasocia un Multimedia existente de un Evento existente
+     *
+     * @param eventosId Identificador de la instancia de Evento
+     * @param multimediaesId Identificador de la instancia de Multimedia
+     */
+    public void removeMultimedia(Long eventosId, Long multimediaesId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar un multimedia del evento con id = {0}", eventosId);
+        MultimediaEntity authorEntity = multimediaPersistence.find(multimediaesId);
+        EventoEntity bookEntity = eventoPersistence.find(eventosId);
+        bookEntity.getMultimedia().remove(authorEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de borrar un multimedia del evento con id = {0}", eventosId);
     }
 }

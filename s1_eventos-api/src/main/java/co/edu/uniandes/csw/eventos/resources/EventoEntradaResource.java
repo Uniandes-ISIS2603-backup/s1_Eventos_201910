@@ -49,7 +49,7 @@ public class EventoEntradaResource {
 
     @GET
     public List<EntradaDTO> getEntradads(@PathParam("eventosId") Long eventosId) {
-        List<EntradaDTO> lista = listEntity2DTO(logica.getEntradas(eventosId));
+        List<EntradaDTO> lista = listEntity2DTO(logica.getEntradaes(eventosId));
         return lista;
     }
 
@@ -70,7 +70,7 @@ public class EventoEntradaResource {
             }
         }
 
-        List<EntradaDTO> lista = listEntity2DTO(logica.replaceEntradas(eventosId, listDTO2Entity(entradas)));
+        List<EntradaDTO> lista = listEntity2DTO(logica.replaceEntradaes(eventosId, listDTO2Entity(entradas)));
         return lista;
     }
 

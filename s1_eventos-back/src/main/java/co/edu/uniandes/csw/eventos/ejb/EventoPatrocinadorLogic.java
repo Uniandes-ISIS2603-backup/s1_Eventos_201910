@@ -7,55 +7,104 @@ package co.edu.uniandes.csw.eventos.ejb;
 
 import co.edu.uniandes.csw.eventos.entities.EventoEntity;
 import co.edu.uniandes.csw.eventos.entities.PatrocinadorEntity;
-import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.eventos.persistence.EventoPersistence;
 import co.edu.uniandes.csw.eventos.persistence.PatrocinadorPersistence;
 import java.util.List;
-import java.util.function.UnaryOperator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
- *
+ * *Clase que implementa la conexion con la persistencia para la relación entre la entidad de Evento y Patrocinador.
+ * 
  * @author Mateo Vallejo
  */
+@Stateless
 public class EventoPatrocinadorLogic {
+    
+     private static final Logger LOGGER = Logger.getLogger(EventoPatrocinadorLogic.class.getName());
 
     @Inject
-    private EventoPersistence ep;
+    private EventoPersistence eventoPersistence;
 
     @Inject
-    private PatrocinadorPersistence pp;
+    private PatrocinadorPersistence patrocinadorPersistence;
 
-    public PatrocinadorEntity addPatrocinador(Long eventoId, Long patrocinadorId) {
-        EventoEntity eventoEntity = ep.find(eventoId);
-        PatrocinadorEntity entity = pp.find(patrocinadorId);
-        eventoEntity.getPatrocinadores();
-        return pp.find(patrocinadorId);
+    /**
+     * Asocia un Patrocinador existente a un Evento
+     *
+     * @param eventosId Identificador de la instancia de Evento
+     * @param patrocinadoresId Identificador de la instancia de Patrocinador
+     * @return Instancia de PatrocinadorEntity que fue asociada a Evento
+     */
+    public PatrocinadorEntity addPatrocinador(Long eventosId, Long patrocinadoresId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de asociarle un patrocinador al evento con id = {0}", eventosId);
+        PatrocinadorEntity patrocinadorEntity = patrocinadorPersistence.find(patrocinadoresId);
+        EventoEntity eventoEntity = eventoPersistence.find(eventosId);
+        eventoEntity.getPatrocinadores().add(patrocinadorEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de asociarle un patrocinador al evento con id = {0}", eventosId);
+        return patrocinadorPersistence.find(patrocinadoresId);
     }
 
-    public List<PatrocinadorEntity> getPatrocinadores(Long eventoId) {
-        return ep.find(eventoId).getPatrocinadores();
+    /**
+     * Obtiene una colección de instancias de PatrocinadorEntity asociadas a una
+     * instancia de Evento
+     *
+     * @param eventosId Identificador de la instancia de Evento
+     * @return Colección de instancias de PatrocinadorEntity asociadas a la instancia de Evento
+     */
+    public List<PatrocinadorEntity> getPatrocinadores(Long eventosId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los patrocinadores del libro con id = {0}", eventosId);
+        return eventoPersistence.find(eventosId).getPatrocinadores();
     }
 
-    public PatrocinadorEntity getPatrocinador(Long eventoId, Long patrocinadorId) throws BusinessLogicException {
-        List<PatrocinadorEntity> patrocinadores = ep.find(eventoId).getPatrocinadores();
-        PatrocinadorEntity entity = pp.find(patrocinadorId);
-        int index = patrocinadores.indexOf(entity);
+    /**
+     * Obtiene una instancia de PatrocinadorEntity asociada a una instancia de Evento
+     *
+     * @param eventosId Identificador de la instancia de Evento
+     * @param patrocinadoresId Identificador de la instancia de Patrocinador
+     * @return La entidad del Patrocinador asociada al evento
+     */
+    public PatrocinadorEntity getPatrocinador(Long eventosId, Long patrocinadoresId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar un patrocinador del evento con id = {0}", eventosId);
+        List<PatrocinadorEntity> patrocinadores = eventoPersistence.find(eventosId).getPatrocinadores();
+        PatrocinadorEntity patrocinadorEntity = patrocinadorPersistence.find(patrocinadoresId);
+        int index = patrocinadores.indexOf(patrocinadorEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de consultar un patrocinador del evento con id = {0}", eventosId);
         if (index >= 0) {
             return patrocinadores.get(index);
         }
-        throw new BusinessLogicException("el patrocinador no está asociado al evento");
+        return null;
     }
 
-    public void removePatrocinador(Long eventoId, Long multimediaId) {
-        EventoEntity eventoEntity = ep.find(eventoId);
-        PatrocinadorEntity entity = pp.find(multimediaId);
-        eventoEntity.getPatrocinadores().remove(entity);
-    }
-    
-     public List<PatrocinadorEntity> replacePatrocinadores(Long eventosId, List<PatrocinadorEntity> list) {
-        EventoEntity eventoEntity = ep.find(eventosId);
+    /**
+     * Remplaza las instancias de Patrocinador asociadas a una instancia de Evento
+     *
+     * @param eventosId Identificador de la instancia de Evento
+     * @param list Colección de instancias de PatrocinadorEntity a asociar a instancia
+     * de Evento
+     * @return Nueva colección de PatrocinadorEntity asociada a la instancia de Evento
+     */
+    public List<PatrocinadorEntity> replacePatrocinadores(Long eventosId, List<PatrocinadorEntity> list) {
+        LOGGER.log(Level.INFO, "Inicia proceso de reemplazar los patrocinadores del libro con id = {0}", eventosId);
+        EventoEntity eventoEntity = eventoPersistence.find(eventosId);
         eventoEntity.setPatrocinadores(list);
-        return ep.find(eventosId).getPatrocinadores();
+        LOGGER.log(Level.INFO, "Termina proceso de reemplazar los patrocinadores del libro con id = {0}", eventosId);
+        return eventoPersistence.find(eventosId).getPatrocinadores();
+    }
+
+    /**
+     * Desasocia un Patrocinador existente de un Evento existente
+     *
+     * @param eventosId Identificador de la instancia de Evento
+     * @param patrocinadoresId Identificador de la instancia de Patrocinador
+     */
+    public void removePatrocinador(Long eventosId, Long patrocinadoresId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar un patrocinador del evento con id = {0}", eventosId);
+        PatrocinadorEntity authorEntity = patrocinadorPersistence.find(patrocinadoresId);
+        EventoEntity bookEntity = eventoPersistence.find(eventosId);
+        bookEntity.getPatrocinadores().remove(authorEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de borrar un patrocinador del evento con id = {0}", eventosId);
     }
 }
