@@ -5,71 +5,110 @@
  */
 package co.edu.uniandes.csw.eventos.ejb;
 
-import co.edu.uniandes.csw.eventos.entities.AgendaEntity;
 import co.edu.uniandes.csw.eventos.entities.EventoEntity;
-import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
-import co.edu.uniandes.csw.eventos.persistence.AgendaPersistence;
+import co.edu.uniandes.csw.eventos.entities.AgendaEntity;
 import co.edu.uniandes.csw.eventos.persistence.EventoPersistence;
+import co.edu.uniandes.csw.eventos.persistence.AgendaPersistence;
 import java.util.List;
-import java.util.function.UnaryOperator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
+ * *Clase que implementa la conexion con la persistencia para la relación entre
+ * la entidad de Evento y Agenda.
  *
- * @author estudiante
+ * @author Mateo Vallejo 
  */
+@Stateless
 public class EventoAgendaLogic {
 
+    private static final Logger LOGGER = Logger.getLogger(EventoAgendaLogic.class.getName());
+
     @Inject
-    private EventoPersistence ep;
+    private EventoPersistence eventoPersistence;
+
     @Inject
-    private AgendaPersistence ap;
+    private AgendaPersistence agendaPersistence;
 
     /**
+     * Asocia un Agenda existente a un Evento
      *
-     * @param eventoId
-     * @param agendaId
-     * @return
+     * @param eventosId Identificador de la instancia de Evento
+     * @param agendasId Identificador de la instancia de Agenda
+     * @return Instancia de AgendaEntity que fue asociada a Evento
      */
-    public AgendaEntity addAgenda(Long eventoId, Long agendaId) {
-        EventoEntity eventoEntity = ep.find(eventoId);
-        AgendaEntity agendaEntity = ap.find(agendaId);
+    public AgendaEntity addAgenda(Long eventosId, Long agendasId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de asociarle un agenda al evento con id = {0}", eventosId);
+        AgendaEntity agendaEntity = agendaPersistence.find(agendasId);
+        EventoEntity eventoEntity = eventoPersistence.find(eventosId);
         eventoEntity.getAgendas().add(agendaEntity);
-        return ap.find(agendaId);
+        LOGGER.log(Level.INFO, "Termina proceso de asociarle un agenda al evento con id = {0}", eventosId);
+        return agendaPersistence.find(agendasId);
     }
 
-    public List<AgendaEntity> getAgendas(Long eventoId) {
-        return ep.find(eventoId).getAgendas();
-
+    /**
+     * Obtiene una colección de instancias de AgendaEntity asociadas a una
+     * instancia de Evento
+     *
+     * @param eventosId Identificador de la instancia de Evento
+     * @return Colección de instancias de AgendaEntity asociadas a la
+     * instancia de Evento
+     */
+    public List<AgendaEntity> getAgendas(Long eventosId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los agendas del libro con id = {0}", eventosId);
+        return eventoPersistence.find(eventosId).getAgendas();
     }
 
-    public AgendaEntity getAgenda(Long eventoId, Long agendaId) throws BusinessLogicException {
-        List<AgendaEntity> agendas = ep.find(eventoId).getAgendas();
-        AgendaEntity agendaEntity = ap.find(agendaId);
+    /**
+     * Obtiene una instancia de AgendaEntity asociada a una instancia de
+     * Evento
+     *
+     * @param eventosId Identificador de la instancia de Evento
+     * @param agendasId Identificador de la instancia de Agenda
+     * @return La entidad del Agenda asociada al evento
+     */
+    public AgendaEntity getAgenda(Long eventosId, Long agendasId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar un agenda del evento con id = {0}", eventosId);
+        List<AgendaEntity> agendas = eventoPersistence.find(eventosId).getAgendas();
+        AgendaEntity agendaEntity = agendaPersistence.find(agendasId);
         int index = agendas.indexOf(agendaEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de consultar un agenda del evento con id = {0}", eventosId);
         if (index >= 0) {
             return agendas.get(index);
         }
-        throw new BusinessLogicException("La ageda  no está asociada al evento");
+        return null;
     }
 
-    public void removeAgenda(Long eventoId, Long agendaId) {
-        EventoEntity eventoEntity = ep.find(eventoId);
-        AgendaEntity agendaEntity = ap.find(agendaId);
-        eventoEntity.getAgendas().remove(agendaEntity);
+    /**
+     * Remplaza las instancias de Agenda asociadas a una instancia de Evento
+     *
+     * @param eventosId Identificador de la instancia de Evento
+     * @param list Colección de instancias de AgendaEntity a asociar a
+     * instancia de Evento
+     * @return Nueva colección de AgendaEntity asociada a la instancia de
+     * Evento
+     */
+    public List<AgendaEntity> replaceAgendas(Long eventosId, List<AgendaEntity> list) {
+        LOGGER.log(Level.INFO, "Inicia proceso de reemplazar los agendas del libro con id = {0}", eventosId);
+        EventoEntity eventoEntity = eventoPersistence.find(eventosId);
+        eventoEntity.setAgendas(list);
+        LOGGER.log(Level.INFO, "Termina proceso de reemplazar los agendas del libro con id = {0}", eventosId);
+        return eventoPersistence.find(eventosId).getAgendas();
     }
 
-    public List<AgendaEntity> replaceAgendas(Long eventoId, List<AgendaEntity> agendas) {
-        EventoEntity eventoEntity = ep.find(eventoId);
-        List<AgendaEntity> agendaList = ap.findAll();
-        for (AgendaEntity agenda : agendaList) {
-            if (agendas.contains(agenda)) {
-                agenda.setEventos(eventoEntity);
-            } else if (agenda.getEventos()!= null && agenda.getEventos().equals(eventoEntity)) {
-                agenda.setEventos(null);
-            }
-        }
-        return agendas;
+    /**
+     * Desasocia un Agenda existente de un Evento existente
+     *
+     * @param eventosId Identificador de la instancia de Evento
+     * @param agendasId Identificador de la instancia de Agenda
+     */
+    public void removeAgenda(Long eventosId, Long agendasId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar un agenda del evento con id = {0}", eventosId);
+        AgendaEntity authorEntity = agendaPersistence.find(agendasId);
+        EventoEntity bookEntity = eventoPersistence.find(eventosId);
+        bookEntity.getAgendas().remove(authorEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de borrar un agenda del evento con id = {0}", eventosId);
     }
-
 }
