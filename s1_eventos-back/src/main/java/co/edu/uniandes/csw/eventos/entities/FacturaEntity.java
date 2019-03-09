@@ -95,12 +95,28 @@ public class FacturaEntity extends BaseEntity implements Serializable{
         this.entradas = entradas;
     }
     @Override
-    public boolean equals(Object o)
-    {
-        if(o ==this)
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+
+        if (this.getClass() != o.getClass()) {
+            return false;
+        }
+        if (o == this) {
             return true;
-        FacturaEntity a = (FacturaEntity)o;
-        return Objects.equals(a.getId(), this.getId());
+        }
+        FacturaEntity a = (FacturaEntity) o;
+        return a.getId().equals( this.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + nombre.hashCode();
+        result = 31 * result + total.hashCode(); 
+        result = 31 * result + iva.hashCode();
+        return result;
     }
     
 }
