@@ -29,19 +29,21 @@ import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
+ * Pruebas de logica de la relacion Evento - Patrocinadores
  *
- * @author Paula Molina
+ * @evento Mateo Vallejo
  */
+
 @RunWith(Arquillian.class)
 public class EventoPatrocinadorLogicTest {
     
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
-    private EventoPatrocinadorLogic eventoPatrocinadorLogic;
+    private EventoPatrocinadorLogic logica;
 
     @Inject
-    private PatrocinadorLogic PatrocinadorLogic;
+    private PatrocinadorLogic patrocinadorLogic;
 
     @PersistenceContext
     private EntityManager em;
@@ -101,7 +103,6 @@ public class EventoPatrocinadorLogicTest {
      * pruebas.
      */
     private void insertData() {
-
         evento = factory.manufacturePojo(EventoEntity.class);
         evento.setId(1L);
         evento.setPatrocinadores(new ArrayList<>());
@@ -124,27 +125,31 @@ public class EventoPatrocinadorLogicTest {
      * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
      */
     @Test
-    public void addPatrocinadoresTest() throws BusinessLogicException {
+    public void addPatrocinadorTest() throws BusinessLogicException {
         PatrocinadorEntity newPatrocinador = factory.manufacturePojo(PatrocinadorEntity.class);
-        PatrocinadorLogic.createPatrocinador(newPatrocinador);
-        PatrocinadorEntity PatrocinadorEntity = eventoPatrocinadorLogic.addPatrocinador(evento.getId(), newPatrocinador.getId());
-        Assert.assertNotNull(PatrocinadorEntity);
+        patrocinadorLogic.createPatrocinador(newPatrocinador);
+        PatrocinadorEntity patrocinadorEntity = logica.addPatrocinador(evento.getId(), newPatrocinador.getId());
+        Assert.assertNotNull(patrocinadorEntity);
 
-        Assert.assertEquals(PatrocinadorEntity.getId(), newPatrocinador.getId());
-        Assert.assertEquals(PatrocinadorEntity.getNombre(), newPatrocinador.getNombre());
+        Assert.assertEquals(patrocinadorEntity.getId(), newPatrocinador.getId());
+        Assert.assertEquals(patrocinadorEntity.getNombre(), newPatrocinador.getNombre());
+        Assert.assertEquals(patrocinadorEntity.getDescripcion(), newPatrocinador.getDescripcion());
+        Assert.assertEquals(patrocinadorEntity.getRango(), newPatrocinador.getRango());
 
-        PatrocinadorEntity lastPatrocinador = eventoPatrocinadorLogic.getPatrocinador(evento.getId(), newPatrocinador.getId());
+        PatrocinadorEntity lastPatrocinador = logica.getPatrocinador(evento.getId(), newPatrocinador.getId());
 
         Assert.assertEquals(lastPatrocinador.getId(), newPatrocinador.getId());
         Assert.assertEquals(lastPatrocinador.getNombre(), newPatrocinador.getNombre());
+        Assert.assertEquals(lastPatrocinador.getDescripcion(), newPatrocinador.getDescripcion());
+        Assert.assertEquals(lastPatrocinador.getRango(), newPatrocinador.getRango());
     }
 
     /**
-     * Prueba para consultar la lista de Patrocinador de un autor.
+     * Prueba para consultar la lista de Patrocinadores de un autor.
      */
     @Test
     public void getPatrocinadoresTest() {
-        List<PatrocinadorEntity> patrocinadorEntities = eventoPatrocinadorLogic.getPatrocinadores(evento.getId());
+        List<PatrocinadorEntity> patrocinadorEntities = logica.getPatrocinadores(evento.getId());
 
         Assert.assertEquals(data.size(), patrocinadorEntities.size());
 
@@ -160,12 +165,15 @@ public class EventoPatrocinadorLogicTest {
      */
     @Test
     public void getPatrocinadorTest() throws BusinessLogicException {
-        PatrocinadorEntity PatrocinadorEntity = data.get(0);
-        PatrocinadorEntity Patrocinador = eventoPatrocinadorLogic.getPatrocinador(evento.getId(), PatrocinadorEntity.getId());
-        Assert.assertNotNull(Patrocinador);
+        PatrocinadorEntity patrocinadorEntity = data.get(0);
+        PatrocinadorEntity patrocinador = logica.getPatrocinador(evento.getId(), patrocinadorEntity.getId());
+        Assert.assertNotNull(patrocinador);
 
-        Assert.assertEquals(PatrocinadorEntity.getId(), Patrocinador.getId());
-        Assert.assertEquals(PatrocinadorEntity.getNombre(), Patrocinador.getNombre());
+        Assert.assertEquals(patrocinadorEntity.getId(), patrocinador.getId());
+        Assert.assertEquals(patrocinadorEntity.getNombre(), patrocinador.getNombre());
+        Assert.assertEquals(patrocinadorEntity.getEventos(), patrocinador.getEventos());
+        Assert.assertEquals(patrocinadorEntity.getDescripcion(), patrocinador.getDescripcion());
+        Assert.assertEquals(patrocinadorEntity.getRango(), patrocinador.getRango());
 
     }
 
@@ -181,11 +189,11 @@ public class EventoPatrocinadorLogicTest {
             PatrocinadorEntity entity = factory.manufacturePojo(PatrocinadorEntity.class);
             entity.setEventos(new ArrayList<>());
             entity.getEventos().add(evento);
-            PatrocinadorLogic.createPatrocinador(entity);
+            patrocinadorLogic.createPatrocinador(entity);
             nuevaLista.add(entity);
         }
-        eventoPatrocinadorLogic.replacePatrocinadores(evento.getId(), nuevaLista);
-        List<PatrocinadorEntity> patrocinadorEntities = eventoPatrocinadorLogic.getPatrocinadores(evento.getId());
+        logica.replacePatrocinadores(evento.getId(), nuevaLista);
+        List<PatrocinadorEntity> patrocinadorEntities = logica.getPatrocinadores(evento.getId());
         for (PatrocinadorEntity aNuevaLista : nuevaLista) {
             Assert.assertTrue(patrocinadorEntities.contains(aNuevaLista));
         }
@@ -197,9 +205,9 @@ public class EventoPatrocinadorLogicTest {
      */
     @Test
     public void removePatrocinadorTest() {
-        for (PatrocinadorEntity Patrocinador : data) {
-            eventoPatrocinadorLogic.removePatrocinador(evento.getId(), Patrocinador.getId());
+        for (PatrocinadorEntity patrocinador : data) {
+            logica.removePatrocinador(evento.getId(), patrocinador.getId());
         }
-        Assert.assertTrue(eventoPatrocinadorLogic.getPatrocinadores(evento.getId()).isEmpty());
+        Assert.assertTrue(logica.getPatrocinadores(evento.getId()).isEmpty());
     }
 }
