@@ -38,10 +38,18 @@ public class MedioDePagoDTO implements Serializable {
      */
     private Date fechaDeExpiracion;
 
+    
+    /**
+     * Constructor
+     */
     public MedioDePagoDTO(){
         
     }
     
+    /**
+     * Constructor
+     * @param medioDePagoEntity 
+     */
     public MedioDePagoDTO(MedioDePagoEntity medioDePagoEntity)
     {
         if(medioDePagoEntity!=null)
@@ -117,6 +125,10 @@ public class MedioDePagoDTO implements Serializable {
         this.fechaDeExpiracion = fechaDeExpiracion;
     }
     
+    /**
+     * To entity
+     * @return entity
+     */
     public MedioDePagoEntity toEntity()
     {
         MedioDePagoEntity medioDePagoEntity = new MedioDePagoEntity();

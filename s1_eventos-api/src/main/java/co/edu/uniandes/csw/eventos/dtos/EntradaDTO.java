@@ -50,6 +50,10 @@ public class EntradaDTO implements Serializable {
     */
     private Boolean reservado;
 
+    /**
+     *Constructor 
+     * 
+     **/
     public EntradaDTO(){
         
     }

@@ -45,6 +45,9 @@ public class CalificacionDTO implements Serializable {
         }
     }
       
+      /**
+       * Constructor vacio
+       */
       public CalificacionDTO(){
           
       }
