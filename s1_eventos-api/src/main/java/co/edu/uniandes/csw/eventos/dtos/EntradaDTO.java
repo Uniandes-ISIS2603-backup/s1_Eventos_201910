@@ -28,7 +28,7 @@ public class EntradaDTO implements Serializable {
     /*
         Atributo de tipo double que representa el precio de la entrada
     */
-    private int precio ;
+    private Integer precio ;
     /*
     Atributo de tipo String que representa la locacion de la entrada
     */
@@ -36,19 +36,19 @@ public class EntradaDTO implements Serializable {
     /*
         Atributo de tipo int que indica el numero de la boleta
     */
-    private int numero;
+    private Integer numero;
     /*
         Atributo de tipo booleano que indica si la boleta esta disponible
     */
-    private boolean disponible;
+    private Boolean disponible;
     /*
         Atributo de tipo booleano que indica si ya se hizo check-In con la boleta
     */
-    private boolean checkIn;
+    private Boolean checkIn;
     /*
         Atributo de tipo booleano que indica si la boleta esta reservada
     */
-    private boolean reservado;
+    private Boolean reservado;
 
     public EntradaDTO(){
         
@@ -85,7 +85,7 @@ public class EntradaDTO implements Serializable {
     /**
      *  @return precio. Retorna el precio
     **/
-    public int getPrecio() {
+    public Integer getPrecio() {
         return precio;
     }
     /**
@@ -97,25 +97,25 @@ public class EntradaDTO implements Serializable {
     /**
      * @return numero. Retorna el numero de la entrada
     **/
-    public int getNumero() {
+    public Integer getNumero() {
         return numero;
     }
     /**
      *  @return disponible. Retorna si esta disponible, true, de lo contrario false
     **/
-    public boolean isDisponible() {
+    public Boolean isDisponible() {
         return disponible;
     }
     /**
        * @reteurn checkIn. Retorna si ya se realizo checkIn, true, de lo contrario false
     **/
-    public boolean isCheckIn() {
+    public Boolean isCheckIn() {
         return checkIn;
     }
     /**
      *  @return reservado. Retorna si esta reservada, true, de lo contrario false
     **/
-    public boolean isReservado() {
+    public Boolean isReservado() {
         return reservado;
     }
     /**

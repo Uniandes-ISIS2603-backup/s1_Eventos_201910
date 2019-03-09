@@ -19,7 +19,7 @@ public class CalificacionDTO implements Serializable {
         Atributo de tipo int que indica la cantidad de estrellas de la calificacion
     */
    //probando git
-    private int estrellas;
+    private Integer estrellas;
     /*
         Atributo de  tipo String que contiene el comentario de la calificacion
     */
@@ -27,7 +27,7 @@ public class CalificacionDTO implements Serializable {
     /*
         Atributo de tipo booleano que indica si se recomienda o no
     */
-    private boolean recomendado;
+    private Boolean recomendado;
 
     
     private Long id;
@@ -69,7 +69,7 @@ public class CalificacionDTO implements Serializable {
     /**
        @param estrellas. Reinicializa las estrellas
       **/
-    public void setEstrellas(int estrellas) {
+    public void setEstrellas(Integer estrellas) {
         this.estrellas = estrellas;
     }
     /**
@@ -81,10 +81,14 @@ public class CalificacionDTO implements Serializable {
     /**
        * @param recomendado. Reinicializa si es recomendado
       **/
-    public void setRecomendado(boolean recomendado) {
+    public void setRecomendado(Boolean recomendado) {
         this.recomendado = recomendado;
     }
     
+    /**
+     * To entity
+     * @return entity
+     */
     public CalificacionEntity toEntity()
     {
         CalificacionEntity calificacionEntity = new CalificacionEntity();
