@@ -23,3 +23,8 @@ insert into AgendaEntity(id, nombre, horaInicio,horaFinal,actividad) values( 100
 insert into AgendaEntity(id, nombre, horaInicio,horaFinal,actividad) values( 200 , 'minuto', '2019-03-04 12:01:00','2019-03-04 12:02:01', 'minuto');
 insert into AgendaEntity(id, nombre, horaInicio,horaFinal,actividad) values( 300 , 'hora', '2019-03-04 12:01:00','2019-03-04 13:02:01', 'hora');
 insert into AgendaEntity(id, nombre, horaInicio,horaFinal,actividad) values( 400 , 'dia', '2019-03-04 12:01:00','2019-03-05 12:02:01', 'dia');
+
+insert into FacturaEntity(id, nombre, fecha, iva, total) values( 100 , 'segundo', '2019-03-04 12:00:00',1,1 );
+insert into FacturaEntity(id, nombre, fecha, iva, total) values( 200 , 'minuto', '2019-03-05 12:01:00',1,1);
+insert into FacturaEntity(id, nombre, fecha, iva, total) values( 300 , 'hora', '2019-03-06 12:01:00',1,1 );
+insert into FacturaEntity(id, nombre, fecha, iva, total) values( 400 , 'dia', '2019-03-07 12:01:00',1,1 );
