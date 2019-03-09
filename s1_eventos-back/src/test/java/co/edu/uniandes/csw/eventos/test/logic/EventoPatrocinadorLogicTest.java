@@ -33,16 +33,17 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  *
  * @evento Mateo Vallejo
  */
+
 @RunWith(Arquillian.class)
 public class EventoPatrocinadorLogicTest {
-
+    
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
-    private EventoPatrocinadorLogic logica;
+    private EventoPatrocinadorLogic eventoPatrocinadorLogic;
 
     @Inject
-    private PatrocinadorLogic patrocinadorLogic;
+    private PatrocinadorLogic PatrocinadorLogic;
 
     @PersistenceContext
     private EntityManager em;
@@ -102,8 +103,6 @@ public class EventoPatrocinadorLogicTest {
      * pruebas.
      */
     private void insertData() {
-
-       
         evento = factory.manufacturePojo(EventoEntity.class);
         evento.setId(1L);
         evento.setPatrocinadores(new ArrayList<>());
@@ -117,19 +116,6 @@ public class EventoPatrocinadorLogicTest {
             data.add(entity);
             evento.getPatrocinadores().add(entity);
         }
-//        evento = factory.manufacturePojo(EventoEntity.class);
-//        evento.setId(1L);
-//        evento.setPatrocinadores(new ArrayList<>());
-//        em.persist(evento);
-//
-//        for (int i = 0; i < 3; i++) {
-//            PatrocinadorEntity entity = factory.manufacturePojo(PatrocinadorEntity.class);
-//            entity.setEventos(new ArrayList<>());
-//            entity.getEventos().add(evento);
-//            em.persist(entity);
-//            data.add(entity);
-//            evento.getPatrocinadores().add(entity);
-//        }
     }
 
     /**
@@ -188,6 +174,7 @@ public class EventoPatrocinadorLogicTest {
         Assert.assertEquals(patrocinadorEntity.getEventos(), patrocinador.getEventos());
         Assert.assertEquals(patrocinadorEntity.getDescripcion(), patrocinador.getDescripcion());
         Assert.assertEquals(patrocinadorEntity.getRango(), patrocinador.getRango());
+
     }
 
     /**
@@ -196,7 +183,7 @@ public class EventoPatrocinadorLogicTest {
      * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
      */
     @Test
-    public void replacePatrocinadoresTest() throws BusinessLogicException {
+    public void replacePatrocinadorTest() throws BusinessLogicException {
         List<PatrocinadorEntity> nuevaLista = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             PatrocinadorEntity entity = factory.manufacturePojo(PatrocinadorEntity.class);

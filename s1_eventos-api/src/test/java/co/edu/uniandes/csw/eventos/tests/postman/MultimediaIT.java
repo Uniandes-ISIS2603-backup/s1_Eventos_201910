@@ -25,7 +25,7 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class MultimediaIT {
 
-    private static final String COLLECTION = "MultimediaTest.postman_collection";
+    private static final String COLLECTION = "Multimedia-Tests.postman_collection";
 
     @Deployment(testable = true)
     public static WebArchive createDeployment() {

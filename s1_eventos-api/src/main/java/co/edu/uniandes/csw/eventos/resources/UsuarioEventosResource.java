@@ -37,7 +37,7 @@ public class UsuarioEventosResource {
 
     @Inject
     private EventoLogic eventoLogic;
-
+    
     @POST
     @Path("{eventosId: \\d+}")
     public EventoDTO addEvento(@PathParam("usuariosId") Long usuariosId, @PathParam("eventosId") Long eventosId) {

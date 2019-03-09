@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "6629d2fc-bd3f-4f7b-9d4f-c533db0e223e",
+		"name": "CalificacionResourceTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Calificaciones",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c1a6f5e8-fd97-4d4a-99b4-075cd97c9a8b",
+						"exec": [
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"calificaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Calificaciones",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3723f8c7-e94d-4ea7-9e1e-ef39d70b5833",
+						"exec": [
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones/{{calif1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"calificaciones",
+						"{{calif1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Calificaciones",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "203f2ec5-dc0a-4ead-9548-349cc51e898f",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones/{{calif1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"calificaciones",
+						"{{calif1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Calificaciones",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"type\": \"calificacionDetailDTO\",\n        \"estrellas\": 5,\n        \"checkIn\": false,\n        \"comentario\": \"Esta muy firme\",\n        \"recomendado\": false\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"calificaciones",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

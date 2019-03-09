@@ -57,7 +57,7 @@ public class CalificacionDetailDTO extends CalificacionDTO implements Serializab
             //Neceisto que usuario cree el metodo toEntity
              //Neceisto que usuario cree el metodo toEntity
              //Neceisto que usuario cree el metodo toEntity
-         //   entity.setUsuario(getUsuario().toEntity());
+            entity.setUsuario(getUsuario().toEntity());
         }
         return entity;
     }

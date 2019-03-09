@@ -19,7 +19,9 @@ public class MedioDePagoDTO implements Serializable {
     /**
      * numero de un medio de pago
      */
-    private int numero;
+   
+    private String numero;
+
     
     /**
      * nombre del titular del medio de pago
@@ -29,17 +31,25 @@ public class MedioDePagoDTO implements Serializable {
     /**
      * codigo de seguridad del medio de pago
      */
-    private int codigoDeSeguridad;
+    private Integer codigoDeSeguridad;
     
     /**
      * fechaDeExpiracion del medio de pago
      */
     private Date fechaDeExpiracion;
 
+    
+    /**
+     * Constructor
+     */
     public MedioDePagoDTO(){
         
     }
     
+    /**
+     * Constructor
+     * @param medioDePagoEntity 
+     */
     public MedioDePagoDTO(MedioDePagoEntity medioDePagoEntity)
     {
         if(medioDePagoEntity!=null)
@@ -54,7 +64,8 @@ public class MedioDePagoDTO implements Serializable {
      * reotrna el numero del medio de pago
      * @return numero
      */
-    public int getNumero() {
+
+    public String getNumero() {
         return numero;
     }
 
@@ -62,7 +73,7 @@ public class MedioDePagoDTO implements Serializable {
      * modifica el numero de medio de pago
      * @param numero 
      */
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
@@ -114,6 +125,10 @@ public class MedioDePagoDTO implements Serializable {
         this.fechaDeExpiracion = fechaDeExpiracion;
     }
     
+    /**
+     * To entity
+     * @return entity
+     */
     public MedioDePagoEntity toEntity()
     {
         MedioDePagoEntity medioDePagoEntity = new MedioDePagoEntity();
