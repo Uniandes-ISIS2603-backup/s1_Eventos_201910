@@ -150,7 +150,6 @@ public class UsuarioFacturasLogicTest {
         Assert.assertEquals(facturaEntity.getNombre(), response.getNombre());
         Assert.assertEquals(facturaEntity.getTotal(), response.getTotal());
         Assert.assertEquals(facturaEntity.getIva(), response.getIva());
-        Assert.assertEquals(facturaEntity.getFecha(), response.getFecha());
     }
 
     /**
