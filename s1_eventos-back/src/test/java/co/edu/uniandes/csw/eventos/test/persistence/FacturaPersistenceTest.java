@@ -141,18 +141,5 @@ public class FacturaPersistenceTest {
          FacturaEntity newEntity = FacturaPersistence.find(entity.getId());
          Assert.assertNotNull(newEntity);
          Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
-     }
- 
-    
-     /**
-      * Prueba para eliminar un Factura.
-      */
-     @Test
-     public void deleteFacturaTest() {
-         FacturaEntity entity = data.get(0);
-         FacturaPersistence.delete(entity.getId());
-         FacturaEntity deleted = em.find(FacturaEntity.class, entity.getId());
-         Assert.assertNull(deleted);
-     }
-    
+     }   
 }

@@ -25,4 +25,11 @@ insert into AgendaEntity(id, nombre, horaInicio,horaFinal,actividad) values( 200
 insert into AgendaEntity(id, nombre, horaInicio,horaFinal,actividad) values( 300 , 'hora', '2019-03-04 12:01:00','2019-03-04 13:02:01', 'hora');
 insert into AgendaEntity(id, nombre, horaInicio,horaFinal,actividad) values( 400 , 'dia', '2019-03-04 12:01:00','2019-03-05 12:02:01', 'dia');
 
+<<<<<<< HEAD
 insert into EntradaEntity(id,QR,descripcion, precio, locacion,numero,disponible,checkIn,reservado) values(100,'no','evento perruno',1000,'PU 301',123,0,1,0);
+=======
+insert into FacturaEntity(id, nombre, fecha, iva, total) values( 100 , 'segundo', '2019-03-04 12:00:00',1,1 );
+insert into FacturaEntity(id, nombre, fecha, iva, total) values( 200 , 'minuto', '2019-03-05 12:01:00',1,1);
+insert into FacturaEntity(id, nombre, fecha, iva, total) values( 300 , 'hora', '2019-03-06 12:01:00',1,1 );
+insert into FacturaEntity(id, nombre, fecha, iva, total) values( 400 , 'dia', '2019-03-07 12:01:00',1,1 );
+>>>>>>> 3233cf4410308669e3886cf3de5ac77220031dfd
