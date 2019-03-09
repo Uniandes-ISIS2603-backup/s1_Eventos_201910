@@ -67,32 +67,34 @@ public class EventoDetailDTO extends EventoDTO implements Serializable {
         multimedias = new ArrayList<>();
         entradas = new ArrayList<>();
         if (evento != null) {
-//            if (evento.getAgendas != null) {
-//        for (AgendaEntity agenda : evento.getAgendas()) {
-//            agendas.add(new AgendaDTO(agenda));
-//        }
-        }
-        if (evento.getPatrocinadores() != null) {
-            for (PatrocinadorEntity patrocinador : evento.getPatrocinadores()) {
-                patrocinadores.add(new PatrocinadorDTO(patrocinador));
+            if (evento.getAgendas() != null) {
+                for (AgendaEntity agenda : evento.getAgendas()) {
+                    agendas.add(new AgendaDTO(agenda));
+                }
             }
-        }
-        if (evento.getOrganizadores() != null) {
 
-            for (OrganizadorEntity organizador : evento.getOrganizadores()) {
-                organizadores.add(new OrganizadorDTO(organizador));
+            if (evento.getPatrocinadores() != null) {
+                for (PatrocinadorEntity patrocinador : evento.getPatrocinadores()) {
+                    patrocinadores.add(new PatrocinadorDTO(patrocinador));
+                }
             }
-        }
-        if (evento.getMultimedia() != null) {
+            if (evento.getOrganizadores() != null) {
 
-            for (MultimediaEntity multimedia : evento.getMultimedia()) {
-                multimedias.add(new MultimediaDTO(multimedia));
+                for (OrganizadorEntity organizador : evento.getOrganizadores()) {
+                    organizadores.add(new OrganizadorDTO(organizador));
+                }
             }
-        }
-        if (evento.getEntradas() != null) {
+            if (evento.getMultimedia() != null) {
 
-            for (EntradaEntity entrada : evento.getEntradas()) {
-                entradas.add(new EntradaDTO(entrada));
+                for (MultimediaEntity multimedia : evento.getMultimedia()) {
+                    multimedias.add(new MultimediaDTO(multimedia));
+                }
+            }
+            if (evento.getEntradas() != null) {
+
+                for (EntradaEntity entrada : evento.getEntradas()) {
+                    entradas.add(new EntradaDTO(entrada));
+                }
             }
         }
     }
@@ -101,13 +103,13 @@ public class EventoDetailDTO extends EventoDTO implements Serializable {
 
         EventoEntity ent = super.toEntity();
 
-//        if (agendas != null) {
-//            List<AgendaEntity> agendasEntity = new ArrayList<>();
-//            for (AgendaDTO dtoAgenda : agendas) {
-//                agendasEntity.add(dtoAgenda.toEntity());
-//            }
-//            ent.setAgendas(agendasEntity);
-//        }
+        if (agendas != null) {
+            List<AgendaEntity> agendasEntity = new ArrayList<>();
+            for (AgendaDTO dtoAgenda : agendas) {
+                agendasEntity.add(dtoAgenda.toEntity());
+            }
+            ent.setAgendas(agendasEntity);
+        }
         if (getOrganizadores() != null) {
             List<OrganizadorEntity> organizadoresEntity = new ArrayList<>();
             for (OrganizadorDTO dtoOrganizador : getOrganizadores()) {

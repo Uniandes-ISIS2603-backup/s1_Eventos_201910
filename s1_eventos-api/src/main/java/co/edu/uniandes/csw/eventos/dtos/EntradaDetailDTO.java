@@ -7,10 +7,7 @@ package co.edu.uniandes.csw.eventos.dtos;
 
 import co.edu.uniandes.csw.eventos.entities.EntradaEntity;
 import co.edu.uniandes.csw.eventos.entities.EventoEntity;
-import co.edu.uniandes.csw.eventos.entities.PatrocinadorEntity;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *

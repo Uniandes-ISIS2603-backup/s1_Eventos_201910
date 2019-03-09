@@ -53,7 +53,7 @@ public class EventoLogic {
             throw new BusinessLogicException("Las boletas superan la capacidad maxima");
         }
 //5.el numero de boletasDisponibles , cantidadMaxima, y el numero de boletas deben ser numeros positivos
-        if (eventoEntity.getEntradas().size() < 0 || eventoEntity.getBoletasDisponibles() < 0 || eventoEntity.getCapacidadMaxima() < 0) {
+        if (eventoEntity.getEntradas().isEmpty() || eventoEntity.getBoletasDisponibles()<0 || eventoEntity.getCapacidadMaxima() < 0) {
             throw new BusinessLogicException("Estos valores deben ser positivos");
 
         }
@@ -113,7 +113,7 @@ public class EventoLogic {
             throw new BusinessLogicException("Las boletas superan la capacidad maxima");
         }
 //5.el numero de boletasDisponibles , cantidadMaxima, y el numero de boletas deben ser numeros positivos
-        if (eventoEntity.getEntradas().size() < 0 || eventoEntity.getBoletasDisponibles() < 0 || eventoEntity.getCapacidadMaxima() < 0) {
+        if (eventoEntity.getEntradas().isEmpty() || eventoEntity.getBoletasDisponibles() < 0 || eventoEntity.getCapacidadMaxima() < 0) {
             throw new BusinessLogicException("Estos valores deben ser positivos");
 
         }
