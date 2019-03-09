@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "f12be74a-c792-4a48-b6e6-9c1ee177aa08",
+		"name": "MedioDePagoResourceTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "MediosDePago",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f2709152-9a0d-48c5-8ce6-ac4648e6dc43",
+						"exec": [
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"mediosDePago"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MediosDePago",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b3aec113-db1b-4d4b-98c4-0e03742e0b91",
+						"exec": [
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/{{medio1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"mediosDePago",
+						"{{medio1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MediosDePago",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fbb6004b-73e4-4ca4-a232-277a3cd3c091",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/{{medio1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"mediosDePago",
+						"{{medio1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Calificacion",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"type\": \"calificacionDetailDTO\",\n        \"numero\": 1001,\n        \"titular\": \"Jonatan\",\n        \"codigoDeSeguridad\": 090909999999999,\n        \"fechaDeExpiracion\": \"Fri Mar 08 21:16:43 COT 2019\"\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificacion/{{calif1}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"calificacion",
+						"{{calif1}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
