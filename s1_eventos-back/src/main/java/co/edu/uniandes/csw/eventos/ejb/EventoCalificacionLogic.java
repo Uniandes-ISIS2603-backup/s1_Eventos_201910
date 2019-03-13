@@ -43,6 +43,7 @@ public class EventoCalificacionLogic {
         CalificacionEntity calificacionEntity = calificacionPersistence.find(calificacionesId);
         EventoEntity eventoEntity = eventoPersistence.find(eventosId);
         eventoEntity.getCalificaciones().add(calificacionEntity);
+        calificacionEntity.setEvento(eventoEntity);
         LOGGER.log(Level.INFO, "Termina proceso de asociarle un calificacion al evento con id = {0}", eventosId);
         return calificacionPersistence.find(calificacionesId);
     }
@@ -102,9 +103,10 @@ public class EventoCalificacionLogic {
      */
     public void removeCalificacion(Long eventosId, Long calificacionesId) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar un calificacion del evento con id = {0}", eventosId);
-        CalificacionEntity authorEntity = calificacionPersistence.find(calificacionesId);
-        EventoEntity bookEntity = eventoPersistence.find(eventosId);
-        bookEntity.getCalificaciones().remove(authorEntity);
+        CalificacionEntity calificacionEntity = calificacionPersistence.find(calificacionesId);
+        EventoEntity eventoEntity = eventoPersistence.find(eventosId);
+        eventoEntity.getCalificaciones().remove(calificacionEntity);
+        calificacionPersistence.delete(calificacionesId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar un calificacion del evento con id = {0}", eventosId);
     }
 }

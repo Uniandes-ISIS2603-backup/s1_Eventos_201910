@@ -44,6 +44,7 @@ public class EventoMultimediaLogic {
         MultimediaEntity multimediaEntity = multimediaPersistence.find(multimediaesId);
         EventoEntity eventoEntity = eventoPersistence.find(eventosId);
         eventoEntity.getMultimedia().add(multimediaEntity);
+        multimediaEntity.setEvento(eventoEntity);
         LOGGER.log(Level.INFO, "Termina proceso de asociarle un multimedia al evento con id = {0}", eventosId);
         return multimediaPersistence.find(multimediaesId);
     }
@@ -106,9 +107,10 @@ public class EventoMultimediaLogic {
      */
     public void removeMultimedia(Long eventosId, Long multimediaesId) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar un multimedia del evento con id = {0}", eventosId);
-        MultimediaEntity authorEntity = multimediaPersistence.find(multimediaesId);
-        EventoEntity bookEntity = eventoPersistence.find(eventosId);
-        bookEntity.getMultimedia().remove(authorEntity);
+        MultimediaEntity multimedia = multimediaPersistence.find(multimediaesId);
+        EventoEntity evento = eventoPersistence.find(eventosId);
+        evento.getMultimedia().remove(multimedia);
+        multimediaPersistence.delete(multimediaesId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar un multimedia del evento con id = {0}", eventosId);
     }
 }
