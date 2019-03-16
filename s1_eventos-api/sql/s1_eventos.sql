@@ -13,4 +13,4 @@ insert into OrganizadorEntity(id, nombre, telefono, correoElectronico) values (2
 insert into OrganizadorEntity(id, nombre, telefono, correoElectronico) values (300, 'Sueño Estéreo SAS', '4660807','info@stivalestereopicnic.com');
 insert into OrganizadorEntity(id, nombre, telefono, correoElectronico) values (400, 'Produccion de Eventos 911 SAS', '4324075', 'info@logistica911.com');
 
-insert into EventoEntity(
+insert into EventoEntity(id, nombre, descripcion, fechaInicio, fechaFin, categoria, privado, capacidadMaxima, boletasDisponibles) values(100,)
