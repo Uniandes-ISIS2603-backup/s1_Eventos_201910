@@ -35,11 +35,12 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * servidor.
  *
  *
- * @author ISIS2603
+ * @author Juan Pablo Hidalgo
  */
     public class AgendaDTO extends CascaraDTO implements Serializable {
     
     private Long id;
+    private String nombre;
     private Date horaInicio;
     private Date horaFinal;
     private String actividad;
@@ -54,6 +55,14 @@ import org.apache.commons.lang3.builder.ToStringStyle;
         this.horaInicio = agendaEntity.getHoraInicio();
         this.actividad = agendaEntity.getActividad();
         this.id = agendaEntity.getId();
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public Long getId() {
@@ -94,6 +103,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
         a.setActividad(this.actividad);
         a.setHoraFinal(horaFinal);
         a.setHoraInicio(horaInicio);
+        a.setNombre(this.nombre);
         return a;
     }
     @Override

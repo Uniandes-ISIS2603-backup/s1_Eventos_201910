@@ -8,11 +8,13 @@ package co.edu.uniandes.csw.eventos.dtos;
 import co.edu.uniandes.csw.eventos.entities.FacturaEntity;
 
 import java.io.Serializable;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 
 /**
  *
- * @author Juan David Díaz
+ * @author Juan Pablo Hidalgo
  */
 public class FacturaDetailDTO extends FacturaDTO implements Serializable {
     
@@ -33,6 +35,7 @@ public class FacturaDetailDTO extends FacturaDTO implements Serializable {
         this.usuario=usuario;
     }
     
+    @Override
     public FacturaEntity toEntity()
     {
         FacturaEntity entity = super.toEntity();
@@ -42,5 +45,8 @@ public class FacturaDetailDTO extends FacturaDTO implements Serializable {
         }
         return entity;
     }
-    
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
 }

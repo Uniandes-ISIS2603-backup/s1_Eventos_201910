@@ -46,9 +46,9 @@ public class AgendaPersistence {
     }
 
     /**
-     * Busca si hay algun organizador con el id que se envía de argumento
+     * Busca si hay alguna agenda con el id que se envía de argumento
      *
-     * @param agendaesId: id correspondiente al organizador buscado.
+     * @param agendaesId: id correspondiente a la ageda buscada.
      * @return un Agenda.
      */
     public AgendaEntity find(Long agendaesId) {
@@ -57,9 +57,9 @@ public class AgendaPersistence {
     }
 
     /**
-     * Actualiza un Agenda.
+     * Actualiza una Agenda.
      *
-     * @param agendaEntity: el organizador que viene con los nuevos cambios. 
+     * @param agendaEntity: el agenda que viene con los nuevos cambios. 
      * @return un Agenda con los cambios aplicados.
      */
     public AgendaEntity update(AgendaEntity agendaEntity) {

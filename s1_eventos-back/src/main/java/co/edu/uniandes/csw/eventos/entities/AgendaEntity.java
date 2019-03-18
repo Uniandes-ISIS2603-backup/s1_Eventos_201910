@@ -114,7 +114,6 @@ public class AgendaEntity extends BaseEntity implements Serializable {
     @Override
     public int hashCode() {
         int result = 17;
-        result = 31 * result + nombre.hashCode();
         result = 31 * result + actividad.hashCode();
         return result;
     }

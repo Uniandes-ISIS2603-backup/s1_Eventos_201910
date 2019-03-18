@@ -29,8 +29,7 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class AgendaEventoResource {
     private static final Logger LOGGER = Logger.getLogger(CalificacionEventoResource.class.getName());
-    @Inject
-    private AgendaLogic agendaLogic;
+    
 
     @Inject
     private EventoLogic eventoLogic;

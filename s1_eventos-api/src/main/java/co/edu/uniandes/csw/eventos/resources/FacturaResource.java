@@ -91,7 +91,7 @@ public class FacturaResource {
         FacturaEntity facturaEntity = facturaLogic.getFactura(facturaId);
        if(facturaEntity == null)
        {
-           throw new WebApplicationException("El recurso /facturaes/" + facturaId + " no existe.", 404);
+           throw new WebApplicationException("El recurso /facturas/" + facturaId + " no existe.", 404);
        }
        FacturaDTO facturaDTO = new FacturaDTO(facturaEntity);
        return facturaDTO;

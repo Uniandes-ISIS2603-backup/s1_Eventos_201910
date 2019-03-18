@@ -56,10 +56,7 @@ public class AgendaLogic {
      */
     public AgendaEntity createAgenda(AgendaEntity agendaEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la Agenda");
-        // Verifica la regla de negocio que dice que no puede haber dos Agendaes con el mismo nombre
-        if (persistence.find(agendaEntity.getId()) != null) {
-            throw new BusinessLogicException("Ya existe una Agenda con el nombre \"" + agendaEntity.getNombre()+ "\"");
-        }
+        
         // Invoca la persistencia para crear la Agenda
         persistence.create(agendaEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación de la Agenda");

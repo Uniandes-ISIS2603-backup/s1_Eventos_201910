@@ -8,7 +8,6 @@ package co.edu.uniandes.csw.eventos.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.*;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -27,27 +26,12 @@ public class FacturaEntity extends BaseEntity implements Serializable{
         fetch = javax.persistence.FetchType.LAZY,cascade = CascadeType.PERSIST
     )
     private List<EntradaEntity> entradas;
-    private String nombre;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
     private Float total;
     private Float iva;
      
-    /**
-     * @return the nombre
-     */
-    public String getNombre()
-    {
-        return nombre;
-    }
     
-    /**
-     * @param nombre the nombre to set
-     */
-    public void setNombre(String nombre)
-    {
-        this.nombre = nombre;
-    }
 
     public Date getFecha() {
         return fecha;
@@ -113,9 +97,9 @@ public class FacturaEntity extends BaseEntity implements Serializable{
     @Override
     public int hashCode() {
         int result = 17;
-        result = 31 * result + nombre.hashCode();
-        result = 31 * result + total.hashCode(); 
-        result = 31 * result + iva.hashCode();
+        result = 31 * result + Math.round(total); 
+        result = 31 * result + Math.round(iva);
+        result = 31 *  result + usuario.hashCode();
         return result;
     }
     

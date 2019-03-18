@@ -41,6 +41,7 @@ public class FacturaDTO implements Serializable {
     private Long id;
     private Date fechaDePago;
     private Float montoTotal;
+    
     private Float iva;
     
 

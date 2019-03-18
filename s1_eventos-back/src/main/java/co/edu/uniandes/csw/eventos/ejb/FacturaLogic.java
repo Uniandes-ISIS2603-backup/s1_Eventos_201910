@@ -56,10 +56,6 @@ public class FacturaLogic {
      */
     public FacturaEntity createFactura(FacturaEntity facturaEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la Factura");
-        // Verifica la regla de negocio que dice que no puede haber dos Facturaes con el mismo nombre
-        if (persistence.find(facturaEntity.getId()) != null) {
-            throw new BusinessLogicException("Ya existe una Factura con el nombre \"" + facturaEntity.getNombre()+ "\"");
-        }
         // Invoca la persistencia para crear la Factura
         persistence.create(facturaEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación de la Factura");

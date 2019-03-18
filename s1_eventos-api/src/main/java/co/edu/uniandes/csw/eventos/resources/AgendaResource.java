@@ -46,8 +46,7 @@ import javax.ws.rs.WebApplicationException;
 /**
  * Clase que implementa el recurso "agendas".
  *
- * @author ISIS2603
- * @version 1.0
+ * @author Juan Pablo Hidalgo
  */
 @Path("agendas")
 @Produces("application/json")
@@ -90,14 +89,15 @@ public class AgendaResource {
      *
      * @param agendasId Identificador de la Agenda que se desea borrar.
      * Este debe ser una cadena de dígitos.
+     * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
      */
     @DELETE
     @Path("{agendasId: \\d+}")
-    public void deleteAgenda(@PathParam("agendasId") Long agendasId) throws BusinessLogicException{
+    public void deleteAgenda(@PathParam("agendasId") Long agendasId) throws WebApplicationException, BusinessLogicException{
         LOGGER.log(Level.INFO, "AgendaResource deleteAgenda: input: {0}", agendasId);
         // Invoca la lógica para borrar la Agenda
        if(agendaLogic.getAgenda(agendasId)==null)
-           throw new BusinessLogicException("la agenda no existe");
+            throw new WebApplicationException("El recurso /agendas/" + agendasId + " no existe.", 404);
         agendaLogic.deleteAgenda(agendasId);
         LOGGER.info("AgendaResource deleteAgenda: output: void");
     }
@@ -107,7 +107,7 @@ public class AgendaResource {
        AgendaEntity agendaEntity = agendaLogic.getAgenda(agendaID);
        if(agendaEntity == null)
        {
-           throw new WebApplicationException("El recurso /Agendaes/" + agendaID + " no existe.", 404);
+           throw new WebApplicationException("El recurso /agendas/" + agendaID + " no existe.", 404);
        }
        AgendaDTO agendaDTO = new AgendaDTO(agendaEntity);
        return agendaDTO;
@@ -118,12 +118,18 @@ public class AgendaResource {
        return listaAgendaes;
    }
    @PUT
-   @Path("(agendaID: \\d+")
-   public AgendaDTO updateAgenda (@PathParam("agendaID") Long agendaId, AgendaDTO agenda){
-       if(agenda ==null)
-            throw new WebApplicationException("El recurso /Agendaes/" + agendaId + " no existe.", 404);
-       return agenda;
-   }
+    @Path("{AgendasId: \\d+}")
+    public AgendaDTO updateAgenda(@PathParam("AgendasId") Long agendasId, AgendaDTO agenda) throws WebApplicationException {
+        LOGGER.log(Level.INFO, "AgendaResource updateAgenda: input: id:{0} , Agenda: {1}", new Object[]{agendasId, agenda.toString()});
+        agenda.setId(agendasId);
+        if (agendaLogic.getAgenda(agendasId) == null) {
+            throw new WebApplicationException("El recurso /agendas/" + agendasId + " no existe.", 404);
+        }
+        AgendaDTO mDTO = new AgendaDTO(agendaLogic.updateAgenda(agendasId, agenda.toEntity()));
+        LOGGER.log(Level.INFO, "AgendaResource updateAgenda: output: {0}", mDTO.toString());
+        return mDTO;
+    }
+    
     private List<AgendaDTO> listEntity2DetailDTO(List<AgendaEntity> entityList)
    {
        List<AgendaDTO> list = new ArrayList<>();

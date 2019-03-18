@@ -147,7 +147,6 @@ public class UsuarioFacturasLogicTest {
         FacturaEntity response = usuarioFacturasLogic.getFactura(entity.getId(), facturaEntity.getId());
 
         Assert.assertEquals(facturaEntity.getId(), response.getId());
-        Assert.assertEquals(facturaEntity.getNombre(), response.getNombre());
         Assert.assertEquals(facturaEntity.getTotal(), response.getTotal());
         Assert.assertEquals(facturaEntity.getIva(), response.getIva());
     }
