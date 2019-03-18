@@ -5,8 +5,18 @@
     <!--Toca entity por entity, exclude-unlisted-clases = false no funciona-->
     <class>co.edu.uniandes.csw.eventos.entities.UsuarioEntity</class>
     <class>co.edu.uniandes.csw.eventos.entities.MultimediaEntity</class>
+    <class>co.edu.uniandes.csw.eventos.entities.AgendaEntity</class>
+    <class>co.edu.uniandes.csw.eventos.entities.CalificacionEntity</class>
+    <class>co.edu.uniandes.csw.eventos.entities.EntradaEntity</class>
+    <class>co.edu.uniandes.csw.eventos.entities.EventoEntity</class>
+    <class>co.edu.uniandes.csw.eventos.entities.FacturaEntity</class>
+    <class>co.edu.uniandes.csw.eventos.entities.InvitadoEspecialEntity</class>
+    <class>co.edu.uniandes.csw.eventos.entities.MedioDePagoEntity</class>
+    <class>co.edu.uniandes.csw.eventos.entities.OrganizadorEntity</class>
+    <class>co.edu.uniandes.csw.eventos.entities.PatrocinadorEntity</class>
+    <class>co.edu.uniandes.csw.eventos.entities.UbicacionEntity</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
- <shared-cache-mode>NONE</shared-cache-mode>
+    <shared-cache-mode>NONE</shared-cache-mode>
     <properties>
       <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
       <property name="eclipselink.target-database" value="Derby"/>
