@@ -5,9 +5,12 @@
  */
 package co.edu.uniandes.csw.eventos.dtos;
 
+import co.edu.uniandes.csw.eventos.entities.EntradaEntity;
 import co.edu.uniandes.csw.eventos.entities.FacturaEntity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -19,10 +22,19 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class FacturaDetailDTO extends FacturaDTO implements Serializable {
     
     private UsuarioDTO usuario;
+    private List<EntradaDTO> entradas = new ArrayList();
 
     public FacturaDetailDTO(FacturaEntity FacturaEntity)
     {
         super(FacturaEntity);
+    }
+
+    public List<EntradaDTO> getEntradas() {
+        return entradas;
+    }
+
+    public void setEntradas(List<EntradaDTO> entradas) {
+        this.entradas = entradas;
     }
     
     public UsuarioDTO getUsuario()
@@ -42,6 +54,15 @@ public class FacturaDetailDTO extends FacturaDTO implements Serializable {
         if(getUsuario()!=null)
         {
            entity.setUsuario(getUsuario().toEntity());
+        }
+        if(getEntradas()!=null)
+        {
+           List<EntradaEntity> lista = new ArrayList();
+           for(EntradaDTO e : getEntradas())
+           {
+               lista.add(e.toEntity());
+           }
+           entity.setEntradas(lista);
         }
         return entity;
     }

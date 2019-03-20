@@ -13,7 +13,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
- * @author Paula Molina
+ * @author Juan Pablo Hidalgo
  */
 @Entity
 public class FacturaEntity extends BaseEntity implements Serializable{
@@ -22,10 +22,11 @@ public class FacturaEntity extends BaseEntity implements Serializable{
     @ManyToOne(cascade = CascadeType.PERSIST)
     private UsuarioEntity usuario = new UsuarioEntity();
     
-    @javax.persistence.ManyToMany(
+    @javax.persistence.OneToMany(
         fetch = javax.persistence.FetchType.LAZY,cascade = CascadeType.PERSIST
     )
     private List<EntradaEntity> entradas;
+    
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
     private Float total;
