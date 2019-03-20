@@ -80,6 +80,7 @@ public class InvitadoEspecialDTO implements Serializable {
        InvitadoEspecialEntity i = new InvitadoEspecialEntity();
        i.setInfo(this.info);
        i.setNombre(this.nombre);
+       i.setId(this.id);
        return i;
    }
     @Override

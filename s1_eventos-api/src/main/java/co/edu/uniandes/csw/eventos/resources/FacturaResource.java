@@ -87,13 +87,13 @@ public class FacturaResource {
     
     @GET
    @Path("{facturaID: \\d+}")
-   public FacturaDTO getFactura(@PathParam("facturaID") Long facturaId){
+   public FacturaDetailDTO getFactura(@PathParam("facturaID") Long facturaId){
         FacturaEntity facturaEntity = facturaLogic.getFactura(facturaId);
        if(facturaEntity == null)
        {
            throw new WebApplicationException("El recurso /facturas/" + facturaId + " no existe.", 404);
        }
-       FacturaDTO facturaDTO = new FacturaDTO(facturaEntity);
+       FacturaDetailDTO facturaDTO = new FacturaDetailDTO(facturaEntity);
        return facturaDTO;
    }
    

@@ -66,6 +66,10 @@ public class FacturaDetailDTO extends FacturaDTO implements Serializable {
         }
         return entity;
     }
+    public FacturaDetailDTO()
+    {
+        
+    }
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);

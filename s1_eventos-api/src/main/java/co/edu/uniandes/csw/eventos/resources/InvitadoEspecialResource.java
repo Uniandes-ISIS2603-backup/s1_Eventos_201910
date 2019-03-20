@@ -108,7 +108,7 @@ public class InvitadoEspecialResource {
        InvitadoEspecialEntity invitadoEspecialEntity = invitadoEspecialLogic.getInvitadoEspecial(invitadoEspecialId);
        if(invitadoEspecialEntity == null)
        {
-           throw new WebApplicationException("El recurso /InvitadoEspeciales/" + invitadoEspecialId + " no existe.", 404);
+           throw new WebApplicationException("El recurso /invitadoespecial/" + invitadoEspecialId + " no existe.", 404);
        }
        InvitadoEspecialDTO InvitadoEspecialDTO = new InvitadoEspecialDTO(invitadoEspecialEntity);
        return InvitadoEspecialDTO;
@@ -123,7 +123,7 @@ public class InvitadoEspecialResource {
         }
         if(invitadoespecial== null)
         {
-            throw new BusinessLogicException("el invitado no es valido");
+            throw new WebApplicationException("El recurso /invitadoespecial/" + invitadoespecialId + " no existe.", 404);
         }
         // Invoca la lógica para borrar la InvitadoEspecial
         invitadoEspecialLogic.updateInvitadoEspecial(invitadoespecialId,invitadoespecial.toEntity());
