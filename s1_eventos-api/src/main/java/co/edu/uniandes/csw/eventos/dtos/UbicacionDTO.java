@@ -46,6 +46,7 @@ public class UbicacionDTO implements Serializable {
      */
     public UbicacionDTO(UbicacionEntity entity){
         if(entity!=null){
+            this.id=entity.getId();
             this.latitud=entity.getLatitud();
             this.longitud=entity.getLongitud();
             this.nombre=entity.getNombre();
@@ -59,6 +60,7 @@ public class UbicacionDTO implements Serializable {
      */
     public UbicacionEntity toEntity(){
         UbicacionEntity entity=new UbicacionEntity();
+        entity.setId(this.getId());
         entity.setLatitud(this.latitud);
         entity.setLongitud(this.longitud);
         entity.setNombre(this.nombre);
