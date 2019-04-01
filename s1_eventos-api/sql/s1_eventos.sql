@@ -3,6 +3,7 @@ delete from OrganizadorEntity;
 delete from EventoEntity;
 delete from UbicacionEntity;
 delete from EntradaEntity;
+delete from MultimediaEntity
 
 insert into PatrocinadorEntity(id, nombre, imagen, rango, descripcion) values (100, 'El Espectador','https://www.elespectador.com/sites/default/files/f132055d336bdccca7332e9c54da0167.jpg', 'Gold', 'Noticias de Colombia y el mundo. El Espectador, el valor de la Información.' );
 insert into PatrocinadorEntity(id, nombre, imagen, rango, descripcion) values (200, 'Microsoft Corporation', 'https://cdn.vox-cdn.com/thumbor/NeSo4JAqv-fFJCIhb5K5eBqvXG4=/7x0:633x417/1200x800/filters:focal(7x0:633x417)/cdn.vox-cdn.com/assets/1311169/mslogo.jpg', 'Gold', 'Tu potencial, nuestra pasión.');
@@ -24,5 +25,3 @@ insert into UbicacionEntity(id, latitud, longitud, nombre) values (200, 5.8, -72
 insert into UbicacionEntity(id, latitud, longitud, nombre) values (300, 3.55, -70.69 , 'El bobo' );
 insert into UbicacionEntity(id, latitud, longitud, nombre) values (400, 4, -72 , 'Monserrate' );
 
-
-insert into EntradaEntity(QR,descripcion,precio,locacion,numero,disponible,checkin,reservado)  values ('Na','instransferible',20,'sur',5,0,0,1);

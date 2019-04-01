@@ -53,25 +53,30 @@ public class EventoLogic {
             throw new BusinessLogicException("Las boletas superan la capacidad maxima");
         }
 //5.el numero de boletasDisponibles , cantidadMaxima, y el numero de boletas deben ser numeros positivos
-        if (eventoEntity.getEntradas().isEmpty() || eventoEntity.getBoletasDisponibles()<0 || eventoEntity.getCapacidadMaxima() < 0) {
-            throw new BusinessLogicException("Estos valores deben ser positivos");
-
+       
+        if (eventoEntity.getBoletasDisponibles() < 0) {
+            throw new BusinessLogicException("las boletas disponibles no pueden ser negativas");
         }
+        if (eventoEntity.getCapacidadMaxima() < 0) {
+            throw new BusinessLogicException("la capacidad maxima no puede ser negativa");
+        }
+    
 //6.la fecha de fin debe ser despues de la fecha de inicio
-        if (eventoEntity.getFechaFin().before(eventoEntity.getFechaInicio())) {
+
+    if (eventoEntity.getFechaFin ().before(eventoEntity.getFechaInicio())) {
             throw new BusinessLogicException("la fecha de fin es antes de la fecha de inicio");
 
-        }
-        eventoEntity = ep.create(eventoEntity);
-        return eventoEntity;
     }
+    eventoEntity  = ep.create(eventoEntity);
+    return eventoEntity ;
+}
 
-    /**
-     * Se retorna todos los eventos
-     *
-     * @return
-     */
-    public List<EventoEntity> findAllEvento() {
+/**
+ * Se retorna todos los eventos
+ *
+ * @return
+ */
+public List<EventoEntity> findAllEvento() {
         return ep.findAll();
     }
 
@@ -113,9 +118,14 @@ public class EventoLogic {
             throw new BusinessLogicException("Las boletas superan la capacidad maxima");
         }
 //5.el numero de boletasDisponibles , cantidadMaxima, y el numero de boletas deben ser numeros positivos
-        if (eventoEntity.getEntradas().isEmpty() || eventoEntity.getBoletasDisponibles() < 0 || eventoEntity.getCapacidadMaxima() < 0) {
-            throw new BusinessLogicException("Estos valores deben ser positivos");
-
+         if (eventoEntity.getEntradas().size() < 0) {
+            throw new BusinessLogicException("no pueden haber entradas negativas");
+        }
+        if (eventoEntity.getBoletasDisponibles() < 0) {
+            throw new BusinessLogicException("las boletas disponibles no pueden ser negativas");
+        }
+        if (eventoEntity.getCapacidadMaxima() < 0) {
+            throw new BusinessLogicException("la capacidad maxima no puede ser negativa");
         }
 //6.la fecha de fin debe ser despues de la fecha de inicio
         if (eventoEntity.getFechaFin().before(eventoEntity.getFechaInicio())) {
@@ -128,8 +138,9 @@ public class EventoLogic {
 
     /**
      * eliminar un evento
+     *
      * @param ubicacionId
-     * @throws BusinessLogicException 
+     * @throws BusinessLogicException
      */
     public void deleteEvento(Long ubicacionId) throws BusinessLogicException {
         ep.delete(ubicacionId);

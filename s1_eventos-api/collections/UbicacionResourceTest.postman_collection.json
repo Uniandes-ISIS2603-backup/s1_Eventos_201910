@@ -54,17 +54,15 @@
 			"response": []
 		},
 		{
-			"name": "Crear ubicacion mismo nombre",
+			"name": "Crear ubicacion mal nombre",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "aca8b509-885d-4839-bbe1-bf7829fe5e8d",
 						"exec": [
-							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_u\",data.id);",
-							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
-							"console.log(data.id);"
+							"tests[\"No crea con mal nombre\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"nombre es muy largo\");"
 						],
 						"type": "text/javascript"
 					}
@@ -82,7 +80,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"latitud\":\"5.88\" ,\n\t\"longitud\":\"-76.59\" ,\n\t\"nombre\":\"Bobo\"\n}"
+					"raw": "{\n\t\"latitud\":\"5.88\" ,\n\t\"longitud\":\"-76.59\" ,\n\t\"nombre\":\"sexdrcjmxesdrcnhctuhxerctvygubxdctuytdufyghodufvblexdx\"\n}"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/ubicaciones",
@@ -109,7 +107,7 @@
 						"id": "eac3c237-69c1-4930-8200-7b5fc71f3222",
 						"exec": [
 							"tests[\"No crea con mal formato\"] = responseCode.code === 412;",
-							""
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"longitud\");"
 						],
 						"type": "text/javascript"
 					}
@@ -152,7 +150,7 @@
 						"id": "eac3c237-69c1-4930-8200-7b5fc71f3222",
 						"exec": [
 							"tests[\"No crea con mal formato\"] = responseCode.code === 412;",
-							""
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"latitud\");"
 						],
 						"type": "text/javascript"
 					}

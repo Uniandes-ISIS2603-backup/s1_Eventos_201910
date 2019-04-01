@@ -133,6 +133,16 @@ public class UbicacionLogicTest {
         Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
     }
 
+ @Test(expected = BusinessLogicException.class)
+    public void createUbicacionMismoNombre() throws BusinessLogicException {
+        UbicacionEntity newEntity = factory.manufacturePojo(UbicacionEntity.class);
+        newEntity.setNombre(data.get(0).getNombre());
+        ubicacionLogic.createUbicacion(newEntity);
+
+    }
+
+
+
     /**
      * test nombre correcto
      * @throws BusinessLogicException 
@@ -233,7 +243,7 @@ public class UbicacionLogicTest {
     /**
      * test de borrar un objeto de UbicacionEntity
      */
-    @Test()
+    @Test
     public void deleteUbicacionEntityTest() throws BusinessLogicException {
         UbicacionEntity entity = data.get(0);
         ubicacionLogic.deleteUbicacion(entity.getId());
