@@ -77,8 +77,8 @@ public class EventoPersistence {
      *
      * @param entity
      */
-    public void update(EventoEntity entity) {
-        em.merge(entity);
+    public EventoEntity update(EventoEntity entity) {
+        return em.merge(entity);
     }
 
     /**

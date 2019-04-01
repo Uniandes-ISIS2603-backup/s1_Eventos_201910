@@ -97,7 +97,7 @@ public List<EventoEntity> findAllEvento() {
      * @return
      * @throws BusinessLogicException
      */
-    public EventoEntity update(EventoEntity eventoEntity) throws BusinessLogicException {
+    public EventoEntity update(Long eventoId,EventoEntity eventoEntity) throws BusinessLogicException {
 
 //    1. dos eventos no pueden tener el mismo nombre
         if (ep.findByName(eventoEntity.getNombre()) != null) {
@@ -132,6 +132,7 @@ public List<EventoEntity> findAllEvento() {
             throw new BusinessLogicException("la fecha de fin es antes de la fecha de inicio");
 
         }
+        EventoEntity newEntity= ep.update(eventoEntity);
         ep.update(eventoEntity);
         return eventoEntity;
     }

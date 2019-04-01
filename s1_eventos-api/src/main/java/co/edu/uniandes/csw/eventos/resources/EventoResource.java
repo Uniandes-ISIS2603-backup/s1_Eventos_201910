@@ -100,13 +100,13 @@ public class EventoResource {
      */
     @PUT
     @Path("(eventosId: \\d+")
-    public EventoDTO updateEvento(@PathParam("eventosId") Long eventosId, EventoDetailDTO evento) throws WebApplicationException, BusinessLogicException {
+    public EventoDetailDTO updateEvento(@PathParam("eventosId") Long eventosId, EventoDetailDTO evento) throws WebApplicationException, BusinessLogicException {
         evento.setId(eventosId);
 
         if (logica.find(eventosId) == null) {
             throw new WebApplicationException("El recurso /eventos/" + eventosId + " no existe.", 404);
         }
-        EventoDetailDTO detailDTO = new EventoDetailDTO(logica.update(evento.toEntity()));
+        EventoDetailDTO detailDTO = new EventoDetailDTO(logica.update(eventosId,evento.toEntity()));
         return detailDTO;
 
     }
