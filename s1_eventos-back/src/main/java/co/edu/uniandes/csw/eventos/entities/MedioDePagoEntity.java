@@ -33,7 +33,7 @@ public class MedioDePagoEntity extends BaseEntity implements Serializable {
     /**
      * codigo de seguridad del medio de pago
      */
-    private Integer codigoDeSeguridad;
+    private String codigoDeSeguridad;
     /**
      * fecha de expiracion del medio de pago
      */
@@ -84,7 +84,7 @@ public class MedioDePagoEntity extends BaseEntity implements Serializable {
      * Retorna el codigo 
      * @return codigoDeCelular
      */
-    public Integer getCodigoDeSeguridad() {
+    public String getCodigoDeSeguridad() {
         return codigoDeSeguridad;
     }
 
@@ -100,7 +100,7 @@ public class MedioDePagoEntity extends BaseEntity implements Serializable {
      * Modifica el codigo de celular
      * @param codigoDeSeguridad 
      */
-    public void setCodigoDeSeguridad(Integer codigoDeSeguridad) {
+    public void setCodigoDeSeguridad(String codigoDeSeguridad) {
         this.codigoDeSeguridad = codigoDeSeguridad;
     }
 

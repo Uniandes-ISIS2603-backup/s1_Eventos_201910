@@ -63,6 +63,7 @@ public class EntradaDTO implements Serializable {
     public EntradaDTO(EntradaEntity entradaEntity)
     {
         if(entradaEntity!=null){
+            this.id=entradaEntity.getId();
             this.QR=entradaEntity.getQR();
             this.descripcion=entradaEntity.getDescripcion();
             this.precio=entradaEntity.getPrecio();
@@ -162,13 +163,14 @@ public class EntradaDTO implements Serializable {
     public EntradaEntity toEntity()
     {
         EntradaEntity entradaEntity = new EntradaEntity();
-        entradaEntity.setDescripcion(this.getDescripcion());
-        entradaEntity.setPrecio(this.getPrecio());
-        entradaEntity.setLocacion(this.getLocacion());
-        entradaEntity.setNumero(this.getNumero());
-        entradaEntity.setDisponible(this.isDisponible());
-        entradaEntity.setCheckInm(this.isCheckIn());
-        entradaEntity.setReservado(this.isReservado());
+        entradaEntity.setId(this.getId());
+        entradaEntity.setDescripcion(this.descripcion);
+        entradaEntity.setPrecio(this.precio);
+        entradaEntity.setLocacion(this.locacion);
+        entradaEntity.setNumero(this.numero);
+        entradaEntity.setDisponible(this.disponible);
+        entradaEntity.setCheckInm(this.checkIn);
+        entradaEntity.setReservado(this.reservado);
         return entradaEntity;
     }
     

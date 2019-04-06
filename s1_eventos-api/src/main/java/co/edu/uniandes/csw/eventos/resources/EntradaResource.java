@@ -51,7 +51,7 @@ public class EntradaResource {
    }
    
     @GET 
-   public List<EntradaDetailDTO> getEntradaS(){
+   public List<EntradaDetailDTO> getEntradas(){
        List<EntradaDetailDTO> listaEntradas = listEntity2DTO(entradaLogic.findAll());
        return listaEntradas;
    }

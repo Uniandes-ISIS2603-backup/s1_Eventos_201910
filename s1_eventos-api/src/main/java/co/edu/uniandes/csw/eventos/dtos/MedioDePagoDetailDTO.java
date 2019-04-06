@@ -17,6 +17,18 @@ import java.util.ArrayList;
  */
 public class MedioDePagoDetailDTO extends MedioDePagoDTO implements Serializable{
     
+    private UsuarioDTO usuario;
+    
+     public UsuarioDTO getUsuario()
+    {
+        return usuario;
+    }
+    
+    public void setUsuario(UsuarioDTO usuario)
+    {
+        this.usuario=usuario;
+    }
+    
     public MedioDePagoDetailDTO(){
         super();
     }
@@ -24,5 +36,13 @@ public class MedioDePagoDetailDTO extends MedioDePagoDTO implements Serializable
     public MedioDePagoDetailDTO(MedioDePagoEntity medioDePagoEntity) {
         super(medioDePagoEntity);
         
+    }
+    
+    public MedioDePagoEntity toEntity(){
+        MedioDePagoEntity entity = super.toEntity();
+        if(this.usuario!=null){
+            entity.setUsuario(getUsuario().toEntity());
+        }
+        return entity;
     }
 }

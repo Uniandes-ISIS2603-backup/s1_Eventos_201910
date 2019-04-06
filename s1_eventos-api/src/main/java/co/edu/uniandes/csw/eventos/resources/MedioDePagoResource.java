@@ -52,7 +52,7 @@ public class MedioDePagoResource {
     
     
     @GET
-    @Path("(medioDePagoId: \\d+)")
+    @Path("(mediosDePagoId: \\d+)")
     public MedioDePagoDTO getMedioDePago(@PathParam("mediosDePagoId") Long medioDePagoId)
     {
         MedioDePagoEntity entity = medioDePagoLogic.find(medioDePagoId);

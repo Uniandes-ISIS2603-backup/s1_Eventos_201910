@@ -35,7 +35,7 @@ public class MedioDePagoPersistence {
         em.remove(eliminar);
     }
     
-    public MedioDePagoEntity find(long id)
+    public MedioDePagoEntity find(Long id)
     {
         return em.find(MedioDePagoEntity.class, id);
     }

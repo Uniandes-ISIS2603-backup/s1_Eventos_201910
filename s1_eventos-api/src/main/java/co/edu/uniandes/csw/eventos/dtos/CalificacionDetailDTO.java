@@ -23,13 +23,7 @@ public class CalificacionDetailDTO extends CalificacionDTO implements Serializab
          super();
      }
 
-    public EventoDTO getEvento() {
-        return evento;
-    }
-
-    public void setEvento(EventoDTO evento) {
-        this.evento = evento;
-    }
+   
     private UsuarioDTO usuario;
 
     public CalificacionDetailDTO(CalificacionEntity calificacionEntity)

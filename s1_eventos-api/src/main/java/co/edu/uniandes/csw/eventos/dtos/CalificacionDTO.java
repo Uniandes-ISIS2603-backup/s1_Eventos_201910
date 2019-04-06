@@ -39,6 +39,7 @@ public class CalificacionDTO implements Serializable {
     {
         if(calificacionEntity !=null)
         {
+            this.id=calificacionEntity.getId();
             this.comentario=calificacionEntity.getComentarios();
             this.estrellas=calificacionEntity.getEstrellas();
             this.recomendado=calificacionEntity.getRecomendado();
@@ -95,6 +96,7 @@ public class CalificacionDTO implements Serializable {
     public CalificacionEntity toEntity()
     {
         CalificacionEntity calificacionEntity = new CalificacionEntity();
+        calificacionEntity.setId(this.id);
         calificacionEntity.setComentarios(this.getComentario());
         calificacionEntity.setEstrellas(this.getEstrellas());
         calificacionEntity.setRecomendado(this.isRecomendado());

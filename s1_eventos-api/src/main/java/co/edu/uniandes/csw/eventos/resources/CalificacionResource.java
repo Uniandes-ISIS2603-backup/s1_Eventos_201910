@@ -43,8 +43,8 @@ public class CalificacionResource {
     @Inject
     private CalificacionLogic calificacionLogic;
     
-    @Inject
-    private UsuarioLogic usuarioLogic;
+    //@Inject
+    //private UsuarioLogic usuarioLogic;
     
     
     

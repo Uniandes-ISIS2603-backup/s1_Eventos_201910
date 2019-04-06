@@ -100,7 +100,7 @@ public class MedioDePagoLogicTest {
     public void createMedioDePagoTest()throws BusinessLogicException
     {
         MedioDePagoEntity newEntity = factory.manufacturePojo(MedioDePagoEntity.class);
-        newEntity.setCodigoDeSeguridad(123);
+        newEntity.setCodigoDeSeguridad("123");
         newEntity.setNumero("1234567891234567");
         newEntity.setTitular("A");
         MedioDePagoEntity result = medioDePagoLogic.createMedioDePago(newEntity);

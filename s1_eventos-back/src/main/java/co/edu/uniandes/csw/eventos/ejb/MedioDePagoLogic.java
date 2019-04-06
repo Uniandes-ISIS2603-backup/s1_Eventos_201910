@@ -31,23 +31,10 @@ public class MedioDePagoLogic {
     public MedioDePagoEntity createMedioDePago(MedioDePagoEntity medioDePagoEntity) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO,"Inicia el proceso de creacion de la editorial");
-       if(persistencia.find(medioDePagoEntity.getId())!=null)
-           throw new BusinessLogicException("Ya existe un medio de pago con el id \""+medioDePagoEntity.getId() + "\"");
-       // 1. el codigo de seguridad debe ser un numero de 3 digitos
-       if((medioDePagoEntity.getCodigoDeSeguridad()+"").length()!=3)
-           throw new BusinessLogicException("El codigo de seguridad debe ser de 3 digitos");
-       // 2. el numero del medio de pago debe ser de 16 digitos
-       if(medioDePagoEntity.getNumero().length()!=16)
-           throw new BusinessLogicException("El numero del medio de pago debe ser de 16 digitos");
-     
-       for(int e=0;e<medioDePagoEntity.getTitular().length();e++)
-       {
-            if(!Character.isUpperCase(medioDePagoEntity.getTitular().toCharArray()[e]))
-                throw new BusinessLogicException("El nombre no esta en mayuscula");
-       }
-           persistencia.create(medioDePagoEntity);
+   
+           MedioDePagoEntity newMed = persistencia.create(medioDePagoEntity);
        
-        return medioDePagoEntity;
+        return newMed;
     }
     
     public void deleteMedioDePago(Long medioDePagoId)

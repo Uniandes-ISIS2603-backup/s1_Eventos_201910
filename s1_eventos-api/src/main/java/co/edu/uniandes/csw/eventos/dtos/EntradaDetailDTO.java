@@ -16,7 +16,11 @@ import java.io.Serializable;
 public class EntradaDetailDTO extends EntradaDTO implements Serializable {
     
     
-    private EventoEntity evento;
+    private EventoDTO evento;
+    
+    private UsuarioDTO usuario;
+    
+    private FacturaDTO factura;
     /**
      * Constructor
      */
@@ -24,17 +28,32 @@ public class EntradaDetailDTO extends EntradaDTO implements Serializable {
     {
         super();
     }
-    
+   
     public EntradaDetailDTO(EntradaEntity entradaEntity){
         super(entradaEntity);
-        if (entradaEntity != null) {
-            evento = entradaEntity.getEvento();
-        }
+       // if (entradaEntity != null) {
+         //   evento = entradaEntity.getEvento();
+        //}
+    }
+    
+     public UsuarioDTO getUsuario()
+    {
+        return usuario;
+    }
+    
+    public void setUsuario(UsuarioDTO usuario)
+    {
+        this.usuario=usuario;
     }
     
     @Override
     public EntradaEntity toEntity() {
-        EntradaEntity entradaEntity = super.toEntity();
-        return entradaEntity;
+        EntradaEntity entity = super.toEntity();
+        if(getUsuario()!=null)
+        {
+            entity.setUsuario(getUsuario().toEntity());
+           
+        }
+        return entity;
     }
 }
