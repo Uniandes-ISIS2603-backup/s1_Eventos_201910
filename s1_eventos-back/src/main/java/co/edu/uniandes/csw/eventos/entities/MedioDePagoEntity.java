@@ -18,6 +18,9 @@ import javax.persistence.Temporal;
 @Entity
 public class MedioDePagoEntity extends BaseEntity implements Serializable {
     
+    /**
+     * Usuario entity
+     */
      @PodamExclude
      @ManyToOne
      private UsuarioEntity usuario;
@@ -88,10 +91,18 @@ public class MedioDePagoEntity extends BaseEntity implements Serializable {
         return codigoDeSeguridad;
     }
 
+    /**
+     * Obtiene el usuario de un medio de pago
+     * @return 
+     */
     public UsuarioEntity getUsuario() {
         return usuario;
     }
 
+    /**
+     * Asgina el usuario de un medio de pago
+     * @param usuario 
+     */
     public void setUsuario(UsuarioEntity usuario) {
         this.usuario = usuario;
     }

@@ -21,41 +21,71 @@ import javax.persistence.ManyToOne;
 @Entity
 public class EntradaEntity extends BaseEntity implements Serializable{
     
+    /**
+     * Usuario entity
+     */
       @PodamExclude
       @ManyToOne
       private UsuarioEntity usuario;
       
+      /**
+       * Evento entity
+       */
       @PodamExclude
       @ManyToOne
       private EventoEntity evento;
       
-      
+      /**
+       * Factura entity
+       */
       @PodamExclude
       @ManyToOne
       private FacturaEntity factura;
 
+      /**
+       * Obtiene la factura de la entrada
+       * @return 
+       */
     public FacturaEntity getFactura() {
         return factura;
     }
 
+    /**
+     * Asigna la factura de la entrada
+     * @param factura 
+     */
     public void setFactura(FacturaEntity factura) {
         this.factura = factura;
     }
 
+    /**
+     * Obtiene el evento al cual pertenece la entrada
+     * @return 
+     */
     public EventoEntity getEvento() {
         return evento;
     }
 
+    /**
+     * Asigna el evento de una entrada
+     * @param evento 
+     */
     public void setEvento(EventoEntity evento) {
         this.evento = evento;
     }
       
-      
-
+    /**
+     * Asigna el usuario de una entrada
+     * @return 
+     */
     public UsuarioEntity getUsuario() {
         return usuario;
     }
 
+    /**
+     * Asgina el usuario usuario de una entidad
+     * @param usuario 
+     */
     public void setUsuario(UsuarioEntity usuario) {
         this.usuario = usuario;
     }

@@ -16,16 +16,28 @@ import java.io.Serializable;
  */
 public class CalificacionDetailDTO extends CalificacionDTO implements Serializable {
     
+    /**
+     * Evento DTO
+     */
     private EventoDTO evento;
     
+    /**
+     * Constructor calificacion detail DTO
+     */
      public CalificacionDetailDTO()
      {
          super();
      }
 
-   
+   /**
+    * Usuario DTO
+    */
     private UsuarioDTO usuario;
 
+    /**
+     * Constructor CalificacionDetailDTO
+     * @param calificacionEntity 
+     */
     public CalificacionDetailDTO(CalificacionEntity calificacionEntity)
     {
         super(calificacionEntity);
@@ -33,16 +45,28 @@ public class CalificacionDetailDTO extends CalificacionDTO implements Serializab
          //   this.evento=new EventoDTO(calificacionEntity.getUsuario());
     }
     
+    /**
+     * Retorna el usuario que realizò la calificacion
+     * @return 
+     */
     public UsuarioDTO getUsuario()
     {
         return usuario;
     }
     
+    /**
+     * Asigna el usuario que realizò la calificacion
+     * @param usuario 
+     */
     public void setUsuario(UsuarioDTO usuario)
     {
         this.usuario=usuario;
     }
     
+    /**
+     * Convierte a Entity
+     * @return 
+     */
     public CalificacionEntity toEntity()
     {
         CalificacionEntity entity = super.toEntity();

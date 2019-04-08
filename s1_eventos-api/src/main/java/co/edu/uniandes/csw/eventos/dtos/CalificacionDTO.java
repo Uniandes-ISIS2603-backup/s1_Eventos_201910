@@ -33,7 +33,7 @@ public class CalificacionDTO implements Serializable {
     private Long id;
     
     /*
-        Constructor
+        Constructor de la calificacion
     */
       public CalificacionDTO(CalificacionEntity calificacionEntity)
     {

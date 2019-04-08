@@ -15,11 +15,19 @@ import java.io.Serializable;
  */
 public class EntradaDetailDTO extends EntradaDTO implements Serializable {
     
-    
+    /**
+     * Evento al que pertenece la entrada
+     */
     private EventoDTO evento;
     
+    /**
+     * Usuario dueño de la entrada
+     */
     private UsuarioDTO usuario;
     
+    /**
+     * Factura donde esta registrada la compra de la boleta
+     */
     private FacturaDTO factura;
     /**
      * Constructor
@@ -36,16 +44,28 @@ public class EntradaDetailDTO extends EntradaDTO implements Serializable {
         //}
     }
     
+    /**
+     * Retorna el usuario de la entrada
+     * @return 
+     */
      public UsuarioDTO getUsuario()
     {
         return usuario;
     }
     
+     /**
+      * Asigna el usuario dueño de la entrada
+      * @param usuario 
+      */
     public void setUsuario(UsuarioDTO usuario)
     {
         this.usuario=usuario;
     }
     
+    /**
+     * Convierte a Entity
+     * @return 
+     */
     @Override
     public EntradaEntity toEntity() {
         EntradaEntity entity = super.toEntity();

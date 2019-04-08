@@ -16,7 +16,11 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class MedioDePagoDTO implements Serializable {
     
+    /**
+     * Id del medio de pago
+     */
     private Long id;
+    
     /**
      * numero de un medio de pago
      */
@@ -161,6 +165,10 @@ public class MedioDePagoDTO implements Serializable {
         return medioDePagoEntity;
     }
     
+    /**
+     * Convierte a String
+     * @return 
+     */
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);

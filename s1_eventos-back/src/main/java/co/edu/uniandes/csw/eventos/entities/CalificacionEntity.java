@@ -17,18 +17,32 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class CalificacionEntity extends BaseEntity implements Serializable{
     
+    /**
+     * Usuario entity
+     */
     @PodamExclude
     @ManyToOne
     private UsuarioEntity usuario;
     
+    /**
+     * Evento entity
+     */
     @PodamExclude
     @ManyToOne
     private EventoEntity evento;
 
+    /**
+     * Retorna el evento dueño de la calificacion
+     * @return 
+     */
     public EventoEntity getEvento() {
         return evento;
     }
 
+    /**
+     * Asigna el evento 
+     * @param evento 
+     */
     public void setEvento(EventoEntity evento) {
         this.evento = evento;
     }

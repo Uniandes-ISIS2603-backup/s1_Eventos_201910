@@ -33,14 +33,30 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class EntradaEventoResource {
     
+    /**
+     * Logger
+     */
     private static final Logger LOGGER = Logger.getLogger(EntradaEventoResource.class.getName());
     
+    /**
+     * Logica de entrada-evento
+     */
     @Inject
     private EntradaEventoLogic entradaEventoLogic;
     
+    /**
+     * Logica del evento
+     */
     @Inject
     private EventoLogic eventoLogic;
     
+    /**
+     * Retorna las entradas correspondientes a un evento
+     * @param entradasId id de la entrada
+     * @param eventosId id del evento
+     * @return
+     * @throws BusinessLogicException 
+     */
     @GET
     @Path("{eventosId: \\d+}")
     public EventoDetailDTO getEvento(@PathParam("entradasId") Long entradasId, @PathParam("eventosId") Long eventosId)

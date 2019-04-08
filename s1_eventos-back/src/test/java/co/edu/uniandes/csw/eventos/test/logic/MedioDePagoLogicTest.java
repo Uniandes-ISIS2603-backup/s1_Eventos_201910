@@ -36,19 +36,38 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class MedioDePagoLogicTest {
     
+    /**
+     * Podam factory
+     */
     private PodamFactory factory = new PodamFactoryImpl();
 
+    /**
+     * Logica de medio de pago
+     */
     @Inject
     private MedioDePagoLogic medioDePagoLogic;
 
+    /**
+     * Contexto de persistencia
+     */
     @PersistenceContext
     private EntityManager em;
     
+    /**
+     * UserTransaction
+     */
      @Inject
     private UserTransaction utx;
     
+     /**
+      * Lista de todos los medios de pago Entity
+      */
     private List<MedioDePagoEntity> data = new ArrayList<>();
     
+    /**
+     * Deployment
+     * @return 
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -59,6 +78,9 @@ public class MedioDePagoLogicTest {
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
     
+    /**
+     * Configuracion inicial
+     */
     @Before
     public void configTest() {
         try {
@@ -76,6 +98,9 @@ public class MedioDePagoLogicTest {
         }
     }
     
+    /**
+     * Borra la informacion
+     */
     private void clearData() {
         em.createQuery("delete from EventoEntity").executeUpdate();
         em.createQuery("delete from MedioDePagoEntity").executeUpdate();
@@ -96,6 +121,10 @@ public class MedioDePagoLogicTest {
         //em.persist(entity);
     }
     
+    /**
+     * Test de crear medios de pago
+     * @throws BusinessLogicException 
+     */
     @Test
     public void createMedioDePagoTest()throws BusinessLogicException
     {
@@ -110,6 +139,9 @@ public class MedioDePagoLogicTest {
         Assert.assertEquals(newEntity.getTitular(), entity.getTitular());
     }
     
+    /**
+     * Test de obtener medios de pago
+     */
     @Test
     public void getMedioDePagoTest() {
         MedioDePagoEntity entity = data.get(0);
@@ -119,8 +151,12 @@ public class MedioDePagoLogicTest {
         Assert.assertEquals(entity.getNumero(), resultEntity.getNumero());
     }
    
+    /**
+     * Test de actualizar medio de pago
+     * @throws Exception 
+     */
     @Test
-    public void updateOrganizadorTest() throws Exception{
+    public void updateMedioDePagoTest() throws Exception{
         MedioDePagoEntity entity = data.get(0);
         MedioDePagoEntity pojoEntity = factory.manufacturePojo(MedioDePagoEntity.class);
 
@@ -134,8 +170,12 @@ public class MedioDePagoLogicTest {
         Assert.assertEquals(pojoEntity.getTitular(), resp.getTitular());
     }
     
+    /**
+     * Test eliminar medio de pago
+     * @throws BusinessLogicException 
+     */
      @Test
-    public void deleteOrganizadorTest() throws BusinessLogicException {
+    public void deleteMedioDePagoTest() throws BusinessLogicException {
         MedioDePagoEntity entity = data.get(0);
         medioDePagoLogic.deleteMedioDePago(entity.getId());
         MedioDePagoEntity deleted = em.find(MedioDePagoEntity.class, entity.getId());

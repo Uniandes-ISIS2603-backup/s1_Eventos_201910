@@ -58,7 +58,7 @@ public class EntradaDTO implements Serializable {
         
     }
     /*
-        Constructor 
+        Constructor Entrada DTO
     */
     public EntradaDTO(EntradaEntity entradaEntity)
     {
@@ -160,6 +160,10 @@ public class EntradaDTO implements Serializable {
         this.reservado = reservado;
     }
     
+    /**
+     * Convierte a Entity
+     * @return 
+     */
     public EntradaEntity toEntity()
     {
         EntradaEntity entradaEntity = new EntradaEntity();
@@ -174,6 +178,10 @@ public class EntradaDTO implements Serializable {
         return entradaEntity;
     }
     
+    /**
+     * Convierte a String
+     * @return 
+     */
     public String toString()
     {
         return ToStringBuilder.reflectionToString(this,ToStringStyle.MULTI_LINE_STYLE);

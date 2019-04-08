@@ -38,11 +38,23 @@ import javax.ws.rs.WebApplicationException;
 @RequestScoped
 public class EntradaResource {
     
+    /**
+     * Logger
+     */
     private static final Logger LOGGER = Logger.getLogger(EntradaResource.class.getName());
     
+    /**
+     * Logica de la entrada
+     */
     @Inject
     private EntradaLogic entradaLogic;
     
+    /**
+     * Metodo que crea una entrada
+     * @param entrada
+     * @return
+     * @throws BusinessLogicException 
+     */
     @POST
    public EntradaDTO createEntrada(EntradaDTO entrada) throws BusinessLogicException
    {
@@ -50,12 +62,21 @@ public class EntradaResource {
         return entradaDTO;
    }
    
+   /**
+    * Metodo que retorna todas las entradas
+    * @return 
+    */
     @GET 
    public List<EntradaDetailDTO> getEntradas(){
        List<EntradaDetailDTO> listaEntradas = listEntity2DTO(entradaLogic.findAll());
        return listaEntradas;
    }
    
+   /**
+    * Metodo que retorna una entrada dado su id
+    * @param entradaId
+    * @return 
+    */
    @GET
    @Path("{entradasId: \\d+}")
    public EntradaDTO getEntrada(@PathParam("entradasId") Long entradaId){
@@ -67,6 +88,13 @@ public class EntradaResource {
        return entradaDTO;
    }
    
+   /**
+    * Metodo que actualiza una entrada
+    * @param entradaId
+    * @param entrada
+    * @return
+    * @throws BusinessLogicException 
+    */
    @PUT
    @Path("(entradasId: \\d+")
    public EntradaDTO updateEntrada (@PathParam("entradasId") Long entradaId, EntradaDetailDTO entrada)throws BusinessLogicException{
@@ -79,6 +107,10 @@ public class EntradaResource {
        return entrada;
    }
    
+   /**
+    * Elimina una entrada
+    * @param entradaId 
+    */
    @DELETE
    @Path("(entradasId: \\d+)")
    public void deleteEntrada (@PathParam("entradasId") Long entradaId){
