@@ -19,9 +19,19 @@
 					}
 				}
 			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": ""
@@ -64,7 +74,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones/{{calif1}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones/100",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -74,7 +84,7 @@
 						"s1_eventos-api",
 						"api",
 						"calificaciones",
-						"{{calif1}}"
+						"100"
 					]
 				}
 			},
@@ -102,7 +112,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones/{{calif1}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones/100",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -112,7 +122,7 @@
 						"s1_eventos-api",
 						"api",
 						"calificaciones",
-						"{{calif1}}"
+						"100"
 					]
 				}
 			},
@@ -122,10 +132,17 @@
 			"name": "Calificaciones",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n        \"type\": \"calificacionDetailDTO\",\n        \"estrellas\": 5,\n        \"checkIn\": false,\n        \"comentario\": \"Esta muy firme\",\n        \"recomendado\": false\n    }"
+					"raw": "{\t\t\n\t\t\"estrellas\": 5,\n    \t\"comentario\": \"Esta muy firme\",\n        \"recomendado\": 1\n}"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones/",
