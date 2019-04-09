@@ -71,12 +71,14 @@ public class MedioDePagoResource {
      * @return 
      */
     @GET
-    @Path("(mediosDePagoId: \\d+)")
+    @Path("{mediosDePagoId: \\d+}")
     public MedioDePagoDTO getMedioDePago(@PathParam("mediosDePagoId") Long medioDePagoId)
     {
         MedioDePagoEntity entity = medioDePagoLogic.find(medioDePagoId);
-        if(entity==null)
+        if(entity==null){
+            System.out.println("ESA MIERDA NO EXISTE");
             throw new WebApplicationException("El recurso no existe",404);
+        }
         MedioDePagoDetailDTO medioDePagoDTO = new MedioDePagoDetailDTO(medioDePagoLogic.find(medioDePagoId));
         return medioDePagoDTO;
     }
@@ -88,7 +90,7 @@ public class MedioDePagoResource {
      * @return 
      */
     @PUT
-    @Path("(mediosDePagoId: \\d+)")
+    @Path("{mediosDePagoId: \\d+}")
     public MedioDePagoDTO updateMedioDePago(@PathParam("mediosDePagoId") Long medioDePagoId, MedioDePagoDetailDTO medioDePago)
     {  // medioDePago.setId(medioDePagoId);
         MedioDePagoEntity entity = medioDePagoLogic.find(medioDePagoId);
@@ -104,7 +106,7 @@ public class MedioDePagoResource {
      * @param medioDePagoId 
      */
     @DELETE
-    @Path("(mediosDePagoId: \\d+)")
+    @Path("{mediosDePagoId: \\d+}")
     public void deleteMedioDePago(@PathParam("mediosDePagoId") Long medioDePagoId)
     {
         if(medioDePagoLogic.find(medioDePagoId)==null){

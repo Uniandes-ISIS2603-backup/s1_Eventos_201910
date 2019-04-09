@@ -21,14 +21,14 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
      * Usuario entity
      */
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(fetch=javax.persistence.FetchType.LAZY)
     private UsuarioEntity usuario;
     
     /**
      * Evento entity
      */
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(fetch=javax.persistence.FetchType.LAZY)
     private EventoEntity evento;
 
     /**

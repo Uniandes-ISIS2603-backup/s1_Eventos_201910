@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import static javax.persistence.FetchType.LAZY;
 import uk.co.jemos.podam.common.PodamExclude;
 import javax.persistence.ManyToOne;
 
@@ -25,21 +25,21 @@ public class EntradaEntity extends BaseEntity implements Serializable{
      * Usuario entity
      */
       @PodamExclude
-      @ManyToOne
+      @ManyToOne(fetch=javax.persistence.FetchType.LAZY)
       private UsuarioEntity usuario;
       
       /**
        * Evento entity
        */
       @PodamExclude
-      @ManyToOne
+      @javax.persistence.ManyToOne(fetch=javax.persistence.FetchType.LAZY)
       private EventoEntity evento;
       
       /**
        * Factura entity
        */
       @PodamExclude
-      @ManyToOne
+      @ManyToOne(fetch=javax.persistence.FetchType.LAZY)
       private FacturaEntity factura;
 
       /**

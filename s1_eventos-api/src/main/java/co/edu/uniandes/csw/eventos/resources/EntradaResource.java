@@ -96,7 +96,7 @@ public class EntradaResource {
     * @throws BusinessLogicException 
     */
    @PUT
-   @Path("(entradasId: \\d+")
+   @Path("{entradasId: \\d+}")
    public EntradaDTO updateEntrada (@PathParam("entradasId") Long entradaId, EntradaDetailDTO entrada)throws BusinessLogicException{
        entrada.setId(entradaId);
        EntradaEntity entity = entradaLogic.find(entradaId);
@@ -112,7 +112,7 @@ public class EntradaResource {
     * @param entradaId 
     */
    @DELETE
-   @Path("(entradasId: \\d+)")
+   @Path("{entradasId: \\d+}")
    public void deleteEntrada (@PathParam("entradasId") Long entradaId){
        //
        entradaLogic.deleteEntrada(entradaId);

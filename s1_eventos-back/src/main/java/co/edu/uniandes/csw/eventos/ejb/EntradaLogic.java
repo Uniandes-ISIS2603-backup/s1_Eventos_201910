@@ -56,7 +56,10 @@ public class EntradaLogic {
     
     public List<EntradaEntity> findAll()
     {
-        return persistence.findAll();
+          System.out.println("B0^*******************");
+        List<EntradaEntity> list = persistence.findAll();
+        System.out.println("B1^*******************");
+        return list;
     }
     
 }
