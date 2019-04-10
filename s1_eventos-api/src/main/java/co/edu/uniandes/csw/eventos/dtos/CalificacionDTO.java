@@ -32,6 +32,16 @@ public class CalificacionDTO implements Serializable {
     
     private Long id;
     
+    private Long deAcuerdo;
+
+    public Long getDeAcuerdo() {
+        return deAcuerdo;
+    }
+
+    public void setDeAcuerdo(Long deAcuerdo) {
+        this.deAcuerdo = deAcuerdo;
+    }
+    
     /*
         Constructor de la calificacion
     */
@@ -43,6 +53,7 @@ public class CalificacionDTO implements Serializable {
             this.comentario=calificacionEntity.getComentarios();
             this.estrellas=calificacionEntity.getEstrellas();
             this.recomendado=calificacionEntity.getRecomendado();
+            this.deAcuerdo=calificacionEntity.getDeAcuerdo();
         }
     }
       
@@ -100,6 +111,7 @@ public class CalificacionDTO implements Serializable {
         calificacionEntity.setComentarios(this.comentario);
         calificacionEntity.setEstrellas(this.estrellas);
         calificacionEntity.setRecomendado(this.isRecomendado());
+        calificacionEntity.setDeAcuerdo(this.deAcuerdo);
         return calificacionEntity;
     }
     

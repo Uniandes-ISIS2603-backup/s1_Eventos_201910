@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.eventos.entities;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Column;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -79,11 +80,22 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
     /**
      * Comentarios de la calificacion
      */
+    @Column( length = 3500)
     private String comentarios;
     /**
      * Estado de recomendado de la calificacion
      */
     private String recomendado;
+    
+    private Long deAcuerdo;
+
+    public Long getDeAcuerdo() {
+        return deAcuerdo;
+    }
+
+    public void setDeAcuerdo(Long deAcuerdo) {
+        this.deAcuerdo = deAcuerdo;
+    }
     
     /**
      * Retorna las estrellas de la calificacion
