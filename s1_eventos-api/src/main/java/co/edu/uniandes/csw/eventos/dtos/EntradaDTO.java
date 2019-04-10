@@ -28,7 +28,7 @@ public class EntradaDTO implements Serializable {
     /*
         Atributo de tipo double que representa el precio de la entrada
     */
-    private Integer precio ;
+    private String precio ;
     /*
     Atributo de tipo String que representa la locacion de la entrada
     */
@@ -36,19 +36,19 @@ public class EntradaDTO implements Serializable {
     /*
         Atributo de tipo int que indica el numero de la boleta
     */
-    private Integer numero;
+    private String numero;
     /*
         Atributo de tipo booleano que indica si la boleta esta disponible
     */
-    private Boolean disponible;
+    private String disponible;
     /*
         Atributo de tipo booleano que indica si ya se hizo check-In con la boleta
     */
-    private Boolean checkIn;
+    private String checkIn;
     /*
         Atributo de tipo booleano que indica si la boleta esta reservada
     */
-    private Boolean reservado;
+    private String reservado;
 
     /**
      *Constructor 
@@ -90,7 +90,7 @@ public class EntradaDTO implements Serializable {
     /**
      *  @return precio. Retorna el precio
     **/
-    public Integer getPrecio() {
+    public String getPrecio() {
         return precio;
     }
     /**
@@ -102,25 +102,25 @@ public class EntradaDTO implements Serializable {
     /**
      * @return numero. Retorna el numero de la entrada
     **/
-    public Integer getNumero() {
+    public String getNumero() {
         return numero;
     }
     /**
      *  @return disponible. Retorna si esta disponible, true, de lo contrario false
     **/
-    public Boolean isDisponible() {
+    public String isDisponible() {
         return disponible;
     }
     /**
        * @reteurn checkIn. Retorna si ya se realizo checkIn, true, de lo contrario false
     **/
-    public Boolean isCheckIn() {
+    public String isCheckIn() {
         return checkIn;
     }
     /**
      *  @return reservado. Retorna si esta reservada, true, de lo contrario false
     **/
-    public Boolean isReservado() {
+    public String isReservado() {
         return reservado;
     }
     /**
@@ -138,25 +138,25 @@ public class EntradaDTO implements Serializable {
     /**
      *@param precio. Reinicializa el valor del precio
     **/
-    public void setPrecio(int precio) {
+    public void setPrecio(String precio) {
         this.precio = precio;
     }
     /**
      * @param disponible. Reinicializa el valor de disponible
     **/
-    public void setDisponible(boolean disponible) {
+    public void setDisponible(String disponible) {
         this.disponible = disponible;
     }
     /**
       * @param checkIn  Reinicializa el valor de checkIn
     **/
-    public void setCheckIn(boolean checkIn) {
+    public void setCheckIn(String checkIn) {
         this.checkIn = checkIn;
     }
     /**
       *@param reservado  Reinicializa el valor de reservado
     **/
-    public void setReservado(boolean reservado) {
+    public void setReservado(String reservado) {
         this.reservado = reservado;
     }
     
@@ -197,7 +197,7 @@ public class EntradaDTO implements Serializable {
     /**
      * @param numero the numero to set
      */
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 

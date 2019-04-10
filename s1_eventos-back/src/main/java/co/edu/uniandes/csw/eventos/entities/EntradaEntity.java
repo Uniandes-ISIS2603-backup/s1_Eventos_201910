@@ -101,7 +101,7 @@ public class EntradaEntity extends BaseEntity implements Serializable{
     /**
      * Precio de la entrada
      */
-    private int precio;
+    private String precio;
     /**
      * Locacion de la entrada
      */
@@ -109,19 +109,19 @@ public class EntradaEntity extends BaseEntity implements Serializable{
     /**
      * Numero de la entrada
      */
-    private int numero;
+    private String numero;
     /**
      * estado disponibilidad de la entrada
      */
-    private boolean disponible;
+    private String disponible;
     /**
      * estado de checkIn de la entrada
      */
-    private boolean checkIn;
+    private String checkIn;
     /**
      * estado de la reserva de la entrada
      */
-    private boolean reservado;
+    private String reservado;
     
    
     /**
@@ -168,7 +168,7 @@ public class EntradaEntity extends BaseEntity implements Serializable{
      * Retorna el precio 
      * @return precio
      */
-    public int getPrecio() {
+    public String getPrecio() {
         return precio;
     }
 
@@ -176,7 +176,7 @@ public class EntradaEntity extends BaseEntity implements Serializable{
      * Modifica el precio
      * @param precio 
      */
-    public void setPrecio(int precio) {
+    public void setPrecio(String precio) {
         this.precio = precio;
     }
 
@@ -200,7 +200,7 @@ public class EntradaEntity extends BaseEntity implements Serializable{
      * Retorna el numero 
      * @return 
      */
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
@@ -208,7 +208,7 @@ public class EntradaEntity extends BaseEntity implements Serializable{
      * Modifica el numero
      * @param numero 
      */
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
@@ -216,7 +216,7 @@ public class EntradaEntity extends BaseEntity implements Serializable{
      * Retorna si esta disponible
      * @return disponible
      */
-    public boolean isDisponible() {
+    public String isDisponible() {
         return disponible;
     }
 
@@ -224,7 +224,7 @@ public class EntradaEntity extends BaseEntity implements Serializable{
      * Modifica i esta disponible
      * @param disponible 
      */
-    public void setDisponible(boolean disponible) {
+    public void setDisponible(String disponible) {
         this.disponible = disponible;
     }
 
@@ -232,7 +232,7 @@ public class EntradaEntity extends BaseEntity implements Serializable{
      * Retorna si el check in ya se realizo
      * @return checkIn
      */
-    public boolean isCheckIn() {
+    public String isCheckIn() {
         return checkIn;
     }
 
@@ -240,7 +240,7 @@ public class EntradaEntity extends BaseEntity implements Serializable{
      * Modifica el estado del checkIn
      * @param checkIn 
      */
-    public void setCheckInm(boolean checkIn) {
+    public void setCheckInm(String checkIn) {
         this.checkIn = checkIn;
     }
 
@@ -248,7 +248,7 @@ public class EntradaEntity extends BaseEntity implements Serializable{
      * Retorna si esta reservada
      * @return reservada
      */
-    public boolean isReservado() {
+    public String isReservado() {
         return reservado;
     }
 
@@ -256,7 +256,7 @@ public class EntradaEntity extends BaseEntity implements Serializable{
      * Modifica el estado de reserva
      * @param reservada 
      */
-    public void setReservado(boolean reservada) {
+    public void setReservado(String reservada) {
         this.reservado = reservada;
     }
     

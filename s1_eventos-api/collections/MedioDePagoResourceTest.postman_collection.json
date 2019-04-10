@@ -167,7 +167,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n        \"numero\": \"9090121267675432\",\n        \"titular\": \"JONATAN TIRATE UNPASO\",\n        \"codigoDeSeguridad\": \"181\",\n        \"fechaDeExpiracion\": \"2020-11-24 00:00:59\"\n}"
+					"raw": "{\n        \"numero\": \"9090121267675432\",\n        \"titular\": \"JONATAN TIRATE UNPASO\",\n        \"codigoDeSeguridad\": \"181\",\n        \"fechaDeExpiracion\": \"2020-07-24T00:00:00-05:00\"\n}"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago",
@@ -180,6 +180,39 @@
 						"s1_eventos-api",
 						"api",
 						"mediosDePago"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MediosDePago",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"codigoDeSeguridad\": \"019\",\n        \"fechaDeExpiracion\": \"2020-07-24T00:00:59-05:00\",\n        \"numero\": \"4092907665439090\",\n        \"titular\": \"JUAN DAVID zhendong\"\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/100",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"mediosDePago",
+						"100"
 					]
 				}
 			},

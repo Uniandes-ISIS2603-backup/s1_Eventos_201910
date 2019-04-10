@@ -40,7 +40,7 @@ public class MedioDePagoEntity extends BaseEntity implements Serializable {
     /**
      * fecha de expiracion del medio de pago
      */
-     @Temporal(javax.persistence.TemporalType.DATE)
+    
     private Date fechaDeExpiracion;
     
     /**

@@ -19,7 +19,7 @@ public class CalificacionDTO implements Serializable {
         Atributo de tipo int que indica la cantidad de estrellas de la calificacion
     */
    //probando git
-    private Integer estrellas;
+    private String estrellas;
     /*
         Atributo de  tipo String que contiene el comentario de la calificacion
     */
@@ -27,7 +27,7 @@ public class CalificacionDTO implements Serializable {
     /*
         Atributo de tipo booleano que indica si se recomienda o no
     */
-    private Boolean recomendado;
+    private String recomendado;
 
     
     private Long id;
@@ -55,7 +55,7 @@ public class CalificacionDTO implements Serializable {
       /**
        * @return estrellas.  Retorna las estrellas
       **/
-    public int getEstrellas() {
+    public String getEstrellas() {
         return estrellas;
     }
      /**
@@ -67,13 +67,13 @@ public class CalificacionDTO implements Serializable {
     /**
        * @return recomendado. Retorna si es recomendado
       **/
-    public boolean isRecomendado() {
+    public String isRecomendado() {
         return recomendado;
     }
     /**
        @param estrellas. Reinicializa las estrellas
       **/
-    public void setEstrellas(Integer estrellas) {
+    public void setEstrellas(String estrellas) {
         this.estrellas = estrellas;
     }
     /**
@@ -85,7 +85,7 @@ public class CalificacionDTO implements Serializable {
     /**
        * @param recomendado. Reinicializa si es recomendado
       **/
-    public void setRecomendado(Boolean recomendado) {
+    public void setRecomendado(String recomendado) {
         this.recomendado = recomendado;
     }
     
@@ -97,8 +97,8 @@ public class CalificacionDTO implements Serializable {
     {
         CalificacionEntity calificacionEntity = new CalificacionEntity();
         calificacionEntity.setId(this.id);
-        calificacionEntity.setComentarios(this.getComentario());
-        calificacionEntity.setEstrellas(this.getEstrellas());
+        calificacionEntity.setComentarios(this.comentario);
+        calificacionEntity.setEstrellas(this.estrellas);
         calificacionEntity.setRecomendado(this.isRecomendado());
         return calificacionEntity;
     }

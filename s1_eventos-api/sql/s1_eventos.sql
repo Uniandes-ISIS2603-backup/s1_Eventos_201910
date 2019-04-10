@@ -16,18 +16,18 @@ insert into OrganizadorEntity(id, nombre, telefono, correoElectronico) values (2
 insert into OrganizadorEntity(id, nombre, telefono, correoElectronico) values (300, 'Sueño Estéreo SAS', '4660807','info@stivalestereopicnic.com');
 insert into OrganizadorEntity(id, nombre, telefono, correoElectronico) values (400, 'Produccion de Eventos 911 SAS', '4324075', 'info@logistica911.com');
 
-insert into CalificacionEntity(id, estrellas, comentarios, recomendado) values (100,3,'Muy regular el evento.',0);
-insert into CalificacionEntity(id, estrellas, comentarios, recomendado) values (200,5,'Espectacular! Me encantó',1);
-insert into CalificacionEntity(id, estrellas, comentarios, recomendado) values (300,4,'Interesante iniciativa. VIVA EL POPULISMO!',1);
-insert into CalificacionEntity(id, estrellas, comentarios, recomendado) values (400,0,'La peor experiencia de mi vida',1);
+insert into CalificacionEntity(id, estrellas, comentarios, recomendado) values (1,'3','Muy regular el evento.','N');
+insert into CalificacionEntity(id, estrellas, comentarios, recomendado) values (2,'5','Espectacular! Me encantó','N');
+insert into CalificacionEntity(id, estrellas, comentarios, recomendado) values (3,'4','Interesante iniciativa. VIVA EL POPULISMO!','Y');
+insert into CalificacionEntity(id, estrellas, comentarios, recomendado) values (4,'0','La peor experiencia de mi vida','N');
 
 
-insert into EntradaEntity(id, QR, descripcion, precio, locacion, numero, disponible, checkIn, reservado) values (100, 'QR1','El evento mas loco del mundo',1000,'Preferencial A',123,1,0,1 );
-insert into EntradaEntity(id, QR, descripcion, precio, locacion, numero, disponible, checkIn, reservado) values (200, 'QR2','La experiencia más reveladora del año',100100,'Preferencial B',321,0,0,0 );
-insert into EntradaEntity(id, QR, descripcion, precio, locacion, numero, disponible, checkIn, reservado) values (300, 'QR1','Ven y ayuda a que estudiante del Pacífico puedan estudiar en los Andes',0,'Preferencial A',123,1,0,1 );
-insert into EntradaEntity(id, QR, descripcion, precio, locacion, numero, disponible, checkIn, reservado) values (400, 'QR1','Beerpong con Pablo Novoa: El evento más alocado del país entero mundial',0,'Preferencial A',124,1,1,1 );
+insert into EntradaEntity(id, QR, descripcion, precio, locacion, numero, disponible, checkIn, reservado) values (1, 'QR1','El evento mas loco del mundo','1000','Preferencial A','123','Y','N','Y');
+insert into EntradaEntity(id, QR, descripcion, precio, locacion, numero, disponible, checkIn, reservado) values (2, 'QR2','La experiencia más reveladora del año','100100','Preferencial B','321','N','N','N' );
+insert into EntradaEntity(id, QR, descripcion, precio, locacion, numero, disponible, checkIn, reservado) values (3, 'QR3','Ven y ayuda a que estudiante del Pacífico puedan estudiar en los Andes','0','Preferencial A','123','Y','N','Y' );
+insert into EntradaEntity(id, QR, descripcion, precio, locacion, numero, disponible, checkIn, reservado) values (4, 'QR4','Beerpong con Pablo Novoa: El evento más alocado del país entero mundial','0','Preferencial A','124','Y','Y','Y' );
 
-insert into MedioDePagoEntity(id, numero, titular, codigoDeSeguridad, fechaDeExpiracion) values (100,'4092907665439090','JUAN DAVID D','019','2020-07-24 00:00:59');
-insert into MedioDePagoEntity(id, numero, titular, codigoDeSeguridad, fechaDeExpiracion) values (200,'7778654553221901','JUAN ROMAN RIQUELME','123','2021-12-24 00:00:59');
-insert into MedioDePagoEntity(id, numero, titular, codigoDeSeguridad, fechaDeExpiracion) values (300,'2236875791287138','CALORS VIAFARA','793','2019-05-24 00:00:59');
-insert into MedioDePagoEntity(id, numero, titular, codigoDeSeguridad, fechaDeExpiracion) values (400,'5032908625469090','PEDRO PABLO L','111','2021-07-24 00:00:59');
+insert into MedioDePagoEntity(id, numero, titular, codigoDeSeguridad, fechaDeExpiracion) values (1,'4092907665439090','JUAN DAVID D','019','2020-07-24 00:00:59');
+insert into MedioDePagoEntity(id, numero, titular, codigoDeSeguridad, fechaDeExpiracion) values (2,'7778654553221901','JUAN ROMAN RIQUELME','123','2021-12-24 00:00:59');
+insert into MedioDePagoEntity(id, numero, titular, codigoDeSeguridad, fechaDeExpiracion) values (3,'2236875791287138','CALORS VIAFARA','793','2019-05-24 00:00:59');
+insert into MedioDePagoEntity(id, numero, titular, codigoDeSeguridad, fechaDeExpiracion) values (4,'5032908625469090','PEDRO PABLO L','111','2021-07-24 00:00:59');

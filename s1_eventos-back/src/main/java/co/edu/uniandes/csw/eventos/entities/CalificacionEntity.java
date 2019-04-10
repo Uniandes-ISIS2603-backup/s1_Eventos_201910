@@ -75,7 +75,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
     /**
      * Estrellas de la calificacion
      */
-    private int estrellas;
+    private String estrellas;
     /**
      * Comentarios de la calificacion
      */
@@ -83,13 +83,13 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
     /**
      * Estado de recomendado de la calificacion
      */
-    private Boolean recomendado;
+    private String recomendado;
     
     /**
      * Retorna las estrellas de la calificacion
      * @return esstrellas
      */
-    public int getEstrellas() {
+    public String getEstrellas() {
         return estrellas;
     }
 
@@ -97,7 +97,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
      * Modifica las estrellas de la calificacion
      * @param estrellas 
      */
-    public void setEstrellas(int estrellas) {
+    public void setEstrellas(String estrellas) {
         this.estrellas = estrellas;
     }
 
@@ -121,7 +121,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
      * Retorna si el comentario es recomendado
      * @return recomendado
      */
-    public Boolean getRecomendado() {
+    public String getRecomendado() {
         return recomendado;
     }
 
@@ -129,7 +129,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
      * Modifica el recomendado 
      * @param recomendado 
      */
-    public void setRecomendado(Boolean recomendado) {
+    public void setRecomendado(String recomendado) {
         this.recomendado = recomendado;
     }
 

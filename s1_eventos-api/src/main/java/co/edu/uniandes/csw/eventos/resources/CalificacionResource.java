@@ -101,7 +101,7 @@ public class CalificacionResource {
     * @throws BusinessLogicException 
     */
    @PUT
-   @Path("(calificacionesId: \\d+")
+   @Path("{calificacionesId: \\d+}")
    public CalificacionDTO updateCalificacion (@PathParam("calificacionesId") Long calificacionId, CalificacionDetailDTO calificacion)  throws BusinessLogicException{
        calificacion.setId(calificacionId);
        CalificacionEntity entity = calificacionLogic.findCalificacion(calificacionId);

@@ -76,7 +76,6 @@ public class MedioDePagoResource {
     {
         MedioDePagoEntity entity = medioDePagoLogic.find(medioDePagoId);
         if(entity==null){
-            System.out.println("ESA MIERDA NO EXISTE");
             throw new WebApplicationException("El recurso no existe",404);
         }
         MedioDePagoDetailDTO medioDePagoDTO = new MedioDePagoDetailDTO(medioDePagoLogic.find(medioDePagoId));

@@ -142,10 +142,42 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\t\t\n\t\t\"estrellas\": 5,\n    \t\"comentario\": \"Esta muy firme\",\n        \"recomendado\": 1\n}"
+					"raw": "{\t\t\n\t\t\"estrellas\": \"5\",\n    \t\"comentario\": \"Esta muy firme\",\n        \"recomendado\": \"Y\"\n}"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones/",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"calificaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Calificaciones",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n        \"comentario\": \"Muy regular el evento.CHOLE CHOOOOO2\",\n        \"estrellas\": \"3\",\n        \"recomendado\": \"N\"\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones/100",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -155,7 +187,7 @@
 						"s1_eventos-api",
 						"api",
 						"calificaciones",
-						""
+						"100"
 					]
 				}
 			},
