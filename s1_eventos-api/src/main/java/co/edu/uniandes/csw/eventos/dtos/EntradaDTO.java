@@ -168,6 +168,7 @@ public class EntradaDTO implements Serializable {
     {
         EntradaEntity entradaEntity = new EntradaEntity();
         entradaEntity.setId(this.getId());
+        entradaEntity.setQR(this.getQR());
         entradaEntity.setDescripcion(this.descripcion);
         entradaEntity.setPrecio(this.precio);
         entradaEntity.setLocacion(this.locacion);
