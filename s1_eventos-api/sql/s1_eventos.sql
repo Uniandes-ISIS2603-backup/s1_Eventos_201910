@@ -66,7 +66,7 @@ insert into AgendaEntity_InvitadoEspecialEntity(invitadosEspeciales_id,agenda_id
 
 
 
-insert into EventoEntity_OrganizadorEntity(eventos_id,organizadores_id) values (100,400);
+/*insert into EventoEntity_OrganizadorEntity(eventos_id,organizadores_id) values (100,400);
 insert into EventoEntity_OrganizadorEntity(eventos_id,organizadores_id) values (200,100);
 insert into EventoEntity_OrganizadorEntity(eventos_id,organizadores_id) values (400,300);
 insert into EventoEntity_OrganizadorEntity(eventos_id,organizadores_id) values (200,200);
@@ -82,7 +82,7 @@ insert into EventoEntity_UsuarioEntity(eventos_id, usuarios_id) values(100,400);
 insert into EventoEntity_UsuarioEntity(eventos_id, usuarios_id) values(300,300);
 insert into EventoEntity_UsuarioEntity(eventos_id, usuarios_id) values(400,100);
 
-
+*/
 insert into FacturaEntity(id, fecha, iva, nombre, total, usuario_id) values (100, '2020-02-23', 0.16, 'Carlos Lopez', 85000,100); 
 insert into FacturaEntity(id, fecha, iva, nombre, total, usuario_id) values (200, '2020-03-05', 0.16, 'Laura Suarez', 50000,300); 
 insert into FacturaEntity(id, fecha, iva, nombre, total, usuario_id) values (300, '2020-10-29', 0.16, 'Camilo Garcia', 0,200); 
