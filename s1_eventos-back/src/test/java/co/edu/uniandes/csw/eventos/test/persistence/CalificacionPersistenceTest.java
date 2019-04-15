@@ -31,17 +31,33 @@ import org.junit.Assert;
 @RunWith(Arquillian.class)
 public class CalificacionPersistenceTest {
     
+    /**
+     * Persistencia de Calificacion
+     */
     @Inject
     private CalificacionPersistence calificacionPersistence;
     
+    /**
+     * Contexto de persistencia
+     */
     @PersistenceContext
     private EntityManager em;
     
+    /**
+     * User transaction
+     */
     @Inject
     UserTransaction utx;
     
+    /**
+     * Lista de calificaciones Enttiy
+     */
     private List<CalificacionEntity> data = new ArrayList<CalificacionEntity>();
     
+    /**
+     * Deployment
+     * @return 
+     */
     @Deployment
     public static JavaArchive createDeployment()
     {
@@ -51,6 +67,9 @@ public class CalificacionPersistenceTest {
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
     
+    /**
+     * Configuracion inicial
+     */
     @Before
     public void configTest() {
         try {
@@ -76,6 +95,9 @@ public class CalificacionPersistenceTest {
         em.createQuery("delete from CalificacionEntity").executeUpdate();
     }
     
+    /**
+     * Inserta la informacion
+     */
      private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
@@ -88,6 +110,9 @@ public class CalificacionPersistenceTest {
         }
     }
      
+     /**
+      * Crea la calificacion test
+      */
      @Test
      public void createCalificacionTest()
      {
@@ -101,6 +126,10 @@ public class CalificacionPersistenceTest {
           
           Assert.assertEquals(newEntity.getId(),entity.getId());
      }
+     
+     /**
+      * test de obtener las calificaciones
+      */
      @Test
      public void getCalificacionesTest()
      {
@@ -117,6 +146,9 @@ public class CalificacionPersistenceTest {
          }
      }
      
+     /**
+      * Test de obtener calificaciones
+      */
      @Test
      public void getCalificacionTest()
      {
@@ -128,6 +160,9 @@ public class CalificacionPersistenceTest {
          Assert.assertEquals(entity.getRecomendado(),newEntity.getRecomendado());
      }
      
+     /**
+      * test de actualizar las calificaciones
+      */
      @Test
      public void updateCalificacionTest()
      {

@@ -18,8 +18,11 @@ import javax.persistence.Temporal;
 @Entity
 public class MedioDePagoEntity extends BaseEntity implements Serializable {
     
+    /**
+     * Usuario entity
+     */
      @PodamExclude
-     @ManyToOne
+     @ManyToOne(fetch=javax.persistence.FetchType.LAZY)
      private UsuarioEntity usuario;
     /**
      * id del medio de pago
@@ -33,11 +36,11 @@ public class MedioDePagoEntity extends BaseEntity implements Serializable {
     /**
      * codigo de seguridad del medio de pago
      */
-    private Integer codigoDeSeguridad;
+    private String codigoDeSeguridad;
     /**
      * fecha de expiracion del medio de pago
      */
-     @Temporal(javax.persistence.TemporalType.DATE)
+    
     private Date fechaDeExpiracion;
     
     /**
@@ -84,14 +87,22 @@ public class MedioDePagoEntity extends BaseEntity implements Serializable {
      * Retorna el codigo 
      * @return codigoDeCelular
      */
-    public Integer getCodigoDeSeguridad() {
+    public String getCodigoDeSeguridad() {
         return codigoDeSeguridad;
     }
 
+    /**
+     * Obtiene el usuario de un medio de pago
+     * @return 
+     */
     public UsuarioEntity getUsuario() {
         return usuario;
     }
 
+    /**
+     * Asgina el usuario de un medio de pago
+     * @param usuario 
+     */
     public void setUsuario(UsuarioEntity usuario) {
         this.usuario = usuario;
     }
@@ -100,7 +111,7 @@ public class MedioDePagoEntity extends BaseEntity implements Serializable {
      * Modifica el codigo de celular
      * @param codigoDeSeguridad 
      */
-    public void setCodigoDeSeguridad(Integer codigoDeSeguridad) {
+    public void setCodigoDeSeguridad(String codigoDeSeguridad) {
         this.codigoDeSeguridad = codigoDeSeguridad;
     }
 
