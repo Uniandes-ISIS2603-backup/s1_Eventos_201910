@@ -32,13 +32,13 @@ public class CalificacionDTO implements Serializable {
     
     private Long id;
     
-    private Long deAcuerdo;
+    private String deAcuerdo;
 
-    public Long getDeAcuerdo() {
+    public String getDeAcuerdo() {
         return deAcuerdo;
     }
 
-    public void setDeAcuerdo(Long deAcuerdo) {
+    public void setDeAcuerdo(String deAcuerdo) {
         this.deAcuerdo = deAcuerdo;
     }
     

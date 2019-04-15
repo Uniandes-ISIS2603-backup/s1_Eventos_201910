@@ -91,7 +91,7 @@ public class MedioDePagoResource {
     @PUT
     @Path("{mediosDePagoId: \\d+}")
     public MedioDePagoDTO updateMedioDePago(@PathParam("mediosDePagoId") Long medioDePagoId, MedioDePagoDetailDTO medioDePago)
-    {  // medioDePago.setId(medioDePagoId);
+    {   medioDePago.setId(medioDePagoId);
         MedioDePagoEntity entity = medioDePagoLogic.find(medioDePagoId);
         if(entity==null){
             throw new WebApplicationException("El recurso no existe",404);

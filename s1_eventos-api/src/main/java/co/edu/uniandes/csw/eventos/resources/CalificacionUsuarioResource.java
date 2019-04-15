@@ -57,7 +57,7 @@ public class CalificacionUsuarioResource {
      * @return
      * @throws BusinessLogicException 
      */
-    @POST
+    @GET
     @Path("{usuariosId: \\d+}")
     public UsuarioDetailDTO getUsuario(@PathParam("calificacionesId") Long calificacionesId, @PathParam("usuariosId") Long usuariosId) throws BusinessLogicException{
        if(usuarioLogic.find(usuariosId)==null){

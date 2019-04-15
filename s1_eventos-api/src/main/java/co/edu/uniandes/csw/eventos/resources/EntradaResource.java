@@ -112,7 +112,7 @@ public class EntradaResource {
     * @param entradaId 
     */
    @DELETE
-   @Path("{entradasId: \\d+}")
+   @Path("(entradasId: \\d+)")
    public void deleteEntrada (@PathParam("entradasId") Long entradaId){
        //
        entradaLogic.deleteEntrada(entradaId);
