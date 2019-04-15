@@ -20,9 +20,19 @@
 					}
 				}
 			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": ""
@@ -59,13 +69,20 @@
 			],
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n        \"type\": \"entradaDetailDTO\",\n        \"QR\": \"nox\",\n        \"checkIn\": false,\n        \"descripcion\": \"evento setenta perruno\",\n        \"disponible\": false,\n        \"locacion\": \"PUJ 301\",\n        \"numero\": 1234,\n        \"precio\": 1001,\n        \"reservado\": true\n    }"
+					"raw": "{\n        \"QR\": \"nox\",\n        \"checkIn\": \"Y\",\n        \"descripcion\": \"evento setenta perruno\",\n        \"disponible\": \"Y\",\n        \"locacion\": \"PUJ 301\",\n        \"numero\": \"1234\",\n        \"precio\": \"1001\",\n        \"reservado\": \"N\"\n    }"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/entradas/{{entrada1}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/entradas/",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -75,7 +92,7 @@
 						"s1_eventos-api",
 						"api",
 						"entradas",
-						"{{entrada1}}"
+						""
 					]
 				}
 			},
@@ -103,7 +120,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/entradas/{{entrada1}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/entradas/22",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -113,7 +130,7 @@
 						"s1_eventos-api",
 						"api",
 						"entradas",
-						"{{entrada1}}"
+						"22"
 					]
 				}
 			},
@@ -121,27 +138,22 @@
 		},
 		{
 			"name": "Entradas",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "e393d2ba-1251-4419-8f08-531567f3a3e7",
-						"exec": [
-							"tests[\"No genera error en el Delete\"] = responseCode.code === 200;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
 			"request": {
-				"method": "DELETE",
-				"header": [],
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": ""
+					"raw": "{\n        \"QR\": \"po\",\n        \"checkIn\": \"N\",\n        \"descripcion\": \"El evento mas loco del mundo. AAA\",\n        \"disponible\": \"Y\",\n        \"locacion\": \"Preferencial A\",\n        \"numero\": \"123\",\n        \"precio\": \"1000\",\n        \"reservado\": \"Y\"\n    }"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/entradas/{{entrada1}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/entradas/22",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -151,7 +163,7 @@
 						"s1_eventos-api",
 						"api",
 						"entradas",
-						"{{entrada1}}"
+						"22"
 					]
 				}
 			},

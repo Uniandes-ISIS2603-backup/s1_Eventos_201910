@@ -33,15 +33,31 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class CalificacionUsuarioResource {
+    /**
+     * Logger
+     */
     private static final Logger LOGGER = Logger.getLogger(CalificacionUsuarioResource.class.getName());
     
+    /**
+     * Logica de la calificacion-usuario
+     */
      @Inject
     private CalificacionUsuarioLogic calificacionUsuarioLogic;
 
+     /**
+      * Logica del usuario
+      */
     @Inject
     private EventoLogic usuarioLogic;
     
-    @POST
+    /**
+     * Crea una calificacion a un usuario
+     * @param calificacionesId
+     * @param usuariosId
+     * @return
+     * @throws BusinessLogicException 
+     */
+    @GET
     @Path("{usuariosId: \\d+}")
     public UsuarioDetailDTO getUsuario(@PathParam("calificacionesId") Long calificacionesId, @PathParam("usuariosId") Long usuariosId) throws BusinessLogicException{
        if(usuarioLogic.find(usuariosId)==null){

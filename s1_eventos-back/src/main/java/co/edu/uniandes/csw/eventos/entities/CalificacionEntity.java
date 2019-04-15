@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.eventos.entities;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Column;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -17,18 +18,32 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class CalificacionEntity extends BaseEntity implements Serializable{
     
+    /**
+     * Usuario entity
+     */
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(fetch=javax.persistence.FetchType.LAZY)
     private UsuarioEntity usuario;
     
+    /**
+     * Evento entity
+     */
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(fetch=javax.persistence.FetchType.LAZY)
     private EventoEntity evento;
 
+    /**
+     * Retorna el evento dueño de la calificacion
+     * @return 
+     */
     public EventoEntity getEvento() {
         return evento;
     }
 
+    /**
+     * Asigna el evento 
+     * @param evento 
+     */
     public void setEvento(EventoEntity evento) {
         this.evento = evento;
     }
@@ -61,21 +76,32 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
     /**
      * Estrellas de la calificacion
      */
-    private int estrellas;
+    private String estrellas;
     /**
      * Comentarios de la calificacion
      */
+    @Column( length = 3500)
     private String comentarios;
     /**
      * Estado de recomendado de la calificacion
      */
-    private Boolean recomendado;
+    private String recomendado;
+    
+    private String deAcuerdo;
+
+    public String getDeAcuerdo() {
+        return deAcuerdo;
+    }
+
+    public void setDeAcuerdo(String deAcuerdo) {
+        this.deAcuerdo = deAcuerdo;
+    }
     
     /**
      * Retorna las estrellas de la calificacion
      * @return esstrellas
      */
-    public int getEstrellas() {
+    public String getEstrellas() {
         return estrellas;
     }
 
@@ -83,7 +109,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
      * Modifica las estrellas de la calificacion
      * @param estrellas 
      */
-    public void setEstrellas(int estrellas) {
+    public void setEstrellas(String estrellas) {
         this.estrellas = estrellas;
     }
 
@@ -107,7 +133,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
      * Retorna si el comentario es recomendado
      * @return recomendado
      */
-    public Boolean getRecomendado() {
+    public String getRecomendado() {
         return recomendado;
     }
 
@@ -115,7 +141,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
      * Modifica el recomendado 
      * @param recomendado 
      */
-    public void setRecomendado(Boolean recomendado) {
+    public void setRecomendado(String recomendado) {
         this.recomendado = recomendado;
     }
 

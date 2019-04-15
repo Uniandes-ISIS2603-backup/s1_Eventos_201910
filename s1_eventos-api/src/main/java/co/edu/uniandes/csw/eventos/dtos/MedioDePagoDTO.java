@@ -17,6 +17,11 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class MedioDePagoDTO implements Serializable {
     
     /**
+     * Id del medio de pago
+     */
+    private Long id;
+    
+    /**
      * numero de un medio de pago
      */
    
@@ -31,7 +36,7 @@ public class MedioDePagoDTO implements Serializable {
     /**
      * codigo de seguridad del medio de pago
      */
-    private Integer codigoDeSeguridad;
+    private String codigoDeSeguridad;
     
     /**
      * fechaDeExpiracion del medio de pago
@@ -53,13 +58,33 @@ public class MedioDePagoDTO implements Serializable {
     public MedioDePagoDTO(MedioDePagoEntity medioDePagoEntity)
     {
         if(medioDePagoEntity!=null)
-        {
+        {   this.id=medioDePagoEntity.getId();
             this.numero=medioDePagoEntity.getNumero();
             this.titular=medioDePagoEntity.getTitular();
             this.codigoDeSeguridad=medioDePagoEntity.getCodigoDeSeguridad();
             this.fechaDeExpiracion=medioDePagoEntity.getFechaDeExpiracion();
         }
     }
+    
+    
+     /**
+     * Devuelve el ID del organizador.
+     *
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * Modifica el ID del .
+     *
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     /**
      * reotrna el numero del medio de pago
      * @return numero
@@ -97,7 +122,7 @@ public class MedioDePagoDTO implements Serializable {
      * retorna el codigo de seguridad del medio de pago
      * @return codigo de seguridad
      */
-    public int getCodigoDeSeguridad() {
+    public String getCodigoDeSeguridad() {
         return codigoDeSeguridad;
     }
 
@@ -105,7 +130,7 @@ public class MedioDePagoDTO implements Serializable {
      * Modifica el codigo de seguridad
      * @param codigoDeSeguridad 
      */
-    public void setCodigoDeSeguridad(int codigoDeSeguridad) {
+    public void setCodigoDeSeguridad(String codigoDeSeguridad) {
         this.codigoDeSeguridad = codigoDeSeguridad;
     }
 
@@ -132,13 +157,18 @@ public class MedioDePagoDTO implements Serializable {
     public MedioDePagoEntity toEntity()
     {
         MedioDePagoEntity medioDePagoEntity = new MedioDePagoEntity();
+        medioDePagoEntity.setId(this.id);
         medioDePagoEntity.setNumero(this.numero);
         medioDePagoEntity.setTitular(this.titular);
-        medioDePagoEntity.setFechaDeExpiracion(this.fechaDeExpiracion);
         medioDePagoEntity.setCodigoDeSeguridad(this.codigoDeSeguridad);
+        medioDePagoEntity.setFechaDeExpiracion(this.fechaDeExpiracion);
         return medioDePagoEntity;
     }
     
+    /**
+     * Convierte a String
+     * @return 
+     */
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);

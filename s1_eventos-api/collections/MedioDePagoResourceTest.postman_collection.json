@@ -19,9 +19,19 @@
 					}
 				}
 			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": ""
@@ -64,7 +74,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/{{medio1}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/22",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -74,7 +84,7 @@
 						"s1_eventos-api",
 						"api",
 						"mediosDePago",
-						"{{medio1}}"
+						"22"
 					]
 				}
 			},
@@ -84,25 +94,77 @@
 			"name": "MediosDePago",
 			"event": [
 				{
+					"listen": "prerequest",
+					"script": {
+						"id": "7afd06c5-bad3-4774-8989-7317a612eb3b",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
 					"listen": "test",
 					"script": {
-						"id": "fbb6004b-73e4-4ca4-a232-277a3cd3c091",
+						"id": "29db61d3-6901-4847-8fa5-d8e59a0134e5",
 						"exec": [
-							"tests[\"No genera error en el Delete\"] = responseCode.code === 200;"
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_o\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
 			"request": {
-				"method": "DELETE",
-				"header": [],
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": ""
+					"raw": "{\n        \"numero\": \"9090121267675432\",\n        \"titular\": \"JONATAN TIRATE UNPASO\",\n        \"codigoDeSeguridad\": \"181\",\n        \"fechaDeExpiracion\": \"2020-07-24T00:00:00-05:00\"\n}"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/{{medio1}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"mediosDePago"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MediosDePago",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"codigoDeSeguridad\": \"019\",\n        \"fechaDeExpiracion\": \"2020-07-24T00:00:59-05:00\",\n        \"numero\": \"4092907665439090\",\n        \"titular\": \"JUAN DAVID zhendong\"\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/44",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -112,33 +174,7 @@
 						"s1_eventos-api",
 						"api",
 						"mediosDePago",
-						"{{medio1}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Calificacion",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n        \"type\": \"calificacionDetailDTO\",\n        \"numero\": 1001,\n        \"titular\": \"Jonatan\",\n        \"codigoDeSeguridad\": 090909999999999,\n        \"fechaDeExpiracion\": \"Fri Mar 08 21:16:43 COT 2019\"\n    }"
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificacion/{{calif1}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_eventos-api",
-						"api",
-						"calificacion",
-						"{{calif1}}"
+						"44"
 					]
 				}
 			},
