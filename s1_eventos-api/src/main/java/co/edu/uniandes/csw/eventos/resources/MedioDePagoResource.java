@@ -30,12 +30,23 @@ import javax.ws.rs.*;
 @Consumes("application/json")
 @RequestScoped
 public class MedioDePagoResource {
-    
+    /**
+     * Logger
+     */
     private static final Logger LOGGER = Logger.getLogger(MedioDePagoResource.class.getName());
 
+    /**
+     * Logica de medio de pago
+     */
     @Inject
     private MedioDePagoLogic medioDePagoLogic;
     
+    /**
+     * Crea un nuevo medio de pago
+     * @param medioDePago medio de pago DTO
+     * @return
+     * @throws BusinessLogicException 
+     */
     @POST
      public MedioDePagoDTO createMedioDePago(MedioDePagoDTO medioDePago) throws BusinessLogicException
      {
@@ -43,6 +54,10 @@ public class MedioDePagoResource {
             return medioDePagoDTO;
      }
     
+     /**
+      * Retorna todos los medios de pago
+      * @return 
+      */
      @GET
     public List<MedioDePagoDetailDTO> getMediosDePago()
     {
@@ -50,22 +65,33 @@ public class MedioDePagoResource {
         return listaMediosDePago;
     }
     
-    
+    /**
+     * Retorna un medio de pago dado su Id
+     * @param medioDePagoId
+     * @return 
+     */
     @GET
-    @Path("(medioDePagoId: \\d+)")
+    @Path("{mediosDePagoId: \\d+}")
     public MedioDePagoDTO getMedioDePago(@PathParam("mediosDePagoId") Long medioDePagoId)
     {
         MedioDePagoEntity entity = medioDePagoLogic.find(medioDePagoId);
-        if(entity==null)
+        if(entity==null){
             throw new WebApplicationException("El recurso no existe",404);
+        }
         MedioDePagoDetailDTO medioDePagoDTO = new MedioDePagoDetailDTO(medioDePagoLogic.find(medioDePagoId));
         return medioDePagoDTO;
     }
     
+    /**
+     * Actualiza un medio de pago
+     * @param medioDePagoId
+     * @param medioDePago
+     * @return 
+     */
     @PUT
-    @Path("(mediosDePagoId: \\d+)")
+    @Path("{mediosDePagoId: \\d+}")
     public MedioDePagoDTO updateMedioDePago(@PathParam("mediosDePagoId") Long medioDePagoId, MedioDePagoDetailDTO medioDePago)
-    {  // medioDePago.setId(medioDePagoId);
+    {   medioDePago.setId(medioDePagoId);
         MedioDePagoEntity entity = medioDePagoLogic.find(medioDePagoId);
         if(entity==null){
             throw new WebApplicationException("El recurso no existe",404);
@@ -74,8 +100,12 @@ public class MedioDePagoResource {
         return detailDTO;
     }
     
+    /**
+     * Borra un medio de pago
+     * @param medioDePagoId 
+     */
     @DELETE
-    @Path("(mediosDePagoId: \\d+)")
+    @Path("{mediosDePagoId: \\d+}")
     public void deleteMedioDePago(@PathParam("mediosDePagoId") Long medioDePagoId)
     {
         if(medioDePagoLogic.find(medioDePagoId)==null){

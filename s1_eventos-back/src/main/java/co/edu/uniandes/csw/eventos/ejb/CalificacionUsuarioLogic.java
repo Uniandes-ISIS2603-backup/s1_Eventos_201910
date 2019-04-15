@@ -21,18 +21,39 @@ import javax.inject.Inject;
  */
 @Stateless
 public class CalificacionUsuarioLogic {
+    /**
+     * Logger
+     */
      private static final Logger LOGGER = Logger.getLogger(CalificacionUsuarioLogic.class.getName());
      
+     /**
+      * Inyecta la persistencia de calificacion en el atributo
+      */
       @Inject
     private CalificacionPersistence calificacionPersistence;
 
+      /**
+       * Inyecta la persistencia del usuario en el atributo
+       */
     @Inject
     private UsuarioPersistence usuarioPersistence;
     
+    /**
+     * Obtiene el usuario dueño de la calificacion
+     * @param calificacionId
+     * @return
+     * @throws BusinessLogicException 
+     */
     public UsuarioEntity getUsuario(Long calificacionId) throws BusinessLogicException{
         return calificacionPersistence.find(calificacionId).getUsuario();
     }
     
+    /**
+     * Reemplaza el usuario dueño de la calificacion
+     * @param calificacionId
+     * @param usuario
+     * @return 
+     */
     public UsuarioEntity replaceUsuario(Long calificacionId, UsuarioEntity usuario)
     {
         calificacionPersistence.find(calificacionId).setUsuario(usuario);
