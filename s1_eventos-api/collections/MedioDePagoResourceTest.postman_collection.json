@@ -74,7 +74,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/100",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/22",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -84,45 +84,7 @@
 						"s1_eventos-api",
 						"api",
 						"mediosDePago",
-						"100"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "MediosDePago",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "fbb6004b-73e4-4ca4-a232-277a3cd3c091",
-						"exec": [
-							"tests[\"No genera error en el Delete\"] = responseCode.code === 200;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/{{medio1}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_eventos-api",
-						"api",
-						"mediosDePago",
-						"{{medio1}}"
+						"22"
 					]
 				}
 			},
@@ -202,7 +164,7 @@
 					"raw": "{\n        \"codigoDeSeguridad\": \"019\",\n        \"fechaDeExpiracion\": \"2020-07-24T00:00:59-05:00\",\n        \"numero\": \"4092907665439090\",\n        \"titular\": \"JUAN DAVID zhendong\"\n    }"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/100",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/44",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -212,7 +174,7 @@
 						"s1_eventos-api",
 						"api",
 						"mediosDePago",
-						"100"
+						"44"
 					]
 				}
 			},

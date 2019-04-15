@@ -87,13 +87,13 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
      */
     private String recomendado;
     
-    private Long deAcuerdo;
+    private String deAcuerdo;
 
-    public Long getDeAcuerdo() {
+    public String getDeAcuerdo() {
         return deAcuerdo;
     }
 
-    public void setDeAcuerdo(Long deAcuerdo) {
+    public void setDeAcuerdo(String deAcuerdo) {
         this.deAcuerdo = deAcuerdo;
     }
     

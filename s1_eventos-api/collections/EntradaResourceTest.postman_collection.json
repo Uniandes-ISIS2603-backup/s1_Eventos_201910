@@ -120,7 +120,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/entradas/100",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/entradas/22",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -130,45 +130,7 @@
 						"s1_eventos-api",
 						"api",
 						"entradas",
-						"100"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Entradas",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "e393d2ba-1251-4419-8f08-531567f3a3e7",
-						"exec": [
-							"tests[\"No genera error en el Delete\"] = responseCode.code === 200;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/entradas/{{entrada1}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_eventos-api",
-						"api",
-						"entradas",
-						"{{entrada1}}"
+						"22"
 					]
 				}
 			},
@@ -191,7 +153,7 @@
 					"raw": "{\n        \"QR\": \"po\",\n        \"checkIn\": \"N\",\n        \"descripcion\": \"El evento mas loco del mundo. AAA\",\n        \"disponible\": \"Y\",\n        \"locacion\": \"Preferencial A\",\n        \"numero\": \"123\",\n        \"precio\": \"1000\",\n        \"reservado\": \"Y\"\n    }"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/entradas/100",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/entradas/22",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -201,7 +163,7 @@
 						"s1_eventos-api",
 						"api",
 						"entradas",
-						"100"
+						"22"
 					]
 				}
 			},

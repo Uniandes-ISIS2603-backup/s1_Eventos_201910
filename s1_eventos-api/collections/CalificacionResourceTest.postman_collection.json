@@ -74,7 +74,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones/100",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones/11",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -84,45 +84,7 @@
 						"s1_eventos-api",
 						"api",
 						"calificaciones",
-						"100"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Calificaciones",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "203f2ec5-dc0a-4ead-9548-349cc51e898f",
-						"exec": [
-							"tests[\"No genera error en el Delete\"] = responseCode.code === 200;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones/100",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_eventos-api",
-						"api",
-						"calificaciones",
-						"100"
+						"11"
 					]
 				}
 			},
@@ -142,7 +104,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\t\t\n\t\t\"estrellas\": \"5\",\n    \t\"comentario\": \"Esta muy firme\",\n        \"recomendado\": \"Y\"\n}"
+					"raw": "{\t\t\n\t\t\"estrellas\": \"5\",\n    \t\"comentario\": \"Esta muy firme\",\n        \"recomendado\": \"Y\",\n        \"deAcuerdo\": 0\n}"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones",
@@ -174,10 +136,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": " {\n        \"comentario\": \"Muy regular el evento.CHOLE CHOOOOO2\",\n        \"estrellas\": \"3\",\n        \"recomendado\": \"N\"\n    }"
+					"raw": " {\n        \"comentario\": \"Muy regular el evento.CHOLE CHOOOOO2\",\n        \"estrellas\": \"1\",\n        \"recomendado\": \"N\",\n        \"deAcuerdo\": 2\n    }"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones/100",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones/22",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -187,7 +149,7 @@
 						"s1_eventos-api",
 						"api",
 						"calificaciones",
-						"100"
+						"22"
 					]
 				}
 			},
