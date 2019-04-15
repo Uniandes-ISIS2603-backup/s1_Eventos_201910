@@ -38,18 +38,33 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 public class CalificacionLogicTest {
     private PodamFactory factory = new PodamFactoryImpl();
     
-    
+    /**
+     * Logica de la calificacion
+     */
     @Inject
     private CalificacionLogic calificacionLogic;
     
+    /**
+     * Contexto de persistencia
+     */
     @PersistenceContext
     private EntityManager em;
     
+    /**
+     * UserTransaction
+     */
     @Inject
     private UserTransaction utx;
     
+    /**
+     * Lista de todas las calificaciones Entity
+     */
     private List<CalificacionEntity> data = new ArrayList<CalificacionEntity>();
     
+    /**
+     * Deployment
+     * @return 
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -105,6 +120,10 @@ public class CalificacionLogicTest {
       
     }
     
+    /**
+     * Test de crear
+     * @throws Exception 
+     */
     @Test
     public void createCalificacionTest()throws Exception
     {
@@ -115,6 +134,9 @@ public class CalificacionLogicTest {
          Assert.assertEquals(newEntity.getId(), entity.getId());
     }
     
+    /**
+     * Test de obtener
+     */
     @Test
     public void getCalificacionTest(){
         CalificacionEntity entity = data.get(0);
@@ -124,6 +146,10 @@ public class CalificacionLogicTest {
         Assert.assertEquals(entity.getRecomendado(), resultEntity.getRecomendado());
     }
     
+    /**
+     * Test de actualizacion
+     * @throws Exception 
+     */
     @Test
     public void updateCalificacionTest() throws Exception {
         CalificacionEntity entity = data.get(0);
@@ -138,6 +164,11 @@ public class CalificacionLogicTest {
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
         Assert.assertEquals(pojoEntity.getRecomendado(), resp.getRecomendado());
     }
+    
+    /**
+     * Test de eliminar una calificacion
+     * @throws BusinessLogicException 
+     */
     @Test
     public void deleteCalificacionTest() throws BusinessLogicException{
         CalificacionEntity entity = data.get(0);

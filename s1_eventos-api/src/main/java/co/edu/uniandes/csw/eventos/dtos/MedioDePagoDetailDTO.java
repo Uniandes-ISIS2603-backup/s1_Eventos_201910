@@ -17,12 +17,54 @@ import java.util.ArrayList;
  */
 public class MedioDePagoDetailDTO extends MedioDePagoDTO implements Serializable{
     
+    /**
+     * Usuario al que pertence el medio de pago
+     */
+    private UsuarioDTO usuario;
+    
+    /**
+     * Retorna el usuario dueño del medio de pago
+     * @return 
+     */
+     public UsuarioDTO getUsuario()
+    {
+        return usuario;
+    }
+    
+     /**
+      * Asgina el usuario dueño del medio de pago
+      * @param usuario 
+      */
+    public void setUsuario(UsuarioDTO usuario)
+    {
+        this.usuario=usuario;
+    }
+    
+    /**
+     * Constructor del medio de pago detail DTO
+     */
     public MedioDePagoDetailDTO(){
         super();
     }
     
+    /**
+     * Constructor del medio de pago detail
+     * @param medioDePagoEntity 
+     */
     public MedioDePagoDetailDTO(MedioDePagoEntity medioDePagoEntity) {
         super(medioDePagoEntity);
         
+    }
+    
+    /**
+     * Convierte a entity
+     * @return 
+     */
+    public MedioDePagoEntity toEntity(){
+        MedioDePagoEntity entity = super.toEntity();
+        if(this.usuario!=null){
+            entity.setUsuario(getUsuario().toEntity());
+        }
+        return entity;
     }
 }

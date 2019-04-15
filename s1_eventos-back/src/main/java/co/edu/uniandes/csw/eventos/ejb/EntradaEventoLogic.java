@@ -22,26 +22,39 @@ import javax.inject.Inject;
  */
 @Stateless
 public class EntradaEventoLogic {
+    /**
+     * Logger
+     */
      private static final Logger LOGGER = Logger.getLogger(EntradaEventoLogic.class.getName());
      
+     /**
+      * Inyecta la persistencia del evento en el atributo
+      */
       @Inject
     private EventoPersistence eventoPersistence;
 
+      /**
+       * Inyecta la persistencia de entrada en el atributo
+       */
     @Inject
     private EntradaPersistence entradaPersistence;
     
-    //public EventoEntity addEvento(Long entradaId,Long eventosId)
-    //{
-      //  EntradaEntity entradaEntity = entradaPersistence.find(entradaId);
-        //EventoEntity eventoEntity = eventoPersistence.find(eventosId);
-        //Creo que falta una lista de entradas en evento
-        //return eventoPersistence.find(eventosId);
-   // }
-    
+    /**
+     * Obtiene el evento 
+     * @param entradaId
+     * @return
+     * @throws BusinessLogicException 
+     */
     public EventoEntity getEvento(Long entradaId) throws BusinessLogicException {
         return entradaPersistence.find(entradaId).getEvento();
     }
     
+    /**
+     * Remplaza el evento
+     * @param entradaId
+     * @param evento
+     * @return 
+     */
     public EventoEntity replaceEvento(Long entradaId, EventoEntity evento)
     {
         entradaPersistence.find(entradaId).setEvento(evento);

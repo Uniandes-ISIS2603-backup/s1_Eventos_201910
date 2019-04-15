@@ -19,43 +19,44 @@ import javax.inject.Inject;
  */
 @Stateless
 public class CalificacionLogic {
-    
+    /**
+     * Logger
+     */
    private static final Logger LOGGER = Logger.getLogger(CalificacionLogic.class.getName());
    
+   /**
+    * Persistencia calificacion
+    */
    @Inject
    private CalificacionPersistence persistence;
    
-   
+   /**
+    * Crea la calificacion
+    * @param calificacion
+    * @return
+    * @throws BusinessLogicException 
+    */
    public CalificacionEntity createCalificacion(CalificacionEntity calificacion) throws BusinessLogicException{
-      if(persistence.find(calificacion.getId())!=null)
-          //throw new BusinessLogicException("Ya existe una calificacion con el id \""+calificacion.getId() + "\"");
-      // 1. La cantidad de estrellas debería ser un numer oentre 0 y 05
-      if(!(calificacion.getEstrellas()<=5 && calificacion.getEstrellas()>=0))
-      {
-          //throw new BusinessLogicException("El numero debe estar entre 0 y 5");
-      }
-      // 2. Revisa que la cantidad de palabras del comentario no sea mayor a 300
-      if(calificacion.getComentarios().split(" ").length>300)
-          throw new BusinessLogicException("El comentario tiene mas de 300 palabras");
+     CalificacionEntity newCal =  persistence.create(calificacion);
       
-      //2. Revisa que cada palabra no exceda 20 caracteres
-      for(int e=0;e<calificacion.getComentarios().split(" ").length;e++)
-      {
-          if(!(calificacion.getComentarios().split(" ")[e].length()<20))
-          {
-              //throw new BusinessLogicException("Esta usando una palabra demasiado larga"); 
-          }
-      }
-      persistence.create(calificacion);
-      
-      return calificacion;
+      return newCal;
    }
    
+   /**
+    * Borra la calificacion
+    * @param calificacionId 
+    */
    public void deleteCalificacion(Long calificacionId)
    {
        persistence.delete(calificacionId);
    }
    
+   /**
+    * Actualiza la calificacion
+    * @param calificacion
+    * @return
+    * @throws BusinessLogicException 
+    */
    public CalificacionEntity updateCalificaion(CalificacionEntity calificacion)throws BusinessLogicException
    {
        if(persistence.find(calificacion.getId())==null)
@@ -64,16 +65,30 @@ public class CalificacionLogic {
         return calificacion;
    }
    
+   /**
+    * Encuentra una calificacion dado su id
+    * @param id
+    * @return 
+    */
    public CalificacionEntity findCalificacion(Long id)
    {
        return persistence.find(id);
    }
    
+   /**
+    * Encuentra una calificacion dado su nombre
+    * @param name
+    * @return 
+    */
    public CalificacionEntity findByName(String name)
    {
        return persistence.findByName(name);
    }
    
+   /**
+    * retorna todas las calificaciones
+    * @return 
+    */
    public List<CalificacionEntity> findAll()
    {
        return persistence.findAll();

@@ -33,14 +33,30 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class EntradaUsuarioResource {
+    /**
+     * Logger
+     */
     private static final Logger LOGGER = Logger.getLogger(EntradaUsuarioResource.class.getName());
     
+    /**
+     * Logica de entrada-usuario
+     */
     @Inject
     private EntradaUsuarioLogic entradaUsuarioLogic;
     
+    /**
+     * Logica de un usuario
+     */
     @Inject
     private UsuarioLogic usuarioLogic;
     
+    /**
+     * Retorna las entradas de un usuario
+     * @param entradasId
+     * @param usuariosId
+     * @return
+     * @throws BusinessLogicException 
+     */
     @GET
     @Path("{usuariosId: \\d+}")
     public UsuarioDetailDTO getUsuario(@PathParam("entradasId") Long entradasId, @PathParam("usuariosId") Long usuariosId) throws BusinessLogicException{
