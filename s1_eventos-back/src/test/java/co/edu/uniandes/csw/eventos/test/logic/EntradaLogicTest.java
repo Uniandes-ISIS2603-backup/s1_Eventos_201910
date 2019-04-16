@@ -37,19 +37,38 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class EntradaLogicTest {
+    /**
+     * Podam factory
+     */
     private PodamFactory factory = new PodamFactoryImpl();
 
+    /**
+     * Logica de Entrada
+     */
     @Inject
     private EntradaLogic entradaLogic;
 
+    /**
+     * Contexto de persistencia
+     */
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     * UserTransaction
+     */
     @Inject
     private UserTransaction utx;
 
+    /**
+     * Lista de entradas Entity
+     */
     private List<EntradaEntity> data = new ArrayList<>();
     
+    /**
+     * Deployment
+     * @return 
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -60,6 +79,9 @@ public class EntradaLogicTest {
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
     
+    /**
+     * Configuracion inicial
+     */
     @Before
     public void configTest() {
         try {
@@ -100,6 +122,10 @@ public class EntradaLogicTest {
         em.persist(entity);
     }
     
+    /**
+     * Test de crear
+     * @throws BusinessLogicException 
+     */
      @Test
     public void createEntradaTest()throws BusinessLogicException
     {
@@ -111,6 +137,10 @@ public class EntradaLogicTest {
         Assert.assertEquals(newEntity.getNumero(), entity.getNumero());
     }
     
+    /**
+     * Test de actualizacion
+     * @throws Exception 
+     */
     @Test
     public void updateEntradaTest() throws Exception {
         EntradaEntity entity = data.get(0);
@@ -126,6 +156,9 @@ public class EntradaLogicTest {
         Assert.assertEquals(pojoEntity.getNumero(), resp.getNumero());
     }
     
+    /**
+     * Test de obtener entradas
+     */
     @Test
     public void getEntradaTest() {
         EntradaEntity entity = data.get(0);
@@ -135,6 +168,10 @@ public class EntradaLogicTest {
         Assert.assertEquals(entity.getNumero(), resultEntity.getNumero());
     }
     
+    /**
+     * Test de eliminar entradas
+     * @throws BusinessLogicException 
+     */
     @Test
     public void deleteEntradaTest() throws BusinessLogicException {
         EntradaEntity entity = data.get(0);
