@@ -1,0 +1,191 @@
+{
+	"info": {
+		"_postman_id": "ce6c1880-2c3d-411d-a947-83e9036c7436",
+		"name": "EventoPatrocinadorResourceTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "crear evento 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "694741e6-4794-48fd-b32b-d790963ac9b0",
+						"exec": [
+							"",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_e\",data.id);",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\r\n   \t \"nombre\":\"actividad de capoeira\",\r\n   \t\"descripcion\":\"curso rapido de capoeira\",\r\n   \t\"fechaInicio\":\"2019-04-23T18:25:43.511Z\",\r\n   \t\"fechaFin\":\"2019-04-24T18:25:43.511Z\",\r\n   \t\"detalles\":\"NA\",\r\n   \t\"categoria\":\"deporte\",\r\n   \t\"privado\":false,\r\n   \t\"capacidadMaxima\":200,\r\n   \t\"boletasDisponibles\":200\r\n   }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/eventos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"eventos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear evevnto 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "694741e6-4794-48fd-b32b-d790963ac9b0",
+						"exec": [
+							"",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_e\",data.id);",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\r\n   \t \"nombre\":\"simulacro modelo naciones unidas\",\r\n   \t\"descripcion\":\"practica libre para debatir\",\r\n   \t\"fechaInicio\":\"2019-04-23T18:25:43.511Z\",\r\n   \t\"fechaFin\":\"2019-04-24T18:25:43.511Z\",\r\n   \t\"detalles\":\"NA\",\r\n   \t\"categoria\":\"deporte\",\r\n   \t\"privado\":false,\r\n   \t\"capacidadMaxima\":200,\r\n   \t\"boletasDisponibles\":200\r\n   }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/eventos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"eventos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear entrada 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "694741e6-4794-48fd-b32b-d790963ac9b0",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_m\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\r\n   \t\"url\": \"https://ualpes.edu/evento.pdf\", \r\n   \t\"nombre\": \"EventoUnialpes\",\r\n   \t\"tipo\":\"PDF\",\r\n   \t\"memoria\": false\r\n   }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/multimedias",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"multimedias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear patrocinador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "694741e6-4794-48fd-b32b-d790963ac9b0",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_p\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"nombre\": \"Kupas\",\n        \"imagen\": \"https://www.kupa.co/assets/img/logo-kupa-negro-512.png\",\n        \"rango\": \"Gold\",\n        \"descripcion\": \"Kupa, un amigo que te acompania\"\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/patrocinadores",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"patrocinadores"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

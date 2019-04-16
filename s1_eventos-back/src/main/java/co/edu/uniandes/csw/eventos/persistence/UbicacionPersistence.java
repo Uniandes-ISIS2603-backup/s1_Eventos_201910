@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.eventos.persistence;
 
+import co.edu.uniandes.csw.eventos.entities.EventoEntity;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -80,5 +81,20 @@ public class UbicacionPersistence {
     public void update(UbicacionEntity entity) {
 
         em.merge(entity);
+    }
+    
+     public UbicacionEntity findByName(String pNombre) {
+        TypedQuery query = em.createQuery("Select e From UbicacionEntity e where e.nombre = :nombre", UbicacionEntity.class);
+        query = query.setParameter("nombre", pNombre);
+        List<UbicacionEntity> iguales = query.getResultList();
+        UbicacionEntity result;
+        if (iguales == null) {
+            result = null;
+        } else if (iguales.isEmpty()) {
+            result = null;
+        } else {
+            result = iguales.get(0);
+        }
+        return result;
     }
 }
