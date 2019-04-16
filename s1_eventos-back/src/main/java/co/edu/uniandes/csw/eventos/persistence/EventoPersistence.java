@@ -6,7 +6,9 @@
 package co.edu.uniandes.csw.eventos.persistence;
 
 import co.edu.uniandes.csw.eventos.entities.EventoEntity;
+import co.edu.uniandes.csw.eventos.entities.EventoEntity;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -38,7 +40,9 @@ public class EventoPersistence {
      * @return el evento creado
      */
     public EventoEntity create(EventoEntity entity) {
+                LOGGER.log(Level.INFO, "Creando un evento nuevo");
         em.persist(entity);
+                LOGGER.log(Level.INFO, "Evento creado");
         return entity;
     }
 
@@ -48,6 +52,7 @@ public class EventoPersistence {
      * @param id
      */
     public void delete(Long id) {
+                LOGGER.log(Level.INFO, "Borrando el evento con id={0}", id);
         EventoEntity eliminar = em.find(EventoEntity.class, id);
         em.remove(eliminar);
     }
@@ -59,6 +64,7 @@ public class EventoPersistence {
      * @return el evento
      */
     public EventoEntity find(Long id) {
+                LOGGER.log(Level.INFO, "Consultando el evento con id={0}", id);
         return em.find(EventoEntity.class, id);
     }
 
@@ -68,6 +74,7 @@ public class EventoPersistence {
      * @return
      */
     public List<EventoEntity> findAll() {
+       LOGGER.log(Level.INFO, "Consultando todos los eventos");
         TypedQuery query = em.createQuery("select u from EventoEntity u", EventoEntity.class);
         return query.getResultList();
     }
@@ -77,8 +84,10 @@ public class EventoPersistence {
      *
      * @param entity
      */
-    public void update(EventoEntity entity) {
-        em.merge(entity);
+    public EventoEntity update(EventoEntity entity) {
+                LOGGER.log(Level.INFO, "Actualizando el evento con id={0}", entity.getId());
+
+        return em.merge(entity);
     }
 
     /**
