@@ -1,0 +1,101 @@
+{
+	"info": {
+		"_postman_id": "e261f401-4682-4f7d-81a7-e489921439c8",
+		"name": "EventoMultimediaResourceTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "crear evento 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "694741e6-4794-48fd-b32b-d790963ac9b0",
+						"exec": [
+							"",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_e\",data.id);",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\r\n   \t \"nombre\":\"taller pintura\",\r\n   \t\"descripcion\":\"taller dirigido por artista\",\r\n   \t\"fechaInicio\":\"2019-04-23T18:25:43.511Z\",\r\n   \t\"fechaFin\":\"2019-04-24T18:25:43.511Z\",\r\n   \t\"detalles\":\"NA\",\r\n   \t\"categoria\":\"deporte\",\r\n   \t\"privado\":false,\r\n   \t\"capacidadMaxima\":200,\r\n   \t\"boletasDisponibles\":200\r\n   }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/eventos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"eventos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear evento 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "694741e6-4794-48fd-b32b-d790963ac9b0",
+						"exec": [
+							"",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_e\",data.id);",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\r\n   \t \"nombre\":\"charla seguridad informatica\",\r\n   \t\"descripcion\":\"encuentro entre varios expertos para hablar de seguridad informatica\",\r\n   \t\"fechaInicio\":\"2019-04-23T18:25:43.511Z\",\r\n   \t\"fechaFin\":\"2019-04-24T18:25:43.511Z\",\r\n   \t\"detalles\":\"NA\",\r\n   \t\"categoria\":\"deporte\",\r\n   \t\"privado\":false,\r\n   \t\"capacidadMaxima\":200,\r\n   \t\"boletasDisponibles\":200\r\n   }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/eventos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"eventos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

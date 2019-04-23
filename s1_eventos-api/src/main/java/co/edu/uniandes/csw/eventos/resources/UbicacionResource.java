@@ -1,24 +1,38 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+MIT License
+
+Copyright (c) 2017 Universidad de los Andes - ISIS2603
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
  */
 package co.edu.uniandes.csw.eventos.resources;
 
-/**
- *
- * @author estudiante
- */
 import co.edu.uniandes.csw.eventos.dtos.UbicacionDTO;
 import co.edu.uniandes.csw.eventos.ejb.UbicacionLogic;
 import co.edu.uniandes.csw.eventos.entities.UbicacionEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -26,113 +40,143 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 
 /**
  *
- * @author Mateo Vallejo
+ * @author Paula Molina
  */
 @Path("ubicaciones")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
-
 public class UbicacionResource {
-
+    
     private static final Logger LOGGER = Logger.getLogger(UbicacionResource.class.getName());
+    private static final String NO_EXISTE = " no existe.";
+    private static final String RECURSO_UBICACION = "El recurso /ubicaciones/";
 
+    @Inject 
+    private UbicacionLogic ubicacionLogic;
+    
     /**
-     * logica de la clase
-     */
-    @Inject
-    private UbicacionLogic logica;
-
-    /**
-     * Servicio que crea una ubicacion
+     * Crea un nuevo ubicacion con la informacion que se recibe en el cuerpo de la
+     * petición y se regresa un objeto identico con un id auto-generado por la
+     * base de datos.
      *
-     * @param ubicacion a crear
-     * @return ubicacion creada
-     * @throws BusinessLogicException
+     * @param ubicacion {@link UbicacionDTO} - EL ubicacion que se desea guardar.
+     * @return JSON {@link UbicacionDTO} - El ubicacion guardado con el atributo id autogenerado.
+     * @throws BusinessLogicException Si el ubicacion a persistir ya existe o si el nombre, descripcion y/o imagen no son validos
      */
     @POST
     public UbicacionDTO createUbicacion(UbicacionDTO ubicacion) throws BusinessLogicException {
-        UbicacionEntity ubicacionEntity = ubicacion.toEntity();
-        UbicacionEntity nuevaUbicacionEntity = logica.createUbicacion(ubicacionEntity);
-        UbicacionDTO nuevaUbicacionDTO = new UbicacionDTO(nuevaUbicacionEntity);
-        return nuevaUbicacionDTO;
+        
+        LOGGER.log(Level.INFO, "UbicacionResource createUbicacion: input: {0}", ubicacion);
+        UbicacionDTO ubicacionDTO = new UbicacionDTO(ubicacionLogic.createUbicacion(ubicacion.toEntity()));
+        LOGGER.log(Level.INFO, "UbicacionResource createUbicacion: output: {0}", ubicacionDTO);
+        return ubicacionDTO;
     }
 
     /**
-     * Servicio que retorna todas las ubicaciones
-     * @return todas las ubicaciones
+     * Busca y devuelve todos los ubicaciones que existen en la aplicacion.
+     *
+     * @return JSONArray {@link UbicacionDTO} - Los ubicaciones encontrados en la
+     * aplicación. Si no hay ninguno retorna una lista vacía.
      */
     @GET
-    public List<UbicacionDTO> getUbicacion() {
-        List<UbicacionDTO> listaEventos = listEntity2DetailDTO(logica.findAllUbicacion());
-        return listaEventos;
+    public List<UbicacionDTO> findUbicaciones() {
+        
+        LOGGER.info("UbicacionResource findUbicaciones: input: void");
+        List<UbicacionDTO> listaUbicaciones = listEntity2DTO(ubicacionLogic.findAllUbicacion());
+        LOGGER.log(Level.INFO, "UbicacionResource findUbicaciones: output: {0}", listaUbicaciones);
+        return listaUbicaciones;
     }
 
     /**
-     *Servicio que retorna una ubicacion
-     * @param ubicacionesId id de la ubicacion a mostrar
-     * @return ubicacion buscada 
+     * Busca el ubicacion con el id asociado recibido en la URL y lo devuelve.
+     *
+     * @param ubicacionesId Identificador del ubicacion que se esta buscando. Este debe
+     * ser una cadena de dígitos.
+     * @return JSON {@link UbicacionDTO} - El ubicacion buscado
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el ubicacion.
      */
     @GET
     @Path("{ubicacionesId: \\d+}")
-    public UbicacionDTO getUbicacion(@PathParam("ubicacionesID") Long ubicacionesId) {
-        UbicacionEntity ubicacionEntity = logica.findUbicacion(ubicacionesId);
-        if (ubicacionEntity == null) {
-            throw new WebApplicationException("El recurso /ubicaciones/" + ubicacionesId + " no existe.", 404);
+    public UbicacionDTO findUbicacion(@PathParam("ubicacionesId") Long ubicacionesId){
+        
+        LOGGER.log(Level.INFO, "UbicacionResource findUbicacion: input: {0}", ubicacionesId);
+        UbicacionEntity entity = ubicacionLogic.findUbicacion(ubicacionesId);
+        if (entity == null) {
+            throw new WebApplicationException(RECURSO_UBICACION + ubicacionesId + NO_EXISTE, 404);
         }
-        UbicacionDTO detailDTO = new UbicacionDTO(ubicacionEntity);
-        return detailDTO;
+        UbicacionDTO ubicacionDTO = new UbicacionDTO(ubicacionLogic.findUbicacion(ubicacionesId));
+        LOGGER.log(Level.INFO, "UbicacionResource findUbicacion: output: {0}", ubicacionDTO);
+        return ubicacionDTO;
     }
 
     /**
-     * servicio de actualizar una ubicacion
-     * @param ubicacionesId id ubicacion a actualizar
-     * @param ubicacion ubicacion de remplazo
-     * @return ubicacion actualizadda
-     * @throws BusinessLogicException 
+     * Actualiza el ubicacion con el id recibido en la URL con la información que se
+     * recibe en el cuerpo de la petición.
+     *
+     * @param ubicacionesId Identificador del ubicacion que se desea actualizar. Este
+     * debe ser una cadena de dígitos.
+     * @param ubicacion {@link UbicacionDTO} El ubicacion que se desea guardar.
+     * @return JSON {@link UbicacionDTO} - El ubicacion guardado.
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el ubicacion a
+     * actualizar.
      */
     @PUT
-    @Path("(ubicacionesId: \\d+")
-    public UbicacionDTO updateUbicacion(@PathParam("ubicacionesID") Long ubicacionesId, UbicacionDTO ubicacion) throws BusinessLogicException {
+    @Path("{ubicacionesId: \\d+}")
+    public UbicacionDTO updateUbicacion(@PathParam("ubicacionesId") Long ubicacionesId, UbicacionDTO ubicacion) throws BusinessLogicException {
+        
+        LOGGER.log(Level.INFO, "UbicacionResource updateUbicacion: input: ubicacionesId: {0} , ubicacion: {1}", new Object[]{ubicacionesId, ubicacion});
         ubicacion.setId(ubicacionesId);
-
-        if (logica.findUbicacion(ubicacionesId) == null) {
-            throw new WebApplicationException("El recurso /eventos/" + ubicacionesId + " no existe.", 404);
+        UbicacionEntity entity = ubicacionLogic.findUbicacion(ubicacionesId);
+        if (entity == null) {
+            throw new WebApplicationException(RECURSO_UBICACION + ubicacionesId + NO_EXISTE, 404);
         }
-        UbicacionDTO detailDTO = new UbicacionDTO(logica.updateUbicacion(ubicacionesId, ubicacion.toEntity()));
-        return detailDTO;
+        UbicacionDTO detailDTO = new UbicacionDTO(ubicacionLogic.updateUbicacion(ubicacionesId, ubicacion.toEntity()));
+        LOGGER.log(Level.INFO, "UbicacionResource updateUbicacion: output: {0}", detailDTO);
+        return detailDTO;    
+    }
+
+    /**
+     * Borra el ubicacion con el id asociado recibido en la URL.
+     *
+     * @param ubicacionesId Identificador del ubicacion que se desea borrar. Este debe
+     * ser una cadena de dígitos.
+     * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
+     * si el ubicacion tiene eventos asociados
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper}
+     * Error de lógica que se genera cuando no se encuentra el ubicacion a borrar.
+     */
+    @DELETE
+    @Path("{ubicacionesId: \\d+}")
+    public void deleteUbicacion(@PathParam("ubicacionesId") Long ubicacionesId) throws BusinessLogicException {
+        
+        LOGGER.log(Level.INFO, "UbicacionResource deleteUbicacion: input: {0}", ubicacionesId);
+        if (ubicacionLogic.findUbicacion(ubicacionesId) == null) {
+            throw new WebApplicationException(RECURSO_UBICACION + ubicacionesId + NO_EXISTE, 404);
+        }
+        ubicacionLogic.deleteUbicacion(ubicacionesId);
+        LOGGER.info("UbicacionResource deleteUbicacion: output: void");
     }
     
-    /**
-     * Servicio de eliminar una ubicacion
-     * @param ubicacionesId ubicacion a eliminar
-     * @throws BusinessLogicException 
-     */
-
-    @DELETE
-    @Path("(ubicacionesId: \\d+)")
-    public void deleteUbicacion(@PathParam("ubicacionesID") Long ubicacionesId) throws BusinessLogicException {
-        if (logica.findUbicacion(ubicacionesId) == null) {
-            throw new WebApplicationException("El recurso /ubicaciones/" + ubicacionesId + " no existe.", 404);
-        }
-        logica.deleteUbicacion(ubicacionesId);
-    }
 
     /**
-     * Metodo para transfomar Entities a Dtos
-     * @param entityList
-     * @return  lista de Dtos
+     * Convierte una lista de UbicacionEntity a una lista de UbicacionDTO.
+     *
+     * @param entityList Lista de UbicacionEntity a convertir.
+     * @return Lista de UbicacionDTO convertida.
      */
-    private List<UbicacionDTO> listEntity2DetailDTO(List<UbicacionEntity> entityList) {
-        List<UbicacionDTO> list = new ArrayList<>();
+    private List<UbicacionDTO> listEntity2DTO(List<UbicacionEntity> entityList) {
+        List<UbicacionDTO> list = new ArrayList();
         for (UbicacionEntity entity : entityList) {
             list.add(new UbicacionDTO(entity));
         }
         return list;
     }
-
 }

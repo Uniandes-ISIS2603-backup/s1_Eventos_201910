@@ -44,6 +44,7 @@ public class EventoEntradaLogic {
         EntradaEntity entradaEntity = entradaPersistence.find(entradasId);
         EventoEntity eventoEntity = eventoPersistence.find(eventosId);
         eventoEntity.getEntradas().add(entradaEntity);
+        entradaEntity.setEvento(eventoEntity);
         LOGGER.log(Level.INFO, "Termina proceso de asociarle un entrada al evento con id = {0}", eventosId);
         return entradaPersistence.find(entradasId);
     }
@@ -106,9 +107,10 @@ public class EventoEntradaLogic {
      */
     public void removeEntrada(Long eventosId, Long entradasId) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar un entrada del evento con id = {0}", eventosId);
-        EntradaEntity authorEntity = entradaPersistence.find(entradasId);
-        EventoEntity bookEntity = eventoPersistence.find(eventosId);
-        bookEntity.getEntradas().remove(authorEntity);
+        EntradaEntity entradaEntity = entradaPersistence.find(entradasId);
+        EventoEntity evento = eventoPersistence.find(eventosId);
+        evento.getEntradas().remove(entradaEntity);
+        entradaPersistence.delete(entradasId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar un entrada del evento con id = {0}", eventosId);
     }
 }

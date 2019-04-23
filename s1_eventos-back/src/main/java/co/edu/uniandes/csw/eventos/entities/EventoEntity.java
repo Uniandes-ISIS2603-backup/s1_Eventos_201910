@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -33,12 +34,12 @@ public class EventoEntity extends BaseEntity implements Serializable {
     /**
      * Representa la fecha de inicio del evento
      */
-    @Temporal(javax.persistence.TemporalType.DATE)
+     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
     /**
      * Representa la fecha de fin de un evento
      */
-    @Temporal(javax.persistence.TemporalType.DATE)
+      @Temporal(TemporalType.DATE)
     private Date fechaFin;
     /**
      * Representa los detalles de un evento
