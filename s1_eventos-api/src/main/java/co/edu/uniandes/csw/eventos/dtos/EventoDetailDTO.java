@@ -61,44 +61,41 @@ public class EventoDetailDTO extends EventoDTO implements Serializable {
     public EventoDetailDTO(EventoEntity evento) {
 
         super(evento);
-        agendas = new ArrayList<>();
-        patrocinadores = new ArrayList<>();
-        organizadores = new ArrayList<>();
-        multimedias = new ArrayList<>();
-        entradas = new ArrayList<>();
         if (evento != null) {
             if (evento.getAgendas() != null) {
+                agendas = new ArrayList<>();
                 for (AgendaEntity agenda : evento.getAgendas()) {
                     agendas.add(new AgendaDTO(agenda));
                 }
             }
 
             if (evento.getPatrocinadores() != null) {
+                patrocinadores = new ArrayList<>();
                 for (PatrocinadorEntity patrocinador : evento.getPatrocinadores()) {
                     patrocinadores.add(new PatrocinadorDTO(patrocinador));
                 }
             }
             if (evento.getOrganizadores() != null) {
-
+                organizadores = new ArrayList<>();
                 for (OrganizadorEntity organizador : evento.getOrganizadores()) {
                     organizadores.add(new OrganizadorDTO(organizador));
                 }
             }
             if (evento.getMultimedia() != null) {
-
+                multimedias = new ArrayList<>();
                 for (MultimediaEntity multimedia : evento.getMultimedia()) {
                     multimedias.add(new MultimediaDTO(multimedia));
                 }
             }
             if (evento.getEntradas() != null) {
-
+                entradas = new ArrayList<>();
                 for (EntradaEntity entrada : evento.getEntradas()) {
                     entradas.add(new EntradaDTO(entrada));
                 }
             }
         }
     }
-
+    
     /**
      * Creacion de entity a partir de DTO
      * @return 

@@ -48,7 +48,7 @@ public class UbicacionResource {
      * logica de la clase
      */
     @Inject
-    private UbicacionLogic logica;
+    private UbicacionLogic ubicacionLogic;
 
     /**
      * Crea un nuevo ubicacion con la informacion que se recibe en el cuerpo de la
@@ -63,7 +63,7 @@ public class UbicacionResource {
     public UbicacionDTO createUbicacion(UbicacionDTO ubicacion) throws BusinessLogicException {
         
         LOGGER.log(Level.INFO, "UbicacionResource createUbicacion: input: {0}", ubicacion);
-        UbicacionDTO ubicacionDTO = new UbicacionDTO(logica.createUbicacion(ubicacion.toEntity()));
+        UbicacionDTO ubicacionDTO = new UbicacionDTO(ubicacionLogic.createUbicacion(ubicacion.toEntity()));
         LOGGER.log(Level.INFO, "UbicacionResource createUbicacion: output: {0}", ubicacionDTO);
         return ubicacionDTO;
     }
@@ -78,7 +78,7 @@ public class UbicacionResource {
     public List<UbicacionDTO> findUbicaciones() {
         
         LOGGER.info("UbicacionResource findUbicaciones: input: void");
-        List<UbicacionDTO> listaUbicaciones = listEntity2DTO(logica.findAllUbicacion());
+        List<UbicacionDTO> listaUbicaciones = listEntity2DTO(ubicacionLogic.findAllUbicacion());
         LOGGER.log(Level.INFO, "UbicacionResource findUbicaciones: output: {0}", listaUbicaciones);
         return listaUbicaciones;
     }
@@ -97,11 +97,11 @@ public class UbicacionResource {
     public UbicacionDTO findUbicacion(@PathParam("ubicacionesId") Long ubicacionesId){
         
         LOGGER.log(Level.INFO, "UbicacionResource findUbicacion: input: {0}", ubicacionesId);
-        UbicacionEntity entity = logica.findUbicacion(ubicacionesId);
+        UbicacionEntity entity = ubicacionLogic.findUbicacion(ubicacionesId);
         if (entity == null) {
             throw new WebApplicationException(RECURSO_UBICACION + ubicacionesId + NO_EXISTE, 404);
         }
-        UbicacionDTO ubicacionDTO = new UbicacionDTO(logica.findUbicacion(ubicacionesId));
+        UbicacionDTO ubicacionDTO = new UbicacionDTO(ubicacionLogic.findUbicacion(ubicacionesId));
         LOGGER.log(Level.INFO, "UbicacionResource findUbicacion: output: {0}", ubicacionDTO);
         return ubicacionDTO;
     }
@@ -124,11 +124,11 @@ public class UbicacionResource {
         
         LOGGER.log(Level.INFO, "UbicacionResource updateUbicacion: input: ubicacionesId: {0} , ubicacion: {1}", new Object[]{ubicacionesId, ubicacion});
         ubicacion.setId(ubicacionesId);
-        UbicacionEntity entity = logica.findUbicacion(ubicacionesId);
+        UbicacionEntity entity = ubicacionLogic.findUbicacion(ubicacionesId);
         if (entity == null) {
             throw new WebApplicationException(RECURSO_UBICACION + ubicacionesId + NO_EXISTE, 404);
         }
-        UbicacionDTO detailDTO = new UbicacionDTO(logica.updateUbicacion(ubicacionesId, ubicacion.toEntity()));
+        UbicacionDTO detailDTO = new UbicacionDTO(ubicacionLogic.updateUbicacion(ubicacionesId, ubicacion.toEntity()));
         LOGGER.log(Level.INFO, "UbicacionResource updateUbicacion: output: {0}", detailDTO);
         return detailDTO;
     }
@@ -148,12 +148,13 @@ public class UbicacionResource {
     public void deleteUbicacion(@PathParam("ubicacionesId") Long ubicacionesId) throws BusinessLogicException {
 
         LOGGER.log(Level.INFO, "UbicacionResource deleteUbicacion: input: {0}", ubicacionesId);
-        if (logica.findUbicacion(ubicacionesId) == null) {
+        if (ubicacionLogic.findUbicacion(ubicacionesId) == null) {
             throw new WebApplicationException(RECURSO_UBICACION + ubicacionesId + NO_EXISTE, 404);
         }
-        logica.deleteUbicacion(ubicacionesId);
+        ubicacionLogic.deleteUbicacion(ubicacionesId);
         LOGGER.info("UbicacionResource deleteUbicacion: output: void");
     }
+
 
     /**
      * Convierte una lista de UbicacionEntity a una lista de UbicacionDTO.
