@@ -99,20 +99,25 @@ public class EventoDetailDTO extends EventoDTO implements Serializable {
         }
     }
 
+    /**
+     * Creacion de entity a partir de DTO
+     * @return 
+     */
+    @Override
     public EventoEntity toEntity() {
 
         EventoEntity ent = super.toEntity();
 
         if (agendas != null) {
             List<AgendaEntity> agendasEntity = new ArrayList<>();
-            for (AgendaDTO dtoAgenda : agendas) {
+            for (AgendaDTO dtoAgenda : this.getAgendas()) {
                 agendasEntity.add(dtoAgenda.toEntity());
             }
             ent.setAgendas(agendasEntity);
         }
         if (getOrganizadores() != null) {
             List<OrganizadorEntity> organizadoresEntity = new ArrayList<>();
-            for (OrganizadorDTO dtoOrganizador : getOrganizadores()) {
+            for (OrganizadorDTO dtoOrganizador : this.getOrganizadores()) {
                 organizadoresEntity.add(dtoOrganizador.toEntity());
             }
             ent.setOrganizadores(organizadoresEntity);
@@ -120,7 +125,7 @@ public class EventoDetailDTO extends EventoDTO implements Serializable {
 
         if (getPatrocinadores() != null) {
             List<PatrocinadorEntity> patrocinadoresEntity = new ArrayList<>();
-            for (PatrocinadorDTO dtoPatrocinador : getPatrocinadores()) {
+            for (PatrocinadorDTO dtoPatrocinador : this.getPatrocinadores()) {
                 patrocinadoresEntity.add(dtoPatrocinador.toEntity());
             }
             ent.setPatrocinadores(patrocinadoresEntity);
@@ -128,7 +133,7 @@ public class EventoDetailDTO extends EventoDTO implements Serializable {
 
         if (getMultimedias() != null) {
             List<MultimediaEntity> multimediasEntity = new ArrayList<>();
-            for (MultimediaDTO dtoMultimedia : getMultimedias()) {
+            for (MultimediaDTO dtoMultimedia : this.getMultimedias()) {
                 multimediasEntity.add(dtoMultimedia.toEntity());
             }
             ent.setMultimedia(multimediasEntity);
@@ -136,7 +141,7 @@ public class EventoDetailDTO extends EventoDTO implements Serializable {
 
         if (entradas != null) {
             List<EntradaEntity> entradasEntity = new ArrayList<>();
-            for (EntradaDTO dtoEntrada : entradas) {
+            for (EntradaDTO dtoEntrada : this.getEntradas()) {
                 entradasEntity.add(dtoEntrada.toEntity());
             }
             ent.setEntradas(entradasEntity);

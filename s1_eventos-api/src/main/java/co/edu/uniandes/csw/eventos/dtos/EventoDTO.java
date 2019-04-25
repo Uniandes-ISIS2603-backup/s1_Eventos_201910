@@ -99,14 +99,14 @@ public class EventoDTO implements Serializable {
     public EventoEntity toEntity() {
         EventoEntity ent = new EventoEntity();
         ent.setBoletasDisponibles(this.boletasDisponibles);
-        ent.setCapacidadMaxima(this.capacidadMaxima);
-        ent.setCategoria(this.categoria);
-        ent.setDescripcion(this.descripcion);
-        ent.setDetalles(this.detalles);
-        ent.setFechaFin(this.fechaFin);
-        ent.setFechaInicio(this.fechaInicio);
-        ent.setNombre(this.nombre);
-        ent.setPrivado(this.privado);
+        ent.setCapacidadMaxima(this.getCapacidadMaxima());
+        ent.setCategoria(this.getCategoria());
+        ent.setDescripcion(this.getDescripcion());
+        ent.setDetalles(this.getDetalles());
+        ent.setFechaFin(this.getFechaFin());
+        ent.setFechaInicio(this.getFechaInicio());
+        ent.setNombre(this.getNombre());
+        ent.setPrivado(this.isPrivado());
         return ent;
     }
 
