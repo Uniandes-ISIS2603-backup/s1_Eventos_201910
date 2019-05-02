@@ -43,6 +43,7 @@ public class EventoCalificacionLogic {
         CalificacionEntity calificacionEntity = calificacionPersistence.find(calificacionesId);
         EventoEntity eventoEntity = eventoPersistence.find(eventosId);
         eventoEntity.getCalificaciones().add(calificacionEntity);
+        calificacionEntity.setEvento(eventoEntity);
         LOGGER.log(Level.INFO, "Termina proceso de asociarle un calificacion al evento con id = {0}", eventosId);
         return calificacionPersistence.find(calificacionesId);
     }
