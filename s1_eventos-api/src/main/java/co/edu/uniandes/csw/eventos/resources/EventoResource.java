@@ -152,5 +152,13 @@ public class EventoResource {
         }
         return list;
     }
+    
+    @Path("{eventosId: \\d+}/calificaciones")
+    public Class<EventoCalificacionResource> getEventoCalificacionesResource(@PathParam("eventosId") Long eventosId){
+        if(logica.find(eventosId)==null){
+            throw new WebApplicationException("El recurso no existe",404);
+        }
+        return EventoCalificacionResource.class;
+    }
 
 }

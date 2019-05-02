@@ -71,6 +71,7 @@ public class EventoCalificacionLogic {
         List<CalificacionEntity> calificaciones = eventoPersistence.find(eventosId).getCalificaciones();
         CalificacionEntity calificacionEntity = calificacionPersistence.find(calificacionesId);
         int index = calificaciones.indexOf(calificacionEntity);
+        System.out.println("LLEGA EL PELUDO");
         LOGGER.log(Level.INFO, "Termina proceso de consultar un calificacion del evento con id = {0}", eventosId);
         if (index >= 0) {
             return calificaciones.get(index);

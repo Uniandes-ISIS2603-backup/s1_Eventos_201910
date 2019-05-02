@@ -23,10 +23,15 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 /**
  *
  * @author Mateo Vallejo
  */
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class EventoCalificacionResource {
 
     @Inject
@@ -73,7 +78,7 @@ public class EventoCalificacionResource {
 
        List<CalificacionEntity> entities=listDTO2Entity(calificaciones);
 
-        List<CalificacionDTO> lista = listEntity2DTO(logica.replaceCalificaciones(eventosId, entities));
+       List<CalificacionDTO> lista = listEntity2DTO(logica.replaceCalificaciones(eventosId, entities));
                
         return lista;
     }
