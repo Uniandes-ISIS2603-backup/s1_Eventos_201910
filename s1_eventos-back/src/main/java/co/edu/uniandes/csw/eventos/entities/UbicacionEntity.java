@@ -6,7 +6,7 @@
 package co.edu.uniandes.csw.eventos.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import javax.persistence.Entity;
 /**
  *
  * @author Mateo Vallejo

@@ -102,9 +102,9 @@ public class EventoPatrocinadorLogic {
      */
     public void removePatrocinador(Long eventosId, Long patrocinadoresId) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar un patrocinador del evento con id = {0}", eventosId);
-        PatrocinadorEntity patrocinadorEntity = patrocinadorPersistence.find(patrocinadoresId);
-        EventoEntity eventoEntity = eventoPersistence.find(eventosId);
-        eventoEntity.getPatrocinadores().remove(patrocinadorEntity);
+        PatrocinadorEntity authorEntity = patrocinadorPersistence.find(patrocinadoresId);
+        EventoEntity bookEntity = eventoPersistence.find(eventosId);
+        bookEntity.getPatrocinadores().remove(authorEntity);
         LOGGER.log(Level.INFO, "Termina proceso de borrar un patrocinador del evento con id = {0}", eventosId);
     }
 }

@@ -88,6 +88,7 @@ public class EventoDTO implements Serializable {
             this.capacidadMaxima = entity.getCapacidadMaxima();
             this.boletasDisponibles = entity.getBoletasDisponibles();
             this.categoria = entity.getCategoria();
+            this.id=entity.getId();
         }
     }
 
@@ -107,6 +108,7 @@ public class EventoDTO implements Serializable {
         ent.setFechaInicio(this.getFechaInicio());
         ent.setNombre(this.getNombre());
         ent.setPrivado(this.isPrivado());
+        ent.setId(this.getId());
         return ent;
     }
 

@@ -36,14 +36,17 @@ import javax.ws.rs.WebApplicationException;
 @RequestScoped
 
 public class EventoResource {
- 
+
     private static final Logger LOGGER = Logger.getLogger(OrganizadorResource.class.getName());
     private static final String NO_EXISTE = " no existe.";
     private static final String RECURSO_EVENTO = "El recurso /eventos/";
 
-    @Inject 
+    /**
+     * Logica del evento
+     */
+    @Inject
     private EventoLogic eventoLogic;
-    
+
     /**
      * Crea un nuevo evento con la informacion que se recibe en el cuerpo de la
      * petición y se regresa un objeto identico con un id auto-generado por la
@@ -55,7 +58,7 @@ public class EventoResource {
      */
     @POST
     public EventoDTO createEvento(EventoDTO evento) throws BusinessLogicException {
-        
+
         LOGGER.log(Level.INFO, "EventoResource createEvento: input: {0}", evento);
         EventoDTO eventoDTO = new EventoDTO(eventoLogic.createEvento(evento.toEntity()));
         LOGGER.log(Level.INFO, "EventoResource createEvento: output: {0}", eventoDTO);
@@ -122,9 +125,9 @@ public class EventoResource {
         if (entity == null) {
             throw new WebApplicationException(RECURSO_EVENTO + eventosId + NO_EXISTE, 404);
         }
-        EventoDetailDTO detailDTO = new EventoDetailDTO(eventoLogic.update(eventosId, evento.toEntity()));
+        EventoDetailDTO detailDTO = new EventoDetailDTO(eventoLogic.update(evento.toEntity()));
         LOGGER.log(Level.INFO, "EventoResource updateEvento: output: {0}", detailDTO);
-        return detailDTO;    
+        return detailDTO;
     }
 
     /**
@@ -148,126 +151,8 @@ public class EventoResource {
         eventoLogic.deleteEvento(eventosId);
         LOGGER.info("EventoResource deleteEvento: output: void");
     }
-    
- /**
-     * Conexión con el servicio de eventos para un patrocinador.
-     * {@link PatrocinadorEventosResource}
-     *
-     * Este método conecta la ruta de /patrocinadores con las rutas de /eventos que
-     * dependen del patrocinador, es una redirección al servicio que maneja el segmento
-     * de la URL que se encarga de los eventos.
-     *
-     * @param eventosId El ID del evento con respecto al cual se accede al
-     * servicio.
-     * @return El servicio de patrocnadores para ese patrocinador en paricular.
-     */
-    @Path("{eventosId: \\d+}/patrocinadores")
-    public Class<EventoPatrocinadorResource> getEventoPatrocinadorResource(@PathParam("eventosId") Long eventosId) {
-        if (eventoLogic.find(eventosId) == null) {
-            throw new WebApplicationException(RECURSO_EVENTO + eventosId + NO_EXISTE, 404);
-        }
-        return EventoPatrocinadorResource.class;
-    }
-    
-    /**
-     * Conexión con el servicio de eventos para un patrocinador.
-     * {@link PatrocinadorEventosResource}
-     *
-     * Este método conecta la ruta de /patrocinadores con las rutas de /eventos que
-     * dependen del patrocinador, es una redirección al servicio que maneja el segmento
-     * de la URL que se encarga de los eventos.
-     *
-     * @param patrocinadoresId El ID del patrocinador con respecto al cual se accede al
-     * servicio.
-     * @return El servicio de Eventos para ese patrocinador en paricular.
-     */
-    @Path("{eventosId: \\d+}/calificaciones")
-    public Class<EventoCalificacionResource> getEventoCalificacionesResource(@PathParam("eventosId") Long eventosId) {
-        if (eventoLogic.find(eventosId) == null) {
-            throw new WebApplicationException(RECURSO_EVENTO + eventosId + NO_EXISTE, 404);
-        }
-        return EventoCalificacionResource.class;
-    }
-    
-    /**
-     * Conexión con el servicio de eventos para un patrocinador.
-     * {@link PatrocinadorEventosResource}
-     *
-     * Este método conecta la ruta de /patrocinadores con las rutas de /eventos que
-     * dependen del patrocinador, es una redirección al servicio que maneja el segmento
-     * de la URL que se encarga de los eventos.
-     *
-     * @param patrocinadoresId El ID del patrocinador con respecto al cual se accede al
-     * servicio.
-     * @return El servicio de Eventos para ese patrocinador en paricular.
-     */
-    @Path("{eventosId: \\d+}/calificaciones")
-    public Class<EventoAgendaResource> getEventoAgendaResource(@PathParam("eventosId") Long eventosId) {
-        if (eventoLogic.find(eventosId) == null) {
-            throw new WebApplicationException(RECURSO_EVENTO + eventosId + NO_EXISTE, 404);
-        }
-        return EventoAgendaResource.class;
-    }
-    
-    /**
-     * Conexión con el servicio de eventos para un patrocinador.
-     * {@link PatrocinadorEventosResource}
-     *
-     * Este método conecta la ruta de /patrocinadores con las rutas de /eventos que
-     * dependen del patrocinador, es una redirección al servicio que maneja el segmento
-     * de la URL que se encarga de los eventos.
-     *
-     * @param patrocinadoresId El ID del patrocinador con respecto al cual se accede al
-     * servicio.
-     * @return El servicio de Eventos para ese patrocinador en paricular.
-     */
-    @Path("{eventosId: \\d+}/calificaciones")
-    public Class<EventoEntradaResource> getEventoEntradaResource(@PathParam("eventosId") Long eventosId) {
-        if (eventoLogic.find(eventosId) == null) {
-            throw new WebApplicationException(RECURSO_EVENTO + eventosId + NO_EXISTE, 404);
-        }
-        return EventoEntradaResource.class;
-    }
-    
-    /**
-     * Conexión con el servicio de eventos para un patrocinador.
-     * {@link PatrocinadorEventosResource}
-     *
-     * Este método conecta la ruta de /patrocinadores con las rutas de /eventos que
-     * dependen del patrocinador, es una redirección al servicio que maneja el segmento
-     * de la URL que se encarga de los eventos.
-     *
-     * @param patrocinadoresId El ID del patrocinador con respecto al cual se accede al
-     * servicio.
-     * @return El servicio de Eventos para ese patrocinador en paricular.
-     */
-    @Path("{eventosId: \\d+}/calificaciones")
-    public Class<EventoMultimediaResource> getEventoMultimediaResource(@PathParam("eventosId") Long eventosId) {
-        if (eventoLogic.find(eventosId) == null) {
-            throw new WebApplicationException(RECURSO_EVENTO + eventosId + NO_EXISTE, 404);
-        }
-        return EventoMultimediaResource.class;
-    }
-    
-    /**
-     * Conexión con el servicio de eventos para un patrocinador.
-     * {@link PatrocinadorEventosResource}
-     *
-     * Este método conecta la ruta de /patrocinadores con las rutas de /eventos que
-     * dependen del patrocinador, es una redirección al servicio que maneja el segmento
-     * de la URL que se encarga de los eventos.
-     *
-     * @param patrocinadoresId El ID del patrocinador con respecto al cual se accede al
-     * servicio.
-     * @return El servicio de Eventos para ese patrocinador en paricular.
-     */
-    @Path("{eventosId: \\d+}/calificaciones")
-    public Class<EventoOrganizadoresResource> getEventoOrganizadorResource(@PathParam("eventosId") Long eventosId) {
-        if (eventoLogic.find(eventosId) == null) {
-            throw new WebApplicationException(RECURSO_EVENTO + eventosId + NO_EXISTE, 404);
-        }
-        return EventoOrganizadoresResource.class;
-    }
+
+
     /**
      * cambia los entities por dtos
      *
@@ -281,5 +166,133 @@ public class EventoResource {
         }
         return list;
     }
-
+//--------------------ASOCIACIONES--------------------------------------------//
+    
+     /**
+     * Conexión con el servicio de patrocinadores para un evento.
+     * {@link EventoPatrocinadoresResource}
+     *
+     * Este método conecta la ruta de /eventos con las rutas de /patrocinadores que
+     * dependen del evento, es una redirección al servicio que maneja el segmento
+     * de la URL que se encarga de los eventos.
+     *
+     * @param eventosId El ID del evento con respecto al cual se accede al
+     * servicio.
+     * @return El servicio de patrocinadores para ese evento en paricular.
+     */
+    @Path("{eventosId: \\d+}/patrocinadores")
+    public Class<EventoPatrocinadorResource> getEventoPatrocinadorResource(@PathParam("eventosId") Long eventosId) {
+        if (eventoLogic.find(eventosId) == null) {
+            throw new WebApplicationException(RECURSO_EVENTO + eventosId + NO_EXISTE, 404);
+        }
+        return EventoPatrocinadorResource.class;
+    }
+    
+    
+    
+     /**
+     * Conexión con el servicio de agendas para un evento.
+     * {@link EventoAgendasResource}
+     *
+     * Este método conecta la ruta de /eventos con las rutas de /agendas que
+     * dependen del evento, es una redirección al servicio que maneja el segmento
+     * de la URL que se encarga de los eventos.
+     *
+     * @param eventosId El ID del evento con respecto al cual se accede al
+     * servicio.
+     * @return El servicio de agendas para ese evento en paricular.
+     */
+    @Path("{eventosId: \\d+}/agendas")
+    public Class<EventoAgendaResource> getEventoAgendaResource(@PathParam("eventosId") Long eventosId) {
+        if (eventoLogic.find(eventosId) == null) {
+            throw new WebApplicationException(RECURSO_EVENTO + eventosId + NO_EXISTE, 404);
+        }
+        return EventoAgendaResource.class;
+    }
+    
+    
+     /**
+     * Conexión con el servicio de multimedias para un evento.
+     * {@link EventoMultimediaesResource}
+     *
+     * Este método conecta la ruta de /eventos con las rutas de /multimedias que
+     * dependen del evento, es una redirección al servicio que maneja el segmento
+     * de la URL que se encarga de los eventos.
+     *
+     * @param eventosId El ID del evento con respecto al cual se accede al
+     * servicio.
+     * @return El servicio de multimedias para ese evento en paricular.
+     */
+    @Path("{eventosId: \\d+}/multimedias")
+    public Class<EventoMultimediaResource> getEventoMultimediaResource(@PathParam("eventosId") Long eventosId) {
+        if (eventoLogic.find(eventosId) == null) {
+            throw new WebApplicationException(RECURSO_EVENTO + eventosId + NO_EXISTE, 404);
+        }
+        return EventoMultimediaResource.class;
+    }
+    
+    
+     /**
+     * Conexión con el servicio de entradas para un evento.
+     * {@link EventoEntradasResource}
+     *
+     * Este método conecta la ruta de /eventos con las rutas de /entradas que
+     * dependen del evento, es una redirección al servicio que maneja el segmento
+     * de la URL que se encarga de los eventos.
+     *
+     * @param eventosId El ID del evento con respecto al cual se accede al
+     * servicio.
+     * @return El servicio de entradas para ese evento en paricular.
+     */
+    @Path("{eventosId: \\d+}/entradas")
+    public Class<EventoEntradaResource> getEventoEntradaResource(@PathParam("eventosId") Long eventosId) {
+        if (eventoLogic.find(eventosId) == null) {
+            throw new WebApplicationException(RECURSO_EVENTO + eventosId + NO_EXISTE, 404);
+        }
+        return EventoEntradaResource.class;
+    }
+    
+    
+       /**
+     * Conexión con el servicio de organizadores para un evento.
+     * {@link EventoOrganizadoresResource}
+     *
+     * Este método conecta la ruta de /eventos con las rutas de /organizadores que
+     * dependen del evento, es una redirección al servicio que maneja el segmento
+     * de la URL que se encarga de los eventos.
+     *
+     * @param eventosId El ID del evento con respecto al cual se accede al
+     * servicio.
+     * @return El servicio de organizadores para ese evento en paricular.
+     */
+    @Path("{eventosId: \\d+}/organizadores")
+    public Class<EventoOrganizadoresResource> getEventoOrganizadoresResource(@PathParam("eventosId") Long eventosId) {
+        if (eventoLogic.find(eventosId) == null) {
+            throw new WebApplicationException(RECURSO_EVENTO + eventosId + NO_EXISTE, 404);
+        }
+        return EventoOrganizadoresResource.class;
+    }
+    
+        /**
+     * Conexión con el servicio de calificaiones para un evento.
+     * {@link EventoCalificacionResource}
+     *
+     * Este método conecta la ruta de /eventos con las rutas de /calificaciones que
+     * dependen del evento, es una redirección al servicio que maneja el segmento
+     * de la URL que se encarga de los eventos.
+     *
+     * @param eventosId El ID del evento con respecto al cual se accede al
+     * servicio.
+     * @return El servicio de calificaciones para ese evento en paricular.
+     */
+    @Path("{eventosId: \\d+}/calificaciones")
+    public Class<EventoCalificacionResource> getEventoCalificacionResource(@PathParam("eventosId") Long eventosId) {
+        if (eventoLogic.find(eventosId) == null) {
+            throw new WebApplicationException(RECURSO_EVENTO + eventosId + NO_EXISTE, 404);
+        }
+        return EventoCalificacionResource.class;
+    }
+    
+    
+    
 }

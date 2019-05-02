@@ -11,6 +11,7 @@ import co.edu.uniandes.csw.eventos.persistence.UbicacionPersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -22,25 +23,20 @@ import javax.inject.Inject;
 public class UbicacionLogic {
 
     private static final Logger LOGGER = Logger.getLogger(UbicacionLogic.class.getName());
-    /**
-     * persistencia de la ubicacion
-     */
+/**
+ * persistencia de la ubicacion
+ */
     @Inject
     private UbicacionPersistence up;
 
     /**
      * crear ubicacion con reglas de negocio
-     *
      * @param ubicacionEntity
      * @return ubicacion creada
-     * @throws BusinessLogicException
+     * @throws BusinessLogicException 
      */
     public UbicacionEntity createUbicacion(UbicacionEntity ubicacionEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de ubicacion");
-        //
-        if (up.findByName(ubicacionEntity.getNombre()) != null) {
-            throw new BusinessLogicException("Ya existe una ubicacion con el nombre");
-        }
 
         if (ubicacionEntity.getLatitud() > 90 || ubicacionEntity.getLatitud() < -90) {
             throw new BusinessLogicException("La latitud es incorrecta");
@@ -62,15 +58,14 @@ public class UbicacionLogic {
      * @return Colección de objetos de UbicacionENtity.
      */
     public List<UbicacionEntity> findAllUbicacion() {
-        return up.findAll();
+      return up.findAll();
 
     }
 
     /**
      * otiene una ubicacion
-     *
      * @param ubicacionId a buscar
-     * @return
+     * @return 
      */
     public UbicacionEntity findUbicacion(Long ubicacionId) {
         return up.find(ubicacionId);
@@ -78,14 +73,13 @@ public class UbicacionLogic {
 
     /**
      * actualiza una ubicacion segun las reglas de negocio
-     *
      * @param UbicacionId
      * @param ubicacionEntity
      * @return
-     * @throws BusinessLogicException
+     * @throws BusinessLogicException 
      */
     public UbicacionEntity updateUbicacion(Long UbicacionId, UbicacionEntity ubicacionEntity) throws BusinessLogicException {
-
+        
         if (ubicacionEntity.getLatitud() > 90 || ubicacionEntity.getLatitud() < -90) {
             throw new BusinessLogicException("La latitud es incorrecta");
         }
@@ -96,15 +90,14 @@ public class UbicacionLogic {
         if (ubicacionEntity.getNombre().length() > 50) {
             throw new BusinessLogicException("El nombre es muy largo");
         }
-        up.update(ubicacionEntity);
+       up.update(ubicacionEntity);
         return ubicacionEntity;
     }
 
     /**
      * elimina una ubicacion
-     *
      * @param ubicacionId
-     * @throws BusinessLogicException
+     * @throws BusinessLogicException 
      */
     public void deleteUbicacion(Long ubicacionId) throws BusinessLogicException {
         up.delete(ubicacionId);

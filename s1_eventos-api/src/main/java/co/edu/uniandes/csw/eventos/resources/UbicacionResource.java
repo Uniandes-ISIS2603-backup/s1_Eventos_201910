@@ -1,28 +1,14 @@
 /*
-MIT License
-
-Copyright (c) 2017 Universidad de los Andes - ISIS2603
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package co.edu.uniandes.csw.eventos.resources;
 
+/**
+ *
+ * @author Mateo Vallejo
+ */
 import co.edu.uniandes.csw.eventos.dtos.UbicacionDTO;
 import co.edu.uniandes.csw.eventos.ejb.UbicacionLogic;
 import co.edu.uniandes.csw.eventos.entities.UbicacionEntity;
@@ -33,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -40,26 +27,29 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 
 /**
  *
- * @author Paula Molina
+ * @author Mateo Vallejo
  */
 @Path("ubicaciones")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
+
 public class UbicacionResource {
-    
+
     private static final Logger LOGGER = Logger.getLogger(UbicacionResource.class.getName());
     private static final String NO_EXISTE = " no existe.";
     private static final String RECURSO_UBICACION = "El recurso /ubicaciones/";
 
-    @Inject 
+    /**
+     * logica de la clase
+     */
+    @Inject
     private UbicacionLogic ubicacionLogic;
-    
+
     /**
      * Crea un nuevo ubicacion con la informacion que se recibe en el cuerpo de la
      * petición y se regresa un objeto identico con un id auto-generado por la
@@ -140,9 +130,9 @@ public class UbicacionResource {
         }
         UbicacionDTO detailDTO = new UbicacionDTO(ubicacionLogic.updateUbicacion(ubicacionesId, ubicacion.toEntity()));
         LOGGER.log(Level.INFO, "UbicacionResource updateUbicacion: output: {0}", detailDTO);
-        return detailDTO;    
+        return detailDTO;
     }
-
+    
     /**
      * Borra el ubicacion con el id asociado recibido en la URL.
      *
@@ -156,7 +146,7 @@ public class UbicacionResource {
     @DELETE
     @Path("{ubicacionesId: \\d+}")
     public void deleteUbicacion(@PathParam("ubicacionesId") Long ubicacionesId) throws BusinessLogicException {
-        
+
         LOGGER.log(Level.INFO, "UbicacionResource deleteUbicacion: input: {0}", ubicacionesId);
         if (ubicacionLogic.findUbicacion(ubicacionesId) == null) {
             throw new WebApplicationException(RECURSO_UBICACION + ubicacionesId + NO_EXISTE, 404);
@@ -164,7 +154,7 @@ public class UbicacionResource {
         ubicacionLogic.deleteUbicacion(ubicacionesId);
         LOGGER.info("UbicacionResource deleteUbicacion: output: void");
     }
-    
+
 
     /**
      * Convierte una lista de UbicacionEntity a una lista de UbicacionDTO.
@@ -179,4 +169,5 @@ public class UbicacionResource {
         }
         return list;
     }
+
 }

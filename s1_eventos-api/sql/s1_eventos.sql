@@ -117,22 +117,6 @@ insert into FacturaEntity_EntradaEntity(facturaEntity_id,entradas_id) values (30
 insert into FacturaEntity_EntradaEntity(facturaEntity_id,entradas_id) values (200,300);
 insert into FacturaEntity_EntradaEntity(facturaEntity_id,entradas_id) values (100,200);
 
-
-
-
-
-
-
-
-delete from PatrocinadorEntity;
-delete from OrganizadorEntity;
-delete from EventoEntity;
-delete from UbicacionEntity;
-delete from EntradaEntity;
-delete from CalificacionEntity;
-delete from MedioDePagoEntity;
-delete from UsuarioEntity;
-
 insert into UsuarioEntity(id, contrasenia, correoElectronico,latitud,longitud,unialpino) values (999,'contrasenia','usuario999@hotmail.com',40.1,40.2,0);
 
 insert into PatrocinadorEntity(id, nombre, imagen, rango, descripcion) values (100, 'El Espectador','https://www.elespectador.com/sites/default/files/f132055d336bdccca7332e9c54da0167.jpg', 'Gold', 'https://www.elespectador.com/noticias' );
