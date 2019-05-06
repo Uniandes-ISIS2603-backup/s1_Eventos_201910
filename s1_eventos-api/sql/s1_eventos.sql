@@ -1,22 +1,22 @@
 
 /*limpiar datos*/
-delete from AgendaEntity;/*Ok*/
-delete from AgendaEntity_InvitadoEspecialEntity;/*Ok*/
+delete from AgendaEntity;                           /*Ok*/
+delete from AgendaEntity_InvitadoEspecialEntity;    /*Ok*/
 delete from CalificacionEntity;
-delete from EntradaEntity;
-delete from EventoEntity; /*Ok*/
-delete from EventoEntity_OrganizadorEntity;/*Ok*/
-delete from EventoEntity_PatrocinadorEntity;/*Ok*/
-delete from EventoEntity_UsuarioEntity;
-delete from FacturaEntity;/*Ok*/
-delete from FacturaEntity_EntradaEntity;
-delete from InvitadoEspecialEntity;/*Ok*/
-delete from MedioDePagoEntity;/*Ok*/
-delete from MultimediaEntity;/*Ok*/
-delete from OrganizadorEntity;/*Ok*/
-delete from PatrocinadorEntity;/*Ok*/
-delete from UbicacionEntity;/*Ok*/
-delete from UsuarioEntity;/*Ok*/
+delete from EntradaEntity;                          /*Ok*/
+delete from EventoEntity;                           /*Ok*/
+delete from EventoEntity_OrganizadorEntity;         /*Ok*/
+delete from EventoEntity_PatrocinadorEntity;        /*Ok*/
+delete from EventoEntity_UsuarioEntity;             /*Ok*/
+delete from FacturaEntity;                          /*Ok*/
+delete from FacturaEntity_EntradaEntity;            /*Ok*/
+delete from InvitadoEspecialEntity;                 /*Ok*/
+delete from MedioDePagoEntity;                      /*Ok*/
+delete from MultimediaEntity;                       /*Ok*/
+delete from OrganizadorEntity;                      /*Ok*/
+delete from PatrocinadorEntity;                     /*Ok*/
+delete from UbicacionEntity;                        /*Ok*/
+delete from UsuarioEntity;                          /*Ok*/
 
 /*crear datos*/
 
@@ -75,8 +75,18 @@ insert into MultimediaEntity(id, url, nombre, tipo, memoria, evento_id, organiza
 insert into MultimediaEntity(id, url, nombre, tipo, memoria, evento_id, organizador_id ) values (200, 'www.asdfgh.com' ,'video', 'video', 1, 300, 100);
 insert into MultimediaEntity(id, url, nombre, tipo, memoria, evento_id, organizador_id ) values (300, 'www.poiuy.com' ,'gif', 'gif', 1, 400, 300);
 insert into MultimediaEntity(id, url, nombre, tipo, memoria, evento_id, organizador_id ) values (400, 'www.mnbvcx.com' ,'video', 'video', 0, 200, 200);
+
 /*Entrada*/
-insert into EntradaEntity (id, qr, checkin, descripcion, disponible, locacion, numero, precio, reservado, evento)
+insert into EntradaEntity(id, qr, checkin, descripcion, locacion, numero, precio, reservado, evento_id, factura_id, usuario_id) values (100, '', 0,'entrada general','general sur', 1,5000, 1 ,200,300,100);
+insert into EntradaEntity(id, qr, checkin, descripcion, locacion, numero, precio, reservado, evento_id, factura_id, usuario_id) values (200, '', 1,'concierto','platea norte', 2,20000, 1 ,100,200,400);
+insert into EntradaEntity(id, qr, checkin, descripcion, locacion, numero, precio, reservado, evento_id, factura_id, usuario_id) values (300, '', 0,'entrada gratis','occidental ', 3,0, 1 ,300,200,100);
+insert into EntradaEntity(id, qr, checkin, descripcion, locacion, numero, precio, reservado, evento_id, factura_id, usuario_id) values (400, '', 1,'preferencial','centro ', 4,150000, 1 ,300,100,400);
+
+/*Calificacion*/
+insert into calificacionEntity(id,comentarios,estrellas,recomendado, evento_id, usuario_id, deacuerdo) values (100,'asdas',4,0,100,100,'hgfd');
+insert into calificacionEntity(id,comentarios,estrellas,recomendado, evento_id, usuario_id, deacuerdo) values (200,'iuytr',4,0,200,200,'kjh');
+insert into calificacionEntity(id,comentarios,estrellas,recomendado, evento_id, usuario_id, deacuerdo) values (300,',mnbvc',4,0,300,300,'oiuy');
+insert into calificacionEntity(id,comentarios,estrellas,recomendado, evento_id, usuario_id, deacuerdo) values (400,'iuytr',4,0,400,400,',kjhgf');
 
 
 
@@ -111,11 +121,7 @@ insert into EventoEntity_UsuarioEntity(eventos_id, usuarios_id) values(100,400);
 insert into EventoEntity_UsuarioEntity(eventos_id, usuarios_id) values(300,300);
 insert into EventoEntity_UsuarioEntity(eventos_id, usuarios_id) values(400,100);
 
-
-
-
-
-
-
-
-
+insert into FacturaEntity_entradaEntity(facturaEntity_id,entradas_id) values(100,100);
+insert into FacturaEntity_entradaEntity(facturaEntity_id,entradas_id)  values(200,200);
+insert into FacturaEntity_entradaEntity(facturaEntity_id,entradas_id)  values(300,300);
+insert into FacturaEntity_entradaEntity(facturaEntity_id,entradas_id) values(400,400);
