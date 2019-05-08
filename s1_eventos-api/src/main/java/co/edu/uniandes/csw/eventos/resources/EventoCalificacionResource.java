@@ -44,12 +44,12 @@ public class EventoCalificacionResource {
     private EventoCalificacionLogic logica;
 
     @POST
-    @Path("{calificacionesId: \\d+}")
-    public CalificacionDTO addCalificacion(@PathParam("eventosId") Long eventosId, @PathParam("calificacionesId") Long calificacionesId) {
-        if (cl.findCalificacion(calificacionesId) == null) {
-            throw new WebApplicationException("El recurso /calificaciones/" + calificacionesId + " no existe.", 404);
-        }
-        CalificacionDTO DTO = new CalificacionDTO(logica.addCalificacion(eventosId, calificacionesId));
+    public CalificacionDTO addCalificacion( @PathParam("eventosId") Long eventosId,CalificacionDTO calif) throws BusinessLogicException{
+        System.out.println("HOLAAAAAA LLEGO ");
+        //if (cl.findCalificacion(calif.getId()) != null) {
+          //  throw new WebApplicationException("El recurso /calificaciones/" + calif.getId() + " ya existe.", 404);
+        //}
+        CalificacionDTO DTO = new CalificacionDTO(logica.addCalificacion(eventosId, calif.toEntity()));
         return DTO;
     }
 
@@ -85,7 +85,7 @@ public class EventoCalificacionResource {
 
     @DELETE
     @Path("{calificacionesId: \\d+}")
-    public void removeCalificacion(@PathParam("eventosId") Long eventosId, @PathParam("agendasId") Long calificacionesId) {
+    public void removeCalificacion(@PathParam("eventosId") Long eventosId, @PathParam("calificacionesId") Long calificacionesId) {
         if (cl.findCalificacion(calificacionesId) == null) {
             throw new WebApplicationException("El recurso /calificaciones/" + calificacionesId + " no existe.", 404);
         }

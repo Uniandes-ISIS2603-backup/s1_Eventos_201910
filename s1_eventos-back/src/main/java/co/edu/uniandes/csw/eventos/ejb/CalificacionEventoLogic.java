@@ -38,6 +38,8 @@ public class CalificacionEventoLogic {
     @Inject
     private CalificacionPersistence calificacionPersistence;
     
+    
+   
     /**
      * Obtiene el evento al cual pertenece la calificacion
      * @param calificacionId

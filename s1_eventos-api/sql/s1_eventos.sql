@@ -117,18 +117,18 @@ insert into UsuarioEntity(id, contrasenia, correoElectronico,latitud,longitud,un
 
 
 
-insert into CalificacionEntity(id, estrellas, comentarios, recomendado,deAcuerdo,evento_id,usuario_id) values (11,'3','el juego me gusta mucho pero queiro que arreglen
+insert into CalificacionEntity(id, estrellas, comentarios, recomendado,deAcuerdo,evento_id,usuario_id) values (1,'3','el juego me gusta mucho pero queiro que arreglen
                                                                                 eso urgente porfavor siempre juegue este juego y nunca me paso hasta hace un mes y medio en un celular les mande mensaje
                                                                                 kañlsjdklasjdklsajkldsjakldjlskajdklsajkldsajkldjsakldjaskljdlkañsjfklja dkasljd kla dk aljsd j klasjd kl
                                                                                 dlka lkalñsd k lsldk lk lsdkls kñaslñd k lskdal ksldkñlaskdñlakñldsa
                                                                                 ','N','3',100,999);
-insert into CalificacionEntity(id, estrellas, comentarios, recomendado,deAcuerdo,evento_id,usuario_id) values (22,'5','el juego me gusta mucho pero queiro que arreglen eso urgente porfavor siempre juegue este juego y nunca me paso hasta hace un mes y medio en un celular les mande mensaje kañlsjdklasjdklsajkldsjakldjlskajdklsajkldsajkldjsakldjaskljdlka
+insert into CalificacionEntity(id, estrellas, comentarios, recomendado,deAcuerdo,evento_id,usuario_id) values (2,'5','el juego me gusta mucho pero queiro que arreglen eso urgente porfavor siempre juegue este juego y nunca me paso hasta hace un mes y medio en un celular les mande mensaje kañlsjdklasjdklsajkldsjakldjlskajdklsajkldsajkldjsakldjaskljdlka
                                                                                 ñsjfklj a dkasljd kla dk aljsd j klasjd kl dlka lkalñsd k lsldk lk lsdkls kñaslñd k lskdal ksldkñlaskdñlakñldsa','N','1',100,999);
-insert into CalificacionEntity(id, estrellas, comentarios, recomendado,deAcuerdo) values (33,'4','Interesante iniciativa. VIVA EL POPULISMO! Cuando llegué al evento me encontré un añsldk ñl klañsdk ñlaksd ñlaksdlñask alkdlñ asklñd
+insert into CalificacionEntity(id, estrellas, comentarios, recomendado,deAcuerdo) values (3,'4','Interesante iniciativa. VIVA EL POPULISMO! Cuando llegué al evento me encontré un añsldk ñl klañsdk ñlaksd ñlaksdlñask alkdlñ asklñd
                                                                                 qouiqowe nals jpodm ñlc´wojm lñapwomed kmsadj ioqwej nadsosajmdi jasid mjiasjd ioajm sklad{iwoej inkdlasdjaslkaiwd djaow
                                                                                 asdasdsa das dsad asd asdklsajdk ljaskld jklasdj klasjdkl jaskldj klasjd kljaskldj klajdklasjkld jaskldj klsajdkl jaskldj klasjdkl ja
                                                                                 ñklasjdklasj a ñlskdj ioasj ñldasj dlak jklda ,.asmdp oqwjd asmdn klqwjd nklasmdklasjdklasmn .danskld mnjskland klas.','Y','0');
-insert into CalificacionEntity(id, estrellas, comentarios, recomendado,deAcuerdo) values (44,'0','La peor experiencia de mi vida','N','9');
+insert into CalificacionEntity(id, estrellas, comentarios, recomendado,deAcuerdo) values (4,'0','La peor experiencia de mi vida','N','9');
 
 
 insert into EntradaEntity(id, QR, descripcion, precio, locacion, numero, disponible, checkIn, reservado) values (10, 'QR1','El evento mas loco del mundo','1000','Preferencial A','123','Y','N','Y');

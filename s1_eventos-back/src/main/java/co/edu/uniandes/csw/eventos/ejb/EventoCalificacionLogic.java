@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.eventos.ejb;
 
 import co.edu.uniandes.csw.eventos.entities.EventoEntity;
 import co.edu.uniandes.csw.eventos.entities.CalificacionEntity;
+import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.eventos.persistence.EventoPersistence;
 import co.edu.uniandes.csw.eventos.persistence.CalificacionPersistence;
 import java.util.List;
@@ -29,23 +30,27 @@ public class EventoCalificacionLogic {
     private EventoPersistence eventoPersistence;
 
     @Inject
-    private CalificacionPersistence calificacionPersistence;
+    private CalificacionPersistence calificacionPersistence; 
 
     /**
      * Asocia un Calificacion existente a un Evento
      *
      * @param eventosId Identificador de la instancia de Evento
-     * @param calificacionesId Identificador de la instancia de Calificacion
+     * @param calificacion Identificador de la instancia de Calificacion
      * @return Instancia de CalificacionEntity que fue asociada a Evento
      */
-    public CalificacionEntity addCalificacion(Long eventosId, Long calificacionesId) {
+    public CalificacionEntity addCalificacion(Long eventosId, CalificacionEntity calificacion) throws BusinessLogicException{
         LOGGER.log(Level.INFO, "Inicia proceso de asociarle un calificacion al evento con id = {0}", eventosId);
-        CalificacionEntity calificacionEntity = calificacionPersistence.find(calificacionesId);
+        
         EventoEntity eventoEntity = eventoPersistence.find(eventosId);
-        eventoEntity.getCalificaciones().add(calificacionEntity);
-        calificacionEntity.setEvento(eventoEntity);
+        //CalificacionEntity calificacionEnttiy = calificacionPersistence.find(0)
+        calificacionPersistence.create(calificacion);
+        eventoEntity.getCalificaciones().add(calificacion);
+      
+        calificacion.setEvento(eventoEntity);
+        eventoPersistence.update(eventoEntity);
         LOGGER.log(Level.INFO, "Termina proceso de asociarle un calificacion al evento con id = {0}", eventosId);
-        return calificacionPersistence.find(calificacionesId);
+        return calificacion;
     }
 
     /**
@@ -89,7 +94,7 @@ public class EventoCalificacionLogic {
      * @return Nueva colección de CalificacionEntity asociada a la instancia de Evento
      */
     public List<CalificacionEntity> replaceCalificaciones(Long eventosId, List<CalificacionEntity> list) {
-        LOGGER.log(Level.INFO, "Inicia proceso de reemplazar los calificaciones del libro con id = {0}", eventosId);
+        LOGGER.log(Level.INFO, "Inicia proceso de reemplazar los calificaciones del libro con id = {0}-", eventosId);
         EventoEntity eventoEntity = eventoPersistence.find(eventosId);
         eventoEntity.setCalificaciones(list);
         LOGGER.log(Level.INFO, "Termina proceso de reemplazar los calificaciones del libro con id = {0}", eventosId);
@@ -102,11 +107,13 @@ public class EventoCalificacionLogic {
      * @param eventosId Identificador de la instancia de Evento
      * @param calificacionesId Identificador de la instancia de Calificacion
      */
-    public void removeCalificacion(Long eventosId, Long calificacionesId) {
+    public void removeCalificacion(Long eventosId, Long calificacionesId){
         LOGGER.log(Level.INFO, "Inicia proceso de borrar un calificacion del evento con id = {0}", eventosId);
-        CalificacionEntity authorEntity = calificacionPersistence.find(calificacionesId);
-        EventoEntity bookEntity = eventoPersistence.find(eventosId);
-        bookEntity.getCalificaciones().remove(authorEntity);
+         EventoEntity eventoEntity = eventoPersistence.find(eventosId);
+        CalificacionEntity califEntity = calificacionPersistence.find(calificacionesId);
+        eventoEntity.getCalificaciones().remove(califEntity);
+        eventoPersistence.update(eventoEntity);
+        calificacionPersistence.delete(calificacionesId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar un calificacion del evento con id = {0}", eventosId);
     }
 }
