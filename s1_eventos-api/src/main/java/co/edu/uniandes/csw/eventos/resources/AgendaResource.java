@@ -1,3 +1,5 @@
+package co.edu.uniandes.csw.eventos.resources;
+
 /*
 MIT License
 
@@ -21,12 +23,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package co.edu.uniandes.csw.eventos.resources;
 
 import co.edu.uniandes.csw.eventos.dtos.AgendaDTO;
 import co.edu.uniandes.csw.eventos.ejb.AgendaLogic;
 import co.edu.uniandes.csw.eventos.entities.AgendaEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.eventos.mappers.BusinessLogicExceptionMapper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -132,4 +134,26 @@ public class AgendaResource {
        }
        return list;
    }
+    
+    
+        
+       /**
+     * Conexión con el servicio de ubicaciones para un agenda.
+     * {@link AgendaUbicacionesResource}
+     *
+     * Este método conecta la ruta de /agendas con las rutas de /ubicaciones que
+     * dependen del agenda, es una redirección al servicio que maneja el segmento
+     * de la URL que se encarga de los agendas.
+     *
+     * @param agendasId El ID del agenda con respecto al cual se accede al
+     * servicio.
+     * @return El servicio de ubicaciones para ese agenda en paricular.
+     */
+    @Path("{agendasId: \\d+}/ubicaciones")
+    public Class<AgendaUbicacionResource> getAgendaUbicacionesResource(@PathParam("agendasId") Long agendasId) {
+        if (agendaLogic.getAgenda(agendasId) == null) {
+            throw new WebApplicationException( "El recurso Agendas" + agendasId + "No existe", 404);
+        }
+        return AgendaUbicacionResource.class;
+    }
 }

@@ -27,7 +27,13 @@ public class AgendaEntity extends BaseEntity implements Serializable {
             fetch = javax.persistence.FetchType.LAZY, cascade = CascadeType.PERSIST
     )
     private List<InvitadoEspecialEntity> invitadosEspeciales = new ArrayList<>();
-
+    
+    
+@PodamExclude
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private UbicacionEntity ubicacion;
+    
+    
     private String nombre;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date horaInicio;
@@ -35,6 +41,8 @@ public class AgendaEntity extends BaseEntity implements Serializable {
     private Date horaFinal;
     private String actividad;
 
+    
+    
     /**
      * @return the nombre
      */
@@ -114,8 +122,22 @@ public class AgendaEntity extends BaseEntity implements Serializable {
     @Override
     public int hashCode() {
         int result = 17;
-        result = 31 * result + nombre.hashCode();
-        result = 31 * result + actividad.hashCode();
+        result = 31 * result + getNombre().hashCode();
+        result = 31 * result + getActividad().hashCode();
         return result;
+    }
+
+    /**
+     * @return the ubicacion
+     */
+    public UbicacionEntity getUbicacion() {
+        return ubicacion;
+    }
+
+    /**
+     * @param ubicacion the ubicacion to set
+     */
+    public void setUbicacion(UbicacionEntity ubicacion) {
+        this.ubicacion = ubicacion;
     }
 }
