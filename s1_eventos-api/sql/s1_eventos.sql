@@ -120,6 +120,7 @@ delete from UsuarioEntity;                          /*Ok*/
 
 /*crear datos Pruebas*/
 
+
 /*Evento*/
 insert into EventoEntity(id, nombre, descripcion, fechaInicio, fechaFin, detalles, categoria, privado, capacidadMaxima, boletasDisponibles) values (100,'1' ,'1','2020-02-23' ,'2020-02-23' ,'1' ,'11' ,0 ,50 ,50 );
 insert into EventoEntity(id, nombre, descripcion, fechaInicio, fechaFin, detalles, categoria, privado, capacidadMaxima, boletasDisponibles) values (200,'2' ,'2','2020-02-23' ,'2020-02-23' ,'2' ,'22' ,0 ,50 ,50 );
@@ -210,7 +211,6 @@ insert into AgendaEntity_InvitadoEspecialEntity(invitadosEspeciales_id,agenda_id
 
 insert into EventoEntity_OrganizadorEntity(eventos_id,organizadores_id) values (100,100);
 insert into EventoEntity_OrganizadorEntity(eventos_id,organizadores_id) values (200,200);
-
 
 
 insert into EventoEntity_PatrocinadorEntity(eventos_id, patrocinadores_id) values(100,100);
