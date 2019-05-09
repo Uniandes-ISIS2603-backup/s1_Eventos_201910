@@ -22,18 +22,17 @@ public class AgendaEntity extends BaseEntity implements Serializable {
     @PodamExclude
     @ManyToOne(cascade = CascadeType.PERSIST)
     private EventoEntity eventos = new EventoEntity();
+
     @PodamExclude
     @ManyToMany(
             fetch = javax.persistence.FetchType.LAZY, cascade = CascadeType.PERSIST
     )
     private List<InvitadoEspecialEntity> invitadosEspeciales = new ArrayList<>();
-    
-    
-@PodamExclude
+
+    @PodamExclude
     @OneToOne(cascade = CascadeType.PERSIST)
     private UbicacionEntity ubicacion;
-    
-    
+
     private String nombre;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date horaInicio;
@@ -41,8 +40,6 @@ public class AgendaEntity extends BaseEntity implements Serializable {
     private Date horaFinal;
     private String actividad;
 
-    
-    
     /**
      * @return the nombre
      */
@@ -116,7 +113,7 @@ public class AgendaEntity extends BaseEntity implements Serializable {
             return true;
         }
         AgendaEntity a = (AgendaEntity) o;
-        return a.getId().equals( this.getId());
+        return a.getId().equals(this.getId());
     }
 
     @Override
@@ -140,4 +137,5 @@ public class AgendaEntity extends BaseEntity implements Serializable {
     public void setUbicacion(UbicacionEntity ubicacion) {
         this.ubicacion = ubicacion;
     }
+    
 }

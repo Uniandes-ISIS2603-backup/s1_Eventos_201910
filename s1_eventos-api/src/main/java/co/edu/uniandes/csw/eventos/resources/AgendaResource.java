@@ -156,4 +156,24 @@ public class AgendaResource {
         }
         return AgendaUbicacionResource.class;
     }
+
+    /**
+     * Conexión con el servicio de ubicaciones para un agenda.
+     * {@link AgendaUbicacionesResource}
+     *
+     * Este método conecta la ruta de /agendas con las rutas de /ubicaciones que
+     * dependen del agenda, es una redirección al servicio que maneja el segmento
+     * de la URL que se encarga de los agendas.
+     *
+     * @param agendasId El ID del agenda con respecto al cual se accede al
+     * servicio.
+     * @return El servicio de ubicaciones para ese agenda en paricular.
+     */
+    @Path("{agendasId: \\d+}/ubicaciones")
+    public Class<AgendaInvitadoEspecialResource> getAgendaInvitadoEspecialResource(@PathParam("agendasId") Long agendasId) {
+        if (agendaLogic.getAgenda(agendasId) == null) {
+            throw new WebApplicationException( "El recurso Agendas" + agendasId + "No existe", 404);
+        }
+        return AgendaInvitadoEspecialResource.class;
+    }
 }
