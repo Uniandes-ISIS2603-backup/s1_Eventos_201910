@@ -51,7 +51,7 @@ public class CalificacionPersistence {
      */
     public void delete(Long id)
     {
-        CalificacionEntity eliminar = find(id);
+        CalificacionEntity eliminar = em.find(CalificacionEntity.class,id);
         em.remove(eliminar);
     }
     

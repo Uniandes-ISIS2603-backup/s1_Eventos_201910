@@ -93,12 +93,21 @@ public class EventoCalificacionLogic {
      * de Evento
      * @return Nueva colección de CalificacionEntity asociada a la instancia de Evento
      */
-    public List<CalificacionEntity> replaceCalificaciones(Long eventosId, List<CalificacionEntity> list) {
+    public String replaceCalificacion(Long eventosId, Long calificacionId,String calif) {
         LOGGER.log(Level.INFO, "Inicia proceso de reemplazar los calificaciones del libro con id = {0}-", eventosId);
         EventoEntity eventoEntity = eventoPersistence.find(eventosId);
-        eventoEntity.setCalificaciones(list);
+        for(int e=0;e<eventoEntity.getCalificaciones().size();e++){
+            if(calificacionId==eventoEntity.getCalificaciones().get(e).getId()){
+                eventoEntity.getCalificaciones().get(e).setComentarios(calif);
+                //sdads
+                System.out.println("LELGA");
+                 eventoPersistence.update(eventoEntity);
+                 calificacionPersistence.update(eventoEntity.getCalificaciones().get(e));
+            }
+        }
+       
         LOGGER.log(Level.INFO, "Termina proceso de reemplazar los calificaciones del libro con id = {0}", eventosId);
-        return eventoPersistence.find(eventosId).getCalificaciones();
+        return calif;
     }
 
     /**

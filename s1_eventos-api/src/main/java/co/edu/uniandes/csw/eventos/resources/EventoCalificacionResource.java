@@ -69,23 +69,27 @@ public class EventoCalificacionResource {
     }
 
     @PUT
-    public List<CalificacionDTO> replaceCalificaciones(@PathParam("eventosId") Long eventosId, List<CalificacionDTO> calificaciones) {
-        for (CalificacionDTO calificacion : calificaciones) {
-            if (cl.findCalificacion(calificacion.getId()) == null) {
-                throw new WebApplicationException("El recurso /agendas/" + calificacion.getId() + " no existe.", 404);
+    @Path("{calificacionesId: \\d+}")
+    public CalificacionDTO replaceCalificacion(@PathParam("eventosId") Long eventosId, @PathParam("calificacionesId") Long calificacionesId, CalificacionDTO calificacion) {
+        System.out.println("-------------------------LLEGA -------------------------");
+        System.out.println("ESTE ES EL ID EVENTOS"+eventosId);
+         System.out.println("ESTE ES EL ID CALIFICACION"+calificacionesId);
+        System.out.println("ESTE ES EL ID: "+calificacionesId);
+      
+            if (cl.findCalificacion(calificacionesId) == null) {
+                throw new WebApplicationException("El recurso /calificaciones/" + calificacion.getId() + " no existe.", 404);
             }
-        }
+       //CalificacionEntity entity =calificacion.toEntity();
 
-       List<CalificacionEntity> entities=listDTO2Entity(calificaciones);
-
-       List<CalificacionDTO> lista = listEntity2DTO(logica.replaceCalificaciones(eventosId, entities));
+       String calif = logica.replaceCalificacion(eventosId, calificacionesId,calificacion.getComentario());
                
-        return lista;
+        return calificacion;
     }
 
     @DELETE
     @Path("{calificacionesId: \\d+}")
     public void removeCalificacion(@PathParam("eventosId") Long eventosId, @PathParam("calificacionesId") Long calificacionesId) {
+        
         if (cl.findCalificacion(calificacionesId) == null) {
             throw new WebApplicationException("El recurso /calificaciones/" + calificacionesId + " no existe.", 404);
         }
