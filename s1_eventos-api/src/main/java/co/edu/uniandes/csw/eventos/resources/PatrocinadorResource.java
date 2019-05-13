@@ -166,25 +166,6 @@ public class PatrocinadorResource {
         LOGGER.info("PatrocinadorResource deletePatrocinador: output: void");
     }
     
-    /**
-     * Conexión con el servicio de eventos para un patrocinador.
-     * {@link PatrocinadorEventosResource}
-     *
-     * Este método conecta la ruta de /patrocinadores con las rutas de /eventos que
-     * dependen del patrocinador, es una redirección al servicio que maneja el segmento
-     * de la URL que se encarga de los eventos.
-     *
-     * @param patrocinadoresId El ID del patrocinador con respecto al cual se accede al
-     * servicio.
-     * @return El servicio de Eventos para ese patrocinador en paricular.
-     */
-    @Path("{patrocinadoresId: \\d+}/eventos")
-    public Class<PatrocinadorEventosResource> getPatrocinadorEventosResource(@PathParam("patrocinadoresId") Long patrocinadoresId) {
-        if (patrocinadorLogic.getPatrocinador(patrocinadoresId) == null) {
-            throw new WebApplicationException(RECURSO_PATROCINADOR + patrocinadoresId + NO_EXISTE, 404);
-        }
-        return PatrocinadorEventosResource.class;
-    }
     
     /**
      * Convierte una lista de PatrocinadorEntity a una lista de PatrocinadorDTO.

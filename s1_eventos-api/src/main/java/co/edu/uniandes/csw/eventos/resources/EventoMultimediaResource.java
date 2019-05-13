@@ -41,9 +41,9 @@ public class EventoMultimediaResource {
      @POST
     @Path("{multimediasId: \\d+}")
     public MultimediaDTO addMultimedia(@PathParam("eventosId") Long eventosId, @PathParam("multimediasId") Long multimediasId) {
-//        if (ml.find(multimediasId) == null) {
-//            throw new WebApplicationException("El recurso /multimedias/" + multimediasId + " no existe.", 404);
-//        }
+        if (ml.getMultimedia(multimediasId) == null) {
+            throw new WebApplicationException("El recurso /multimedias/" + multimediasId + " no existe.", 404);
+        }
         MultimediaDTO DTO = new MultimediaDTO(logica.addMultimedia(eventosId, multimediasId));
         return DTO;
     }
@@ -56,31 +56,30 @@ public class EventoMultimediaResource {
 
     @Path("{multimediasId: \\d+}")
     public MultimediaDTO getMultimedia(@PathParam("eventosId") Long eventosId, @PathParam("multimediasId") Long multimediasId) throws BusinessLogicException {
-//        if (ml.find(multimediasId) == null) {
-//            throw new WebApplicationException("El recurso /multimedias/" + multimediasId + " no existe.", 404);
-//        }
+        if (ml.getMultimedia(multimediasId) == null) {
+            throw new WebApplicationException("El recurso /multimedias/" + multimediasId + " no existe.", 404);
+        }
         MultimediaDTO DTO = new MultimediaDTO(logica.getMultimedia(eventosId, multimediasId));
         return DTO;
     }
 
    @PUT
     public List<MultimediaDTO> replaceMultimedias(@PathParam("editorialsId") Long editorialsId, List<MultimediaDTO> multimedias) {
-//        for (MultimediaDTO multimedia : multimedias) {
-//            if (ml.getMultimedia(multimedia.getId()) == null) {
-//                throw new WebApplicationException("El recurso /multimedias/" + multimedia.getId() + " no existe.", 404);
-//            }
-//        }
-//        List<MultimediaDTO> listaDTOs = multimediasListEntity2DTO(logica.replaceMultimedias(editorialsId, multimediasListDTO2Entity(multimedias)));
-//       return listaDTOs;
-return null;
+        for (MultimediaDTO multimedia : multimedias) {
+            if (ml.getMultimedia(multimedia.getId()) == null) {
+                throw new WebApplicationException("El recurso /multimedias/" + multimedia.getId() + " no existe.", 404);
+            }
+        }
+        List<MultimediaDTO> listaDTOs = listEntity2DTO(logica.replaceMultimediaes(editorialsId, listDTO2Entity(multimedias)));
+       return listaDTOs;
     }
 
     @DELETE
     @Path("{multimediasId: \\d+}")
     public void removeMultimedia(@PathParam("eventosId") Long eventosId, @PathParam("agendasId") Long multimediasId) {
-//        if (ml.find(multimediasId) == null) {
-//            throw new WebApplicationException("El recurso /multimedias/" + multimediasId + " no existe.", 404);
-//        }
+        if (ml.getMultimedia(multimediasId) == null) {
+            throw new WebApplicationException("El recurso /multimedias/" + multimediasId + " no existe.", 404);
+        }
         logica.removeMultimedia(eventosId, multimediasId);
     }
 
