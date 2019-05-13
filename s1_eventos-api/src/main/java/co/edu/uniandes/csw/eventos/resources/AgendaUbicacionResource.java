@@ -9,18 +9,23 @@ import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
  * @author Mateo Vallejo
  */
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class AgendaUbicacionResource {
 
     @Inject
@@ -42,12 +47,10 @@ public class AgendaUbicacionResource {
         return DTO;
     }
 
-  
-
+    @GET
     @Path("{ubicacionesId: \\d+}")
-    public UbicacionDTO getUbicacion(@PathParam("agendasId") Long agendasId)throws BusinessLogicException 
-    {
-        if (al.getAgenda(agendasId) == null) {
+    public UbicacionDTO getUbicacion(@PathParam("agendasId") Long agendasId,@PathParam("ubicacionesId") Long ubicacionesId) throws BusinessLogicException {
+        if (ul.findUbicacion(ubicacionesId) == null) {
             throw new WebApplicationException("El recurso /agendas/" + agendasId + " no existe.", 404);
         }
         UbicacionDTO DTO = new UbicacionDTO(logica.getUbicacion(agendasId));

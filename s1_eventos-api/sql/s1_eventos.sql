@@ -133,14 +133,6 @@ insert into EventoEntity(id, nombre, descripcion, fechaInicio, fechaFin, detalle
 /*Organizador*/
 insert into OrganizadorEntity(id, nombre, telefono, correoElectronico) values (100, '1 ', '1', '1');
 insert into OrganizadorEntity(id, nombre, telefono, correoElectronico) values (200, '2 ', '2', '2');
-insert into OrganizadorEntity(id, nombre, telefono, correoElectronico) values (100, 'Universidad de Los Alpes', '3394949', 'admreg@unialpes.edu.co');
-insert into OrganizadorEntity(id, nombre, telefono, correoElectronico) values (200, 'W Radio Colombia', '3487600', 'redaccionw@caracol.com.co');
-insert into OrganizadorEntity(id, nombre, telefono, correoElectronico) values (300, 'Sueño Estéreo SAS', '4660807','info@stivalestereopicnic.com');
-insert into OrganizadorEntity(id, nombre, telefono, correoElectronico) values (400, 'Produccion de Eventos 911 SAS', '4324075', 'info@logistica911.com');
-insert into OrganizadorEntity(id, nombre, telefono, correoElectronico) values (500, 'Universidad de Los Alpes', '3394949', 'admreg@unialpes.edu.co');
-insert into OrganizadorEntity(id, nombre, telefono, correoElectronico) values (600, 'W Radio Colombia', '3487600', 'redaccionw@caracol.com.co');
-insert into OrganizadorEntity(id, nombre, telefono, correoElectronico) values (700, 'Sueño Estéreo SAS', '4660807','info@stivalestereopicnic.com');
-insert into OrganizadorEntity(id, nombre, telefono, correoElectronico) values (800, 'Produccion de Eventos 911 SAS', '4324075', 'info@logistica911.com');
 
 /*Patrocinador*/
 insert into PatrocinadorEntity(id, nombre, imagen, rango, descripcion) values (100, '1','1', '1', '1' );

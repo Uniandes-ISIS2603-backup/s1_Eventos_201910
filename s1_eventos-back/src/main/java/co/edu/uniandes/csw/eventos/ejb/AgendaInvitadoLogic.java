@@ -63,11 +63,9 @@ public class AgendaInvitadoLogic {
         LOGGER.log(Level.INFO, "Inicia proceso de agregarle un libro a la Agenda con id = {0}", agendasId);
         AgendaEntity agendaEntity = agendaPersistence.find(agendasId);
         InvitadoEspecialEntity invitadoEspecialEntity = invitadoEspecialPersistence.find(invitadoEspecialsId);
-        List<AgendaEntity> lista = invitadoEspecialEntity.getAgenda();
-        lista.add(agendaEntity);
-        invitadoEspecialEntity.setAgenda(lista);
+       agendaEntity.getInvitadosEspeciales().add(invitadoEspecialEntity);
         LOGGER.log(Level.INFO, "Termina proceso de agregarle un invitado especial a la Agenda con id = {0}", agendasId);
-        return invitadoEspecialEntity;
+        return invitadoEspecialPersistence.find(invitadoEspecialsId);
     }
 
     /**

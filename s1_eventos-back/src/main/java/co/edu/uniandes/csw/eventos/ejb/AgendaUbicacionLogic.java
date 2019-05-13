@@ -7,6 +7,7 @@ import co.edu.uniandes.csw.eventos.persistence.AgendaPersistence;
 import co.edu.uniandes.csw.eventos.persistence.UbicacionPersistence;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 
@@ -14,6 +15,7 @@ import javax.inject.Inject;
  *
  * @author Mateo Vallejo
  */
+@Stateless
 public class AgendaUbicacionLogic {
     
     

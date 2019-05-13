@@ -14,25 +14,27 @@ import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author estudiante
+ * @author Mateo Vallejo
  */
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class AgendaInvitadoEspecialResource {
- 
-    @Inject
-    private AgendaLogic al;
 
     @Inject
-    private InvitadoEspecialLogic ul;
+    private InvitadoEspecialLogic iel;
 
     @Inject
     private AgendaInvitadoLogic logica;
@@ -40,49 +42,42 @@ public class AgendaInvitadoEspecialResource {
     @POST
     @Path("{invitadoEspecialesId: \\d+}")
     public InvitadoEspecialDTO addInvitadoEspecial(@PathParam("agendasId") Long agendasId, @PathParam("invitadoEspecialesId") Long invitadoEspecialesId) {
-        if (ul.getInvitadoEspecial(invitadoEspecialesId) == null) {
+        if (iel.getInvitadoEspecial(invitadoEspecialesId) == null) {
             throw new WebApplicationException("El recurso /invitadoEspeciales/" + invitadoEspecialesId + " no existe.", 404);
         }
         InvitadoEspecialDTO DTO = new InvitadoEspecialDTO(logica.addInvitadoEspecial(agendasId, invitadoEspecialesId));
         return DTO;
     }
 
-    
-      @GET
+    @GET
     public List<InvitadoEspecialDTO> getInvitadoEspeciales(@PathParam("agendasId") Long agendasId) {
         List<InvitadoEspecialDTO> lista = listEntity2DTO(logica.getInvitadoEspecials(agendasId));
         return lista;
     }
-  
 
+    @GET
     @Path("{invitadoEspecialesId: \\d+}")
     public InvitadoEspecialDTO getInvitadoEspecial(@PathParam("agendasId") Long agendasId, @PathParam("invitadoEspecialesId") Long invitadoEspecialesId) throws BusinessLogicException {
-        if (ul.getInvitadoEspecial(invitadoEspecialesId) == null) {
+        if (iel.getInvitadoEspecial(invitadoEspecialesId) == null) {
             throw new WebApplicationException("El recurso /invitadoEspeciales/" + invitadoEspecialesId + " no existe.", 404);
         }
         InvitadoEspecialDTO DTO = new InvitadoEspecialDTO(logica.getInvitadoEspecial(agendasId, invitadoEspecialesId));
         return DTO;
     }
 
- 
-      @PUT
+    @PUT
     public List<InvitadoEspecialDTO> replaceInvitadoEspeciales(@PathParam("agendasId") Long agendasId, List<InvitadoEspecialDTO> invitadoEspeciales) {
         for (InvitadoEspecialDTO invitadoEspecial : invitadoEspeciales) {
-            if (ul.getInvitadoEspecial(invitadoEspecial.getId()) == null) {
+            if (iel.getInvitadoEspecial(invitadoEspecial.getId()) == null) {
                 throw new WebApplicationException("El recurso /agendas/" + invitadoEspecial.getId() + " no existe.", 404);
             }
         }
-
-       List<InvitadoEspecialEntity> entities=listDTO2Entity(invitadoEspeciales);
-
-        List<InvitadoEspecialDTO> lista = listEntity2DTO(logica.replaceInvitadoEspeciales(agendasId, entities));
-               
+        List<InvitadoEspecialDTO> lista = listEntity2DTO(logica.replaceInvitadoEspeciales(agendasId, listDTO2Entity(invitadoEspeciales)));
         return lista;
     }
 
-
     
-       private List<InvitadoEspecialDTO> listEntity2DTO(List<InvitadoEspecialEntity> entityList) {
+    private List<InvitadoEspecialDTO> listEntity2DTO(List<InvitadoEspecialEntity> entityList) {
         List<InvitadoEspecialDTO> list = new ArrayList<>();
         for (InvitadoEspecialEntity entity : entityList) {
             list.add(new InvitadoEspecialDTO(entity));
@@ -99,5 +94,3 @@ public class AgendaInvitadoEspecialResource {
     }
 
 }
-
-

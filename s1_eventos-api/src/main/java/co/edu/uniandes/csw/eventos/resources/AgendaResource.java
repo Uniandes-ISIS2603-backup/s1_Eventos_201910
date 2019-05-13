@@ -169,7 +169,7 @@ public class AgendaResource {
      * servicio.
      * @return El servicio de ubicaciones para ese agenda en paricular.
      */
-    @Path("{agendasId: \\d+}/ubicaciones")
+    @Path("{agendasId: \\d+}/invitadoEspeciales")
     public Class<AgendaInvitadoEspecialResource> getAgendaInvitadoEspecialResource(@PathParam("agendasId") Long agendasId) {
         if (agendaLogic.getAgenda(agendasId) == null) {
             throw new WebApplicationException( "El recurso Agendas" + agendasId + "No existe", 404);
