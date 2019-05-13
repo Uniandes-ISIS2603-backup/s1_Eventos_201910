@@ -2,9 +2,8 @@
 package co.edu.uniandes.csw.eventos.tests.postman;
 
 import co.edu.uniandes.csw.eventos.mappers.BusinessLogicExceptionMapper;
-import co.edu.uniandes.csw.eventos.dtos.CascaraDTO;
-
-import co.edu.uniandes.csw.eventos.resources.RestConfig;
+import co.edu.uniandes.csw.eventos.dtos.MultimediaDTO;
+import co.edu.uniandes.csw.eventos.resources.MultimediaResource;
 import co.edu.uniandes.csw.postman.tests.PostmanTestBuilder;
 import java.io.File;
 import java.io.IOException;
@@ -35,8 +34,8 @@ public class MultimediaIT {
                         .importRuntimeDependencies().resolve()
                         .withTransitivity().asFile())
                 // Se agregan los compilados de los paquetes de servicios
-                .addPackage(RestConfig.class.getPackage()) //No importa cual recurso usar, lo importante es agregar el paquet
-                .addPackage(CascaraDTO.class.getPackage()) //No importa cual dto usar, lo importante es agregar el paquete.
+                .addPackage(MultimediaResource.class.getPackage()) //No importa cual recurso usar, lo importante es agregar el paquet
+                .addPackage(MultimediaDTO.class.getPackage()) //No importa cual dto usar, lo importante es agregar el paquete.
                 .addPackage(BusinessLogicExceptionMapper.class.getPackage())
                 // El archivo que contiene la configuracion a la base de datos.
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
@@ -58,7 +57,6 @@ public class MultimediaIT {
         Assert.assertEquals("Error en Requests de: " + COLLECTION, desiredResult, tp.getRequests_failed());
 
         Assert.assertEquals("Error en Test-Scripts de: " + COLLECTION, desiredResult, tp.getTest_scripts_failed());
-        desiredResult = "1";
         Assert.assertEquals("Error en Assertions de: " + COLLECTION, desiredResult, tp.getAssertions_failed());
     }
 }
