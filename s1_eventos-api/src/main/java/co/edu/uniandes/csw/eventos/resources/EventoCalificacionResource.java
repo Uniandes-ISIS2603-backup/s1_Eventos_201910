@@ -71,17 +71,15 @@ public class EventoCalificacionResource {
     @PUT
     @Path("{calificacionesId: \\d+}")
     public CalificacionDTO replaceCalificacion(@PathParam("eventosId") Long eventosId, @PathParam("calificacionesId") Long calificacionesId, CalificacionDTO calificacion) {
-        System.out.println("-------------------------LLEGA -------------------------");
-        System.out.println("ESTE ES EL ID EVENTOS"+eventosId);
-         System.out.println("ESTE ES EL ID CALIFICACION"+calificacionesId);
-        System.out.println("ESTE ES EL ID: "+calificacionesId);
-      
+        System.out.println("-------------LLEGAA----------------");
             if (cl.findCalificacion(calificacionesId) == null) {
                 throw new WebApplicationException("El recurso /calificaciones/" + calificacion.getId() + " no existe.", 404);
             }
        //CalificacionEntity entity =calificacion.toEntity();
 
-       String calif = logica.replaceCalificacion(eventosId, calificacionesId,calificacion.getComentario());
+
+
+       CalificacionEntity calif = logica.replaceCalificacion(eventosId, calificacionesId,calificacion.toEntity());
                
         return calificacion;
     }

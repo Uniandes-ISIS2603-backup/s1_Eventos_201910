@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.eventos.ejb;
 
 import co.edu.uniandes.csw.eventos.entities.EventoEntity;
 import co.edu.uniandes.csw.eventos.entities.CalificacionEntity;
+import co.edu.uniandes.csw.eventos.entities.EntradaEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.eventos.persistence.EventoPersistence;
 import co.edu.uniandes.csw.eventos.persistence.CalificacionPersistence;
@@ -93,12 +94,14 @@ public class EventoCalificacionLogic {
      * de Evento
      * @return Nueva colección de CalificacionEntity asociada a la instancia de Evento
      */
-    public String replaceCalificacion(Long eventosId, Long calificacionId,String calif) {
+    public CalificacionEntity replaceCalificacion(Long eventosId, Long calificacionId, CalificacionEntity calif) {
         LOGGER.log(Level.INFO, "Inicia proceso de reemplazar los calificaciones del libro con id = {0}-", eventosId);
         EventoEntity eventoEntity = eventoPersistence.find(eventosId);
         for(int e=0;e<eventoEntity.getCalificaciones().size();e++){
             if(calificacionId==eventoEntity.getCalificaciones().get(e).getId()){
-                eventoEntity.getCalificaciones().get(e).setComentarios(calif);
+                eventoEntity.getCalificaciones().get(e).setComentarios(calif.getComentarios());
+                 eventoEntity.getCalificaciones().get(e).setEstrellas(calif.getEstrellas());
+                  eventoEntity.getCalificaciones().get(e).setRecomendado(calif.getRecomendado());
                 //sdads
                 System.out.println("LELGA");
                  eventoPersistence.update(eventoEntity);

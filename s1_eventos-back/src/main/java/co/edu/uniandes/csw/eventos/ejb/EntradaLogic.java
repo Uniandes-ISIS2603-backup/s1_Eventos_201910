@@ -9,7 +9,9 @@ import co.edu.uniandes.csw.eventos.entities.EntradaEntity;
 import co.edu.uniandes.csw.eventos.entities.MedioDePagoEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.eventos.persistence.EntradaPersistence;
+import co.edu.uniandes.csw.eventos.persistence.EventoPersistence;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -26,8 +28,15 @@ public class EntradaLogic {
     @Inject
     private EntradaPersistence persistence;
     
-    public EntradaEntity createEntrada(EntradaEntity entradaEntity) throws BusinessLogicException {
+    @Inject
+    private EventoPersistence evPersistence;
+    
+    public EntradaEntity createEntrada(EntradaEntity entradaEntity, Long idEvento) throws BusinessLogicException {
         EntradaEntity newEntr = persistence.create(entradaEntity);
+        persistence.create(newEntr);
+        newEntr.setEvento(evPersistence.find(idEvento));
+        persistence.update(newEntr);
+        evPersistence.update(evPersistence.find(idEvento));
         return newEntr;
     }
     
@@ -45,8 +54,12 @@ public class EntradaLogic {
     }
     
     public EntradaEntity find(Long entradaId)
-    {
-        return persistence.find(entradaId);
+    {  
+        EntradaEntity entradaEntity = persistence.find(entradaId);
+        if(entradaEntity==null){
+             LOGGER.log(Level.SEVERE, "La calificacion con el id = {0} no existe", entradaId);
+        }
+        return entradaEntity;
     }
     
     public EntradaEntity findByName(String nombre)

@@ -131,8 +131,8 @@ insert into CalificacionEntity(id, estrellas, comentarios, recomendado,deAcuerdo
 insert into CalificacionEntity(id, estrellas, comentarios, recomendado,deAcuerdo) values (4,'0','La peor experiencia de mi vida','N','9');
 
 
-insert into EntradaEntity(id, QR, descripcion, precio, locacion, numero, disponible, checkIn, reservado) values (10, 'QR1','El evento mas loco del mundo','1000','Preferencial A','123','Y','N','Y');
-insert into EntradaEntity(id, QR, descripcion, precio, locacion, numero, disponible, checkIn, reservado) values (22, 'QR2','La experiencia más reveladora del año','100100','Preferencial B','321','N','N','N' );
+insert into EntradaEntity(id, QR, descripcion, precio, locacion, numero, disponible, checkIn, reservado,evento_id) values (10, 'QR1','El evento mas loco del mundo','1000','Preferencial A','123','Y','N','Y',100);
+insert into EntradaEntity(id, QR, descripcion, precio, locacion, numero, disponible, checkIn, reservado,evento_id) values (22, 'QR2','La experiencia más reveladora del año','100100','Preferencial B','321','N','N','N',100 );
 insert into EntradaEntity(id, QR, descripcion, precio, locacion, numero, disponible, checkIn, reservado) values (33, 'QR3','Ven y ayuda a que estudiante del Pacífico puedan estudiar en los Andes','0','Preferencial A','123','Y','N','Y' );
 insert into EntradaEntity(id, QR, descripcion, precio, locacion, numero, disponible, checkIn, reservado) values (44, 'QR4','Beerpong con Pablo Novoa: El evento más alocado del país entero mundial','0','Preferencial A','124','Y','Y','N');
 
