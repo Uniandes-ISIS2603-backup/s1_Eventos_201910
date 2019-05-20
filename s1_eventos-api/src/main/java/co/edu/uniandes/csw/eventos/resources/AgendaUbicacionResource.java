@@ -38,15 +38,17 @@ public class AgendaUbicacionResource {
     private AgendaUbicacionLogic logica;
 
     @POST
-    @Path("{ubicacionesId: \\d+}")
-    public UbicacionDTO addUbicacion(@PathParam("agendasId") Long agendasId, @PathParam("ubicacionesId") Long ubicacionesId) {
-        if (ul.findUbicacion(ubicacionesId) == null) {
-            throw new WebApplicationException("El recurso /ubicaciones/" + ubicacionesId + " no existe.", 404);
-        }
-        UbicacionDTO DTO = new UbicacionDTO(logica.addUbicacion(agendasId, ubicacionesId));
+    public UbicacionDTO addUbicacion(@PathParam("agendasId") Long agendasId, UbicacionDTO ubicacion) {
+        System.out.println("LLEGA A ADD UBICACION");
+        // if (ul.findUbicacion(ubicacionesId) == null) {
+         //   throw new WebApplicationException("El recurso /ubicaciones/" + ubicacionesId + " no existe.", 404);
+       // }
+        UbicacionDTO DTO = new UbicacionDTO(logica.addUbicacion(agendasId, ubicacion.toEntity()));
         return DTO;
     }
 
+   
+    
     @GET
     @Path("{ubicacionesId: \\d+}")
     public UbicacionDTO getUbicacion(@PathParam("agendasId") Long agendasId,@PathParam("ubicacionesId") Long ubicacionesId) throws BusinessLogicException {
@@ -58,24 +60,25 @@ public class AgendaUbicacionResource {
     }
 
     @PUT
-    public UbicacionDTO replaceUbicaciones(@PathParam("agendasId") Long agendasId, UbicacionDTO ubicacion) {
-
-        if (ul.findUbicacion(ubicacion.getId()) == null) {
+    @Path("{ubicacionesId: \\d+}")
+    public UbicacionDTO replaceUbicaciones(@PathParam("agendasId") Long agendasId,@PathParam("ubicacionesId") Long ubicacionesId ,UbicacionDTO ubicacion) {
+        System.out.println("TERRIBLE OREMOS");
+        
+        if (ul.findUbicacion(ubicacionesId) == null) {
             throw new WebApplicationException("El recurso /agendas/" + ubicacion.getId() + " no existe.", 404);
         }
-        UbicacionEntity entity = ubicacion.toEntity();
-
-        UbicacionDTO u = new UbicacionDTO(logica.replaceUbicacion(agendasId, entity));
-        return u;
+        UbicacionEntity ubic = logica.replaceUbicacion(agendasId,ubicacionesId,ubicacion.toEntity());
+        System.out.println("-----------FIN DE LOS TIEMPOS-----------");
+        return ubicacion;
     }
 
     @DELETE
     @Path("{ubicacionesId: \\d+}")
-    public void removeUbicacion(@PathParam("agendasId") Long agendasId, @PathParam("agendasId") Long ubicacionesId) {
+    public void removeUbicacion(@PathParam("agendasId") Long agendasId, @PathParam("ubicacionesId") Long ubicacionesId) {
         if (ul.findUbicacion(ubicacionesId) == null) {
             throw new WebApplicationException("El recurso /ubicaciones/" + ubicacionesId + " no existe.", 404);
         }
-        logica.removeUbicacion(agendasId, ubicacionesId);
+        logica.removeUbicacion(agendasId,ubicacionesId);
     }
 
 }
