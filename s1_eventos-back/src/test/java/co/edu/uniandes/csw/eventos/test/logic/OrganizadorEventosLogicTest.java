@@ -30,7 +30,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @author estudiante
+ * @author Paula Molina Ruiz
  */
 @RunWith(Arquillian.class)
 public class OrganizadorEventosLogicTest {
@@ -39,9 +39,9 @@ public class OrganizadorEventosLogicTest {
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
-    private OrganizadorLogic OrganizadorLogic;
+    private OrganizadorLogic organizadorLogic;
     @Inject
-    private OrganizadorEventosLogic OrganizadorEventosLogic;
+    private OrganizadorEventosLogic organizadorEventosLogic;
 
     @PersistenceContext
     private EntityManager em;
@@ -112,25 +112,12 @@ public class OrganizadorEventosLogicTest {
     }
 
     /**
-     * Prueba para asociar un Evento existente a un Organizador.
-     */
-    @Test
-    public void addEventosTest() {
-        OrganizadorEntity entity = data.get(0);
-        EventoEntity eventoEntity = eventosData.get(1);
-        EventoEntity response = OrganizadorEventosLogic.addEvento(eventoEntity.getId(), entity.getId());
-
-        Assert.assertNotNull(response);
-        Assert.assertEquals(eventoEntity.getId(), response.getId());
-    }
-
-    /**
      * Prueba para obtener una colección de instancias de Eventos asociadas a una
      * instancia Organizador.
      */
     @Test
     public void getEventosTest() {
-        List<EventoEntity> list = OrganizadorEventosLogic.getEventos(data.get(0).getId());
+        List<EventoEntity> list = organizadorEventosLogic.getEventos(data.get(0).getId());
         Assert.assertEquals(1, list.size());
     }
 
@@ -144,7 +131,7 @@ public class OrganizadorEventosLogicTest {
     public void getEventoTest() throws BusinessLogicException {
         OrganizadorEntity entity = data.get(0);
         EventoEntity eventoEntity = eventosData.get(0);
-        EventoEntity response = OrganizadorEventosLogic.getEvento(entity.getId(), eventoEntity.getId());
+        EventoEntity response = organizadorEventosLogic.getEvento(entity.getId(), eventoEntity.getId());
 
         Assert.assertEquals(eventoEntity.getId(), response.getId());
         Assert.assertEquals(eventoEntity.getNombre(), response.getNombre());
@@ -163,7 +150,7 @@ public class OrganizadorEventosLogicTest {
     public void getEventoNoAsociadoTest() throws BusinessLogicException {
         OrganizadorEntity entity = data.get(0);
         EventoEntity eventoEntity = eventosData.get(1);
-        OrganizadorEventosLogic.getEvento(entity.getId(), eventoEntity.getId());
+        organizadorEventosLogic.getEvento(entity.getId(), eventoEntity.getId());
     }
 
     /**
@@ -174,9 +161,9 @@ public class OrganizadorEventosLogicTest {
     public void replaceEventosTest() {
         OrganizadorEntity entity = data.get(0);
         List<EventoEntity> list = eventosData.subList(1, 3);
-        OrganizadorEventosLogic.replaceEventos(entity.getId(), list);
+        organizadorEventosLogic.replaceEventos(entity.getId(), list);
 
-        entity = OrganizadorLogic.getOrganizador(entity.getId());
+        entity = organizadorLogic.getOrganizador(entity.getId());
         Assert.assertFalse(entity.getEventos().contains(eventosData.get(0)));
         Assert.assertTrue(entity.getEventos().contains(eventosData.get(1)));
         Assert.assertTrue(entity.getEventos().contains(eventosData.get(2)));
@@ -190,8 +177,8 @@ public class OrganizadorEventosLogicTest {
     public void removeEventoTest() {
         OrganizadorEntity entity = data.get(0);
         for (EventoEntity evento : eventosData) {
-            OrganizadorEventosLogic.removeEvento(entity.getId(), evento.getId());
+            organizadorEventosLogic.removeEvento(entity.getId(), evento.getId());
         }
-        Assert.assertTrue(OrganizadorEventosLogic.getEventos(entity.getId()).isEmpty());
+        Assert.assertTrue(organizadorEventosLogic.getEventos(entity.getId()).isEmpty());
     }
 }

@@ -54,7 +54,7 @@ public class MultimediaLogicTest {
     /**
      * Lista que tiene los datos de prueba.
      */
-    private List<MultimediaEntity> data = new ArrayList<MultimediaEntity>();
+    private List<MultimediaEntity> data = new ArrayList<>();
 
     /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
@@ -205,5 +205,53 @@ public class MultimediaLogicTest {
         multimediaLogic.deleteMultimedia(entity.getId());
         MultimediaEntity deleted = em.find(MultimediaEntity.class, entity.getId());
         Assert.assertNull(deleted);
+    }
+    
+        /**
+     * Prueba para consultar una Multimedia.
+     */
+    @Test
+    public void getMultimediaTest() {
+        MultimediaEntity entity = data.get(0);
+        MultimediaEntity resultEntity = multimediaLogic.getMultimedia(entity.getId());
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(entity.getId(), resultEntity.getId());
+        Assert.assertEquals(entity.getNombre(), resultEntity.getNombre());
+    }
+    
+    /**
+     * Prueba para consultar la lista de Multimedias.
+     */
+    @Test
+    public void getMultimediasTest() {
+        List<MultimediaEntity> list = multimediaLogic.getMultimedias();
+        Assert.assertEquals(data.size(), list.size());
+        for (MultimediaEntity entity : list) {
+            boolean found = false;
+            for (MultimediaEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    
+    /**
+     * Prueba para actualizar una Multimedia.
+     */
+    @Test
+    public void updateMultimediaTest() {
+        MultimediaEntity entity = data.get(0);
+        MultimediaEntity pojoEntity = factory.manufacturePojo(MultimediaEntity.class);
+
+        pojoEntity.setId(entity.getId());
+
+        multimediaLogic.updateMultimedia(pojoEntity.getId(), pojoEntity);
+
+        MultimediaEntity resp = em.find(MultimediaEntity.class, entity.getId());
+
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+        Assert.assertEquals(pojoEntity.getNombre(), resp.getNombre());
     }
 }

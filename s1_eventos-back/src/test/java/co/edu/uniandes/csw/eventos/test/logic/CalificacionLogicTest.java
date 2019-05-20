@@ -5,13 +5,10 @@
  */
 package co.edu.uniandes.csw.eventos.test.logic;
 import co.edu.uniandes.csw.eventos.ejb.CalificacionLogic;
-import co.edu.uniandes.csw.eventos.ejb.OrganizadorLogic;
 import co.edu.uniandes.csw.eventos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.eventos.entities.EventoEntity;
-import co.edu.uniandes.csw.eventos.entities.OrganizadorEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.eventos.persistence.CalificacionPersistence;
-import co.edu.uniandes.csw.eventos.persistence.OrganizadorPersistence;
 import java.util.ArrayList;
 import java.util.List;
 

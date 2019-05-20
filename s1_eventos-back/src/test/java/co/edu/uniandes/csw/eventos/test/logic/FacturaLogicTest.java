@@ -117,4 +117,23 @@ public class FacturaLogicTest {
         Assert.assertEquals(entity.getId(), resultEntity.getId());
     }
     
+        /**
+     * Prueba para consultar la lista de Organizadores.
+     */
+    @Test
+    public void getFacturasTest() {
+        List<FacturaEntity> list = facturaLogic.getFacturas();
+        Assert.assertEquals(data.size(), list.size());
+        for (FacturaEntity entity : list) {
+            boolean found = false;
+            for (FacturaEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    
+    
 }
