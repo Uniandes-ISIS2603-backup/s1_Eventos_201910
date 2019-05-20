@@ -35,7 +35,7 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class OrganizadorEventosResource {
     
-    private static final Logger LOGGER = Logger.getLogger(PatrocinadorEventosResource.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(OrganizadorEventosResource.class.getName());
     private static final String NO_EXISTE = " no existe.";
     private static final String RECURSO_EVENTO = "El recurso /eventos/";
 
