@@ -360,5 +360,6 @@ public class EventoEntity extends BaseEntity implements Serializable {
     public void setCalificaciones(List<CalificacionEntity> calificaciones) {
         this.calificaciones = calificaciones;
     }
+  
 
 }

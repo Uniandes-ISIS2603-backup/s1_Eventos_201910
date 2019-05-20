@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.eventos.ejb;
 
 import co.edu.uniandes.csw.eventos.entities.EventoEntity;
 import co.edu.uniandes.csw.eventos.entities.EntradaEntity;
+import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.eventos.persistence.EventoPersistence;
 import co.edu.uniandes.csw.eventos.persistence.EntradaPersistence;
 import java.util.List;
@@ -39,13 +40,15 @@ public class EventoEntradaLogic {
      * @param entradasId Identificador de la instancia de Entrada
      * @return Instancia de EntradaEntity que fue asociada a Evento
      */
-    public EntradaEntity addEntrada(Long eventosId, Long entradasId) {
+    public EntradaEntity addEntrada(Long eventosId, EntradaEntity entrada) throws BusinessLogicException{
         LOGGER.log(Level.INFO, "Inicia proceso de asociarle un entrada al evento con id = {0}", eventosId);
-        EntradaEntity entradaEntity = entradaPersistence.find(entradasId);
         EventoEntity eventoEntity = eventoPersistence.find(eventosId);
-        eventoEntity.getEntradas().add(entradaEntity);
+        entradaPersistence.create(entrada);
+        eventoEntity.getEntradas().add(entrada);
+        entrada.setEvento(eventoEntity);
+        eventoPersistence.update(eventoEntity);
         LOGGER.log(Level.INFO, "Termina proceso de asociarle un entrada al evento con id = {0}", eventosId);
-        return entradaPersistence.find(entradasId);
+        return entrada;
     }
 
     /**
@@ -56,7 +59,7 @@ public class EventoEntradaLogic {
      * @return Colección de instancias de EntradaEntity asociadas a la
      * instancia de Evento
      */
-    public List<EntradaEntity> getEntradaes(Long eventosId) {
+    public List<EntradaEntity> getEntradas(Long eventosId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los entradas del libro con id = {0}", eventosId);
         return eventoPersistence.find(eventosId).getEntradas();
     }
@@ -90,12 +93,25 @@ public class EventoEntradaLogic {
      * @return Nueva colección de EntradaEntity asociada a la instancia de
      * Evento
      */
-    public List<EntradaEntity> replaceEntradaes(Long eventosId, List<EntradaEntity> list) {
+    public EntradaEntity replaceEntrada(Long eventosId,Long entradaId,EntradaEntity entrada) {
         LOGGER.log(Level.INFO, "Inicia proceso de reemplazar los entradas del libro con id = {0}", eventosId);
         EventoEntity eventoEntity = eventoPersistence.find(eventosId);
-        eventoEntity.setEntradas(list);
+        
+        for(int e=0;e<eventoEntity.getEntradas().size();e++){
+            if(entradaId==eventoEntity.getEntradas().get(e).getId()){
+                eventoEntity.getEntradas().get(e).setQR(entrada.getQR());
+                eventoEntity.getEntradas().get(e).setCheckInm(entrada.isCheckIn());
+                eventoEntity.getEntradas().get(e).setDescripcion(entrada.getDescripcion());
+                eventoEntity.getEntradas().get(e).setDisponible(entrada.isDisponible());
+                eventoEntity.getEntradas().get(e).setLocacion(entrada.getLocacion());
+                eventoEntity.getEntradas().get(e).setNumero(entrada.getNumero());
+                eventoEntity.getEntradas().get(e).setPrecio(entrada.getPrecio());
+                eventoEntity.getEntradas().get(e).setReservado(entrada.isReservado());
+            }
+        }
+        
         LOGGER.log(Level.INFO, "Termina proceso de reemplazar los entradas del libro con id = {0}", eventosId);
-        return eventoPersistence.find(eventosId).getEntradas();
+        return entrada;
     }
 
     /**
@@ -106,9 +122,12 @@ public class EventoEntradaLogic {
      */
     public void removeEntrada(Long eventosId, Long entradasId) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar un entrada del evento con id = {0}", eventosId);
-        EntradaEntity authorEntity = entradaPersistence.find(entradasId);
-        EventoEntity bookEntity = eventoPersistence.find(eventosId);
-        bookEntity.getEntradas().remove(authorEntity);
+        
+        EventoEntity eventoEntity = eventoPersistence.find(eventosId);
+        EntradaEntity entradaEntity = entradaPersistence.find(entradasId);
+        eventoEntity.getEntradas().remove(entradaEntity);
+        eventoPersistence.update(eventoEntity);
+        entradaPersistence.delete(entradasId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar un entrada del evento con id = {0}", eventosId);
     }
 }
