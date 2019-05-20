@@ -44,7 +44,7 @@ public class CalificacionLogic {
     * @return
     * @throws BusinessLogicException 
     */
-   public CalificacionEntity createCalificacion(CalificacionEntity calificacion,Long idEvento) throws BusinessLogicException{
+   public CalificacionEntity createCalificacion(CalificacionEntity calificacion, Long idEvento) throws BusinessLogicException{
      CalificacionEntity newCal =  persistence.create(calificacion);
      persistence.create(newCal);
      newCal.setEvento(evPersistence.find(idEvento));
@@ -91,15 +91,6 @@ public class CalificacionLogic {
        return calificacionEntity;
    }
    
-   /**
-    * Encuentra una calificacion dado su nombre
-    * @param name
-    * @return 
-    */
-   public CalificacionEntity findByName(String name)
-   {
-       return persistence.findByName(name);
-   }
    
    /**
     * retorna todas las calificaciones

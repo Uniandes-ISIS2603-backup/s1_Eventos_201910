@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.eventos.test.logic;
 
+import co.edu.uniandes.csw.eventos.ejb.EventoLogic;
 import co.edu.uniandes.csw.eventos.ejb.OrganizadorEventosLogic;
 import co.edu.uniandes.csw.eventos.ejb.OrganizadorLogic;
 import co.edu.uniandes.csw.eventos.entities.EventoEntity;
@@ -40,6 +41,10 @@ public class OrganizadorEventosLogicTest {
 
     @Inject
     private OrganizadorLogic organizadorLogic;
+    
+    @Inject
+    private EventoLogic eventoLogic;
+        
     @Inject
     private OrganizadorEventosLogic organizadorEventosLogic;
 
@@ -180,5 +185,28 @@ public class OrganizadorEventosLogicTest {
             organizadorEventosLogic.removeEvento(entity.getId(), evento.getId());
         }
         Assert.assertTrue(organizadorEventosLogic.getEventos(entity.getId()).isEmpty());
+    }
+    
+    /**
+     * Prueba para asociar un Evento un organizador.
+     *
+     *
+     * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void addEventoTest() throws BusinessLogicException {
+        EventoEntity newEvento = factory.manufacturePojo(EventoEntity.class);
+        OrganizadorEntity entity = data.get(0);
+        eventoLogic.createEvento(newEvento);
+        EventoEntity eventolEntity = organizadorEventosLogic.addEvento(entity.getId(), newEvento.getId());
+        Assert.assertNotNull(eventolEntity);
+
+        Assert.assertEquals(eventolEntity.getId(), eventolEntity.getId());
+        Assert.assertEquals(eventolEntity.getNombre(), eventolEntity.getNombre());
+
+        EventoEntity lastEvento = organizadorEventosLogic.getEvento(entity.getId(), newEvento.getId());
+
+        Assert.assertEquals(lastEvento.getId(), newEvento.getId());
+        Assert.assertEquals(lastEvento.getNombre(), newEvento.getNombre());
     }
 }

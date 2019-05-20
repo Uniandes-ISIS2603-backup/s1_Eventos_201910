@@ -139,7 +139,7 @@ public class EventoCalificacionLogicTest {
         Assert.assertEquals(calificacionEntity.getId(), response.getId());
     }
     
-        /**
+    /**
      * Prueba para asociar una calificacion a un evento.
      *
      *
@@ -148,8 +148,9 @@ public class EventoCalificacionLogicTest {
     @Test
     public void addCalificacionTest() throws BusinessLogicException {
         CalificacionEntity newCalificacion = factory.manufacturePojo(CalificacionEntity.class);
-        calificacionLogic.createCalificacion(newCalificacion);
-        CalificacionEntity calificacionEntity = eventoCalificacionLogic.addCalificacion(data.get(0).getId(), newCalificacion.getId());
+        EventoEntity entity = data.get(0);
+        calificacionLogic.createCalificacion(newCalificacion,entity.getId() );
+        CalificacionEntity calificacionEntity = eventoCalificacionLogic.addCalificacion(entity.getId(), newCalificacion);
         Assert.assertNotNull(calificacionEntity);
 
         Assert.assertEquals(calificacionEntity.getId(), newCalificacion.getId());
@@ -158,30 +159,6 @@ public class EventoCalificacionLogicTest {
         CalificacionEntity lastCalificacion = eventoCalificacionLogic.getCalificacion(data.get(0).getId(), newCalificacion.getId());
 
         Assert.assertEquals(lastCalificacion.getId(), newCalificacion.getId());
-    }
-    
-        /**
-     * Prueba para actualizar las calificaciones de un evento.
-     *
-     * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
-     */
-    @Test
-    public void replaceCalificacionesTest() throws BusinessLogicException {
-        List<CalificacionEntity> nuevaLista = new ArrayList<>();
-        EventoEntity evento = data.get(0);
-        
-        for (int i = 0; i < 3; i++) {
-      
-            CalificacionEntity entity = factory.manufacturePojo(CalificacionEntity.class);
-            entity.setEvento(evento);
-            calificacionLogic.createCalificacion(entity);
-            nuevaLista.add(entity);
-        }
-        eventoCalificacionLogic.replaceCalificaciones(evento.getId(), nuevaLista);
-        List<CalificacionEntity> agendaEntities = eventoCalificacionLogic.getCalificaciones(evento.getId());
-        for (CalificacionEntity aNuevaLista : nuevaLista) {
-            Assert.assertTrue(agendaEntities.contains(aNuevaLista));
-        }
     }
     
     /**
@@ -194,6 +171,25 @@ public class EventoCalificacionLogicTest {
         for (CalificacionEntity calificacion : calificacionData) {
             eventoCalificacionLogic.removeCalificacion(evento.getId(), calificacion.getId());
         }
-        Assert.assertTrue(eventoCalificacionLogic.getCalificaciones(evento.getId()).size() == 1);
+        Assert.assertTrue(eventoCalificacionLogic.getCalificaciones(evento.getId()).isEmpty());
+    }
+    
+   /**
+     * Prueba para actualizar una calificacion.
+     */
+    @Test
+    public void replaceCalificacionTest() {
+        EventoEntity evento = data.get(0);
+        CalificacionEntity entity = calificacionData.get(0);
+        CalificacionEntity pojoEntity = factory.manufacturePojo(CalificacionEntity.class);
+
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setComentarios(entity.getComentarios());
+
+        eventoCalificacionLogic.replaceCalificacion(evento.getId(),entity.getId(),pojoEntity);
+
+        CalificacionEntity resp = em.find(CalificacionEntity.class, entity.getId());
+
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
     }
 }

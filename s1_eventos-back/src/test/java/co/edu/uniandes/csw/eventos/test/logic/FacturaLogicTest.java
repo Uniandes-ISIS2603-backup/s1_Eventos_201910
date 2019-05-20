@@ -117,7 +117,7 @@ public class FacturaLogicTest {
         Assert.assertEquals(entity.getId(), resultEntity.getId());
     }
     
-        /**
+    /**
      * Prueba para consultar la lista de Organizadores.
      */
     @Test

@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.eventos.test.logic;
 
 import co.edu.uniandes.csw.eventos.ejb.EntradaLogic;
 import co.edu.uniandes.csw.eventos.ejb.EventoEntradaLogic;
-import co.edu.uniandes.csw.eventos.ejb.EventoLogic;
 import co.edu.uniandes.csw.eventos.entities.EntradaEntity;
 import co.edu.uniandes.csw.eventos.entities.EventoEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
@@ -121,7 +120,7 @@ public class EventoEntradaLogicTest {
      */
     @Test
     public void getEntradasTest() {
-        List<EntradaEntity> entradaEntities = eventoEntradasLogic.getEntradaes(evento.getId());
+        List<EntradaEntity> entradaEntities = eventoEntradasLogic.getEntradas(evento.getId());
 
         Assert.assertEquals(data.size(), entradaEntities.size());
 
@@ -144,26 +143,58 @@ public class EventoEntradaLogicTest {
         Assert.assertEquals(entradaEntity.getId(), entrada.getId());
         Assert.assertEquals(entradaEntity.getNumero(), entrada.getNumero());
     }
+    
+     /**
+     * Prueba para actualizar una calificacion.
+     */
+    @Test
+    public void replaceEntradaTest() {
 
+        EntradaEntity entity = data.get(0);
+        EntradaEntity pojoEntity = factory.manufacturePojo(EntradaEntity.class);
+
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setNumero(entity.getNumero());
+
+        eventoEntradasLogic.replaceEntrada(evento.getId(),entity.getId(),pojoEntity);
+
+        EntradaEntity resp = em.find(EntradaEntity.class, entity.getId());
+
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+    }
+    
+    
     /**
-     * Prueba para actualizar los libros de un autor.
+     * Prueba para asociar una calificacion a un evento.
+     *
      *
      * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
      */
     @Test
-    public void replaceEntradasTest() throws BusinessLogicException {
-        List<EntradaEntity> nuevaLista = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            EntradaEntity entity = factory.manufacturePojo(EntradaEntity.class);
-            entity.setEvento(evento);
-            entradaLogic.createEntrada(entity);
-            nuevaLista.add(entity);
+    public void addEntradaTest() throws BusinessLogicException {
+        EntradaEntity newEntrada = factory.manufacturePojo(EntradaEntity.class);
+        entradaLogic.createEntrada(newEntrada,evento.getId() );
+        EntradaEntity calificacionEntity = eventoEntradasLogic.addEntrada(evento.getId(), newEntrada);
+        Assert.assertNotNull(calificacionEntity);
+
+        Assert.assertEquals(calificacionEntity.getId(), newEntrada.getId());
+
+
+        EntradaEntity lastCalificacion = eventoEntradasLogic.getEntrada(evento.getId(), newEntrada.getId());
+
+        Assert.assertEquals(lastCalificacion.getId(), newEntrada.getId());
+    }
+    
+        /**
+     * Prueba desasociar un evento con una calificacion.
+     *
+     */
+    @Test
+    public void removeEntradaTest() {
+        for (EntradaEntity entrada : data) {
+            eventoEntradasLogic.removeEntrada(evento.getId(), entrada.getId());
         }
-        eventoEntradasLogic.replaceEntradaes(evento.getId(), nuevaLista);
-        List<EntradaEntity> entradaEntities = eventoEntradasLogic.getEntradaes(evento.getId());
-        for (EntradaEntity aNuevaLista : nuevaLista) {
-            Assert.assertTrue(entradaEntities.contains(aNuevaLista));
-        }
+        Assert.assertTrue(eventoEntradasLogic.getEntradas(evento.getId()).isEmpty());
     }
 }
   
