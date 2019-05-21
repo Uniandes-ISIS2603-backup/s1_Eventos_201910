@@ -6,10 +6,7 @@
 package co.edu.uniandes.csw.eventos.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Entity;
-import static javax.persistence.FetchType.LAZY;
 import uk.co.jemos.podam.common.PodamExclude;
 import javax.persistence.ManyToOne;
 

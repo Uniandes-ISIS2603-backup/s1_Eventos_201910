@@ -23,7 +23,6 @@ SOFTWARE.
  */
 package co.edu.uniandes.csw.eventos.resources;
 import co.edu.uniandes.csw.eventos.dtos.InvitadoEspecialDTO;
-import co.edu.uniandes.csw.eventos.dtos.InvitadoEspecialDTO;
 import co.edu.uniandes.csw.eventos.ejb.InvitadoEspecialLogic;
 import co.edu.uniandes.csw.eventos.entities.InvitadoEspecialEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;

@@ -4,7 +4,6 @@ package co.edu.uniandes.csw.eventos.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.*;
 import uk.co.jemos.podam.common.PodamExclude;
 

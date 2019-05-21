@@ -6,14 +6,11 @@
 package co.edu.uniandes.csw.eventos.test.logic;
 
 import co.edu.uniandes.csw.eventos.ejb.AgendaLogic;
-import co.edu.uniandes.csw.eventos.ejb.OrganizadorLogic;
 import co.edu.uniandes.csw.eventos.entities.AgendaEntity;
 import co.edu.uniandes.csw.eventos.entities.EventoEntity;
 import co.edu.uniandes.csw.eventos.entities.InvitadoEspecialEntity;
-import co.edu.uniandes.csw.eventos.entities.OrganizadorEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.eventos.persistence.AgendaPersistence;
-import co.edu.uniandes.csw.eventos.persistence.OrganizadorPersistence;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +39,7 @@ public class AgendaLogicTest {
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
-    private AgendaLogic AgendaLogic;
+    private AgendaLogic agendaLogic;
 
     @PersistenceContext
     private EntityManager em;
@@ -50,7 +47,7 @@ public class AgendaLogicTest {
     @Inject
     private UserTransaction utx;
 
-    private List<AgendaEntity> data = new ArrayList<AgendaEntity>();
+    private List<AgendaEntity> data = new ArrayList<>();
 
     @Deployment
     public static JavaArchive createDeployment() {
@@ -117,7 +114,7 @@ public class AgendaLogicTest {
     @Test
     public void createAgendaTest() throws Exception {
         AgendaEntity newEntity = factory.manufacturePojo(AgendaEntity.class);
-        AgendaEntity result = AgendaLogic.createAgenda(newEntity);
+        AgendaEntity result = agendaLogic.createAgenda(newEntity);
         Assert.assertNotNull(result);
         AgendaEntity entity = em.find(AgendaEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
@@ -126,7 +123,7 @@ public class AgendaLogicTest {
     @Test
     public void getAgendaTest() {
         AgendaEntity entity = data.get(0);
-        AgendaEntity resultEntity = AgendaLogic.getAgenda(entity.getId());
+        AgendaEntity resultEntity = agendaLogic.getAgenda(entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
     }
@@ -138,7 +135,7 @@ public class AgendaLogicTest {
 
         pojoEntity.setId(entity.getId());
 
-        AgendaLogic.updateAgenda(pojoEntity.getId(), pojoEntity);
+        agendaLogic.updateAgenda(pojoEntity.getId(), pojoEntity);
 
         AgendaEntity resp = em.find(AgendaEntity.class, entity.getId());
 
@@ -148,9 +145,27 @@ public class AgendaLogicTest {
     @Test
     public void deleteAgendaTest() throws BusinessLogicException {
         AgendaEntity entity = data.get(0);
-        AgendaLogic.deleteAgenda(entity.getId());
+        agendaLogic.deleteAgenda(entity.getId());
         AgendaEntity deleted = em.find(AgendaEntity.class, entity.getId());
         Assert.assertNull(deleted);
+    }
+    
+    /**
+     * Prueba para consultar la lista de Agendas.
+     */
+    @Test
+    public void getAgendasTest() {
+        List<AgendaEntity> list = agendaLogic.getAgendas();
+        Assert.assertEquals(data.size(), list.size());
+        for (AgendaEntity entity : list) {
+            boolean found = false;
+            for (AgendaEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
     }
 
 }

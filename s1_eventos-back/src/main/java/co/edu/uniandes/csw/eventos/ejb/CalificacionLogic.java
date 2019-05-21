@@ -8,10 +8,12 @@ package co.edu.uniandes.csw.eventos.ejb;
 import co.edu.uniandes.csw.eventos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.eventos.persistence.CalificacionPersistence;
+import co.edu.uniandes.csw.eventos.persistence.EventoPersistence;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.util.logging.Level;
 
 /**
  *
@@ -30,14 +32,24 @@ public class CalificacionLogic {
    @Inject
    private CalificacionPersistence persistence;
    
+   @Inject
+   private EventoPersistence evPersistence;
+   
+
+  
+   
    /**
     * Crea la calificacion
     * @param calificacion
     * @return
     * @throws BusinessLogicException 
     */
-   public CalificacionEntity createCalificacion(CalificacionEntity calificacion) throws BusinessLogicException{
+   public CalificacionEntity createCalificacion(CalificacionEntity calificacion, Long idEvento) throws BusinessLogicException{
      CalificacionEntity newCal =  persistence.create(calificacion);
+     persistence.create(newCal);
+     newCal.setEvento(evPersistence.find(idEvento));
+     persistence.update(newCal);
+     evPersistence.update(evPersistence.find(idEvento));
       
       return newCal;
    }
@@ -71,19 +83,14 @@ public class CalificacionLogic {
     * @return 
     */
    public CalificacionEntity findCalificacion(Long id)
-   {
-       return persistence.find(id);
+   {    
+      CalificacionEntity calificacionEntity = persistence.find(id);
+      if(calificacionEntity==null){
+          LOGGER.log(Level.SEVERE, "La calificacion con el id = {0} no existe", id);
+      }
+       return calificacionEntity;
    }
    
-   /**
-    * Encuentra una calificacion dado su nombre
-    * @param name
-    * @return 
-    */
-   public CalificacionEntity findByName(String name)
-   {
-       return persistence.findByName(name);
-   }
    
    /**
     * retorna todas las calificaciones
