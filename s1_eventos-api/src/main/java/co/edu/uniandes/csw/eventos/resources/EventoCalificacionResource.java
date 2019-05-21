@@ -7,8 +7,11 @@ package co.edu.uniandes.csw.eventos.resources;
 
 import co.edu.uniandes.csw.eventos.dtos.CalificacionDTO;
 import co.edu.uniandes.csw.eventos.ejb.CalificacionLogic;
+import co.edu.uniandes.csw.eventos.ejb.EntradaLogic;
 import co.edu.uniandes.csw.eventos.ejb.EventoCalificacionLogic;
 import co.edu.uniandes.csw.eventos.ejb.EventoLogic;
+import co.edu.uniandes.csw.eventos.ejb.FacturaEntradaLogic;
+import co.edu.uniandes.csw.eventos.ejb.FacturaLogic;
 import co.edu.uniandes.csw.eventos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.eventos.mappers.WebApplicationExceptionMapper;
@@ -42,6 +45,9 @@ public class EventoCalificacionResource {
 
     @Inject
     private EventoCalificacionLogic logica;
+    
+    
+    
 
     @POST
     public CalificacionDTO addCalificacion( @PathParam("eventosId") Long eventosId,CalificacionDTO calif) throws BusinessLogicException{

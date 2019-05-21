@@ -34,6 +34,10 @@ public class FacturaPersistence {
         return facturaEntity;
     }
     
+    public void update(FacturaEntity entity){
+        em.merge(entity);
+    }
+    
     /**
      * Devuelve todos los Facturaes de la base de datos.
      *

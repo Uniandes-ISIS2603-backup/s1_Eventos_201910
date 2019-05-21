@@ -23,14 +23,22 @@ public class FacturaEntity extends BaseEntity implements Serializable{
     @ManyToOne(cascade = CascadeType.PERSIST)
     private UsuarioEntity usuario = new UsuarioEntity();
     
-    @javax.persistence.ManyToMany(
-        fetch = javax.persistence.FetchType.LAZY,cascade = CascadeType.PERSIST
+    @PodamExclude
+    @javax.persistence.OneToMany(
+        mappedBy = "factura",
+        fetch = javax.persistence.FetchType.LAZY
     )
     private List<EntradaEntity> entradas;
+    
+    
+    
     private String nombre;
+    
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
+    
     private Float total;
+    
     private Float iva;
      
     /**

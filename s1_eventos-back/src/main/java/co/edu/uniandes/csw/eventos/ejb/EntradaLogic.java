@@ -10,6 +10,7 @@ import co.edu.uniandes.csw.eventos.entities.MedioDePagoEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.eventos.persistence.EntradaPersistence;
 import co.edu.uniandes.csw.eventos.persistence.EventoPersistence;
+import co.edu.uniandes.csw.eventos.persistence.FacturaPersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +31,9 @@ public class EntradaLogic {
     
     @Inject
     private EventoPersistence evPersistence;
+    
+    @Inject
+    private FacturaPersistence facPersistence;
     
     public EntradaEntity createEntrada(EntradaEntity entradaEntity, Long idEvento) throws BusinessLogicException {
         EntradaEntity newEntr = persistence.create(entradaEntity);
