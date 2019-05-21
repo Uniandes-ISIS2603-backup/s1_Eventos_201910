@@ -59,13 +59,20 @@ public class AgendaInvitadoLogic {
      * libro.
      * @return la InvitadoEspecial creado.
      */
-    public InvitadoEspecialEntity addInvitadoEspecial(Long invitadoEspecialsId, Long agendasId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de agregarle un libro a la Agenda con id = {0}", agendasId);
-        AgendaEntity agendaEntity = agendaPersistence.find(agendasId);
-        InvitadoEspecialEntity invitadoEspecialEntity = invitadoEspecialPersistence.find(invitadoEspecialsId);
-       agendaEntity.getInvitadosEspeciales().add(invitadoEspecialEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de agregarle un invitado especial a la Agenda con id = {0}", agendasId);
-        return invitadoEspecialPersistence.find(invitadoEspecialsId);
+    public InvitadoEspecialEntity addInvitadoEspecial(Long agendaId, InvitadoEspecialEntity invitadoEspecial) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "Inicia proceso de agregarle un libro a la Agenda con id = {0}", agendaId);
+       // AgendaEntity agendaEntity = agendaPersistence.find(agendasId);
+       AgendaEntity agendaEntity = agendaPersistence.find(agendaId);
+       invitadoEspecialPersistence.create(invitadoEspecial) ;
+       agendaEntity.getInvitadosEspeciales().add(invitadoEspecial);
+       //InvitadoEspecialEntity invitadoEspecialEntity = invitadoEspecialPersistence.find(invitadoEspecialsId);
+       //agendaEntity.getInvitadosEspeciales().add(invitadoEspecialEntity);
+       List<AgendaEntity> agendasInv = invitadoEspecial.getAgenda();
+       agendasInv.add(agendaEntity);
+       invitadoEspecial.setAgenda(agendasInv);
+       agendaPersistence.update(agendaEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de agregarle un invitado especial a la Agenda con id = {0}", agendaId);
+        return invitadoEspecial;
     }
 
     /**
@@ -105,17 +112,42 @@ public class AgendaInvitadoLogic {
      * Remplaza las instancias de InvitadoEspecial asociadas a una instancia de Agenda
      *
      * @param agendasId Identificador de la instancia de Agenda
-     * @param list Colección de instancias de InvitadoEspecialEntity a asociar a
-     * instancia de Agenda
+     * @param invitadoEspecialesId
+     * @param invi
+     
      * @return Nueva colección de InvitadoEspecialEntity asociada a la instancia de
      * Agenda
      */
-    public List<InvitadoEspecialEntity> replaceInvitadoEspeciales(Long agendasId, List<InvitadoEspecialEntity> list) {
+    public InvitadoEspecialEntity replaceInvitadoEspeciales(Long agendasId, Long invitadoEspecialesId,InvitadoEspecialEntity invi) {
         LOGGER.log(Level.INFO, "Inicia proceso de reemplazar los invitadoEspeciales del libro con id = {0}", agendasId);
         AgendaEntity agendaEntity = agendaPersistence.find(agendasId);
-        agendaEntity.setInvitadosEspeciales(list);
+        for(int i=0;i<agendaEntity.getInvitadosEspeciales().size();i++){
+            if(invitadoEspecialesId.compareTo(agendaEntity.getInvitadosEspeciales().get(i).getId())==0){
+                agendaEntity.getInvitadosEspeciales().get(i).setInfo(invi.getInfo());
+                agendaEntity.getInvitadosEspeciales().get(i).setNombre(invi.getNombre());
+                agendaPersistence.update(agendaEntity);
+                invitadoEspecialPersistence.update(agendaEntity.getInvitadosEspeciales().get(i));
+            }
+        }
         LOGGER.log(Level.INFO, "Termina proceso de reemplazar los invitadoEspeciales del libro con id = {0}", agendasId);
-        return agendaPersistence.find(agendasId).getInvitadosEspeciales();
+        return invi;
+    }
+    
+    public void removeInvitadoEspecial(Long agendasId, Long invitadoEspecialId){
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar un invitado especial de la agenda con id = {0}", agendasId);
+        AgendaEntity agendaEntity = agendaPersistence.find(agendasId);
+        InvitadoEspecialEntity invitadoEspecialEntity = null;
+        for(int i=0;i<agendaEntity.getInvitadosEspeciales().size();i++){
+            if(agendaEntity.getInvitadosEspeciales().get(i).getId()==invitadoEspecialId){
+                invitadoEspecialEntity=agendaEntity.getInvitadosEspeciales().get(i);
+            }
+        }
+        agendaEntity.getInvitadosEspeciales().remove(invitadoEspecialEntity);
+        agendaPersistence.update(agendaEntity);
+        invitadoEspecialPersistence.delete(invitadoEspecialId);
+                LOGGER.log(Level.INFO, "Termina proceso de borrar un invitado especial de la agenda con id = {0}", agendasId);
+
+        
     }
 
 }

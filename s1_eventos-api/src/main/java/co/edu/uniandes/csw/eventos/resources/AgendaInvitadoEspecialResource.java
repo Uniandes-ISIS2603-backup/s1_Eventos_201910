@@ -40,12 +40,12 @@ public class AgendaInvitadoEspecialResource {
     private AgendaInvitadoLogic logica;
 
     @POST
-    @Path("{invitadoEspecialesId: \\d+}")
-    public InvitadoEspecialDTO addInvitadoEspecial(@PathParam("agendasId") Long agendasId, @PathParam("invitadoEspecialesId") Long invitadoEspecialesId) {
-        if (iel.getInvitadoEspecial(invitadoEspecialesId) == null) {
-            throw new WebApplicationException("El recurso /invitadoEspeciales/" + invitadoEspecialesId + " no existe.", 404);
-        }
-        InvitadoEspecialDTO DTO = new InvitadoEspecialDTO(logica.addInvitadoEspecial(agendasId, invitadoEspecialesId));
+    public InvitadoEspecialDTO addInvitadoEspecial(@PathParam("agendasId") Long agendasId, InvitadoEspecialDTO invitadoEspecial) throws BusinessLogicException {
+        
+    //    if (iel.getInvitadoEspecial(invitadoEspecialesId) == null) {
+      //      throw new WebApplicationException("El recurso /invitadoEspeciales/" + invitadoEspecialesId + " no existe.", 404);
+      //  }
+        InvitadoEspecialDTO DTO = new InvitadoEspecialDTO(logica.addInvitadoEspecial(agendasId, invitadoEspecial.toEntity()));
         return DTO;
     }
 
@@ -64,16 +64,29 @@ public class AgendaInvitadoEspecialResource {
         InvitadoEspecialDTO DTO = new InvitadoEspecialDTO(logica.getInvitadoEspecial(agendasId, invitadoEspecialesId));
         return DTO;
     }
+    
+    @DELETE
+     @Path("{invitadoEspecialesId: \\d+}")
+    public void removeInvitadoEspecial(@PathParam("agendasId") Long agendasId, @PathParam("invitadoEspecialesId") Long invitadosEspecialId){
+       
+        if(iel.getInvitadoEspecial(invitadosEspecialId)==null){
+          throw new WebApplicationException("El recurso /invitadoEspeciales/" + invitadosEspecialId + " no existe.", 404);
+        }
+        logica.removeInvitadoEspecial(agendasId, invitadosEspecialId);
+       
+    }
 
     @PUT
-    public List<InvitadoEspecialDTO> replaceInvitadoEspeciales(@PathParam("agendasId") Long agendasId, List<InvitadoEspecialDTO> invitadoEspeciales) {
-        for (InvitadoEspecialDTO invitadoEspecial : invitadoEspeciales) {
-            if (iel.getInvitadoEspecial(invitadoEspecial.getId()) == null) {
-                throw new WebApplicationException("El recurso /agendas/" + invitadoEspecial.getId() + " no existe.", 404);
-            }
+    @Path("{invitadoEspecialesId: \\d+}")
+    public InvitadoEspecialDTO replaceInvitadoEspeciales(@PathParam("agendasId") Long agendasId, @PathParam("invitadoEspecialesId") Long invitadoEspecialesId, InvitadoEspecialDTO invitado) {
+        
+        if(iel.getInvitadoEspecial(invitadoEspecialesId)==null){
+            throw new WebApplicationException("El recurso no existe");
         }
-        List<InvitadoEspecialDTO> lista = listEntity2DTO(logica.replaceInvitadoEspeciales(agendasId, listDTO2Entity(invitadoEspeciales)));
-        return lista;
+        
+        InvitadoEspecialEntity invi = logica.replaceInvitadoEspeciales(agendasId, invitadoEspecialesId,invitado.toEntity());
+        
+        return invitado;
     }
 
     

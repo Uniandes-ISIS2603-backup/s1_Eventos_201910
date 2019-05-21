@@ -14,18 +14,23 @@ import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
  * @author Mateo Vallejo
  */
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class EventoEntradaResource {
 
     @Inject
@@ -37,19 +42,18 @@ public class EventoEntradaResource {
     @Inject
     private EventoEntradaLogic logica;
     
-     @POST
-    @Path("{entradasId: \\d+}")
-    public EntradaDTO addEntrada(@PathParam("eventosId") Long eventosId, @PathParam("entradasId") Long entradasId) {
-        if (entradaL.find(entradasId) == null) {
-            throw new WebApplicationException("El recurso /entradas/" + entradasId + " no existe.", 404);
-        }
-        EntradaDTO DTO = new EntradaDTO(logica.addEntrada(eventosId, entradasId));
+    @POST
+    public EntradaDTO addEntrada(@PathParam("eventosId") Long eventosId, EntradaDTO calif) throws BusinessLogicException{
+       // if (entradaL.find(entradasId) == null) {
+         //   throw new WebApplicationException("El recurso /entradas/" + entradasId + " no existe.", 404);
+        //}
+        EntradaDTO DTO = new EntradaDTO(logica.addEntrada(eventosId, calif.toEntity()));
         return DTO;
     }
 
     @GET
-    public List<EntradaDTO> getEntradads(@PathParam("eventosId") Long eventosId) {
-        List<EntradaDTO> lista = listEntity2DTO(logica.getEntradaes(eventosId));
+    public List<EntradaDTO> getEntradas(@PathParam("eventosId") Long eventosId) {
+        List<EntradaDTO> lista = listEntity2DTO(logica.getEntradas(eventosId));
         return lista;
     }
 
@@ -63,20 +67,23 @@ public class EventoEntradaResource {
     }
 
     @PUT
-    public List<EntradaDTO> replaceEntrada(@PathParam("eventosId") Long eventosId, List<EntradaDTO> entradas) {
-        for (EntradaDTO entrada : entradas) {
-            if (entradaL.find(entrada.getId()) == null) {
-                throw new WebApplicationException("El recurso /entradas/" + entrada.getId() + " no existe.", 404);
-            }
-        }
+    @Path("{entradasId: \\d+}")
+    public EntradaDTO replaceEntrada(@PathParam("eventosId") Long eventosId, @PathParam("entradasId") Long entradasId, EntradaDTO entrada) {
+        System.out.println("LLEGA EL PELUDOOOLKOLOLOLO");
+        if(entradaL.find(entradasId)==null){
+                            throw new WebApplicationException("El recurso /entradas/" + entrada.getId() + " no existe.", 404);
 
-        List<EntradaDTO> lista = listEntity2DTO(logica.replaceEntradaes(eventosId, listDTO2Entity(entradas)));
-        return lista;
+        }
+        
+        EntradaEntity entra = logica.replaceEntrada(eventosId, entradasId,entrada.toEntity());
+
+       
+        return entrada;
     }
 
     @DELETE
     @Path("{entradasId: \\d+}")
-    public void removeEntrada(@PathParam("eventosId") Long eventosId, @PathParam("agendasId") Long entradasId) {
+    public void removeEntrada(@PathParam("eventosId") Long eventosId, @PathParam("entradasId") Long entradasId) {
         if (entradaL.find(entradasId) == null) {
             throw new WebApplicationException("El recurso /entradas/" + entradasId + " no existe.", 404);
         }

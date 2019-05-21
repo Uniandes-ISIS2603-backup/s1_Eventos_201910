@@ -14,6 +14,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import co.edu.uniandes.csw.eventos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.eventos.entities.MedioDePagoEntity;
+import java.util.logging.Level;
 
 /**
  *
@@ -50,7 +51,7 @@ public class CalificacionPersistence {
      */
     public void delete(Long id)
     {
-        CalificacionEntity eliminar = find(id);
+        CalificacionEntity eliminar = em.find(CalificacionEntity.class,id);
         em.remove(eliminar);
     }
     
