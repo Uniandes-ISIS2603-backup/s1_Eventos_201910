@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.eventos.ejb;
 
 import co.edu.uniandes.csw.eventos.entities.EntradaEntity;
-import co.edu.uniandes.csw.eventos.entities.MedioDePagoEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.eventos.persistence.EntradaPersistence;
 import co.edu.uniandes.csw.eventos.persistence.EventoPersistence;
@@ -64,11 +63,6 @@ public class EntradaLogic {
              LOGGER.log(Level.SEVERE, "La calificacion con el id = {0} no existe", entradaId);
         }
         return entradaEntity;
-    }
-    
-    public EntradaEntity findByName(String nombre)
-    {
-        return persistence.findByName(nombre);
     }
     
     public List<EntradaEntity> findAll()

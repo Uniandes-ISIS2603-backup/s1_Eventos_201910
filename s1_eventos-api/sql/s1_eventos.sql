@@ -22,10 +22,10 @@ delete from UsuarioEntity;                          /*Ok*/
 
 
 /*Evento*/
-insert into EventoEntity(id, nombre, descripcion, fechaInicio, fechaFin, detalles, categoria, privado, capacidadMaxima, boletasDisponibles) values (100,'charla videojuegos' ,'experto habla de la importancia de los videojuegos en la juventud','2020-02-23' ,'2020-02-23' ,'se recomienda uso de portatil' ,'Informatica' ,0 ,50 ,50 );
-insert into EventoEntity(id, nombre, descripcion, fechaInicio, fechaFin, detalles, categoria, privado, capacidadMaxima, boletasDisponibles) values (200,'concierto musica clasica' ,'concierto por la orquesta de los alpes' ,'2020-02-23' ,'2020-02-23' ,'se admiten mascotas' ,'Musica' ,1 ,200 ,200 );
+insert into EventoEntity(id, nombre, descripcion, fechaInicio, fechaFin, detalles, categoria, privado, capacidadMaxima, boletasDisponibles) values (100,'charla videojuegos' ,'experto habla de la importancia de los videojuegos en la juventud','2020-02-25' ,'2020-02-25' ,'se recomienda uso de portatil' ,'Informatica' ,0 ,50 ,50 );
+insert into EventoEntity(id, nombre, descripcion, fechaInicio, fechaFin, detalles, categoria, privado, capacidadMaxima, boletasDisponibles) values (200,'concierto musica clasica' ,'concierto por la orquesta de los alpes' ,'2020-02-24' ,'2020-02-24' ,'se admiten mascotas' ,'Musica' ,1 ,200 ,200 );
 insert into EventoEntity(id, nombre, descripcion, fechaInicio, fechaFin, detalles, categoria, privado, capacidadMaxima, boletasDisponibles) values (300 ,'debate corrupcion' ,'charla interactiva sobre la politica del pais' ,'2020-02-23' ,'2020-02-23' ,'N/A' ,'academico' ,0 ,30,25 );
-insert into EventoEntity(id, nombre, descripcion, fechaInicio, fechaFin, detalles, categoria, privado, capacidadMaxima, boletasDisponibles) values (400,'caminata monserrate' ,'integracion entre personas' ,'2020-02-23' ,'2020-02-23','Calentamiento a las 6 am' ,'Deporte' ,1 ,20 ,10 );
+insert into EventoEntity(id, nombre, descripcion, fechaInicio, fechaFin, detalles, categoria, privado, capacidadMaxima, boletasDisponibles) values (400,'caminata monserrate' ,'integracion entre personas' ,'2020-02-22' ,'2020-02-22','Calentamiento a las 6 am' ,'Deporte' ,1 ,20 ,10 );
 
 /*InvitadoEspecial*/
 insert into InvitadoEspecialEntity(id, info, nombre) values(100,'politologo','Javier Guzman');
@@ -123,87 +123,6 @@ insert into EventoEntity_UsuarioEntity(eventos_id, usuarios_id) values(100,400);
 insert into EventoEntity_UsuarioEntity(eventos_id, usuarios_id) values(300,300);
 insert into EventoEntity_UsuarioEntity(eventos_id, usuarios_id) values(400,100);
 
-<<<<<<< HEAD
-
-insert into FacturaEntity(id, fecha, iva, nombre, total, usuario_id) values (100, '2020-02-23', 0.16, 'Carlos Lopez', 85000,100); 
-insert into FacturaEntity(id, fecha, iva, nombre, total, usuario_id) values (200, '2020-03-05', 0.16, 'Laura Suarez', 50000,300); 
-insert into FacturaEntity(id, fecha, iva, nombre, total, usuario_id) values (300, '2020-10-29', 0.16, 'Camilo Garcia', 0,200); 
-insert into FacturaEntity(id, fecha, iva, nombre, total, usuario_id) values (400, '2020-05-15', 0.16, 'Juan Cabello', 6000,100); 
-
-
-insert into MultimediaEntity(id, url, nombre, tipo, memoria, evento_id, organizador_id ) values (500, 'www.asdsd.com' ,'imagen', 'imagen', 0, 100, 100);
-insert into MultimediaEntity(id, url, nombre, tipo, memoria, evento_id, organizador_id ) values (600, 'www.asdfgh.com' ,'video', 'video', 1, 300, 100);
-insert into MultimediaEntity(id, url, nombre, tipo, memoria, evento_id, organizador_id ) values (700, 'www.poiuy.com' ,'gif', 'gif', 1, 400, 300);
-insert into MultimediaEntity(id, url, nombre, tipo, memoria, evento_id, organizador_id ) values (800, 'www.mnbvcx.com' ,'video', 'video', 0, 200, 200);
-
-
-
-
-insert into UsuarioEntity(id, contrasenia, correoElectronico,latitud,longitud,unialpino) values (999,'contrasenia','usuario111@hotmail.com',40.1,40.2,0);
-insert into UsuarioEntity(id, contrasenia, correoElectronico,latitud,longitud,unialpino) values (1000,'contrasenia','usuario99229@hotmail.com',40.1,40.2,0);
-insert into UsuarioEntity(id, contrasenia, correoElectronico,latitud,longitud,unialpino) values (199,'contrasenia','usuario9993@hotmail.com',40.1,40.2,0);
-insert into UsuarioEntity(id, contrasenia, correoElectronico,latitud,longitud,unialpino) values (399,'contrasenia','usuario999433@hotmail.com',40.1,40.2,0);
-
-
-
-
-
-
-insert into CalificacionEntity(id, estrellas, comentarios, recomendado,deAcuerdo,evento_id,usuario_id) values (1,'3','el juego me gusta mucho pero queiro que arreglen
-                                                                                eso urgente porfavor siempre juegue este juego y nunca me paso hasta hace un mes y medio en un celular les mande mensaje
-                                                                                kañlsjdklasjdklsajkldsjakldjlskajdklsajkldsajkldjsakldjaskljdlkañsjfklja dkasljd kla dk aljsd j klasjd kl
-                                                                                dlka lkalñsd k lsldk lk lsdkls kñaslñd k lskdal ksldkñlaskdñlakñldsa
-                                                                                ','N','3',100,999);
-insert into CalificacionEntity(id, estrellas, comentarios, recomendado,deAcuerdo,evento_id,usuario_id) values (2,'5','el juego me gusta mucho pero queiro que arreglen eso urgente porfavor siempre juegue este juego y nunca me paso hasta hace un mes y medio en un celular les mande mensaje kañlsjdklasjdklsajkldsjakldjlskajdklsajkldsajkldjsakldjaskljdlka
-                                                                                ñsjfklj a dkasljd kla dk aljsd j klasjd kl dlka lkalñsd k lsldk lk lsdkls kñaslñd k lskdal ksldkñlaskdñlakñldsa','N','1',100,999);
-insert into CalificacionEntity(id, estrellas, comentarios, recomendado,deAcuerdo) values (3,'4','Interesante iniciativa. VIVA EL POPULISMO! Cuando llegué al evento me encontré un añsldk ñl klañsdk ñlaksd ñlaksdlñask alkdlñ asklñd
-                                                                                qouiqowe nals jpodm ñlc´wojm lñapwomed kmsadj ioqwej nadsosajmdi jasid mjiasjd ioajm sklad{iwoej inkdlasdjaslkaiwd djaow
-                                                                                asdasdsa das dsad asd asdklsajdk ljaskld jklasdj klasjdkl jaskldj klasjd kljaskldj klajdklasjkld jaskldj klsajdkl jaskldj klasjdkl ja
-                                                                                ñklasjdklasj a ñlskdj ioasj ñldasj dlak jklda ,.asmdp oqwjd asmdn klqwjd nklasmdklasjdklasmn .danskld mnjskland klas.','Y','0');
-insert into CalificacionEntity(id, estrellas, comentarios, recomendado,deAcuerdo) values (4,'0','La peor experiencia de mi vida','N','9');
-
-
-insert into EntradaEntity(id, QR, descripcion, precio, locacion, numero, disponible, checkIn, reservado,evento_id) values (10, 'QR1','El evento mas loco del mundo','1000','Preferencial A','123','Y','N','Y',100);
-insert into EntradaEntity(id, QR, descripcion, precio, locacion, numero, disponible, checkIn, reservado,evento_id) values (22, 'QR2','La experiencia más reveladora del año','100100','Preferencial B','321','N','N','N',100 );
-insert into EntradaEntity(id, QR, descripcion, precio, locacion, numero, disponible, checkIn, reservado) values (33, 'QR3','Ven y ayuda a que estudiante del Pacífico puedan estudiar en los Andes','0','Preferencial A','123','Y','N','Y' );
-insert into EntradaEntity(id, QR, descripcion, precio, locacion, numero, disponible, checkIn, reservado) values (44, 'QR4','Beerpong con Pablo Novoa: El evento más alocado del país entero mundial','0','Preferencial A','124','Y','Y','N');
-
-insert into MedioDePagoEntity(id, numero, titular, codigoDeSeguridad, fechaDeExpiracion) values (1,'4092907665439090','JUAN DAVID D','019','2020-07-24 00:00:59');
-insert into MedioDePagoEntity(id, numero, titular, codigoDeSeguridad, fechaDeExpiracion) values (2,'7778654553221901','JUAN ROMAN RIQUELME','123','2021-12-24 00:00:59');
-insert into MedioDePagoEntity(id, numero, titular, codigoDeSeguridad, fechaDeExpiracion) values (3,'2236875791287138','CALORS VIAFARA','793','2019-05-24 00:00:59');
-insert into MedioDePagoEntity(id, numero, titular, codigoDeSeguridad, fechaDeExpiracion) values (4,'5032908625469090','PEDRO PABLO L','111','2021-07-24 00:00:59');
-/*
-insert into UsuarioEntity(id, correoElectronico, contrasenia, longitud, latitud, unialpino) values (100,'je.perez@unialpes.edu.co','Contrasena123#',-80.745,80.321,1);
-insert into UsuarioEntity(id, correoElectronico, contrasenia, longitud, latitud, unialpino) values (200,'ca.quintero10@unialpes.edu.co','NoEsUnaContrasena123#',-50.745,60.321,1);
-insert into UsuarioEntity(id, correoElectronico, contrasenia, longitud, latitud, unialpino) values (300,'email@hotmail.com','EmailYContrasena123#',-40.745,-40.321,0);
-insert into UsuarioEntity(id, correoElectronico, contrasenia, longitud, latitud, unialpino) values (400,'jlm01010@gmail.com','JoseLopezMartinez123#',-85.745,85.321,0);
-
-*/
-insert into MultimediaEntity(id, url, nombre, tipo, memoria) values (100, 'http://managersmagazine.com/wp-content/uploads/2018/06/eventos-y-branding-750x410.jpg','Noche de Fiesta','Reunion',0);
-insert into MultimediaEntity(id, url, nombre, tipo, memoria) values (200, 'https://estatico1.diariolibre.com/binrepository/546x364/0c7/546d350/none/10904/PPPP/3-discoteca-hi-ibiza_11077768_20190101163411.jpg','Baile','Fiesta',1);
-insert into MultimediaEntity(id, url, nombre, tipo, memoria) values (300, 'https://cadenaser00.epimg.net/emisora/imagenes/2018/04/16/radio_madrid/1523886310_620593_1523886468_noticia_normal.jpg','Momento Inolvidable','Reunion',0);
-insert into MultimediaEntity(id, url, nombre, tipo, memoria) values (400, 'https://alianzafrancesa.org.mx/aguascalientes/wp-content/uploads/sites/3/2018/05/unnamed.jpg','Buen momento','Fiesta',1);
-
-insert into MedioDePagoEntity(id, numero, titular, codigoDeSeguridad, fechaDeExpiracion,usuario_id) values (11,'4092907665439090','JUAN DAVID D','019','2020-07-24 00:00:59',999);
-insert into MedioDePagoEntity(id, numero, titular, codigoDeSeguridad, fechaDeExpiracion,usuario_id) values (22,'7778654553221901','JUAN ROMAN RIQUELME','123','2021-12-24 00:00:59',999);
-insert into MedioDePagoEntity(id, numero, titular, codigoDeSeguridad, fechaDeExpiracion) values (33,'2236875791287138','CALORS VIAFARA','793','2019-05-24 00:00:59');
-insert into MedioDePagoEntity(id, numero, titular, codigoDeSeguridad, fechaDeExpiracion) values (44,'5032908625469090','PEDRO PABLO L','111','2021-07-24 00:00:59');
-/*
-insert into MedioDePagoEntity(id, codigoDeSeguridad, fechaDeExpiracion, numero, titular, usuario_id) values(100, 456,'2026-02-23','7418529637418526','Javier Lopez',100 );
-insert into MedioDePagoEntity(id, codigoDeSeguridad, fechaDeExpiracion, numero, titular, usuario_id) values(200, 852,'2026-02-23','7894561234567899','Camila Aguilar',200 );
-insert into MedioDePagoEntity(id, codigoDeSeguridad, fechaDeExpiracion, numero, titular, usuario_id) values(300, 753,'2026-02-23','9516234785698745','Jose Guzman',300 );
-insert into MedioDePagoEntity(id, codigoDeSeguridad, fechaDeExpiracion, numero, titular, usuario_id) values(400, 954,'2026-02-23','8794654187946532','Andrea Canton',400 );
-
-insert into EntradaEntity(id, qr, checkin, descripcion, locacion, numero, precio, reservado, evento_id, factura_id, usuario_id) values (100, '', 0,'entrada general','general sur', 1,5000, 1 ,200,300,100);
-insert into EntradaEntity(id, qr, checkin, descripcion, locacion, numero, precio, reservado, evento_id, factura_id, usuario_id) values (200, '', 1,'concierto','platea norte', 2,20000, 1 ,100,200,400);
-insert into EntradaEntity(id, qr, checkin, descripcion, locacion, numero, precio, reservado, evento_id, factura_id, usuario_id) values (300, '', 0,'entrada gratis','occidental ', 3,0, 1 ,300,200,100);
-insert into EntradaEntity(id, qr, checkin, descripcion, locacion, numero, precio, reservado, evento_id, factura_id, usuario_id) values (400, '', 1,'preferencial','centro ', 4,150000, 1 ,300,100,400);
-=======
-insert into FacturaEntity_entradaEntity(facturaEntity_id,entradas_id) values(100,100);
-insert into FacturaEntity_entradaEntity(facturaEntity_id,entradas_id)  values(200,200);
-insert into FacturaEntity_entradaEntity(facturaEntity_id,entradas_id)  values(300,300);
-insert into FacturaEntity_entradaEntity(facturaEntity_id,entradas_id) values(400,400);
->>>>>>> 8c32feb3db42ba2c754d6fcee7df617a3b53b617
 
 
 

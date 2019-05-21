@@ -44,7 +44,7 @@ public class UsuarioEntradasLogicTest {
     @Inject
     private UserTransaction utx;
 
-    private List<UsuarioEntity> data = new ArrayList<UsuarioEntity>();
+    private List<UsuarioEntity> data = new ArrayList<>();
 
     private List<EntradaEntity> entradasData = new ArrayList();
 
@@ -138,7 +138,7 @@ public class UsuarioEntradasLogicTest {
      * Prueba para obtener una instancia de Entradas asociada a una instancia
      * Usuario.
      *
-     * @throws co.edu.uniandes.csw.entradas.exceptions.BusinessLogicException
+     * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
      */
     @Test
     public void getEntradaTest() throws BusinessLogicException {
@@ -158,7 +158,7 @@ public class UsuarioEntradasLogicTest {
      * Prueba para obtener una instancia de Entradas asociada a una instancia
      * Usuario que no le pertenece.
      *
-     * @throws co.edu.uniandes.csw.entradas.exceptions.BusinessLogicException
+     * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
      */
     @Test(expected = BusinessLogicException.class)
     public void getEntradaNoAsociadoTest() throws BusinessLogicException {

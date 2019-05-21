@@ -21,7 +21,6 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class EventoEntity extends BaseEntity implements Serializable {
 
-    //Atributos
     /**
      * Representa el nombre de un evento
      */

@@ -93,11 +93,11 @@ public class EventoEntradaLogic {
      * @return Nueva colección de EntradaEntity asociada a la instancia de
      * Evento
      */
-    public EntradaEntity replaceEntrada(Long eventosId,Long entradaId,EntradaEntity entrada) {
+    public EntradaEntity replaceEntrada(Long eventosId, Long entradaId, EntradaEntity entrada) {
         LOGGER.log(Level.INFO, "Inicia proceso de reemplazar los entradas del libro con id = {0}", eventosId);
         EventoEntity eventoEntity = eventoPersistence.find(eventosId);
         
-        for(int e=0;e<eventoEntity.getEntradas().size();e++){
+        for(int e=0; e<eventoEntity.getEntradas().size(); e++){
             if(entradaId==eventoEntity.getEntradas().get(e).getId()){
                 eventoEntity.getEntradas().get(e).setQR(entrada.getQR());
                 eventoEntity.getEntradas().get(e).setCheckInm(entrada.isCheckIn());

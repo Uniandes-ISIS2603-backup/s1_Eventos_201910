@@ -28,62 +28,44 @@ public class PatrocinadorEntity extends BaseEntity implements Serializable{
     private String descripcion;
      
     /**
-     * @return the nombre
+     * @return Nombre del Patrocinador
      */
-    public String getNombre()
-    {
-        return nombre;
-    }
+    public String getNombre(){return nombre;}
     
     /**
-     * @param nombre the nombre to set
+     * @param nombre El nombre a asignar
      */
-    public void setNombre(String nombre)
-    {
-        this.nombre = nombre;
-    }
+    public void setNombre(String nombre){this.nombre = nombre;}
     
     /**
-     * @return the imagen
+     * @return Imagen del Patrocinador
      */
-    public String getImagen() {
-        return imagen;
-    }
+    public String getImagen() {return imagen;}
 
     /**
-     * @param imagen the imagen to set
+     * @param imagen La imagen a asignar
      */
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
+    public void setImagen(String imagen) {this.imagen = imagen;}
 
     /**
-     * @return the rango
+     * @return El rango del patrocinador
      */
-    public String getRango() {
-        return rango;
-    }
+    public String getRango() {return rango;}
 
     /**
-     * @param rango the rango to set
+     * @param rango El rango a asignar
      */
-    public void setRango(String rango) {
-        this.rango = rango;
-    }
+    public void setRango(String rango) {this.rango = rango;}
 
     /**
-     * @return the descripcion
+     * @return Descripción del patrocinador
      */
-    public String getDescripcion() {
-        return descripcion;
-    }
+    public String getDescripcion() {return descripcion;}
 
     /**
-     * @param descripcion the descripcion to set
+     * @param descripcion la descripción a asignar
      */
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+    public void setDescripcion(String descripcion) {this.descripcion = descripcion;}
     
     /**
      * @return the eventos
