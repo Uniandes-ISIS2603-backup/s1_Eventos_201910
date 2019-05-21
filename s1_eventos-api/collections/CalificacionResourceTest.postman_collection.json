@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6629d2fc-bd3f-4f7b-9d4f-c533db0e223e",
+		"_postman_id": "3f6f00a0-2d6f-494d-960c-9ffa945a77b0",
 		"name": "CalificacionResourceTest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -11,9 +11,58 @@
 				{
 					"listen": "test",
 					"script": {
+						"id": "2abfb3cc-e474-4fa0-ad4e-33de32043015",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_c\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\t\t\n\t\t\"estrellas\": \"5\",\n    \t\"comentario\": \"Esta muy firme\",\n        \"recomendado\": \"Y\",\n        \"deAcuerdo\": 0\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"calificaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Calificaciones",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
 						"id": "c1a6f5e8-fd97-4d4a-99b4-075cd97c9a8b",
 						"exec": [
-							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Gell All\"] = responseCode.code === 200;",
+							"tests[\"calificaciones count\"] = data.length >= 1;"
 						],
 						"type": "text/javascript"
 					}
@@ -60,6 +109,8 @@
 					"script": {
 						"id": "3723f8c7-e94d-4ea7-9e1e-ef39d70b5833",
 						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
 							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -69,12 +120,8 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones/11",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones/{{new_id_c}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -84,30 +131,32 @@
 						"s1_eventos-api",
 						"api",
 						"calificaciones",
-						"11"
+						"{{new_id_c}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Calificaciones",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+			"name": "Obtener calificacion que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "39dc353d-ae0a-41c6-99a5-89218360c4d3",
+						"exec": [
+							"tests[\"No se deberia obtener una calificacion con un id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /calificaciones/0 no existe.\");"
+						],
+						"type": "text/javascript"
 					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\t\t\n\t\t\"estrellas\": \"5\",\n    \t\"comentario\": \"Esta muy firme\",\n        \"recomendado\": \"Y\",\n        \"deAcuerdo\": 0\n}"
-				},
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones/0",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -116,7 +165,8 @@
 					"path": [
 						"s1_eventos-api",
 						"api",
-						"calificaciones"
+						"calificaciones",
+						"0"
 					]
 				}
 			},
@@ -124,6 +174,20 @@
 		},
 		{
 			"name": "Calificaciones",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "70b0cfad-5bab-4df4-96e3-642d9a027455",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -139,7 +203,7 @@
 					"raw": " {\n        \"comentario\": \"Muy regular el evento.CHOLE CHOOOOO2\",\n        \"estrellas\": \"1\",\n        \"recomendado\": \"N\",\n        \"deAcuerdo\": 2\n    }"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones/22",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones/{{new_id_c}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -149,7 +213,128 @@
 						"s1_eventos-api",
 						"api",
 						"calificaciones",
-						"22"
+						"{{new_id_c}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una calificacion que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "15a70f62-2a66-469a-9ca6-d1125b0c8774",
+						"exec": [
+							"tests[\"No se deberia actualizar un patrocinador con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /patrocinadores/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n        \"comentario\": \"Muy regular el evento.CHOLE CHOOOOO2\",\n        \"estrellas\": \"1\",\n        \"recomendado\": \"N\",\n        \"deAcuerdo\": 2\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"calificaciones",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Calificacion delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d403e21b-3da3-4bbc-9b8a-9a2285ec0292",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones/{{new_id_c}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"calificaciones",
+						"{{new_id_c}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar calificacion que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d403e21b-3da3-4bbc-9b8a-9a2285ec0292",
+						"exec": [
+							"tests[\"No se deberia borrar una calificacion con un id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /calificaciones/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/calificaciones/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"calificaciones",
+						"0"
 					]
 				}
 			},
