@@ -113,143 +113,103 @@ public class EventoDTO implements Serializable {
     }
 
     /**
-     * @return the nombre
+     * @return Nombre del evento
      */
-    public String getNombre() {
-        return nombre;
-    }
+    public String getNombre() {return nombre;}
 
     /**
-     * @param nombre the nombre to set
+     * @param nombre nombre a asignar
      */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public void setNombre(String nombre) {this.nombre = nombre;}
 
     /**
-     * @return the descripcion
+     * @return descripcion del evento
      */
-    public String getDescripcion() {
-        return descripcion;
-    }
+    public String getDescripcion() {return descripcion;}
 
     /**
-     * @param descripcion the descripcion to set
+     * @param descripcion descripcion a asignar
      */
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+    public void setDescripcion(String descripcion) {this.descripcion = descripcion;}
 
     /**
-     * @return the fechaInicio
+     * @return fecha de inicio del evento
      */
-    public Date getFechaInicio() {
-        return fechaInicio;
-    }
+    public Date getFechaInicio() {return fechaInicio;}
 
     /**
-     * @param fechaInicio the fechaInicio to set
+     * @param fechaInicio fecha de inicio a asignar
      */
-    public void setFechaInicio(Date fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
+    public void setFechaInicio(Date fechaInicio) {this.fechaInicio = fechaInicio;}
 
     /**
-     * @return the fechaFin
+     * @return fecha final del evento
      */
-    public Date getFechaFin() {
-        return fechaFin;
-    }
+    public Date getFechaFin() {return fechaFin;}
 
     /**
-     * @param fechaFin the fechaFin to set
+     * @param fechaFin fecha final a asignar
      */
-    public void setFechaFin(Date fechaFin) {
-        this.fechaFin = fechaFin;
-    }
+    public void setFechaFin(Date fechaFin) {this.fechaFin = fechaFin;}
 
     /**
-     * @return the detalles
+     * @return detalles del evento
      */
-    public String getDetalles() {
-        return detalles;
-    }
+    public String getDetalles() {return detalles;}
 
     /**
-     * @param detalles the detalles to set
+     * @param detalles detalles a asignar
      */
-    public void setDetalles(String detalles) {
-        this.detalles = detalles;
-    }
+    public void setDetalles(String detalles) {this.detalles = detalles;}
 
     /**
-     * @return the categoria
+     * @return categoria del evento
      */
-    public String getCategoria() {
-        return categoria;
-    }
+    public String getCategoria() {return categoria;}
 
     /**
-     * @param categoria the categoria to set
+     * @param categoria categoria a asignar
      */
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
+    public void setCategoria(String categoria) {this.categoria = categoria;}
 
     /**
-     * @return the privado
+     * @return si es un evento privado
      */
-    public Boolean isPrivado() {
-        return privado;
-    }
+    public Boolean isPrivado() {return privado;}
 
     /**
-     * @param privado the privado to set
+     * @param privado asignar si es privado
      */
-    public void setPrivado(Boolean privado) {
-        this.privado = privado;
-    }
+    public void setPrivado(Boolean privado) {this.privado = privado;}
 
     /**
-     * @return the capacidadMaxima
+     * @return capacidad maxima del evento
      */
-    public Integer getCapacidadMaxima() {
-        return capacidadMaxima;
-    }
+    public Integer getCapacidadMaxima() {return capacidadMaxima;}
 
     /**
-     * @param capacidadMaxima the capacidadMaxima to set
+     * @param capacidadMaxima capacidad maxima a asignar
      */
-    public void setCapacidadMaxima(Integer capacidadMaxima) {
-        this.capacidadMaxima = capacidadMaxima;
-    }
+    public void setCapacidadMaxima(Integer capacidadMaxima) {this.capacidadMaxima = capacidadMaxima;}
 
     /**
-     * @return the boletasDisponibles
+     * @return boletas disponibles para el evento
      */
-    public Integer getBoletasDisponibles() {
-        return boletasDisponibles;
-    }
+    public Integer getBoletasDisponibles() {return boletasDisponibles;}
 
     /**
-     * @param boletasDisponibles the boletasDisponibles to set
+     * @param boletasDisponibles boletas disponibles a asignar
      */
-    public void setBoletasDisponibles(Integer boletasDisponibles) {
-        this.boletasDisponibles = boletasDisponibles;
-    }
+    public void setBoletasDisponibles(Integer boletasDisponibles) {this.boletasDisponibles = boletasDisponibles;}
 
     /**
-     * @return the id
+     * @return id del evento
      */
-    public Long getId() {
-        return id;
-    }
+    public Long getId() {return id;}
 
     /**
-     * @param id the id to set
+     * @param id id a asignar
      */
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public void setId(Long id) {this.id = id;}
 
 }
