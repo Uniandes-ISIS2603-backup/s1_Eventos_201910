@@ -35,48 +35,36 @@ public class UbicacionEntity extends BaseEntity implements Serializable {
      * constructor por defecto
      */
     public UbicacionEntity(){
-        
+        //No es necesario implementar nada dentro del metodo
     }
             
     /**
-     * @return the latitud
+     * @return latitud de la ubicacion
      */
-    public Double getLatitud() {
-        return latitud;
-    }
+    public Double getLatitud() {return latitud;}
 
     /**
-     * @param latitud the latitud to set
+     * @param latitud la latitud a asignar
      */
-    public void setLatitud(Double latitud) {
-        this.latitud = latitud;
-    }
+    public void setLatitud(Double latitud) {this.latitud = latitud;}
 
     /**
-     * @return the longitud
+     * @return longitud de la ubicacion
      */
-    public Double getLongitud() {
-        return longitud;
-    }
+    public Double getLongitud() {return longitud;}
 
     /**
-     * @param longitud the longitud to set
+     * @param longitud la longitud a asignar
      */
-    public void setLongitud(Double longitud) {
-        this.longitud = longitud;
-    }
+    public void setLongitud(Double longitud) {this.longitud = longitud;}
 
     /**
-     * @return the edificio
+     * @return el edificio de la ubicacion
      */
-    public String getNombre() {
-        return nombre;
-    }
+    public String getNombre() {return nombre;}
 
     /**
-     * @param nombre the edificio to set
+     * @param nombre el edificio a asignar a la ubicacion
      */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }   
+    public void setNombre(String nombre) {this.nombre = nombre;}   
 }

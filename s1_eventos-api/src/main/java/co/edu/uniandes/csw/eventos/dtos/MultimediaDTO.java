@@ -42,72 +42,52 @@ public class MultimediaDTO implements Serializable {
     }
 
     /**
-     * @return the id
+     * @return id de la multimedia
      */
-    public Long getId() {
-        return id;
-    }
+    public Long getId() {return id;}
 
     /**
-     * @param id the id to set
+     * @param id id a asignar
      */
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public void setId(Long id) {this.id = id;}
 
     /**
-     * @return the url
+     * @return url de la multimedia
      */
-    public String getUrl() {
-        return url;
-    }
+    public String getUrl() {return url;}
 
     /**
-     * @param url the url to set
+     * @param url url a asignar
      */
-    public void setUrl(String url) {
-        this.url = url;
-    }
+    public void setUrl(String url) {this.url = url;}
 
     /**
-     * @return the nombre
+     * @return nombre de la multimedia
      */
-    public String getNombre() {
-        return nombre;
-    }
+    public String getNombre() {return nombre;}
 
     /**
-     * @param nombre the nombre to set
+     * @param nombre nombre a asignar
      */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public void setNombre(String nombre) {this.nombre = nombre;}
 
     /**
-     * @return the tipo
+     * @return tipo de la multimedia
      */
-    public String getTipo() {
-        return tipo;
-    }
+    public String getTipo() {return tipo;}
 
     /**
-     * @param tipo the tipo to set
+     * @param tipo tipo a asignar
      */
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
+    public void setTipo(String tipo) {this.tipo = tipo;}
 
     /**
-     * @return the memoria
+     * @return si se trata de una memoria
      */
-    public Boolean isMemoria() {
-        return memoria;
-    }
+    public Boolean isMemoria() {return memoria;}
 
     /**
-     * @param memoria the memoria to set
+     * @param memoria asignar si es memoria
      */
-    public void setMemoria(Boolean memoria) {
-        this.memoria = memoria;
-    }
+    public void setMemoria(Boolean memoria) {this.memoria = memoria;}
 }
