@@ -7,10 +7,8 @@ package co.edu.uniandes.csw.eventos.resources;
 
 import co.edu.uniandes.csw.eventos.dtos.EntradaDTO;
 import co.edu.uniandes.csw.eventos.dtos.EntradaDetailDTO;
-import co.edu.uniandes.csw.eventos.dtos.PatrocinadorDetailDTO;
 import co.edu.uniandes.csw.eventos.ejb.EntradaLogic;
 import co.edu.uniandes.csw.eventos.entities.EntradaEntity;
-import co.edu.uniandes.csw.eventos.entities.PatrocinadorEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
