@@ -54,6 +54,16 @@ public class UsuarioDTO implements Serializable{
     public void setId(Long id) {this.id = id;}
 
     /**
+     * @return contraseña del usuario
+     */
+    public String getContrasenia() {return contrasenia;}
+
+    /**
+     * @param contrasenia la contraseña a asignar
+     */
+    public void setContrasenia(String contrasenia) {this.contrasenia = contrasenia;}
+    
+    /**
      * @return Correo del usuario
      */
     public String getCorreoElectronico() {return correoElectronico;}
@@ -64,15 +74,15 @@ public class UsuarioDTO implements Serializable{
     public void setCorreoElectronico(String correoElectronico) {this.correoElectronico = correoElectronico;}
 
     /**
-     * @return contraseña del usuario
+     * @return latitud del usuario
      */
-    public String getContrasenia() {return contrasenia;}
+    public Double getLatitud() {return latitud;}
 
     /**
-     * @param contrasenia la contraseña a asignar
+     * @param latitud latitud a asignar
      */
-    public void setContrasenia(String contrasenia) {this.contrasenia = contrasenia;}
-
+    public void setLatitud(Double latitud) {this.latitud = latitud;}
+    
     /**
      * @return longitud del usuario
      */
@@ -82,16 +92,6 @@ public class UsuarioDTO implements Serializable{
      * @param longitud longitud a asignar
      */
     public void setLongitud(Double longitud) {this.longitud = longitud;}
-
-    /**
-     * @return latitud del usuario
-     */
-    public Double getLatitud() {return latitud;}
-
-    /**
-     * @param latitud latitud a asignar
-     */
-    public void setLatitud(Double latitud) {this.latitud = latitud;}
 
     /**
      * @return si el usuario es unialpino
