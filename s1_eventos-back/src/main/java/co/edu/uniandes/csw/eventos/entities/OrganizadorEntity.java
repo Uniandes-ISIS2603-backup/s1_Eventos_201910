@@ -29,57 +29,40 @@ public class OrganizadorEntity extends BaseEntity implements Serializable {
     /**
      * @return the eventos
      */
-    public List<EventoEntity> getEventos() {
-        return eventos;
-    }
+    public List<EventoEntity> getEventos() {return eventos;}
 
     /**
      * @param eventos the eventos to set
      */
-    public void setEventos(List<EventoEntity> eventos) {
-        this.eventos = eventos;
-    }
+    public void setEventos(List<EventoEntity> eventos) {this.eventos = eventos;}
 
     /**
      * @return the nombre
      */
-    public String getNombre() {
-        return nombre;
-    }
+    public String getNombre() {return nombre;}
 
     /**
      * @param nombre the nombre to set
      */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public void setNombre(String nombre) {this.nombre = nombre;}
 
     /**
      * @return the telefono
      */
-    public String getTelefono() {
-        return telefono;
-    }
+    public String getTelefono() {return telefono;}
 
     /**
      * @param telefono the telefono to set
      */
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
+    public void setTelefono(String telefono) {this.telefono = telefono;}
 
     /**
      * @return the correoElectronico
      */
-    public String getCorreoElectronico() {
-        return correoElectronico;
-    }
+    public String getCorreoElectronico() {return correoElectronico;}
 
     /**
      * @param correoElectronico the correoElectronico to set
      */
-    public void setCorreoElectronico(String correoElectronico) {
-        this.correoElectronico = correoElectronico;
-    }
-    
+    public void setCorreoElectronico(String correoElectronico) {this.correoElectronico = correoElectronico;}
 }

@@ -26,26 +26,6 @@ public class PatrocinadorEntity extends BaseEntity implements Serializable{
     private String imagen;
     private String rango;
     private String descripcion;
-     
-    /**
-     * @return Nombre del Patrocinador
-     */
-    public String getNombre(){return nombre;}
-    
-    /**
-     * @param nombre El nombre a asignar
-     */
-    public void setNombre(String nombre){this.nombre = nombre;}
-    
-    /**
-     * @return Imagen del Patrocinador
-     */
-    public String getImagen() {return imagen;}
-
-    /**
-     * @param imagen La imagen a asignar
-     */
-    public void setImagen(String imagen) {this.imagen = imagen;}
 
     /**
      * @return El rango del patrocinador
@@ -66,6 +46,26 @@ public class PatrocinadorEntity extends BaseEntity implements Serializable{
      * @param descripcion la descripción a asignar
      */
     public void setDescripcion(String descripcion) {this.descripcion = descripcion;}
+    
+    /**
+     * @return Nombre del Patrocinador
+     */
+    public String getNombre(){return nombre;}
+    
+    /**
+     * @param nombre El nombre a asignar
+     */
+    public void setNombre(String nombre){this.nombre = nombre;}
+    
+    /**
+     * @return Imagen del Patrocinador
+     */
+    public String getImagen() {return imagen;}
+
+    /**
+     * @param imagen La imagen a asignar
+     */
+    public void setImagen(String imagen) {this.imagen = imagen;}
     
     /**
      * @return the eventos

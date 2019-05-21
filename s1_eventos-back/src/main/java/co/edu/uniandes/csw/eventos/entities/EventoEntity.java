@@ -59,6 +59,11 @@ public class EventoEntity extends BaseEntity implements Serializable {
      * Representa las boletas disponibles de un evento
      */
     private Integer boletasDisponibles;
+    
+    /**
+     * Representa la imagen de un evento
+     */
+    private String imagen;
 
     /**
      * Representa los contenido multimedia de un evento
@@ -260,6 +265,20 @@ public class EventoEntity extends BaseEntity implements Serializable {
      */
     public void setBoletasDisponibles(Integer boletasDisponibles) {
         this.boletasDisponibles = boletasDisponibles;
+    }
+    
+    /**
+     * @return imagen de evento
+     */
+    public String getImagen() {
+        return imagen;
+    }
+
+    /**
+     * @param imagen imagen to set
+     */
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     /**

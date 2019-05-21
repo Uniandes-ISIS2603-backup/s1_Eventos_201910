@@ -64,7 +64,11 @@ public class EventoDTO implements Serializable {
      * Id de un evento
      */
     private Long id;
-
+    
+    /**
+     * Imagen de un evento
+     */
+    private String imagen;
     /**
      * Constructor por defecto
      */
@@ -89,6 +93,7 @@ public class EventoDTO implements Serializable {
             this.boletasDisponibles = entity.getBoletasDisponibles();
             this.categoria = entity.getCategoria();
             this.id=entity.getId();
+            this.imagen=entity.getImagen();
         }
     }
 
@@ -109,6 +114,7 @@ public class EventoDTO implements Serializable {
         ent.setNombre(this.getNombre());
         ent.setPrivado(this.isPrivado());
         ent.setId(this.getId());
+        ent.setImagen(this.getImagen());
         return ent;
     }
 
@@ -211,5 +217,15 @@ public class EventoDTO implements Serializable {
      * @param id id a asignar
      */
     public void setId(Long id) {this.id = id;}
+    
+    /**
+     * @return imagen del evento
+     */
+    public String getImagen() {return imagen;}
+
+    /**
+     * @param imagen imagen a asignar
+     */
+    public void setImagen(String imagen) {this.imagen = imagen;}
 
 }
