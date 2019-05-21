@@ -156,7 +156,7 @@ public class UsuarioCalificacionesLogicTest {
      * Prueba para obtener una instancia de Calificaciones asociada a una instancia
      * Usuario que no le pertenece.
      *
-     * @throws co.edu.uniandes.csw.calificaciones.exceptions.BusinessLogicException
+     * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
      */
     @Test(expected = BusinessLogicException.class)
     public void getCalificacionNoAsociadoTest() throws BusinessLogicException {

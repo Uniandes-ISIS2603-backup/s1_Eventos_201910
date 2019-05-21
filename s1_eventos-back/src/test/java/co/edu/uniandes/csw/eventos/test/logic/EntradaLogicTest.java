@@ -5,15 +5,12 @@
  */
 package co.edu.uniandes.csw.eventos.test.logic;
 
-import co.edu.uniandes.csw.eventos.ejb.OrganizadorLogic;
+
 import co.edu.uniandes.csw.eventos.ejb.EntradaLogic;
 import co.edu.uniandes.csw.eventos.entities.EntradaEntity;
 import co.edu.uniandes.csw.eventos.entities.EventoEntity;
-import co.edu.uniandes.csw.eventos.entities.MedioDePagoEntity;
-import co.edu.uniandes.csw.eventos.entities.OrganizadorEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.eventos.persistence.EntradaPersistence;
-import co.edu.uniandes.csw.eventos.persistence.OrganizadorPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -64,6 +61,11 @@ public class EntradaLogicTest {
      * Lista de entradas Entity
      */
     private List<EntradaEntity> data = new ArrayList<>();
+    
+    /**
+     * Lista de todos los eventos Entity
+     */
+    private List<EventoEntity> dataEventos = new ArrayList<>();
     
     /**
      * Deployment
@@ -117,9 +119,12 @@ public class EntradaLogicTest {
             em.persist(entity);
             data.add(entity);
         }
-        EntradaEntity medioDePago = data.get(2);
-        EventoEntity entity = factory.manufacturePojo(EventoEntity.class);
-        em.persist(entity);
+
+        for (int i = 0; i < 3; i++) {
+            EventoEntity entity = factory.manufacturePojo(EventoEntity.class);
+            em.persist(entity);
+            dataEventos.add(entity);
+        }
     }
     
     /**
@@ -130,11 +135,11 @@ public class EntradaLogicTest {
     public void createEntradaTest()throws BusinessLogicException
     {
         EntradaEntity newEntity = factory.manufacturePojo(EntradaEntity.class);
-        EntradaEntity result = entradaLogic.createEntrada(newEntity);
+        EventoEntity evento = dataEventos.get(0);
+        EntradaEntity result = entradaLogic.createEntrada(newEntity, evento.getId());
         Assert.assertNotNull(result);
         EntradaEntity entity = em.find(EntradaEntity.class, result.getId());
-        Assert.assertEquals(newEntity.getId(), entity.getId());
-        Assert.assertEquals(newEntity.getNumero(), entity.getNumero());
+         Assert.assertEquals(newEntity.getId(), entity.getId());
     }
     
     /**
@@ -179,6 +184,26 @@ public class EntradaLogicTest {
         EntradaEntity deleted = em.find(EntradaEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
+    
+    /**
+     * Test de econtrar todas las entradas 
+     * @throws BusinessLogicException 
+     */
+    @Test
+    public void findAllTest() throws BusinessLogicException{
+        
+        List<EntradaEntity> list = entradaLogic.findAll();
+        Assert.assertEquals(data.size(), list.size());
+        for (EntradaEntity entity : list) {
+            boolean found = false;
+            for (EntradaEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    } 
     
     
 }

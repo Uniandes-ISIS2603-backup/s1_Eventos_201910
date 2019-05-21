@@ -59,10 +59,10 @@ public class CalificacionResource {
      * @return
      * @throws BusinessLogicException 
      */
-   @POST
+    @POST
    public CalificacionDTO createCalificacion(CalificacionDTO calificacion) throws BusinessLogicException
    {
-       CalificacionDTO calificacionDTO = new CalificacionDTO(calificacionLogic.createCalificacion(calificacion.toEntity()));
+      
         return calificacion;
    }
    

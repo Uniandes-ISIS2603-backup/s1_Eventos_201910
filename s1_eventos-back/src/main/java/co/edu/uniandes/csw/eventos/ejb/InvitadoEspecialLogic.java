@@ -89,6 +89,7 @@ public class InvitadoEspecialLogic {
     public InvitadoEspecialEntity getInvitadoEspecial(Long invitadoEspecialsId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar la InvitadoEspecial con id = {0}", invitadoEspecialsId);
         // Note que, por medio de la inyección de dependencias se llama al método "find(id)" que se encuentra en la persistencia.
+        System.out.println("********QUE LE PASA A LUPITAAAA********"+invitadoEspecialsId);
         InvitadoEspecialEntity invitadoEspecialEntity = persistence.find(invitadoEspecialsId);
         if (invitadoEspecialEntity == null) {
             LOGGER.log(Level.SEVERE, "La InvitadoEspecial con el id = {0} no existe", invitadoEspecialsId);

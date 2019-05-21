@@ -5,13 +5,10 @@
  */
 package co.edu.uniandes.csw.eventos.test.logic;
 import co.edu.uniandes.csw.eventos.ejb.InvitadoEspecialLogic;
-import co.edu.uniandes.csw.eventos.ejb.OrganizadorLogic;
 import co.edu.uniandes.csw.eventos.entities.InvitadoEspecialEntity;
 import co.edu.uniandes.csw.eventos.entities.EventoEntity;
-import co.edu.uniandes.csw.eventos.entities.OrganizadorEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.eventos.persistence.InvitadoEspecialPersistence;
-import co.edu.uniandes.csw.eventos.persistence.OrganizadorPersistence;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +36,7 @@ public class InvitadoEspecialLogicTest {
     private PodamFactory factory = new PodamFactoryImpl();
     
     @Inject
-    private InvitadoEspecialLogic InvitadoEspecialLogic;
+    private InvitadoEspecialLogic invitadoEspecialLogic;
     
     @PersistenceContext
     private EntityManager em;
@@ -47,7 +44,7 @@ public class InvitadoEspecialLogicTest {
     @Inject
     private UserTransaction utx;
     
-    private List<InvitadoEspecialEntity> data = new ArrayList<InvitadoEspecialEntity>();
+    private List<InvitadoEspecialEntity> data = new ArrayList<>();
     
     @Deployment
     public static JavaArchive createDeployment() {
@@ -97,7 +94,6 @@ public class InvitadoEspecialLogicTest {
             em.persist(entity);
             data.add(entity);
         }
-        InvitadoEspecialEntity InvitadoEspecial = data.get(2);
         EventoEntity entity = factory.manufacturePojo(EventoEntity.class);
        
         em.persist(entity);
@@ -108,7 +104,7 @@ public class InvitadoEspecialLogicTest {
     public void createInvitadoEspecialTest()throws Exception
     {
         InvitadoEspecialEntity newEntity = factory.manufacturePojo(InvitadoEspecialEntity.class);
-        InvitadoEspecialEntity result = InvitadoEspecialLogic.createInvitadoEspecial(newEntity);
+        InvitadoEspecialEntity result = invitadoEspecialLogic.createInvitadoEspecial(newEntity);
         Assert.assertNotNull(result);
         InvitadoEspecialEntity entity = em.find(InvitadoEspecialEntity.class,result.getId());
          Assert.assertEquals(newEntity.getId(), entity.getId());
@@ -117,7 +113,7 @@ public class InvitadoEspecialLogicTest {
     @Test
     public void getInvitadoEspecialTest(){
         InvitadoEspecialEntity entity = data.get(0);
-        InvitadoEspecialEntity resultEntity = InvitadoEspecialLogic.getInvitadoEspecial(entity.getId());
+        InvitadoEspecialEntity resultEntity = invitadoEspecialLogic.getInvitadoEspecial(entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
     }
@@ -129,7 +125,7 @@ public class InvitadoEspecialLogicTest {
         
         pojoEntity.setId(entity.getId());
         
-        InvitadoEspecialLogic.updateInvitadoEspecial(pojoEntity.getId(),pojoEntity);
+        invitadoEspecialLogic.updateInvitadoEspecial(pojoEntity.getId(),pojoEntity);
         
         InvitadoEspecialEntity resp = em.find(InvitadoEspecialEntity.class,entity.getId());
         
@@ -138,9 +134,27 @@ public class InvitadoEspecialLogicTest {
     @Test
     public void deleteInvitadoEspecialTest() throws BusinessLogicException{
         InvitadoEspecialEntity entity = data.get(0);
-        InvitadoEspecialLogic.deleteInvitadoEspecial(entity.getId());
+        invitadoEspecialLogic.deleteInvitadoEspecial(entity.getId());
         InvitadoEspecialEntity deleted = em.find(InvitadoEspecialEntity.class, entity.getId());
         Assert.assertNull(deleted);
-    }    
+    } 
+    
+    /**
+     * Prueba para consultar la lista de Organizadores.
+     */
+    @Test
+    public void getInvitadosEspecialesTest() {
+        List<InvitadoEspecialEntity> list = invitadoEspecialLogic.getInvitadoEspecials();
+        Assert.assertEquals(data.size(), list.size());
+        for (InvitadoEspecialEntity entity : list) {
+            boolean found = false;
+            for (InvitadoEspecialEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
     
 }

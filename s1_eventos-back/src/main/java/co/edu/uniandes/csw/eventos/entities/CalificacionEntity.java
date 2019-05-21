@@ -101,7 +101,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
      * Retorna las estrellas de la calificacion
      * @return esstrellas
      */
-    public String getEstrellas() {
+        public String getEstrellas() {
         return estrellas;
     }
 

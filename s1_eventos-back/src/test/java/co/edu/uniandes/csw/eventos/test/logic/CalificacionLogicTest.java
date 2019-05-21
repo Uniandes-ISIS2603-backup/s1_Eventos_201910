@@ -5,13 +5,10 @@
  */
 package co.edu.uniandes.csw.eventos.test.logic;
 import co.edu.uniandes.csw.eventos.ejb.CalificacionLogic;
-import co.edu.uniandes.csw.eventos.ejb.OrganizadorLogic;
 import co.edu.uniandes.csw.eventos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.eventos.entities.EventoEntity;
-import co.edu.uniandes.csw.eventos.entities.OrganizadorEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.eventos.persistence.CalificacionPersistence;
-import co.edu.uniandes.csw.eventos.persistence.OrganizadorPersistence;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +56,12 @@ public class CalificacionLogicTest {
     /**
      * Lista de todas las calificaciones Entity
      */
-    private List<CalificacionEntity> data = new ArrayList<CalificacionEntity>();
+    private List<CalificacionEntity> data = new ArrayList<>();
+    
+    /**
+     * Lista de todos los eventos Entity
+     */
+    private List<EventoEntity> dataEventos = new ArrayList<>();
     
     /**
      * Deployment
@@ -113,10 +115,12 @@ public class CalificacionLogicTest {
             em.persist(entity);
             data.add(entity);
         }
-        CalificacionEntity calificacion = data.get(2);
-        EventoEntity entity = factory.manufacturePojo(EventoEntity.class);
-       
-        em.persist(entity);
+        
+        for (int i = 0; i < 3; i++) {
+            EventoEntity entity = factory.manufacturePojo(EventoEntity.class);
+            em.persist(entity);
+            dataEventos.add(entity);
+        }
       
     }
     
@@ -128,17 +132,18 @@ public class CalificacionLogicTest {
     public void createCalificacionTest()throws Exception
     {
         CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
-        CalificacionEntity result = calificacionLogic.createCalificacion(newEntity);
+        EventoEntity evento = dataEventos.get(0);
+        CalificacionEntity result = calificacionLogic.createCalificacion(newEntity, evento.getId());
         Assert.assertNotNull(result);
-        CalificacionEntity entity = em.find(CalificacionEntity.class,result.getId());
+        CalificacionEntity entity = em.find(CalificacionEntity.class, result.getId());
          Assert.assertEquals(newEntity.getId(), entity.getId());
     }
     
     /**
-     * Test de obtener
+     * Test de obtener calificacion
      */
     @Test
-    public void getCalificacionTest(){
+    public void findCalificacionTest(){
         CalificacionEntity entity = data.get(0);
         CalificacionEntity resultEntity = calificacionLogic.findCalificacion(entity.getId());
         Assert.assertNotNull(resultEntity);
@@ -176,5 +181,25 @@ public class CalificacionLogicTest {
         CalificacionEntity deleted = em.find(CalificacionEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }    
+    
+    /**
+     * Test de econtrar todas las calificaciones 
+     * @throws BusinessLogicException 
+     */
+    @Test
+    public void findAllTest() throws BusinessLogicException{
+        
+        List<CalificacionEntity> list = calificacionLogic.findAll();
+        Assert.assertEquals(data.size(), list.size());
+        for (CalificacionEntity entity : list) {
+            boolean found = false;
+            for (CalificacionEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    } 
     
 }

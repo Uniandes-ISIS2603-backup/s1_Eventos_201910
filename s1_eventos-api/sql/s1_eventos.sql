@@ -123,10 +123,6 @@ insert into EventoEntity_UsuarioEntity(eventos_id, usuarios_id) values(100,400);
 insert into EventoEntity_UsuarioEntity(eventos_id, usuarios_id) values(300,300);
 insert into EventoEntity_UsuarioEntity(eventos_id, usuarios_id) values(400,100);
 
-insert into FacturaEntity_entradaEntity(facturaEntity_id,entradas_id) values(100,100);
-insert into FacturaEntity_entradaEntity(facturaEntity_id,entradas_id)  values(200,200);
-insert into FacturaEntity_entradaEntity(facturaEntity_id,entradas_id)  values(300,300);
-insert into FacturaEntity_entradaEntity(facturaEntity_id,entradas_id) values(400,400);
 
 
 

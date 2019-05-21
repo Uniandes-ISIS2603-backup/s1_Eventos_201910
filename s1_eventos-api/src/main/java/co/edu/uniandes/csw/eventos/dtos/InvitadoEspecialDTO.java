@@ -78,6 +78,7 @@ public class InvitadoEspecialDTO implements Serializable {
    public InvitadoEspecialEntity toEntity()
    {
        InvitadoEspecialEntity i = new InvitadoEspecialEntity();
+       i.setId(this.id);
        i.setInfo(this.info);
        i.setNombre(this.nombre);
        return i;
