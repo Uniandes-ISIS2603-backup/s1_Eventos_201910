@@ -84,7 +84,7 @@ public class EventoCalificacionResource {
        //CalificacionEntity entity =calificacion.toEntity();
 
 
-
+        System.out.println("LOS DE ACUERDO SON "+calificacion.getDeAcuerdo());
        CalificacionEntity calif = logica.replaceCalificacion(eventosId, calificacionesId,calificacion.toEntity());
                
         return calificacion;
