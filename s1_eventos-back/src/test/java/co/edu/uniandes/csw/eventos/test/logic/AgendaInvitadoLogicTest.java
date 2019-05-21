@@ -35,7 +35,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class AgendaInvitadoLogicTest {
     
-     private PodamFactory factory = new PodamFactoryImpl();
+    private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
     private AgendaInvitadoLogic logica;
