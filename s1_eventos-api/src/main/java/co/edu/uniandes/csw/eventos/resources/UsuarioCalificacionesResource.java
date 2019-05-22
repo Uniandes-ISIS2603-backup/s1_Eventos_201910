@@ -40,6 +40,12 @@ public class UsuarioCalificacionesResource {
     @Inject
     private CalificacionLogic calificacionLogic;
 
+    /**
+     *
+     * @param usuariosId
+     * @param calificacionesId
+     * @return
+     */
     @POST
     @Path("{calificacionesId: \\d+}")
     public CalificacionDTO addCalificacion(@PathParam("usuariosId") Long usuariosId, @PathParam("calificacionesId") Long calificacionesId) {
@@ -52,6 +58,11 @@ public class UsuarioCalificacionesResource {
         return calificacionDTO;
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @return
+     */
     @GET
     public List<CalificacionDetailDTO> getCalificaciones(@PathParam("usuariosId") Long usuariosId) {
         LOGGER.log(Level.INFO, "UsuarioCalificacionesResource getCalificaciones: input: {0}", usuariosId);
@@ -60,6 +71,13 @@ public class UsuarioCalificacionesResource {
         return listaDetailDTOs;
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @param calificacionesId
+     * @return
+     * @throws BusinessLogicException
+     */
     @GET
     @Path("{calificacionesId: \\d+}")
     public CalificacionDetailDTO getCalificacion(@PathParam("usuariosId") Long usuariosId, @PathParam("calificacionesId") Long calificacionesId) throws BusinessLogicException {
@@ -72,6 +90,12 @@ public class UsuarioCalificacionesResource {
         return calificacionDetailDTO;
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @param calificaciones
+     * @return
+     */
     @PUT
     public List<CalificacionDetailDTO> replaceCalificaciones(@PathParam("usuariosId") Long usuariosId, List<CalificacionDetailDTO> calificaciones) {
         LOGGER.log(Level.INFO, "UsuarioCalificacionesResource replaceCalificaciones: input: usuariosId: {0} , calificaciones: {1}", new Object[]{usuariosId, calificaciones});

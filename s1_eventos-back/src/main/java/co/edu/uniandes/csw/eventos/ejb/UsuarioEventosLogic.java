@@ -28,6 +28,12 @@ public class UsuarioEventosLogic {
     @Inject
     private UsuarioPersistence usuarioPersistence;
 
+    /**
+     *
+     * @param eventosId
+     * @param usuariosId
+     * @return
+     */
     public EventoEntity addEvento(Long eventosId, Long usuariosId) {
         LOGGER.log(Level.INFO, "Inicia proceso de agregarle un evento al usuario con id = {0}", usuariosId);
         UsuarioEntity usuarioEntity = usuarioPersistence.find(usuariosId);
@@ -37,11 +43,23 @@ public class UsuarioEventosLogic {
         return eventoEntity;
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @return
+     */
     public List<EventoEntity> getEventos(Long usuariosId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar los eventos asociados al usuario con id = {0}", usuariosId);
         return usuarioPersistence.find(usuariosId).getEventos();
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @param eventosId
+     * @return
+     * @throws BusinessLogicException
+     */
     public EventoEntity getEvento(Long usuariosId, Long eventosId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el evento con id = {0} del usuario con id = " + usuariosId, eventosId);
         List<EventoEntity> eventos = usuarioPersistence.find(usuariosId).getEventos();
@@ -54,6 +72,12 @@ public class UsuarioEventosLogic {
         throw new BusinessLogicException("El evento no está asociado al usuario");
     }
 
+    /**
+     *
+     * @param usuarioId
+     * @param eventos
+     * @return
+     */
     public List<EventoEntity> replaceEventos(Long usuarioId, List<EventoEntity> eventos) {
         LOGGER.log(Level.INFO, "Inicia proceso de reemplazar los eventos asocidos al usuario con id = {0}", usuarioId);
         UsuarioEntity usuarioEntity = usuarioPersistence.find(usuarioId);
@@ -71,6 +95,12 @@ public class UsuarioEventosLogic {
         LOGGER.log(Level.INFO, "Termina proceso de reemplazar los eventos asocidos al usuario con id = {0}", usuarioId);
         return usuarioEntity.getEventos();
     }
+
+    /**
+     *
+     * @param usuariosId
+     * @param eventosId
+     */
     public void removeEvento(Long usuariosId, Long eventosId) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar un evento del usuario con id = {0}", usuariosId);
         UsuarioEntity usuarioEntity = usuarioPersistence.find(usuariosId);

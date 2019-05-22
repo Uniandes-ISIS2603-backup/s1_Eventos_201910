@@ -17,6 +17,9 @@ import javax.persistence.*;
 @Stateless
 public class OrganizadorPersistence {
      
+    /**
+     *
+     */
     @PersistenceContext(unitName = "eventosPU")
     protected EntityManager em;
     

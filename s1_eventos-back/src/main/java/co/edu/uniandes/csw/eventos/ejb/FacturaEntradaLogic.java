@@ -46,26 +46,32 @@ public class FacturaEntradaLogic {
     private static final Logger LOGGER = Logger.getLogger(FacturaEntradaLogic.class.getName());
 
     @Inject
+    private FacturaPersistence facturaPersistence;
+    
+    @Inject
     private EntradaPersistence entradaPersistence;
 
-    @Inject
-    private FacturaPersistence facturaPersistence;
+   
 
     /**
      * Agregar un Entrada a la Factura
      *
-     * @param entradasId El id libro a guardar
      * @param facturasId El id de la Factura en la cual se va a guardar el
      * libro.
+     * @param entrada
      * @return la entrada creado.
      */
-    public EntradaEntity addEntrada(Long entradasId, Long facturasId) {
+    public EntradaEntity addEntrada(Long facturasId, EntradaEntity entrada) {
         LOGGER.log(Level.INFO, "Inicia proceso de agregarle un libro a la Factura con id = {0}", facturasId);
         FacturaEntity facturaEntity = facturaPersistence.find(facturasId);
-        EntradaEntity entradaEntity = entradaPersistence.find(entradasId);
-        entradaEntity.setFactura(facturaEntity);
+        entradaPersistence.create(entrada);
+        facturaEntity.getEntradas().add(entrada);
+        entrada.setFactura(facturaEntity);
+        facturaPersistence.update(facturaEntity);
+       // EntradaEntity entradaEntity = entradaPersistence.find(entradasId);
+        //entradaEntity.setFactura(facturaEntity);
         LOGGER.log(Level.INFO, "Termina proceso de agregarle un libro a la Factura con id = {0}", facturasId);
-        return entradaEntity;
+        return entrada;
     }
 
     /**

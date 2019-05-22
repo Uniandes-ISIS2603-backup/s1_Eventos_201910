@@ -19,6 +19,9 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class FacturaPersistence {
     
+    /**
+     *
+     */
     @PersistenceContext(unitName = "eventosPU")
     protected EntityManager em;
     
@@ -32,6 +35,14 @@ public class FacturaPersistence {
     {
         em.persist(facturaEntity);
         return facturaEntity;
+    }
+    
+    /**
+     *
+     * @param entity
+     */
+    public void update(FacturaEntity entity){
+        em.merge(entity);
     }
     
     /**

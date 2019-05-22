@@ -22,9 +22,17 @@ import javax.persistence.TypedQuery;
 public class UsuarioPersistence {
     private static final Logger LOGGER = Logger.getLogger(UsuarioPersistence.class.getName());
     
+    /**
+     *
+     */
     @PersistenceContext(unitName = "eventosPU")
     protected EntityManager em;
     
+    /**
+     *
+     * @param usuarioEntity
+     * @return
+     */
     public UsuarioEntity create(UsuarioEntity usuarioEntity){
         LOGGER.log(Level.INFO, "Creando un usuario nuevo");
         em.persist(usuarioEntity);
@@ -32,6 +40,10 @@ public class UsuarioPersistence {
         return usuarioEntity;
     }
     
+    /**
+     *
+     * @param id
+     */
     public void delete(Long id) {
         LOGGER.log(Level.INFO, "Borrando usuario con id = {0}", id);
         UsuarioEntity entity = em.find(UsuarioEntity.class, id);
@@ -39,11 +51,20 @@ public class UsuarioPersistence {
         LOGGER.log(Level.INFO, "Saliendo de borrar el usuario con id = {0}", id);
     }
     
+    /**
+     *
+     * @param usuarioID
+     * @return
+     */
     public UsuarioEntity find (Long usuarioID){
         LOGGER.log(Level.INFO, "Buscando usuario con id = {0}", usuarioID);
         return em.find(UsuarioEntity.class, usuarioID);
     }
     
+    /**
+     *
+     * @return
+     */
     public List<UsuarioEntity> findAll(){
         LOGGER.log(Level.INFO, "Buscando todos los usuarios");
         TypedQuery<UsuarioEntity> query = em.createQuery("select u from UsuarioEntity u", UsuarioEntity.class);
@@ -51,6 +72,11 @@ public class UsuarioPersistence {
         return query.getResultList();
     }
     
+    /**
+     *
+     * @param email
+     * @return
+     */
     public UsuarioEntity findByEmail(String email) {
         LOGGER.log(Level.INFO, "Consultando Usuario por email", email);
         TypedQuery query = em.createQuery("Select e From UsuarioEntity e where e.correoElectronico = :email", UsuarioEntity.class);
@@ -68,6 +94,11 @@ public class UsuarioPersistence {
         return result;
     }
     
+    /**
+     *
+     * @param usuarioEntity
+     * @return
+     */
     public UsuarioEntity update(UsuarioEntity usuarioEntity) {
 
         return em.merge(usuarioEntity);

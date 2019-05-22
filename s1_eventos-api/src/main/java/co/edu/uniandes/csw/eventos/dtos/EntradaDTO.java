@@ -60,6 +60,12 @@ public class EntradaDTO implements Serializable {
     /*
         Constructor Entrada DTO
     */
+
+    /**
+     *
+     * @param entradaEntity
+     */
+
     public EntradaDTO(EntradaEntity entradaEntity)
     {
         if(entradaEntity!=null){
@@ -112,6 +118,7 @@ public class EntradaDTO implements Serializable {
         return disponible;
     }
     /**
+     * @return 
        * @reteurn checkIn. Retorna si ya se realizo checkIn, true, de lo contrario false
     **/
     public String isCheckIn() {

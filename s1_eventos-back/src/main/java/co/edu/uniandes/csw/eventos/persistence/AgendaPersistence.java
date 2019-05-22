@@ -19,6 +19,9 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class AgendaPersistence {
     
+    /**
+     *
+     */
     @PersistenceContext(unitName = "eventosPU")
     protected EntityManager em;
     

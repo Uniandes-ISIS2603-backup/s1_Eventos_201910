@@ -26,6 +26,12 @@ public class MultimediaLogic {
     @Inject
     private MultimediaPersistence persistence;
     
+    /**
+     *
+     * @param multimediaEntity
+     * @return
+     * @throws BusinessLogicException
+     */
     public MultimediaEntity createMultimedia(MultimediaEntity multimediaEntity)throws BusinessLogicException{
         LOGGER.log(Level.INFO, "Inicia proceso de creación de multimedia");
         
@@ -58,12 +64,20 @@ public class MultimediaLogic {
         return multimediaEntity;
     }
     
+    /**
+     *
+     * @param multimediaId
+     */
     public void deleteMultimedia(Long multimediaId) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la multimedia con id = {0}", multimediaId);
         persistence.delete(multimediaId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar la multimedia con id = {0}", multimediaId);
     }
     
+    /**
+     *
+     * @return
+     */
     public List<MultimediaEntity> getMultimedias() {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar todas las multimedias");
         List<MultimediaEntity> lista = persistence.findAll();
@@ -71,7 +85,11 @@ public class MultimediaLogic {
         return lista;
     }
     
-    
+    /**
+     *
+     * @param multimediaId
+     * @return
+     */
     public MultimediaEntity getMultimedia(Long multimediaId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar la multimedia con id = {0}", multimediaId);
         MultimediaEntity multimediaEntity = persistence.find(multimediaId);
@@ -82,7 +100,12 @@ public class MultimediaLogic {
         return multimediaEntity;
     }
     
-     
+    /**
+     *
+     * @param multimediaId
+     * @param multimediaEntity
+     * @return
+     */
     public MultimediaEntity updateMultimedia(Long multimediaId, MultimediaEntity multimediaEntity) {
         
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la multimedia con id = {0}", multimediaId);

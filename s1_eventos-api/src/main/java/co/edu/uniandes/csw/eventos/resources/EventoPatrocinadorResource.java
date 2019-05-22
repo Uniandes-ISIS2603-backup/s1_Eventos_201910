@@ -37,7 +37,12 @@ public class EventoPatrocinadorResource {
     @Inject
     private EventoPatrocinadorLogic logica;
     
-    
+    /**
+     *
+     * @param eventosId
+     * @param patrocinadoresId
+     * @return
+     */
     @POST
     @Path("{patrocinadoresId: \\d+}")
     public PatrocinadorDTO addPatrocinador(@PathParam("eventosId") Long eventosId, @PathParam("patrocinadoresId") Long patrocinadoresId) {
@@ -48,12 +53,24 @@ public class EventoPatrocinadorResource {
         return DTO;
     }
 
+    /**
+     *
+     * @param eventosId
+     * @return
+     */
     @GET
     public List<PatrocinadorDTO> getPatrocinadors(@PathParam("eventosId") Long eventosId) {
         List<PatrocinadorDTO> lista = listEntity2DTO(logica.getPatrocinadores(eventosId));
         return lista;
     }
 
+    /**
+     *
+     * @param eventosId
+     * @param patrocinadoresId
+     * @return
+     * @throws BusinessLogicException
+     */
     @Path("{patrocinadoresId: \\d+}")
     public PatrocinadorDTO getPatrocinador(@PathParam("eventosId") Long eventosId, @PathParam("patrocinadoresId") Long patrocinadoresId) throws BusinessLogicException {
         if (pl.getPatrocinador(patrocinadoresId) == null) {
@@ -63,6 +80,12 @@ public class EventoPatrocinadorResource {
         return DTO;
     }
 
+    /**
+     *
+     * @param eventosId
+     * @param patrocinadores
+     * @return
+     */
     @PUT
     public List<PatrocinadorDTO> replacePatrocinadores(@PathParam("eventosId") Long eventosId, List<PatrocinadorDTO> patrocinadores) {
         for (PatrocinadorDTO patrocinador : patrocinadores) {
@@ -75,6 +98,11 @@ public class EventoPatrocinadorResource {
         return lista;
     }
 
+    /**
+     *
+     * @param eventosId
+     * @param patrocinadoresId
+     */
     @DELETE
     @Path("{patrocinadoresId: \\d+}")
     public void removePatrocinador(@PathParam("eventosId") Long eventosId, @PathParam("patrocinadoresId") Long patrocinadoresId) {

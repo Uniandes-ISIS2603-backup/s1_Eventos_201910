@@ -1,0 +1,238 @@
+{
+	"info": {
+		"_postman_id": "ed85d7e6-82d5-46a3-bedb-5cafd470a01e",
+		"name": "EventoCalificacionResourceTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "creara evento 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "694741e6-4794-48fd-b32b-d790963ac9b0",
+						"exec": [
+							"",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_e\",data.id);",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\r\n   \t \"nombre\":\"Debate corrupcion\",\r\n   \t\"descripcion\":\"debate con congresistas sobre la corrupcion\",\r\n   \t\"fechaInicio\":\"2019-04-23T18:25:43.511Z\",\r\n   \t\"fechaFin\":\"2019-04-24T18:25:43.511Z\",\r\n   \t\"detalles\":\"NA\",\r\n   \t\"categoria\":\"deporte\",\r\n   \t\"privado\":false,\r\n   \t\"capacidadMaxima\":200,\r\n   \t\"boletasDisponibles\":200\r\n   }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/eventos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"eventos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear evento 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "694741e6-4794-48fd-b32b-d790963ac9b0",
+						"exec": [
+							"",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_e\",data.id);",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\r\n   \t \"nombre\":\"yoga\",\r\n   \t\"descripcion\":\"sesion de yoga relajante\",\r\n   \t\"fechaInicio\":\"2019-04-23T18:25:43.511Z\",\r\n   \t\"fechaFin\":\"2019-04-24T18:25:43.511Z\",\r\n   \t\"detalles\":\"NA\",\r\n   \t\"categoria\":\"deporte\",\r\n   \t\"privado\":false,\r\n   \t\"capacidadMaxima\":200,\r\n   \t\"boletasDisponibles\":200\r\n   }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/eventos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"eventos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post calificacion",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"comentario\": \"No estoy de acuerdo con la despolitizacion de los mercados globales internos del pais colombinao uribe\",\n        \"deAcuerdo\": \"3\",\n        \"estrellas\": \"3\",\n        \"recomendado\": \"N\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s1_eventos-api/api/eventos/100/calificaciones/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"eventos",
+						"100",
+						"calificaciones",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get calificaciones",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3723f8c7-e94d-4ea7-9e1e-ef39d70b5833",
+						"exec": [
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/eventos/100/calificaciones",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"eventos",
+						"100",
+						"calificaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete calificacion ",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s1_eventos-api/api/eventos/100/calificaciones/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"eventos",
+						"100",
+						"calificaciones",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update calificacion",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"comentario\": \"DJ POPOPOP \",\n        \"deAcuerdo\": \"888\",\n        \"estrellas\": \"1\",\n        \"recomendado\": \"N\"\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/eventos/100/calificaciones/2",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"eventos",
+						"100",
+						"calificaciones",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

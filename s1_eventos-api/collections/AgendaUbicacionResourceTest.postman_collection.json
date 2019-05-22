@@ -1,0 +1,135 @@
+{
+	"info": {
+		"_postman_id": "f0d2d991-a7e0-42fb-be3f-ccfebc7fc550",
+		"name": "AgendaUbicacionResourceTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get ubicacion",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/agendas/100/ubicacion/1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"agendas",
+						"100",
+						"ubicacion",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post ubicacion",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"latitud\":4.55,\n\t\"longitud\":-70.22,\n\t\"nombre\":\"DJ NELSON\"\n\t\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/agendas/400/ubicacion/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"agendas",
+						"400",
+						"ubicacion",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put ubicacion",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"latitud\":4.55,\n\t\"longitud\":-70.22,\n\t\"nombre\":\"GO GO GO DIEGO GO  123\"\n\t\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/agendas/400/ubicacion/1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"agendas",
+						"400",
+						"ubicacion",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete ubicacion",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/agendas/400/ubicacion/14",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"agendas",
+						"400",
+						"ubicacion",
+						"14"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

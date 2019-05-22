@@ -40,6 +40,9 @@ public class OrganizadorDetailDTO extends OrganizadorDTO implements Serializable
     // relación  cero o muchos eventos
     private List<EventoDTO> eventos;
 
+    /**
+     *
+     */
     public OrganizadorDetailDTO() {
         super();
     }

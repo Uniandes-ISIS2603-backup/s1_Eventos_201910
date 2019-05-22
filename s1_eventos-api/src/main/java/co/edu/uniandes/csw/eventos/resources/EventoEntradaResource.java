@@ -42,21 +42,38 @@ public class EventoEntradaResource {
     @Inject
     private EventoEntradaLogic logica;
     
+    /**
+     *
+     * @param eventosId
+     * @param calif
+     * @return
+     * @throws BusinessLogicException
+     */
     @POST
     public EntradaDTO addEntrada(@PathParam("eventosId") Long eventosId, EntradaDTO calif) throws BusinessLogicException{
-       // if (entradaL.find(entradasId) == null) {
-         //   throw new WebApplicationException("El recurso /entradas/" + entradasId + " no existe.", 404);
-        //}
+       
         EntradaDTO DTO = new EntradaDTO(logica.addEntrada(eventosId, calif.toEntity()));
         return DTO;
     }
 
+    /**
+     *
+     * @param eventosId
+     * @return
+     */
     @GET
     public List<EntradaDTO> getEntradas(@PathParam("eventosId") Long eventosId) {
         List<EntradaDTO> lista = listEntity2DTO(logica.getEntradas(eventosId));
         return lista;
     }
 
+    /**
+     *
+     * @param eventosId
+     * @param entradasId
+     * @return
+     * @throws BusinessLogicException
+     */
     @Path("{entradasId: \\d+}")
     public EntradaDTO getEntrada(@PathParam("eventosId") Long eventosId, @PathParam("entradasId") Long entradasId) throws BusinessLogicException {
         if (entradaL.find(entradasId) == null) {
@@ -66,10 +83,16 @@ public class EventoEntradaResource {
         return DTO;
     }
 
+    /**
+     *
+     * @param eventosId
+     * @param entradasId
+     * @param entrada
+     * @return
+     */
     @PUT
     @Path("{entradasId: \\d+}")
     public EntradaDTO replaceEntrada(@PathParam("eventosId") Long eventosId, @PathParam("entradasId") Long entradasId, EntradaDTO entrada) {
-        System.out.println("LLEGA EL PELUDOOOLKOLOLOLO");
         if(entradaL.find(entradasId)==null){
                             throw new WebApplicationException("El recurso /entradas/" + entrada.getId() + " no existe.", 404);
 
@@ -81,6 +104,11 @@ public class EventoEntradaResource {
         return entrada;
     }
 
+    /**
+     *
+     * @param eventosId
+     * @param entradasId
+     */
     @DELETE
     @Path("{entradasId: \\d+}")
     public void removeEntrada(@PathParam("eventosId") Long eventosId, @PathParam("entradasId") Long entradasId) {

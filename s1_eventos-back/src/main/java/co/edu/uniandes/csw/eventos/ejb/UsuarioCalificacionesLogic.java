@@ -28,6 +28,12 @@ public class UsuarioCalificacionesLogic {
     @Inject
     private UsuarioPersistence usuarioPersistence;
 
+    /**
+     *
+     * @param calificacionesId
+     * @param usuariosId
+     * @return
+     */
     public CalificacionEntity addCalificacion(Long calificacionesId, Long usuariosId) {
         LOGGER.log(Level.INFO, "Inicia proceso de agregarle una calificacion al usuario con id = {0}", usuariosId);
         UsuarioEntity usuarioEntity = usuarioPersistence.find(usuariosId);
@@ -37,11 +43,23 @@ public class UsuarioCalificacionesLogic {
         return calificacionEntity;
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @return
+     */
     public List<CalificacionEntity> getCalificaciones(Long usuariosId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar las calificaciones asociadas al usuario con id = {0}", usuariosId);
         return usuarioPersistence.find(usuariosId).getCalificaciones();
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @param calificacionesId
+     * @return
+     * @throws BusinessLogicException
+     */
     public CalificacionEntity getCalificacion(Long usuariosId, Long calificacionesId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar la calificacion con id = {0} del usuario con id = " + usuariosId, calificacionesId);
         List<CalificacionEntity> calificaciones = usuarioPersistence.find(usuariosId).getCalificaciones();
@@ -54,6 +72,12 @@ public class UsuarioCalificacionesLogic {
         throw new BusinessLogicException("La calificacion no está asociada al usuario");
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @param calificaciones
+     * @return
+     */
     public List<CalificacionEntity> replaceCalificaciones(Long usuariosId, List<CalificacionEntity> calificaciones) {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar el usuario con id = {0}", usuariosId);
         UsuarioEntity usuarioEntity = usuarioPersistence.find(usuariosId);

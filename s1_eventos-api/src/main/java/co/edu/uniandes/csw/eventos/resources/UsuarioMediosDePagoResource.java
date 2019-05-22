@@ -37,6 +37,12 @@ public class UsuarioMediosDePagoResource {
     @Inject
     private MedioDePagoLogic medioDePagoLogic;
 
+    /**
+     *
+     * @param usuariosId
+     * @param mediosDePagoId
+     * @return
+     */
     @POST
     @Path("{mediosDePagoId: \\d+}")
     public MedioDePagoDTO addMedioDePago(@PathParam("usuariosId") Long usuariosId, @PathParam("mediosDePagoId") Long mediosDePagoId) {
@@ -49,6 +55,11 @@ public class UsuarioMediosDePagoResource {
         return medioDePagoDTO;
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @return
+     */
     @GET
     public List<MedioDePagoDTO> getMediosDePago(@PathParam("usuariosId") Long usuariosId) {
         LOGGER.log(Level.INFO, "UsuarioMediosDePagoResource getMediosDePago: input: {0}", usuariosId);
@@ -57,6 +68,13 @@ public class UsuarioMediosDePagoResource {
         return listaDetailDTOs;
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @param mediosDePagoId
+     * @return
+     * @throws BusinessLogicException
+     */
     @GET
     @Path("{mediosDePagoId: \\d+}")
     public MedioDePagoDTO getMedioDePago(@PathParam("usuariosId") Long usuariosId, @PathParam("mediosDePagoId") Long mediosDePagoId) throws BusinessLogicException {
@@ -82,6 +100,11 @@ public class UsuarioMediosDePagoResource {
 //        return listaDetailDTOs;
 //    }
 
+    /**
+     * Convirete a DTO
+     * @param entityList
+     * @return 
+     */
     private List<MedioDePagoDTO> mediosDePagoListEntity2DTO(List<MedioDePagoEntity> entityList) {
         List<MedioDePagoDTO> list = new ArrayList();
         for (MedioDePagoEntity entity : entityList) {
@@ -89,7 +112,12 @@ public class UsuarioMediosDePagoResource {
         }
         return list;
     }
-    
+
+    /**
+     * Convierte a Entity
+     * @param dtos
+     * @return 
+     */
     private List<MedioDePagoEntity> mediosDePagoListDTO2Entity(List<MedioDePagoDTO> dtos) {
         List<MedioDePagoEntity> list = new ArrayList<>();
         for (MedioDePagoDTO dto : dtos) {

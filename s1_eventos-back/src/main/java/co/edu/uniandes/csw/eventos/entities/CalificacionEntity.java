@@ -76,23 +76,34 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
     /**
      * Estrellas de la calificacion
      */
-    private String estrellas;
+    public String estrellas;
     /**
      * Comentarios de la calificacion
      */
     @Column( length = 3500)
-    private String comentarios;
+    public String comentarios;
     /**
      * Estado de recomendado de la calificacion
      */
-    private String recomendado;
+    public String recomendado;
     
-    private String deAcuerdo;
+    /**
+     *
+     */
+    public String deAcuerdo;
 
+    /**
+     *
+     * @return
+     */
     public String getDeAcuerdo() {
         return deAcuerdo;
     }
 
+    /**
+     *
+     * @param deAcuerdo
+     */
     public void setDeAcuerdo(String deAcuerdo) {
         this.deAcuerdo = deAcuerdo;
     }

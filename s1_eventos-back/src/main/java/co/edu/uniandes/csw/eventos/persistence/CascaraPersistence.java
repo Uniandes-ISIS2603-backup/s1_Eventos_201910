@@ -39,6 +39,9 @@ public class CascaraPersistence {
 
     private static final Logger LOGGER = Logger.getLogger(CascaraPersistence.class.getName());
 
+    /**
+     *
+     */
     @PersistenceContext(unitName = "eventosPU")
     protected EntityManager em;
 }

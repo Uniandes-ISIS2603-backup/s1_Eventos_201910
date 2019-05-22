@@ -41,6 +41,7 @@ public class CalificacionLogic {
    /**
     * Crea la calificacion
     * @param calificacion
+     * @param idEvento
     * @return
     * @throws BusinessLogicException 
     */
