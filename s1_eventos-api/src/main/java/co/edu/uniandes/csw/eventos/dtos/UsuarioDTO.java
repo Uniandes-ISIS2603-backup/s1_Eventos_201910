@@ -44,86 +44,62 @@ public class UsuarioDTO implements Serializable{
     }
 
     /**
-     * @return the id
+     * @return ID del usuario
      */
-    public Long getId() {
-        return id;
-    }
+    public Long getId() {return id;}
 
     /**
-     * @param id the id to set
+     * @param id ID a asignar
      */
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public void setId(Long id) {this.id = id;}
 
     /**
-     * @return the correoElectronico
+     * @return contraseña del usuario
      */
-    public String getCorreoElectronico() {
-        return correoElectronico;
-    }
+    public String getContrasenia() {return contrasenia;}
 
     /**
-     * @param correoElectronico the correoElectronico to set
+     * @param contrasenia la contraseña a asignar
      */
-    public void setCorreoElectronico(String correoElectronico) {
-        this.correoElectronico = correoElectronico;
-    }
+    public void setContrasenia(String contrasenia) {this.contrasenia = contrasenia;}
+    
+    /**
+     * @return Correo del usuario
+     */
+    public String getCorreoElectronico() {return correoElectronico;}
 
     /**
-     * @return the contrasenia
+     * @param correoElectronico el correo a asignar
      */
-    public String getContrasenia() {
-        return contrasenia;
-    }
+    public void setCorreoElectronico(String correoElectronico) {this.correoElectronico = correoElectronico;}
 
     /**
-     * @param contrasenia the contrasenia to set
+     * @return latitud del usuario
      */
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
-    }
+    public Double getLatitud() {return latitud;}
 
     /**
-     * @return the longitud
+     * @param latitud latitud a asignar
      */
-    public Double getLongitud() {
-        return longitud;
-    }
+    public void setLatitud(Double latitud) {this.latitud = latitud;}
+    
+    /**
+     * @return longitud del usuario
+     */
+    public Double getLongitud() {return longitud;}
 
     /**
-     * @param longitud the longitud to set
+     * @param longitud longitud a asignar
      */
-    public void setLongitud(Double longitud) {
-        this.longitud = longitud;
-    }
+    public void setLongitud(Double longitud) {this.longitud = longitud;}
 
     /**
-     * @return the latitud
+     * @return si el usuario es unialpino
      */
-    public Double getLatitud() {
-        return latitud;
-    }
+    public Boolean getUnialpino() {return unialpino;}
 
     /**
-     * @param latitud the latitud to set
+     * @param unialpino asignar si es unialpino
      */
-    public void setLatitud(Double latitud) {
-        this.latitud = latitud;
-    }
-
-    /**
-     * @return the unialpino
-     */
-    public Boolean getUnialpino() {
-        return unialpino;
-    }
-
-    /**
-     * @param unialpino the unialpino to set
-     */
-    public void setUnialpino(Boolean unialpino) {
-        this.unialpino = unialpino;
-    }
+    public void setUnialpino(Boolean unialpino) {this.unialpino = unialpino;}
 }

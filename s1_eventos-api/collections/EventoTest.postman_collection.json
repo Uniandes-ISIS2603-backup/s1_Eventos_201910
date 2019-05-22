@@ -1,7 +1,6 @@
-
 {
 	"info": {
-		"_postman_id": "6e89ed15-3d98-43be-8ddc-30484154d1b6",
+		"_postman_id": "2412d873-21be-46a1-ac53-2722483acde7",
 		"name": "EventoTest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -15,7 +14,7 @@
 						"id": "694741e6-4794-48fd-b32b-d790963ac9b0",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_o\",data.id);",
+							"postman.setGlobalVariable(\"new_id_e\",data.id);",
 							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
 							"console.log(data.id);"
 						],
@@ -28,12 +27,14 @@
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json"
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"nombre\": \"Empresas Públicas de Medellín E.S.P\",\n        \"telefono\": \"44 44 115\",\n        \"correoElectronico\": \"epm@epm.com.co\"\n    }"
+					"raw": "    {\n        \"nombre\": \"Evento1\",\n        \"descripcion\": \"experto habla de la importancia de los videojuegos en la juventud\",\n\t\t \"detalles\": \"se recomienda uso de portatil\",\n        \"categoria\": \"Informatica\",\n        \"fechainicio\": \"2020-02-23\",\n        \"fechaFin\": \"2020-02-23\",\n        \"privado\":0, \n        \"capacidadMaxima\":50, \n        \"boletasDisponibles\": 50\n    }"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/eventos",
@@ -68,10 +69,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/eventos",
 					"protocol": "http",
@@ -107,10 +104,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/eventos/{{new_id_o}}",
 					"protocol": "http",
@@ -146,10 +139,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/eventos/0",
 					"protocol": "http",
@@ -193,10 +182,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"nombre\": \"Empresas Públicas de Medellín E.S.P\",\n        \"telefono\": \"44 44 115\",\n        \"correoElectronico\": \"epm@epm.com.co\"\n    }"
+					"raw": "    {\n       \"nombre\": \"Evento2\",\n        \"descripcion\": \"experto habla de la importancia de los videojuegos en la juventud\",\n\t\t \"detalles\": \"se recomienda uso de portatil\",\n        \"categoria\": \"Informatica\",\n        \"fechainicio\": \"2020-02-23\",\n        \"fechaFin\": \"2020-02-23\",\n        \"privado\":0, \n        \"capacidadMaxima\":50, \n        \"boletasDisponibles\": 50\n    }"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/eventos/{{new_id_o}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/eventos/{{new_id_e}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -206,7 +195,7 @@
 						"s1_eventos-api",
 						"api",
 						"eventos",
-						"{{new_id_o}}"
+						"{{new_id_e}}"
 					]
 				}
 			},
@@ -237,7 +226,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"nombre\": \"Empresas Públicas de Medellín E.S.P\",\n        \"telefono\": \"44 44 115\",\n        \"correoElectronico\": \"epm@epm.com.co\"\n    }"
+					"raw": "    {\n       \"nombre\": \"Evento1\",\n        \"descripcion\": \"experto habla de la importancia de los videojuegos en la juventud\",\n\t\t \"detalles\": \"se recomienda uso de portatil\",\n        \"categoria\": \"Informatica\",\n        \"fechainicio\": \"2020-02-23\",\n        \"fechaFin\": \"2020-02-23\",\n        \"privado\":0, \n        \"capacidadMaxima\":50, \n        \"boletasDisponibles\": 50\n    }"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/eventos/0",
@@ -317,7 +306,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/eventos/{{new_id_o}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/eventos/{{new_id_e}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -327,7 +316,7 @@
 						"s1_eventos-api",
 						"api",
 						"eventos",
-						"{{new_id_o}}"
+						"{{new_id_e}}"
 					]
 				}
 			},

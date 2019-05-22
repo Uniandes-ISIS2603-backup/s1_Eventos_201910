@@ -1,32 +1,23 @@
 {
 	"info": {
-		"_postman_id": "077bcbc0-4077-49f6-a269-89ed9645cbfa",
-		"name": "MedioDePagoResourceTest",
+		"_postman_id": "5e3784ae-c98b-4a3c-a621-a21e6db627ed",
+		"name": "Agenda Test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "MediosDePago",
+			"name": "Crear Agenda",
 			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "7afd06c5-bad3-4774-8989-7317a612eb3b",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				},
 				{
 					"listen": "test",
 					"script": {
-						"id": "29db61d3-6901-4847-8fa5-d8e59a0134e5",
+						"id": "694741e6-4794-48fd-b32b-d790963ac9b0",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_m\",data.id);",
+							"postman.setGlobalVariable(\"new_id_ag\",data.id);",
 							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
-							"console.log(data.id);"
+							"console.log(data.id);",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -37,17 +28,15 @@
 				"header": [
 					{
 						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"value": "application/json"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n        \"numero\": \"9090121267675432\",\n        \"titular\": \"JONATAN TIRATE UNPASO\",\n        \"codigoDeSeguridad\": \"181\",\n        \"fechaDeExpiracion\": \"2020-07-24T00:00:00-05:00\"\n}"
+					"raw": "    {\n    \t\"id\": 2,\n\t\t\"horafinal\": \"2020-02-16\", \n\t\t\"horainicio\": \"2020-02-15\",\n\t\t\"actividad\": \"juegos\"\n\n    }"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/agendas",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -56,47 +45,34 @@
 					"path": [
 						"s1_eventos-api",
 						"api",
-						"mediosDePago"
+						"agendas"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "MediosDePago",
+			"name": "Obtener todas las agendas",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "f2709152-9a0d-48c5-8ce6-ac4648e6dc43",
+						"id": "ffc24813-89a3-47fa-9d38-241d31b1e7c3",
 						"exec": [
 							"var data= JSON.parse(responseBody);",
 							"tests[\"No genera error en el Gell All\"] = responseCode.code === 200;",
-							"tests[\"patrocinadores count\"] = data.length >= 1;"
+							"tests[\"agenda count\"] = data.length >= 0;",
+							"pm.globals.unset(\"variable_key\");"
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
+				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/agendas",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -105,19 +81,19 @@
 					"path": [
 						"s1_eventos-api",
 						"api",
-						"mediosDePago"
+						"agendas"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "MediosDePago",
+			"name": "Obtener todas las agendas",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "b3aec113-db1b-4d4b-98c4-0e03742e0b91",
+						"id": "20acc8ea-cadf-4ea4-b92e-f4d8218ce963",
 						"exec": [
 							"console.log(responseBody);",
 							"var data = JSON.parse(responseBody);",
@@ -131,7 +107,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/{{new_id_m}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/agendas/{{new_id_ag}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -140,23 +116,23 @@
 					"path": [
 						"s1_eventos-api",
 						"api",
-						"mediosDePago",
-						"{{new_id_m}}"
+						"agendas",
+						"{{new_id_ag}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Obtener un medio de pago que no existe",
+			"name": "Obtener una agenda que no existe",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "39dc353d-ae0a-41c6-99a5-89218360c4d3",
 						"exec": [
-							"tests[\"No se deberia obtener un medioDePago con un id que no existe\"] = responseCode.code === 404;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /medioDePago/0 no existe.\");"
+							"tests[\"No se deberia obtener una agenda con un id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /Agendaes/0 no existe.\");"
 						],
 						"type": "text/javascript"
 					}
@@ -166,7 +142,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/0",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/agendas/0",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -175,7 +151,7 @@
 					"path": [
 						"s1_eventos-api",
 						"api",
-						"mediosDePago",
+						"agendas",
 						"0"
 					]
 				}
@@ -183,62 +159,16 @@
 			"response": []
 		},
 		{
-			"name": "MediosDePago",
+			"name": "Editar una agenda",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "88a777b5-3ca2-4c0b-ae90-df4db5477754",
+						"id": "68dc8b6c-6d16-40b8-8f51-b61db7113074",
 						"exec": [
 							"console.log(responseBody);",
 							"var data = JSON.parse(responseBody);",
 							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n        \"codigoDeSeguridad\": \"019\",\n        \"fechaDeExpiracion\": \"2020-07-24T00:00:59-05:00\",\n        \"numero\": \"4092907665439090\",\n        \"titular\": \"JUAN DAVID zhendong\"\n    }"
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/{{new_id_m}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_eventos-api",
-						"api",
-						"mediosDePago",
-						"{{new_id_m}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Editar un medio de pago que no existe",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "15a70f62-2a66-469a-9ca6-d1125b0c8774",
-						"exec": [
-							"tests[\"No se deberia actualizar un meidioDePago con id que no existe\"] = responseCode.code === 404;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /meidioDePago/0 no existe.\");"
 						],
 						"type": "text/javascript"
 					}
@@ -254,10 +184,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n        \"codigoDeSeguridad\": \"019\",\n        \"fechaDeExpiracion\": \"2020-07-24T00:00:59-05:00\",\n        \"numero\": \"4092907665439090\",\n        \"titular\": \"JUAN DAVID zhendong\"\n    }"
+					"raw": "    {\n    \t\"id\": 2,\n\t\t\"horafinal\": \"2020-02-16\", \n\t\t\"horainicio\": \"2020-02-15\",\n\t\t\"actividad\": \"estudio\"\n    }"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/0",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/agendas/{{new_id_ag}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -266,7 +196,51 @@
 					"path": [
 						"s1_eventos-api",
 						"api",
-						"mediosDePago",
+						"agendas",
+						"{{new_id_ag}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una agenda que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "15a70f62-2a66-469a-9ca6-d1125b0c8774",
+						"exec": [
+							"tests[\"No se deberia actualizar una agenda con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /Agendaes/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n\t\t\"horafinal\": \"2020-02-16\", \n\t\t\"horainicio\": \"2020-02-15\",\n\t\t\"actividad\": \"estudio\"\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/agendas/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"agendas",
 						"0"
 					]
 				}
@@ -274,7 +248,7 @@
 			"response": []
 		},
 		{
-			"name": "Elminiar medio de pago",
+			"name": "Borrar agenda",
 			"event": [
 				{
 					"listen": "test",
@@ -295,7 +269,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/{{new_id_m}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/agendas/{{new_id_ag}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -304,23 +278,23 @@
 					"path": [
 						"s1_eventos-api",
 						"api",
-						"mediosDePago",
-						"{{new_id_m}}"
+						"agendas",
+						"{{new_id_ag}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Eliminar medio de pago que no existe",
+			"name": "Borrar agenda que no existe",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "c0905623-e468-4838-b24e-56e8402ea65c",
 						"exec": [
-							"tests[\"No se deberia borrar un mediosDePago con un id que no existe\"] = responseCode.code === 404;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /mediosDePago/0 no existe.\");"
+							"tests[\"No se deberia borrar una agenda con un id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /Agendaes/0 no existe.\");"
 						],
 						"type": "text/javascript"
 					}
@@ -334,7 +308,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/0",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/agendas/0",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -343,7 +317,7 @@
 					"path": [
 						"s1_eventos-api",
 						"api",
-						"mediosDePago",
+						"agendas",
 						"0"
 					]
 				}

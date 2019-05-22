@@ -26,64 +26,46 @@ public class PatrocinadorEntity extends BaseEntity implements Serializable{
     private String imagen;
     private String rango;
     private String descripcion;
-     
+
     /**
-     * @return the nombre
+     * @return El rango del patrocinador
      */
-    public String getNombre()
-    {
-        return nombre;
-    }
+    public String getRango() {return rango;}
+
+    /**
+     * @param rango El rango a asignar
+     */
+    public void setRango(String rango) {this.rango = rango;}
+
+    /**
+     * @return Descripción del patrocinador
+     */
+    public String getDescripcion() {return descripcion;}
+
+    /**
+     * @param descripcion la descripción a asignar
+     */
+    public void setDescripcion(String descripcion) {this.descripcion = descripcion;}
     
     /**
-     * @param nombre the nombre to set
+     * @return Nombre del Patrocinador
      */
-    public void setNombre(String nombre)
-    {
-        this.nombre = nombre;
-    }
+    public String getNombre(){return nombre;}
     
     /**
-     * @return the imagen
+     * @param nombre El nombre a asignar
      */
-    public String getImagen() {
-        return imagen;
-    }
+    public void setNombre(String nombre){this.nombre = nombre;}
+    
+    /**
+     * @return Imagen del Patrocinador
+     */
+    public String getImagen() {return imagen;}
 
     /**
-     * @param imagen the imagen to set
+     * @param imagen La imagen a asignar
      */
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
-
-    /**
-     * @return the rango
-     */
-    public String getRango() {
-        return rango;
-    }
-
-    /**
-     * @param rango the rango to set
-     */
-    public void setRango(String rango) {
-        this.rango = rango;
-    }
-
-    /**
-     * @return the descripcion
-     */
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    /**
-     * @param descripcion the descripcion to set
-     */
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+    public void setImagen(String imagen) {this.imagen = imagen;}
     
     /**
      * @return the eventos
