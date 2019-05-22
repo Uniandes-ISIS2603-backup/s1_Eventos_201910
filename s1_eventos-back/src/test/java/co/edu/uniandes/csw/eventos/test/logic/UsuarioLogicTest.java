@@ -43,7 +43,7 @@ public class UsuarioLogicTest {
     @Inject
     private UserTransaction utx;
 
-    private List<UsuarioEntity> data = new ArrayList<UsuarioEntity>();
+    private List<UsuarioEntity> data = new ArrayList<>();
 
     @Deployment
     public static JavaArchive createDeployment() {
@@ -235,5 +235,43 @@ public class UsuarioLogicTest {
         usuarioLogic.deleteUsuario(entity.getId());
         UsuarioEntity deleted = em.find(UsuarioEntity.class, entity.getId());
         Assert.assertNull(deleted);
+    }
+    
+    /**
+     * Prueba para actualizar un usuario.
+     */
+    @Test
+    public void updateUsuarioTest() {
+        UsuarioEntity entity = data.get(0);
+        UsuarioEntity pojoEntity = factory.manufacturePojo(UsuarioEntity.class);
+
+        pojoEntity.setId(entity.getId());
+
+        usuarioLogic.updateUsuario(pojoEntity.getId(), pojoEntity);
+
+        UsuarioEntity resp = em.find(UsuarioEntity.class, entity.getId());
+
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+        Assert.assertEquals(pojoEntity.getCorreoElectronico(), resp.getCorreoElectronico());
+        Assert.assertEquals(pojoEntity.getContrasenia(), resp.getContrasenia());
+        Assert.assertEquals(pojoEntity.getUnialpino(), resp.getUnialpino());
+    }
+    
+       /**
+     * Prueba para consultar la lista de usuarios.
+     */
+    @Test
+    public void getUsuariosTest() {
+        List<UsuarioEntity> list = usuarioLogic.getUsuarios();
+        Assert.assertEquals(data.size(), list.size());
+        for (UsuarioEntity entity : list) {
+            boolean found = false;
+            for (UsuarioEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
     }
 }

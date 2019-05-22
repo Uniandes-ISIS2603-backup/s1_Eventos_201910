@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.eventos.ejb.EventoAgendaLogic;
 import co.edu.uniandes.csw.eventos.ejb.AgendaLogic;
 import co.edu.uniandes.csw.eventos.entities.EventoEntity;
 import co.edu.uniandes.csw.eventos.entities.AgendaEntity;
+import co.edu.uniandes.csw.eventos.entities.UbicacionEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.eventos.persistence.EventoPersistence;
 import java.util.ArrayList;
@@ -164,6 +165,35 @@ public class EventoAgendaLogicTest {
         for (AgendaEntity aNuevaLista : nuevaLista) {
             Assert.assertTrue(agendaEntities.contains(aNuevaLista));
         }
+    }
+    
+     /**
+     * Prueba para asociar una agenda a un evento.
+     *
+     *
+     * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
+     */
+    @Test
+    public void addAgendaTest() throws BusinessLogicException {
+        AgendaEntity newAgenda = factory.manufacturePojo(AgendaEntity.class);
+        agendaLogic.createAgenda(newAgenda);
+        AgendaEntity agendaEntity = eventoAgendasLogic.addAgenda(evento.getId(), newAgenda.getId());
+        Assert.assertNotNull(agendaEntity);
+
+        Assert.assertEquals(agendaEntity.getId(), newAgenda.getId());
+        Assert.assertEquals(agendaEntity.getNombre(), newAgenda.getNombre());        
+    }
+    
+    /**
+     * Prueba desasociar un libro con un autor.
+     *
+     */
+    @Test
+    public void removeAgendaTest() {
+        for (AgendaEntity agenda : data) {
+            eventoAgendasLogic.removeAgenda(evento.getId(), agenda.getId());
+        }
+        Assert.assertTrue(eventoAgendasLogic.getAgendas(evento.getId()).size() == 3);
     }
     
 }

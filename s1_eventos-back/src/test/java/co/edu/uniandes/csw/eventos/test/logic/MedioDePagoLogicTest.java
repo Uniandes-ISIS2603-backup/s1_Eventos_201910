@@ -113,9 +113,6 @@ public class MedioDePagoLogicTest {
             em.persist(entity);
             data.add(entity);
         }
-        MedioDePagoEntity organizador = data.get(2);
-       // EventoEntity entity = factory.manufacturePojo(EventoEntity.class);
-        //em.persist(entity);
     }
     
     /**
@@ -177,5 +174,23 @@ public class MedioDePagoLogicTest {
         medioDePagoLogic.deleteMedioDePago(entity.getId());
         MedioDePagoEntity deleted = em.find(MedioDePagoEntity.class, entity.getId());
         Assert.assertNull(deleted);
+    }
+    
+        /**
+     * Prueba para consultar la lista de MediosDePago.
+     */
+    @Test
+    public void getMediosDePagoTest() {
+        List<MedioDePagoEntity> list = medioDePagoLogic.findAll();
+        Assert.assertEquals(data.size(), list.size());
+        for (MedioDePagoEntity entity : list) {
+            boolean found = false;
+            for (MedioDePagoEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
     }
 }

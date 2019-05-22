@@ -168,4 +168,36 @@ public class EventoMultimediaLogicTest {
             Assert.assertTrue(multimediaEntities.contains(aNuevaLista));
         }
     }
+    
+    /**
+     * Prueba para asociar una agenda a un evento.
+     *
+     *
+     * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
+     */
+    @Test
+    public void addMultiemdiaTest() throws BusinessLogicException {
+        MultimediaEntity newMultimedia = factory.manufacturePojo(MultimediaEntity.class);
+        newMultimedia.setNombre("Prueba-Multimedia00");
+        newMultimedia.setTipo("TipoPrueba00");
+        newMultimedia.setUrl("https://uniandes.edu.co/desarrollo/test.txt");
+        multimediaLogic.createMultimedia(newMultimedia);
+        MultimediaEntity agendaEntity = eventoMultimediasLogic.addMultimedia(evento.getId(), newMultimedia.getId());
+        Assert.assertNotNull(agendaEntity);
+
+        Assert.assertEquals(agendaEntity.getId(), newMultimedia.getId());
+        Assert.assertEquals(agendaEntity.getNombre(), newMultimedia.getNombre());        
+    }
+    
+    /**
+     * Prueba desasociar un evento con una multimedia.
+     *
+     */
+    @Test
+    public void removeMultimediaTest() {
+        for (MultimediaEntity agenda : data) {
+            eventoMultimediasLogic.removeMultimedia(evento.getId(), agenda.getId());
+        }
+        Assert.assertTrue(eventoMultimediasLogic.getMultimediaes(evento.getId()).size() == 3);
+    }
 }
