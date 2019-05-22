@@ -76,16 +76,16 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
     /**
      * Estrellas de la calificacion
      */
-    public String estrellas;
+    private String estrellas;
     /**
      * Comentarios de la calificacion
      */
     @Column( length = 3500)
-    public String comentarios;
+    private String comentarios;
     /**
      * Estado de recomendado de la calificacion
      */
-    public String recomendado;
+    private String recomendado;
     
     /**
      *
