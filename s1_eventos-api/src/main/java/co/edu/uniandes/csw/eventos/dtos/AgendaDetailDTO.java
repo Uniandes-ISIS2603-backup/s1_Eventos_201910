@@ -20,10 +20,17 @@ public class AgendaDetailDTO extends AgendaDTO implements Serializable {
     private UbicacionDTO ubicacion;
     private List<InvitadoEspecialDTO> invitados;
     
+    /**
+     *
+     */
     public AgendaDetailDTO() {
         super();
     }
     
+    /**
+     *
+     * @param agenda
+     */
     public AgendaDetailDTO(AgendaEntity agenda) {
 
         super(agenda);
@@ -44,6 +51,10 @@ public class AgendaDetailDTO extends AgendaDTO implements Serializable {
         }
     }
     
+    /**
+     *
+     * @return
+     */
     public AgendaEntity toEntity(){
         
         AgendaEntity ent = super.toEntity();

@@ -57,8 +57,9 @@ public class FacturaResource {
     private static final Logger LOGGER = Logger.getLogger(FacturaResource.class.getName());
 
     @Inject
-    FacturaLogic facturaLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
-
+    private FacturaLogic facturaLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
+    
+    
     /**
      * Crea una nueva Factura con la informacion que se recibe en el cuerpo de
      * la petición y se regresa un objeto identico con un id auto-generado por
@@ -120,4 +121,15 @@ public class FacturaResource {
         }
         return list;
     }
+    
+    @Path("{facturasId: \\d+}/entradas")
+    public Class<FacturaEntradaResource> getFacturaEntradaResource(@PathParam("facturasId") Long facturasId){
+        System.out.println("REBOTA REBOTA");
+        if(facturaLogic.getFactura(facturasId)==null){
+            throw new WebApplicationException("El recurso que busca no existe, perry",404);
+        }
+        System.out.println("LO MANDA O NO");
+        return FacturaEntradaResource.class;
+    }
+    
 }

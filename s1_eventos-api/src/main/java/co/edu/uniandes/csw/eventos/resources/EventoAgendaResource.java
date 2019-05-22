@@ -36,6 +36,13 @@ public class EventoAgendaResource {
      
     @Inject
     private EventoAgendaLogic logica;
+
+    /**
+     *
+     * @param eventosId
+     * @param agendasId
+     * @return
+     */
     @POST
     @Path("{agendasId: \\d+}")
     public AgendaDTO addAgenda(@PathParam("eventosId") Long eventosId, @PathParam("agendasId") Long agendasId) {
@@ -45,11 +52,25 @@ public class EventoAgendaResource {
         AgendaDTO DTO = new AgendaDTO(logica.addAgenda(eventosId, agendasId));
         return DTO;
     }
+
+    /**
+     *
+     * @param eventosId
+     * @return
+     */
     @GET
     public List<AgendaDTO> getAgendas(@PathParam("eventosId") Long eventosId) {
         List<AgendaDTO> lista = listEntity2DTO(logica.getAgendas(eventosId));
         return lista;
     }
+
+    /**
+     *
+     * @param eventosId
+     * @param agenadsId
+     * @return
+     * @throws BusinessLogicException
+     */
     @Path("{agenadsId: \\d+}")
     public AgendaDTO getAgenda(@PathParam("eventosId") Long eventosId, @PathParam("agenadsId") Long agenadsId)throws BusinessLogicException {
         if (al.getAgenda(agenadsId) == null) {
@@ -59,6 +80,12 @@ public class EventoAgendaResource {
         return DTO;
     }
 
+    /**
+     *
+     * @param eventosId
+     * @param agendas
+     * @return
+     */
     @PUT
     public List<AgendaDTO> replaceAgendas(@PathParam("eventosId") Long eventosId, List<AgendaDTO> agendas) {
         for (AgendaDTO agenda : agendas) {
@@ -71,7 +98,11 @@ public class EventoAgendaResource {
         return lista;
     }
 
-    
+    /**
+     *
+     * @param eventosId
+     * @param agendaId
+     */
     @DELETE
     @Path("{agendas: \\d+}")
     public void removeAgenda(@PathParam("eventosId") Long eventosId, @PathParam("agendasId") Long agendaId) {

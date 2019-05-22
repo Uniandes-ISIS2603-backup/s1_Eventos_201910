@@ -20,9 +20,17 @@ public class UsuarioDTO implements Serializable{
     private Double latitud;
     private Boolean unialpino;
     
+    /**
+     *
+     */
     public UsuarioDTO(){
         
     }
+
+    /**
+     *
+     * @param usuarioEntity
+     */
     public UsuarioDTO(UsuarioEntity usuarioEntity){
         if(usuarioEntity != null){
             this.id = usuarioEntity.getId();
@@ -33,6 +41,11 @@ public class UsuarioDTO implements Serializable{
             this.unialpino = usuarioEntity.getUnialpino();
         }
     }
+
+    /**
+     *
+     * @return
+     */
     public UsuarioEntity toEntity(){
         UsuarioEntity usuarioEntity = new UsuarioEntity();
         usuarioEntity.setCorreoElectronico(this.getCorreoElectronico());

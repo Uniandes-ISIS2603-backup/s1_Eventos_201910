@@ -1,0 +1,81 @@
+{
+	"info": {
+		"_postman_id": "14a45240-207f-440e-9a83-177efc984602",
+		"name": "FacturaEntradaResourceTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get facturaEntradas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/facturas/100/entradas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"facturas",
+						"100",
+						"entradas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post facturaEntrada",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n            \"QR\": \"QR77\",\n            \"checkIn\": \"Y\",\n            \"descripcion\": \"FUNCIONA EL ADD ENTRADA FAC\",\n            \"disponible\": \"Y\",\n            \"locacion\": \"Preferencial A\",\n            \"numero\": \"123\",\n            \"precio\": \"1000\",\n            \"reservado\": \"Y\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s1_eventos-api/api/facturas/100/entradas/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"facturas",
+						"100",
+						"entradas",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

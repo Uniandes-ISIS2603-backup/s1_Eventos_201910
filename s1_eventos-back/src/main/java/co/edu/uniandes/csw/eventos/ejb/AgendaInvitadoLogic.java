@@ -54,10 +54,10 @@ public class AgendaInvitadoLogic {
     /**
      * Agregar un InvitadoEspecial a la Agenda
      *
-     * @param invitadoEspecialsId El id libro a guardar
-     * @param agendasId El id de la Agenda en la cual se va a guardar el
-     * libro.
+     * @param agendaId
+     * @param invitadoEspecial
      * @return la InvitadoEspecial creado.
+     * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
      */
     public InvitadoEspecialEntity addInvitadoEspecial(Long agendaId, InvitadoEspecialEntity invitadoEspecial) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de agregarle un libro a la Agenda con id = {0}", agendaId);
@@ -133,6 +133,11 @@ public class AgendaInvitadoLogic {
         return invi;
     }
     
+    /**
+     *
+     * @param agendasId
+     * @param invitadoEspecialId
+     */
     public void removeInvitadoEspecial(Long agendasId, Long invitadoEspecialId){
         LOGGER.log(Level.INFO, "Inicia proceso de borrar un invitado especial de la agenda con id = {0}", agendasId);
         AgendaEntity agendaEntity = agendaPersistence.find(agendasId);

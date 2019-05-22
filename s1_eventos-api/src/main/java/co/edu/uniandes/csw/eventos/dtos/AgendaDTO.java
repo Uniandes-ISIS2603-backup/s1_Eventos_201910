@@ -44,10 +44,18 @@ import org.apache.commons.lang3.builder.ToStringStyle;
     private Date horaFinal;
     private String actividad;
     
+    /**
+     *
+     */
     public AgendaDTO()
     {
         
     }
+
+    /**
+     *
+     * @param agendaEntity
+     */
     public AgendaDTO(AgendaEntity agendaEntity)
     {
         this.horaFinal = agendaEntity.getHoraFinal();
@@ -56,38 +64,74 @@ import org.apache.commons.lang3.builder.ToStringStyle;
         this.id = agendaEntity.getId();
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getHoraInicio() {
         return horaInicio;
     }
 
+    /**
+     *
+     * @param horaInicio
+     */
     public void setHoraInicio(Date horaInicio) {
         this.horaInicio = horaInicio;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getHoraFinal() {
         return horaFinal;
     }
 
+    /**
+     *
+     * @param horaFinal
+     */
     public void setHoraFinal(Date horaFinal) {
         this.horaFinal = horaFinal;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getActividad() {
         return actividad;
     }
 
+    /**
+     *
+     * @param actividad
+     */
     public void setActividad(String actividad) {
         this.actividad = actividad;
     }
     
+    /**
+     *
+     * @return
+     */
     public AgendaEntity toEntity()
     {
         AgendaEntity a = new AgendaEntity();

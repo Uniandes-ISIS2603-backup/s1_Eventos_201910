@@ -46,6 +46,8 @@ public class FacturaLogic {
     @Inject
     private FacturaPersistence persistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
 
+    
+    
     /**
      * Crea una Factura en la persistencia.
      *
@@ -88,14 +90,10 @@ public class FacturaLogic {
      * @return la Factura solicitada por medio de su id.
      */
     public FacturaEntity getFactura(Long facturasId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar la Factura con id = {0}", facturasId);
+      //  LOGGER.log(Level.INFO, "Inicia proceso de consultar la Factura con id = {0}", facturasId);
         // Note que, por medio de la inyección de dependencias se llama al método "find(id)" que se encuentra en la persistencia.
-        FacturaEntity facturaEntity = persistence.find(facturasId);
-        if (facturaEntity == null) {
-            LOGGER.log(Level.SEVERE, "La Factura con el id = {0} no existe", facturasId);
-        }
-        LOGGER.log(Level.INFO, "Termina proceso de consultar la Factura con id = {0}", facturasId);
-        return facturaEntity;
+       // LOGGER.log(Level.INFO, "Termina proceso de consultar la Factura con id = {0}", facturasId);
+        return persistence.find(facturasId);
     }
 
 }
