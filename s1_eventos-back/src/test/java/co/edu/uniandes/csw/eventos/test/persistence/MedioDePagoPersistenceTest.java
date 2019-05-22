@@ -143,13 +143,5 @@ public class MedioDePagoPersistenceTest {
          Assert.assertEquals(newEntity.getNumero(),resp.getNumero());
          Assert.assertEquals(newEntity.getTitular(),resp.getTitular());
          Assert.assertEquals(newEntity.getCodigoDeSeguridad(),resp.getCodigoDeSeguridad());
-     }
-     
-    
-     
-     
-    
-    
-    
-    
+     }  
 }

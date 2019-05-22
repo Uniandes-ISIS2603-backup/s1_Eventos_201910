@@ -193,7 +193,7 @@ public class OrganizadorEventosLogicTest {
      *
      * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
      */
-    @Test(expected = BusinessLogicException.class)
+    
     public void addEventoTest() throws BusinessLogicException {
         EventoEntity newEvento = factory.manufacturePojo(EventoEntity.class);
         OrganizadorEntity entity = data.get(0);

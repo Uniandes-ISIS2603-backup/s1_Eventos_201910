@@ -111,7 +111,6 @@ public class UbicacionLogicTest {
     private void insertData() {
         for (int i = 0; i < 3; i++) {
             UbicacionEntity entity = factory.manufacturePojo(UbicacionEntity.class);
-            UbicacionEntity entradas = factory.manufacturePojo(UbicacionEntity.class);
 
             em.persist(entity);
             data.add(entity);
@@ -158,6 +157,20 @@ public class UbicacionLogicTest {
         ubicacionLogic.createUbicacion(newEntity);
 
     }
+    
+        /**
+     * test latitud incorrecta
+     * @throws BusinessLogicException 
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void createUbicacioLatitudIncorrecta2() throws BusinessLogicException {
+        UbicacionEntity newEntity = factory.manufacturePojo(UbicacionEntity.class);
+        newEntity.setLatitud( -100.00);
+        ubicacionLogic.createUbicacion(newEntity);
+
+    }
+    
+    
 
     /**
      * test longitus incorrecta
@@ -173,12 +186,16 @@ public class UbicacionLogicTest {
     }
 
     /**
-     * genera numero aleatoreo entre 0 y 500
-     * @return 
+     * test longitus incorrecta
+     * @throws BusinessLogicException 
      */
-    private int generarNumeroAleatoreo() {
-        Random rnd = new Random();
-        return rnd.nextInt(500);
+    //1. Latitud: debe ser un número decimal entre +180 y 180
+    @Test(expected = BusinessLogicException.class)
+    public void createUbicacioLongitudIncorrecta2() throws BusinessLogicException {
+        UbicacionEntity newEntity = factory.manufacturePojo(UbicacionEntity.class);
+        newEntity.setLongitud(-190.00);
+        ubicacionLogic.createUbicacion(newEntity);
+
     }
 
     /**
@@ -198,6 +215,76 @@ public class UbicacionLogicTest {
         UbicacionEntity resp = em.find(UbicacionEntity.class, entity.getId());
 
         Assert.assertEquals(newEntity.getId(), resp.getId());
+    }
+    
+        /**
+     * Prueba para actualizar un Patrocinador con Nombre inválido
+     *
+     * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void updateUbicacionConNombreInvalidoTest() throws BusinessLogicException {
+        UbicacionEntity entity = data.get(0);
+        UbicacionEntity pojoEntity = factory.manufacturePojo(UbicacionEntity.class);
+        pojoEntity.setNombre("lgrhjfgkkfjdhfcgjfjkjhgfdxcvbjhggcvefgjcvebfhjcefdvcehjdvdncvdnc");
+        pojoEntity.setId(entity.getId());
+        ubicacionLogic.updateUbicacion(pojoEntity.getId(), pojoEntity);
+    }
+    
+    /**
+     * Prueba para actualizar un Patrocinador con Nombre inválido
+     *
+     * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void updateUbicacionLatitudInvalidaTest() throws BusinessLogicException {
+        UbicacionEntity entity = data.get(0);
+        UbicacionEntity pojoEntity = factory.manufacturePojo(UbicacionEntity.class);
+        pojoEntity.setLatitud( -100.00);
+        pojoEntity.setId(entity.getId());
+        ubicacionLogic.updateUbicacion(pojoEntity.getId(), pojoEntity);
+    }
+    
+    /**
+     * Prueba para actualizar un Patrocinador con Nombre inválido
+     *
+     * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void updateUbicacionLatitudInvalida2Test() throws BusinessLogicException {
+        UbicacionEntity entity = data.get(0);
+        UbicacionEntity pojoEntity = factory.manufacturePojo(UbicacionEntity.class);
+        pojoEntity.setLatitud(100.00);
+        pojoEntity.setId(entity.getId());
+        ubicacionLogic.updateUbicacion(pojoEntity.getId(), pojoEntity);
+    }
+    
+                    /**
+     * Prueba para actualizar un Patrocinador con Nombre inválido
+     *
+     * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void updateUbicacionLongitudInvalidaTest() throws BusinessLogicException {
+        UbicacionEntity entity = data.get(0);
+        UbicacionEntity pojoEntity = factory.manufacturePojo(UbicacionEntity.class);
+        pojoEntity.setLongitud(-190.00);
+        pojoEntity.setId(entity.getId());
+        ubicacionLogic.updateUbicacion(pojoEntity.getId(), pojoEntity);
+    }
+    
+    /**
+     * Prueba para actualizar un Patrocinador con Nombre inválido
+     *
+     * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
+     */
+    @Test(expected = BusinessLogicException.class)
+    public void updateUbicacionLongitudInvalida2Test() throws BusinessLogicException {
+        UbicacionEntity entity = data.get(0);
+        UbicacionEntity pojoEntity = factory.manufacturePojo(UbicacionEntity.class);
+        pojoEntity.setLongitud(190.00);
+        pojoEntity.setId(entity.getId());
+        ubicacionLogic.updateUbicacion(pojoEntity.getId(), pojoEntity);
     }
 
    /**
