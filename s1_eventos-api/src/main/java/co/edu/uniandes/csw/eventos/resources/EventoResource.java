@@ -111,6 +111,7 @@ public class EventoResource {
      * debe ser una cadena de dígitos.
      * @param evento {@link EventoDetailDTO} El evento que se desea guardar.
      * @return JSON {@link EventoDetailDTO} - El evento guardado.
+     * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el evento a
      * actualizar.

@@ -33,28 +33,52 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class AgendaInvitadoEspecialResource {
 
+    /**
+     * Atributo para inyectar la logica de invitado especial
+     */
     @Inject
     private InvitadoEspecialLogic iel;
 
+    
+    /**
+     * Atributo para inyectar la logica de agendainvitado
+     */
     @Inject
     private AgendaInvitadoLogic logica;
 
+    /**
+     * Metodo que crea un invitado especial a una agenda
+     * @param agendasId
+     * @param invitadoEspecial
+     * @return
+     * @throws BusinessLogicException 
+     */
     @POST
     public InvitadoEspecialDTO addInvitadoEspecial(@PathParam("agendasId") Long agendasId, InvitadoEspecialDTO invitadoEspecial) throws BusinessLogicException {
         
-    //    if (iel.getInvitadoEspecial(invitadoEspecialesId) == null) {
-      //      throw new WebApplicationException("El recurso /invitadoEspeciales/" + invitadoEspecialesId + " no existe.", 404);
-      //  }
+  
         InvitadoEspecialDTO DTO = new InvitadoEspecialDTO(logica.addInvitadoEspecial(agendasId, invitadoEspecial.toEntity()));
         return DTO;
     }
 
+    /**
+     * Metodo que obtiene los invitados especiales
+     * @param agendasId
+     * @return 
+     */
     @GET
     public List<InvitadoEspecialDTO> getInvitadoEspeciales(@PathParam("agendasId") Long agendasId) {
         List<InvitadoEspecialDTO> lista = listEntity2DTO(logica.getInvitadoEspecials(agendasId));
         return lista;
     }
 
+    /**
+     * Metodo que obitiene un invitado especial por id
+     * @param agendasId
+     * @param invitadoEspecialesId
+     * @return
+     * @throws BusinessLogicException 
+     */
     @GET
     @Path("{invitadoEspecialesId: \\d+}")
     public InvitadoEspecialDTO getInvitadoEspecial(@PathParam("agendasId") Long agendasId, @PathParam("invitadoEspecialesId") Long invitadoEspecialesId) throws BusinessLogicException {
@@ -65,6 +89,11 @@ public class AgendaInvitadoEspecialResource {
         return DTO;
     }
     
+    /**
+     * Metodo que borra un invitado especial de una agenda
+     * @param agendasId
+     * @param invitadosEspecialId 
+     */
     @DELETE
      @Path("{invitadoEspecialesId: \\d+}")
     public void removeInvitadoEspecial(@PathParam("agendasId") Long agendasId, @PathParam("invitadoEspecialesId") Long invitadosEspecialId){
@@ -76,6 +105,13 @@ public class AgendaInvitadoEspecialResource {
        
     }
 
+    /**
+     * Metodo que actualiza un invitado especial de una agenda por id
+     * @param agendasId
+     * @param invitadoEspecialesId
+     * @param invitado
+     * @return 
+     */
     @PUT
     @Path("{invitadoEspecialesId: \\d+}")
     public InvitadoEspecialDTO replaceInvitadoEspeciales(@PathParam("agendasId") Long agendasId, @PathParam("invitadoEspecialesId") Long invitadoEspecialesId, InvitadoEspecialDTO invitado) {
@@ -89,7 +125,11 @@ public class AgendaInvitadoEspecialResource {
         return invitado;
     }
 
-    
+    /**
+     * Convierte una lista de invitados especiales entity a dto
+     * @param entityList
+     * @return 
+     */
     private List<InvitadoEspecialDTO> listEntity2DTO(List<InvitadoEspecialEntity> entityList) {
         List<InvitadoEspecialDTO> list = new ArrayList<>();
         for (InvitadoEspecialEntity entity : entityList) {
@@ -98,6 +138,11 @@ public class AgendaInvitadoEspecialResource {
         return list;
     }
 
+    /**
+     * Convierte una lista de invitados especiales DTO a entity
+     * @param dtos
+     * @return 
+     */
     private List<InvitadoEspecialEntity> listDTO2Entity(List<InvitadoEspecialDTO> dtos) {
         List<InvitadoEspecialEntity> list = new ArrayList<>();
         for (InvitadoEspecialDTO dto : dtos) {

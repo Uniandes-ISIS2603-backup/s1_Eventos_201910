@@ -19,9 +19,18 @@ public class MultimediaDTO implements Serializable {
     private String nombre;
     private String tipo;
     private Boolean memoria;
+
+    /**
+     *
+     */
     public MultimediaDTO(){
         
     }
+
+    /**
+     *
+     * @param multimediaEntity
+     */
     public MultimediaDTO(MultimediaEntity multimediaEntity){
         if(multimediaEntity != null){
             this.id = multimediaEntity.getId();
@@ -31,6 +40,11 @@ public class MultimediaDTO implements Serializable {
             this.memoria = multimediaEntity.isMemoria();
         }
     }
+
+    /**
+     *
+     * @return
+     */
     public MultimediaEntity toEntity(){
         MultimediaEntity multimediaEntity = new MultimediaEntity();
         multimediaEntity.setId(this.getId());

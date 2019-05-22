@@ -28,6 +28,12 @@ public class UsuarioFacturasLogic {
     @Inject
     private UsuarioPersistence usuarioPersistence;
 
+    /**
+     *
+     * @param facturasId
+     * @param usuariosId
+     * @return
+     */
     public FacturaEntity addFactura(Long facturasId, Long usuariosId) {
         LOGGER.log(Level.INFO, "Inicia proceso de agregarle una factura al usuario con id = {0}", usuariosId);
         UsuarioEntity usuarioEntity = usuarioPersistence.find(usuariosId);
@@ -37,11 +43,23 @@ public class UsuarioFacturasLogic {
         return facturaEntity;
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @return
+     */
     public List<FacturaEntity> getFacturas(Long usuariosId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar los facturas asociados al usuario con id = {0}", usuariosId);
         return usuarioPersistence.find(usuariosId).getFacturas();
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @param facturasId
+     * @return
+     * @throws BusinessLogicException
+     */
     public FacturaEntity getFactura(Long usuariosId, Long facturasId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar la factura con id = {0} del usuario con id = " + usuariosId, facturasId);
         List<FacturaEntity> facturas = usuarioPersistence.find(usuariosId).getFacturas();
@@ -54,6 +72,12 @@ public class UsuarioFacturasLogic {
         throw new BusinessLogicException("La factura no está asociada al usuario");
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @param facturas
+     * @return
+     */
     public List<FacturaEntity> replaceFacturas(Long usuariosId, List<FacturaEntity> facturas) {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar el usuario con id = {0}", usuariosId);
         UsuarioEntity usuarioEntity = usuarioPersistence.find(usuariosId);

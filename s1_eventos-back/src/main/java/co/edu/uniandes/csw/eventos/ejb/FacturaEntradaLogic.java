@@ -56,9 +56,9 @@ public class FacturaEntradaLogic {
     /**
      * Agregar un Entrada a la Factura
      *
-     * @param entradasId El id libro a guardar
      * @param facturasId El id de la Factura en la cual se va a guardar el
      * libro.
+     * @param entrada
      * @return la entrada creado.
      */
     public EntradaEntity addEntrada(Long facturasId, EntradaEntity entrada) {

@@ -1,0 +1,272 @@
+{
+	"info": {
+		"_postman_id": "b3ca29bc-53d1-4d9c-84cc-c1c13d157ac7",
+		"name": "EventoEntradaResourceTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear evento",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "694741e6-4794-48fd-b32b-d790963ac9b0",
+						"exec": [
+							"",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_e\",data.id);",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\r\n   \t \"nombre\":\"concierto musica electronica\",\r\n   \t\"descripcion\":\"concierto por la orquesta de los alpes\",\r\n   \t\"fechaInicio\":\"2019-04-23T18:25:43.511Z\",\r\n   \t\"fechaFin\":\"2019-04-24T18:25:43.511Z\",\r\n   \t\"detalles\":\"NA\",\r\n   \t\"categoria\":\"Musica\",\r\n   \t\"privado\":false,\r\n   \t\"capacidadMaxima\":200,\r\n   \t\"boletasDisponibles\":200\r\n   }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/eventos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"eventos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear evento 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "694741e6-4794-48fd-b32b-d790963ac9b0",
+						"exec": [
+							"",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_e\",data.id);",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\r\n   \t \"nombre\":\"partido de futbol egresados\",\r\n   \t\"descripcion\":\"encuentro entre egresados y estudiantes\",\r\n   \t\"fechaInicio\":\"2019-04-23T18:25:43.511Z\",\r\n   \t\"fechaFin\":\"2019-04-24T18:25:43.511Z\",\r\n   \t\"detalles\":\"NA\",\r\n   \t\"categoria\":\"deporte\",\r\n   \t\"privado\":false,\r\n   \t\"capacidadMaxima\":200,\r\n   \t\"boletasDisponibles\":200\r\n   }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/eventos",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"eventos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear entradad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "694741e6-4794-48fd-b32b-d790963ac9b0",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_m\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\r\n   \t\"url\": \"https://ualpes.edu/evento.pdf\", \r\n   \t\"nombre\": \"EventoUnialpes\",\r\n   \t\"tipo\":\"PDF\",\r\n   \t\"memoria\": false\r\n   }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/multimedias",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"multimedias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get entradas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/eventos/100/entradas/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"eventos",
+						"100",
+						"entradas",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post entrada",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"QR\": \"QR88\",\n        \"checkIn\": \"N\",\n        \"descripcion\": \"DIABULUS IN OPERA\",\n        \"disponible\": \"Y\",\n        \"locacion\": \"General\",\n        \"numero\": \"123456\",\n        \"precio\": \"1111\",\n        \"reservado\": \"Y\"\n    }"
+				},
+				"url": {
+					"raw": "http://localhost:8080/s1_eventos-api/api/eventos/100/entradas/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"eventos",
+						"100",
+						"entradas",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete entrada",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s1_eventos-api/api/eventos/100/entradas/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"eventos",
+						"100",
+						"entradas",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put entrada",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"QR\": \"QR77\",\n        \"checkIn\": \"N\",\n        \"descripcion\": \"LA ACTUALIZACION FUNCIONA CHOLEEE\",\n        \"disponible\": \"Y\",\n        \"locacion\": \"General\",\n        \"numero\": \"123456\",\n        \"precio\": \"1111\",\n        \"reservado\": \"Y\"\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/eventos/100/entradas/1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"eventos",
+						"100",
+						"entradas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

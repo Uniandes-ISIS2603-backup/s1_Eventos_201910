@@ -40,7 +40,12 @@ public class MultimediaResource {
     @Inject
     private MultimediaLogic multimediaLogic;
     
-        
+    /**
+     *
+     * @param multimedia
+     * @return
+     * @throws BusinessLogicException
+     */
     @POST
     public MultimediaDTO createMultimedia(MultimediaDTO multimedia) throws BusinessLogicException {
         
@@ -50,7 +55,10 @@ public class MultimediaResource {
         return multimediaDTO;
     }
 
-    
+    /**
+     *
+     * @return
+     */
     @GET
     public List<MultimediaDTO> getMultimedias() {
         
@@ -60,7 +68,12 @@ public class MultimediaResource {
         return listaMultimedias;
     }
 
-    
+    /**
+     *
+     * @param multimediasId
+     * @return
+     * @throws WebApplicationException
+     */
     @GET
     @Path("{multimediasId: \\d+}")
     public MultimediaDTO getMultimedia(@PathParam("multimediasId") Long multimediasId) throws WebApplicationException {
@@ -75,7 +88,13 @@ public class MultimediaResource {
         return multimediaDTO;
     }
 
-    
+    /**
+     *
+     * @param multimediasId
+     * @param multimedia
+     * @return
+     * @throws WebApplicationException
+     */
     @PUT
     @Path("{multimediasId: \\d+}")
     public MultimediaDTO updateMultimedia(@PathParam("multimediasId") Long multimediasId, MultimediaDTO multimedia) throws WebApplicationException {
@@ -89,7 +108,11 @@ public class MultimediaResource {
         return mDTO;
     }
 
-    
+    /**
+     *
+     * @param multimediasId
+     * @throws BusinessLogicException
+     */
     @DELETE
     @Path("{multimediasId: \\d+}")
     public void deleteMultimedia(@PathParam("multimediasId") Long multimediasId) throws BusinessLogicException {

@@ -38,6 +38,12 @@ public class UsuarioFacturasResource {
     @Inject
     private FacturaLogic facturaLogic;
 
+    /**
+     *
+     * @param usuariosId
+     * @param facturasId
+     * @return
+     */
     @POST
     @Path("{facturasId: \\d+}")
     public FacturaDTO addFactura(@PathParam("usuariosId") Long usuariosId, @PathParam("facturasId") Long facturasId) {
@@ -50,6 +56,11 @@ public class UsuarioFacturasResource {
         return facturaDTO;
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @return
+     */
     @GET
     public List<FacturaDetailDTO> getFacturas(@PathParam("usuariosId") Long usuariosId) {
         LOGGER.log(Level.INFO, "UsuarioFacturasResource getFacturas: input: {0}", usuariosId);
@@ -58,6 +69,13 @@ public class UsuarioFacturasResource {
         return listaDetailDTOs;
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @param facturasId
+     * @return
+     * @throws BusinessLogicException
+     */
     @GET
     @Path("{facturasId: \\d+}")
     public FacturaDetailDTO getFactura(@PathParam("usuariosId") Long usuariosId, @PathParam("facturasId") Long facturasId) throws BusinessLogicException {
@@ -70,6 +88,12 @@ public class UsuarioFacturasResource {
         return facturaDetailDTO;
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @param facturas
+     * @return
+     */
     @PUT
     public List<FacturaDetailDTO> replaceFacturas(@PathParam("usuariosId") Long usuariosId, List<FacturaDetailDTO> facturas) {
         LOGGER.log(Level.INFO, "UsuarioFacturasResource replaceFacturas: input: usuariosId: {0} , facturas: {1}", new Object[]{usuariosId, facturas});

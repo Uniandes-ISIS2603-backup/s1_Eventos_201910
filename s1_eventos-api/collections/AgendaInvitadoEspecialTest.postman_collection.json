@@ -1,0 +1,156 @@
+{
+	"info": {
+		"_postman_id": "b3e0b993-6ca8-4095-a1cf-78bce1d4b13e",
+		"name": "AgendaInvitadoEspecialTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get invitadoEspeciales",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/agendas/100/invitadoEspeciales",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"agendas",
+						"100",
+						"invitadoEspeciales"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post invitadoEspecial",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"info\": \"especialista en Backend\",\n        \"nombre\": \"Funciona Del Putas\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/agendas/100/invitadoEspeciales/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"agendas",
+						"100",
+						"invitadoEspeciales",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete invitadoEspecial",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/agendas/100/invitadoEspeciales/3",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"agendas",
+						"100",
+						"invitadoEspeciales",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put invitadoEspecial",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"info\": \"Profesor del putas\",\n        \"nombre\": \"Perro Nel Gaira\"\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/agendas/100/invitadoEspeciales/400",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"agendas",
+						"100",
+						"invitadoEspeciales",
+						"400"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "20df5ee5-4164-4483-9ae3-f7e224b72723",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "c5e1cea2-5bb6-41cb-989c-2b303ce84e8b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

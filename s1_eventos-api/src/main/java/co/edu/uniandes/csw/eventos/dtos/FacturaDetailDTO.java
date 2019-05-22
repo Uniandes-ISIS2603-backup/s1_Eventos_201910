@@ -18,21 +18,37 @@ public class FacturaDetailDTO extends FacturaDTO implements Serializable {
     
     private UsuarioDTO usuario;
 
+    /**
+     *
+     * @param FacturaEntity
+     */
     public FacturaDetailDTO(FacturaEntity FacturaEntity)
     {
         super(FacturaEntity);
     }
     
+    /**
+     *
+     * @return
+     */
     public UsuarioDTO getUsuario()
     {
         return usuario;
     }
     
+    /**
+     *
+     * @param usuario
+     */
     public void setUsuario(UsuarioDTO usuario)
     {
         this.usuario=usuario;
     }
     
+    /**
+     *
+     * @return
+     */
     public FacturaEntity toEntity()
     {
         FacturaEntity entity = super.toEntity();

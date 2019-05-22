@@ -34,6 +34,13 @@ public class EntradaLogic {
     @Inject
     private FacturaPersistence facPersistence;
     
+    /**
+     *
+     * @param entradaEntity
+     * @param idEvento
+     * @return
+     * @throws BusinessLogicException
+     */
     public EntradaEntity createEntrada(EntradaEntity entradaEntity, Long idEvento) throws BusinessLogicException {
         EntradaEntity newEntr = persistence.create(entradaEntity);
         persistence.create(newEntr);
@@ -43,11 +50,21 @@ public class EntradaLogic {
         return newEntr;
     }
     
+    /**
+     *
+     * @param entradaId
+     */
     public void deleteEntrada(Long entradaId)
     {
         persistence.delete(entradaId);
     }
     
+    /**
+     *
+     * @param entrada
+     * @return
+     * @throws BusinessLogicException
+     */
     public EntradaEntity updateEntrada(EntradaEntity entrada) throws BusinessLogicException
     {
         if(persistence.find(entrada.getId())==null)
@@ -56,6 +73,11 @@ public class EntradaLogic {
         return entrada;
     }
     
+    /**
+     *
+     * @param entradaId
+     * @return
+     */
     public EntradaEntity find(Long entradaId)
     {  
         EntradaEntity entradaEntity = persistence.find(entradaId);
@@ -65,6 +87,10 @@ public class EntradaLogic {
         return entradaEntity;
     }
     
+    /**
+     *
+     * @return
+     */
     public List<EntradaEntity> findAll()
     {
           System.out.println("B0^*******************");

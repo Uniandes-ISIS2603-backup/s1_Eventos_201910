@@ -43,8 +43,11 @@ public class FacturaDTO implements Serializable {
     private Float montoTotal;
     private Float iva;
     
-
-      public FacturaDTO(FacturaEntity facturaEntity)
+    /**
+     *
+     * @param facturaEntity
+     */
+    public FacturaDTO(FacturaEntity facturaEntity)
     {
         if(facturaEntity !=null)
         {
@@ -53,42 +56,83 @@ public class FacturaDTO implements Serializable {
             this.iva=facturaEntity.getIva();
         }
     }
+
+    /**
+     *
+     */
     public FacturaDTO()
     {
         
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getFechaDePago() {
         return fechaDePago;
     }
 
+    /**
+     *
+     * @param fechaDePago
+     */
     public void setFechaDePago(Date fechaDePago) {
         this.fechaDePago = fechaDePago;
     }
 
+    /**
+     *
+     * @return
+     */
     public Float getMontoTotal() {
         return montoTotal;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param montoTotal
+     */
     public void setMontoTotal(Float montoTotal) {
         this.montoTotal = montoTotal;
     }
 
+    /**
+     *
+     * @return
+     */
     public Float getIva() {
         return iva;
     }
 
+    /**
+     *
+     * @param iva
+     */
     public void setIva(Float iva) {
         this.iva = iva;
     }
+
+    /**
+     *
+     * @return
+     */
     public FacturaEntity toEntity()
     {
         FacturaEntity f = new FacturaEntity();

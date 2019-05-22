@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "077bcbc0-4077-49f6-a269-89ed9645cbfa",
+		"_postman_id": "80ce3aa0-8306-4762-a64a-5d252d8d6ed2",
 		"name": "MedioDePagoResourceTest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -9,70 +9,11 @@
 			"name": "MediosDePago",
 			"event": [
 				{
-					"listen": "prerequest",
-					"script": {
-						"id": "7afd06c5-bad3-4774-8989-7317a612eb3b",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"id": "29db61d3-6901-4847-8fa5-d8e59a0134e5",
-						"exec": [
-							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_m\",data.id);",
-							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
-							"console.log(data.id);"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n        \"numero\": \"9090121267675432\",\n        \"titular\": \"JONATAN TIRATE UNPASO\",\n        \"codigoDeSeguridad\": \"181\",\n        \"fechaDeExpiracion\": \"2020-07-24T00:00:00-05:00\"\n}"
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_eventos-api",
-						"api",
-						"mediosDePago"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "MediosDePago",
-			"event": [
-				{
 					"listen": "test",
 					"script": {
 						"id": "f2709152-9a0d-48c5-8ce6-ac4648e6dc43",
 						"exec": [
-							"var data= JSON.parse(responseBody);",
-							"tests[\"No genera error en el Gell All\"] = responseCode.code === 200;",
-							"tests[\"patrocinadores count\"] = data.length >= 1;"
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
 					}
@@ -119,8 +60,6 @@
 					"script": {
 						"id": "b3aec113-db1b-4d4b-98c4-0e03742e0b91",
 						"exec": [
-							"console.log(responseBody);",
-							"var data = JSON.parse(responseBody);",
 							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -130,8 +69,12 @@
 			"request": {
 				"method": "GET",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/{{new_id_m}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/22",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -141,42 +84,7 @@
 						"s1_eventos-api",
 						"api",
 						"mediosDePago",
-						"{{new_id_m}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Obtener un medio de pago que no existe",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "39dc353d-ae0a-41c6-99a5-89218360c4d3",
-						"exec": [
-							"tests[\"No se deberia obtener un medioDePago con un id que no existe\"] = responseCode.code === 404;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /medioDePago/0 no existe.\");"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/0",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_eventos-api",
-						"api",
-						"mediosDePago",
-						"0"
+						"22"
 					]
 				}
 			},
@@ -186,18 +94,61 @@
 			"name": "MediosDePago",
 			"event": [
 				{
+					"listen": "prerequest",
+					"script": {
+						"id": "7afd06c5-bad3-4774-8989-7317a612eb3b",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
 					"listen": "test",
 					"script": {
-						"id": "88a777b5-3ca2-4c0b-ae90-df4db5477754",
+						"id": "29db61d3-6901-4847-8fa5-d8e59a0134e5",
 						"exec": [
-							"console.log(responseBody);",
 							"var data = JSON.parse(responseBody);",
-							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+							"postman.setGlobalVariable(\"new_id_o\",data.id);",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"numero\": \"9090121267675432\",\n        \"titular\": \"JONATAN TIRATE UNPASO\",\n        \"codigoDeSeguridad\": \"181\",\n        \"fechaDeExpiracion\": \"2020-07-24T00:00:00-05:00\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_eventos-api",
+						"api",
+						"mediosDePago"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MediosDePago",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -213,7 +164,7 @@
 					"raw": "{\n        \"codigoDeSeguridad\": \"019\",\n        \"fechaDeExpiracion\": \"2020-07-24T00:00:59-05:00\",\n        \"numero\": \"4092907665439090\",\n        \"titular\": \"JUAN DAVID zhendong\"\n    }"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/{{new_id_m}}",
+					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/44",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -223,128 +174,7 @@
 						"s1_eventos-api",
 						"api",
 						"mediosDePago",
-						"{{new_id_m}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Editar un medio de pago que no existe",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "15a70f62-2a66-469a-9ca6-d1125b0c8774",
-						"exec": [
-							"tests[\"No se deberia actualizar un meidioDePago con id que no existe\"] = responseCode.code === 404;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /meidioDePago/0 no existe.\");"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n        \"codigoDeSeguridad\": \"019\",\n        \"fechaDeExpiracion\": \"2020-07-24T00:00:59-05:00\",\n        \"numero\": \"4092907665439090\",\n        \"titular\": \"JUAN DAVID zhendong\"\n    }"
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/0",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_eventos-api",
-						"api",
-						"mediosDePago",
-						"0"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Elminiar medio de pago",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "d403e21b-3da3-4bbc-9b8a-9a2285ec0292",
-						"exec": [
-							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/{{new_id_m}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_eventos-api",
-						"api",
-						"mediosDePago",
-						"{{new_id_m}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Eliminar medio de pago que no existe",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "c0905623-e468-4838-b24e-56e8402ea65c",
-						"exec": [
-							"tests[\"No se deberia borrar un mediosDePago con un id que no existe\"] = responseCode.code === 404;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /mediosDePago/0 no existe.\");"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s1_eventos-api/api/mediosDePago/0",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s1_eventos-api",
-						"api",
-						"mediosDePago",
-						"0"
+						"44"
 					]
 				}
 			},

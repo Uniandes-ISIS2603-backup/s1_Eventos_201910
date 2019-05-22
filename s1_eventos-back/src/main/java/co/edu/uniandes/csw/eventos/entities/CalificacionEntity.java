@@ -87,12 +87,23 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
      */
     public String recomendado;
     
+    /**
+     *
+     */
     public String deAcuerdo;
 
+    /**
+     *
+     * @return
+     */
     public String getDeAcuerdo() {
         return deAcuerdo;
     }
 
+    /**
+     *
+     * @param deAcuerdo
+     */
     public void setDeAcuerdo(String deAcuerdo) {
         this.deAcuerdo = deAcuerdo;
     }

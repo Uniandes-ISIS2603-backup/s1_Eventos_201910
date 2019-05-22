@@ -16,11 +16,17 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable {
     
     private List<EventoDTO> eventos;
 
+    /**
+     *
+     */
     public UsuarioDetailDTO() {
         super();
     }
 
-    
+    /**
+     *
+     * @param usuarioEntity
+     */
     public UsuarioDetailDTO(UsuarioEntity usuarioEntity) {
         super(usuarioEntity);
         if (usuarioEntity != null) {
@@ -31,7 +37,10 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable {
         }
     }
 
-    
+    /**
+     *
+     * @return
+     */
     @Override
     public UsuarioEntity toEntity() {
         UsuarioEntity usuarioEntity = super.toEntity();
@@ -46,12 +55,18 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable {
         return usuarioEntity;
     }
 
-    
+    /**
+     *
+     * @return
+     */
     public List<EventoDTO> getEventos() {
         return eventos;
     }
 
-    
+    /**
+     *
+     * @param eventos
+     */
     public void setEventos(List<EventoDTO> eventos) {
         this.eventos = eventos;
     }

@@ -56,26 +56,50 @@ public class FacturaEntity extends BaseEntity implements Serializable{
         this.nombre = nombre;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getFecha() {
         return fecha;
     }
 
+    /**
+     *
+     * @param fecha
+     */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
+    /**
+     *
+     * @return
+     */
     public Float getTotal() {
         return total;
     }
 
+    /**
+     *
+     * @param total
+     */
     public void setTotal(Float total) {
         this.total = total;
     }
 
+    /**
+     *
+     * @return
+     */
     public Float getIva() {
         return iva;
     }
 
+    /**
+     *
+     * @param iva
+     */
     public void setIva(Float iva) {
         this.iva = iva;
     }
@@ -94,10 +118,18 @@ public class FacturaEntity extends BaseEntity implements Serializable{
          this.usuario = usuarios;
      }
 
+    /**
+     *
+     * @return
+     */
     public List<EntradaEntity> getEntradas() {
         return entradas;
     }
 
+    /**
+     *
+     * @param entradas
+     */
     public void setEntradas(List<EntradaEntity> entradas) {
         this.entradas = entradas;
     }

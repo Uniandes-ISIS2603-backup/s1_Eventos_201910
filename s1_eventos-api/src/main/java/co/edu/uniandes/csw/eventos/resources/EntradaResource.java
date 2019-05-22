@@ -56,7 +56,6 @@ public class EntradaResource {
     @POST
    public EntradaDTO createEntrada(EntradaDTO entrada) throws BusinessLogicException
    {
-       //EntradaDTO entradaDTO = new EntradaDTO(entradaLogic.createEntrada(entrada.toEntity()));
         return entrada;
    }
    
@@ -112,7 +111,7 @@ public class EntradaResource {
    @DELETE
    @Path("(entradasId: \\d+)")
    public void deleteEntrada (@PathParam("entradasId") Long entradaId){
-       //
+       
        entradaLogic.deleteEntrada(entradaId);
    }
    

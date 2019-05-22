@@ -39,6 +39,7 @@ public class EventoEntradaLogic {
      * @param eventosId Identificador de la instancia de Evento
      * @param entradasId Identificador de la instancia de Entrada
      * @return Instancia de EntradaEntity que fue asociada a Evento
+     * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
      */
     public EntradaEntity addEntrada(Long eventosId, EntradaEntity entrada) throws BusinessLogicException{
         LOGGER.log(Level.INFO, "Inicia proceso de asociarle un entrada al evento con id = {0}", eventosId);
@@ -90,6 +91,7 @@ public class EventoEntradaLogic {
      * @param eventosId Identificador de la instancia de Evento
      * @param list Colección de instancias de EntradaEntity a asociar a
      * instancia de Evento
+     * @param entrada
      * @return Nueva colección de EntradaEntity asociada a la instancia de
      * Evento
      */

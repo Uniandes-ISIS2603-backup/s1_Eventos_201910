@@ -22,10 +22,17 @@ import javax.persistence.TypedQuery;
 public class MultimediaPersistence {
     private static final Logger LOGGER = Logger.getLogger(MultimediaPersistence.class.getName());
     
+    /**
+     *
+     */
     @PersistenceContext(unitName = "eventosPU")
     protected EntityManager em;
     
-    
+    /**
+     *
+     * @param multimediaEntity
+     * @return
+     */
     public MultimediaEntity create(MultimediaEntity multimediaEntity){
         LOGGER.log(Level.INFO, "Creando una multimedia nueva");
         em.persist(multimediaEntity);
@@ -33,6 +40,10 @@ public class MultimediaPersistence {
         return multimediaEntity;
     }
     
+    /**
+     *
+     * @param id
+     */
     public void delete(Long id) {
         LOGGER.log(Level.INFO, "Borrando multimedia con id = {0}", id);
         MultimediaEntity entity = em.find(MultimediaEntity.class, id);
@@ -40,11 +51,20 @@ public class MultimediaPersistence {
         LOGGER.log(Level.INFO, "Saliendo de borrar la multimedia con id = {0}", id);
     }
     
+    /**
+     *
+     * @param multimediaID
+     * @return
+     */
     public MultimediaEntity find (Long multimediaID){
         LOGGER.log(Level.INFO, "Buscando multimedia con id = {0}", multimediaID);
         return em.find(MultimediaEntity.class, multimediaID);
     }
     
+    /**
+     *
+     * @return
+     */
     public List<MultimediaEntity> findAll(){
         LOGGER.log(Level.INFO, "Buscando todas las multimedias");
         TypedQuery<MultimediaEntity> query = em.createQuery("select u from MultimediaEntity u", MultimediaEntity.class);
@@ -52,6 +72,11 @@ public class MultimediaPersistence {
         return query.getResultList();
     }
     
+    /**
+     *
+     * @param multimediaEntity
+     * @return
+     */
     public MultimediaEntity update(MultimediaEntity multimediaEntity) {
 
         return em.merge(multimediaEntity);

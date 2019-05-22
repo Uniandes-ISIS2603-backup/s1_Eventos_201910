@@ -28,6 +28,12 @@ public class UsuarioMediosDePagoLogic {
     @Inject
     private UsuarioPersistence usuarioPersistence;
 
+    /**
+     *
+     * @param mediosDePagoId
+     * @param usuariosId
+     * @return
+     */
     public MedioDePagoEntity addMedioDePago(Long mediosDePagoId, Long usuariosId) {
         LOGGER.log(Level.INFO, "Inicia proceso de agregarle un medio de pago al usuario con id = {0}", usuariosId);
         UsuarioEntity usuarioEntity = usuarioPersistence.find(usuariosId);
@@ -37,11 +43,23 @@ public class UsuarioMediosDePagoLogic {
         return medioDePagoEntity;
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @return
+     */
     public List<MedioDePagoEntity> getMediosDePago(Long usuariosId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar los medios de pago asociados al usuario con id = {0}", usuariosId);
         return usuarioPersistence.find(usuariosId).getMediosdepago();
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @param mediosDePagoId
+     * @return
+     * @throws BusinessLogicException
+     */
     public MedioDePagoEntity getMedioDePago(Long usuariosId, Long mediosDePagoId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el medio de pago con id = {0} del usuario con id = " + usuariosId, mediosDePagoId);
         List<MedioDePagoEntity> mediosDePago = usuarioPersistence.find(usuariosId).getMediosdepago();
@@ -54,6 +72,12 @@ public class UsuarioMediosDePagoLogic {
         throw new BusinessLogicException("El medio de pago no está asociado al usuario");
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @param mediosDePago
+     * @return
+     */
     public List<MedioDePagoEntity> replaceMediosDePago(Long usuariosId, List<MedioDePagoEntity> mediosDePago) {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar el usuario con id = {0}", usuariosId);
         UsuarioEntity usuarioEntity = usuarioPersistence.find(usuariosId);

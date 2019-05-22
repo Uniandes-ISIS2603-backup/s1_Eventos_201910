@@ -32,7 +32,7 @@ public class AgendaUbicacionLogic {
      * Asocia un Ubicacion existente a un Agenda
      *
      * @param agendasId Identificador de la instancia de Agenda
-     * @param ubicacionesId Identificador de la instancia de Ubicacion
+     * @param ubicacion
      * @return Instancia de UbicacionEntity que fue asociada a Agenda
      */
     public UbicacionEntity addUbicacion(Long agendasId, UbicacionEntity ubicacion) {
@@ -78,8 +78,8 @@ public class AgendaUbicacionLogic {
      * Remplaza las instancias de Ubicacion asociadas a una instancia de Agenda
      *
      * @param agendasId Identificador de la instancia de Agenda
-     * @param list Colección de instancias de UbicacionEntity a asociar a
-     * instancia de Agenda
+     * @param ubicacionesId
+     * @param u
      * @return Nueva colección de UbicacionEntity asociada a la instancia de
      * Agenda
      */

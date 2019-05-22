@@ -40,6 +40,7 @@ public class EventoCalificacionLogic {
      * @param eventosId Identificador de la instancia de Evento
      * @param calificacion Identificador de la instancia de Calificacion
      * @return Instancia de CalificacionEntity que fue asociada a Evento
+     * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
      */
     public CalificacionEntity addCalificacion(Long eventosId, CalificacionEntity calificacion) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de asociarle un calificacion al evento con id = {0}", eventosId);
@@ -94,8 +95,8 @@ public class EventoCalificacionLogic {
      * Evento
      *
      * @param eventosId Identificador de la instancia de Evento
-     * @param list Colección de instancias de CalificacionEntity a asociar a
-     * instancia de Evento
+     * @param calificacionId
+     * @param calif
      * @return Nueva colección de CalificacionEntity asociada a la instancia de
      * Evento
      */
