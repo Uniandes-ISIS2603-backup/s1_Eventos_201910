@@ -104,14 +104,11 @@ public class CalificacionResource {
    @Path("{calificacionesId: \\d+}")
    public CalificacionDTO updateCalificacion (@PathParam("calificacionesId") Long calificacionId, CalificacionDetailDTO calificacion)  throws BusinessLogicException{
        calificacion.setId(calificacionId);
-       System.out.println("-------LLEGA1-------");
        CalificacionEntity entity = calificacionLogic.findCalificacion(calificacionId);
-       System.out.println("-------LLEGA2-------");
        if(entity==null){
            throw new WebApplicationException("El recurso no existe",404);
        }
        CalificacionDetailDTO detailDTO = new CalificacionDetailDTO(calificacionLogic.updateCalificaion(calificacion.toEntity()));
-       System.out.println("-------LLEGA3-------");
        return calificacion;
    }
    

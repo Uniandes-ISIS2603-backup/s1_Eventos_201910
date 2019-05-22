@@ -54,26 +54,50 @@ public class AgendaEntity extends BaseEntity implements Serializable {
         this.nombre = nombre;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getHoraInicio() {
         return horaInicio;
     }
 
+    /**
+     *
+     * @param horaInicio
+     */
     public void setHoraInicio(Date horaInicio) {
         this.horaInicio = horaInicio;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getHoraFinal() {
         return horaFinal;
     }
 
+    /**
+     *
+     * @param horaFinal
+     */
     public void setHoraFinal(Date horaFinal) {
         this.horaFinal = horaFinal;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getActividad() {
         return actividad;
     }
 
+    /**
+     *
+     * @param actividad
+     */
     public void setActividad(String actividad) {
         this.actividad = actividad;
     }
@@ -92,10 +116,18 @@ public class AgendaEntity extends BaseEntity implements Serializable {
         this.eventos = eventos;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<InvitadoEspecialEntity> getInvitadosEspeciales() {
         return invitadosEspeciales;
     }
 
+    /**
+     *
+     * @param invitadosEspeciales
+     */
     public void setInvitadosEspeciales(List<InvitadoEspecialEntity> invitadosEspeciales) {
         this.invitadosEspeciales = invitadosEspeciales;
     }

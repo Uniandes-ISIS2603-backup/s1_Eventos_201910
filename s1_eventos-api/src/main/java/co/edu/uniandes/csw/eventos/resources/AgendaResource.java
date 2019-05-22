@@ -59,6 +59,9 @@ public class AgendaResource {
 
     private static final Logger LOGGER = Logger.getLogger(AgendaResource.class.getName());
 
+    /**
+     * Atributo donde se inyecta la logica de agenda
+     */
     @Inject
     AgendaLogic agendaLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
 
@@ -92,6 +95,7 @@ public class AgendaResource {
      *
      * @param agendasId Identificador de la Agenda que se desea borrar.
      * Este debe ser una cadena de dígitos.
+     * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
      */
     @DELETE
     @Path("{agendasId: \\d+}")
@@ -103,6 +107,12 @@ public class AgendaResource {
         agendaLogic.deleteAgenda(agendasId);
         LOGGER.info("AgendaResource deleteAgenda: output: void");
     }
+    
+    /**
+     * Metodo donde se obtiene una agenda a través de su id
+     * @param agendaID
+     * @return 
+     */
     @GET
    @Path("{agendaID: \\d+}")
    public AgendaDTO getAgenda(@PathParam("agendaID") Long agendaID){
@@ -114,11 +124,23 @@ public class AgendaResource {
        AgendaDTO agendaDTO = new AgendaDTO(agendaEntity);
        return agendaDTO;
    }
+   
+   /**
+    * Obtiene todas las agendas
+    * @return agendas
+    */
     @GET 
    public List<AgendaDTO> getAgendaes(){
         List<AgendaDTO> listaAgendaes = listEntity2DetailDTO(agendaLogic.getAgendas());
        return listaAgendaes;
    }
+   
+   /**
+    * Actualiza una agenda
+    * @param agendaId
+    * @param agenda
+    * @return 
+    */
    @PUT
    @Path("(agendaID: \\d+")
    public AgendaDTO updateAgenda (@PathParam("agendaID") Long agendaId, AgendaDTO agenda){
@@ -126,6 +148,12 @@ public class AgendaResource {
             throw new WebApplicationException("El recurso /Agendaes/" + agendaId + " no existe.", 404);
        return agenda;
    }
+   
+   /**
+    * Convierte una lista de agendas DTO en entity
+    * @param entityList
+    * @return 
+    */
     private List<AgendaDTO> listEntity2DetailDTO(List<AgendaEntity> entityList)
    {
        List<AgendaDTO> list = new ArrayList<>();
@@ -151,7 +179,6 @@ public class AgendaResource {
      */
     @Path("{agendasId: \\d+}/ubicacion")
     public Class<AgendaUbicacionResource> getAgendaUbicacionesResource(@PathParam("agendasId") Long agendasId) {
-        System.out.println("LLEGA AQUI");
         if (agendaLogic.getAgenda(agendasId) == null) {
             throw new WebApplicationException( "El recurso Agendas" + agendasId + "No existe", 404);
         }

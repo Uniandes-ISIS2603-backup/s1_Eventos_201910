@@ -37,6 +37,12 @@ public class UsuarioEntradasResource {
     @Inject
     private EntradaLogic entradaLogic;
 
+    /**
+     *
+     * @param usuariosId
+     * @param entradasId
+     * @return
+     */
     @POST
     @Path("{entradasId: \\d+}")
     public EntradaDTO addEntrada(@PathParam("usuariosId") Long usuariosId, @PathParam("entradasId") Long entradasId) {
@@ -49,6 +55,11 @@ public class UsuarioEntradasResource {
         return entradaDTO;
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @return
+     */
     @GET
     public List<EntradaDTO> getEntradas(@PathParam("usuariosId") Long usuariosId) {
         LOGGER.log(Level.INFO, "UsuarioEntradasResource getEntradas: input: {0}", usuariosId);
@@ -57,6 +68,13 @@ public class UsuarioEntradasResource {
         return listaDetailDTOs;
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @param entradasId
+     * @return
+     * @throws BusinessLogicException
+     */
     @GET
     @Path("{entradasId: \\d+}")
     public EntradaDTO getEntrada(@PathParam("usuariosId") Long usuariosId, @PathParam("entradasId") Long entradasId) throws BusinessLogicException {
@@ -69,6 +87,12 @@ public class UsuarioEntradasResource {
         return entradaDetailDTO;
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @param entradas
+     * @return
+     */
     @PUT
     public List<EntradaDTO> replaceEntradas(@PathParam("usuariosId") Long usuariosId, List<EntradaDTO> entradas) {
         LOGGER.log(Level.INFO, "UsuarioEntradasResource replaceEntradas: input: usuariosId: {0} , entradas: {1}", new Object[]{usuariosId, entradas});

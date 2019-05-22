@@ -37,8 +37,13 @@ public class EventoMultimediaResource {
     @Inject
     private EventoMultimediaLogic logica;
     
-    
-     @POST
+    /**
+     *
+     * @param eventosId
+     * @param multimediasId
+     * @return
+     */
+    @POST
     @Path("{multimediasId: \\d+}")
     public MultimediaDTO addMultimedia(@PathParam("eventosId") Long eventosId, @PathParam("multimediasId") Long multimediasId) {
         if (ml.getMultimedia(multimediasId) == null) {
@@ -48,12 +53,24 @@ public class EventoMultimediaResource {
         return DTO;
     }
 
+    /**
+     *
+     * @param eventosId
+     * @return
+     */
     @GET
     public List<MultimediaDTO> getMultimedias(@PathParam("eventosId") Long eventosId) {
         List<MultimediaDTO> lista = listEntity2DTO(logica.getMultimediaes(eventosId));
         return lista;
     }
 
+    /**
+     *
+     * @param eventosId
+     * @param multimediasId
+     * @return
+     * @throws BusinessLogicException
+     */
     @Path("{multimediasId: \\d+}")
     public MultimediaDTO getMultimedia(@PathParam("eventosId") Long eventosId, @PathParam("multimediasId") Long multimediasId) throws BusinessLogicException {
         if (ml.getMultimedia(multimediasId) == null) {
@@ -63,7 +80,13 @@ public class EventoMultimediaResource {
         return DTO;
     }
 
-   @PUT
+    /**
+     *
+     * @param editorialsId
+     * @param multimedias
+     * @return
+     */
+    @PUT
     public List<MultimediaDTO> replaceMultimedias(@PathParam("editorialsId") Long editorialsId, List<MultimediaDTO> multimedias) {
         for (MultimediaDTO multimedia : multimedias) {
             if (ml.getMultimedia(multimedia.getId()) == null) {
@@ -74,6 +97,11 @@ public class EventoMultimediaResource {
        return listaDTOs;
     }
 
+    /**
+     *
+     * @param eventosId
+     * @param multimediasId
+     */
     @DELETE
     @Path("{multimediasId: \\d+}")
     public void removeMultimedia(@PathParam("eventosId") Long eventosId, @PathParam("agendasId") Long multimediasId) {

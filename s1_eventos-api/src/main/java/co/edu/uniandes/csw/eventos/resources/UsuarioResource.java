@@ -35,7 +35,12 @@ public class UsuarioResource {
     @Inject
     private UsuarioLogic usuarioLogic;
     
-    
+    /**
+     *
+     * @param usuario
+     * @return
+     * @throws BusinessLogicException
+     */
     @POST
     public UsuarioDTO createUsuario(UsuarioDTO usuario) throws BusinessLogicException {
         
@@ -45,7 +50,10 @@ public class UsuarioResource {
         return usuarioDTO;
     }
 
-    
+    /**
+     * obitene
+     * @return
+     */
     @GET
     public List<UsuarioDetailDTO> getUsuarios() {
         
@@ -55,7 +63,12 @@ public class UsuarioResource {
         return listaUsuarios;
     }
 
-    
+    /**
+     *
+     * @param usuariosId
+     * @return
+     * @throws WebApplicationException
+     */
     @GET
     @Path("{usuariosId: \\d+}")
     public UsuarioDetailDTO getUsuario(@PathParam("usuariosId") Long usuariosId) throws WebApplicationException {

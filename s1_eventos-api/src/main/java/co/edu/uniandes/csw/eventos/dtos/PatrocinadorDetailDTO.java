@@ -42,6 +42,9 @@ public class PatrocinadorDetailDTO extends PatrocinadorDTO implements Serializab
     */
     private List<EventoDTO> eventos;
 
+    /**
+     *
+     */
     public PatrocinadorDetailDTO() {
         
         super();

@@ -7,8 +7,11 @@ package co.edu.uniandes.csw.eventos.resources;
 
 import co.edu.uniandes.csw.eventos.dtos.CalificacionDTO;
 import co.edu.uniandes.csw.eventos.ejb.CalificacionLogic;
+import co.edu.uniandes.csw.eventos.ejb.EntradaLogic;
 import co.edu.uniandes.csw.eventos.ejb.EventoCalificacionLogic;
 import co.edu.uniandes.csw.eventos.ejb.EventoLogic;
+import co.edu.uniandes.csw.eventos.ejb.FacturaEntradaLogic;
+import co.edu.uniandes.csw.eventos.ejb.FacturaLogic;
 import co.edu.uniandes.csw.eventos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.eventos.mappers.WebApplicationExceptionMapper;
@@ -42,23 +45,39 @@ public class EventoCalificacionResource {
 
     @Inject
     private EventoCalificacionLogic logica;
-
+    
+    /**
+     *
+     * @param eventosId
+     * @param calif
+     * @return
+     * @throws BusinessLogicException
+     */
     @POST
     public CalificacionDTO addCalificacion( @PathParam("eventosId") Long eventosId,CalificacionDTO calif) throws BusinessLogicException{
-        System.out.println("HOLAAAAAA LLEGO ");
-        //if (cl.findCalificacion(calif.getId()) != null) {
-          //  throw new WebApplicationException("El recurso /calificaciones/" + calif.getId() + " ya existe.", 404);
-        //}
+       
         CalificacionDTO DTO = new CalificacionDTO(logica.addCalificacion(eventosId, calif.toEntity()));
         return DTO;
     }
 
+    /**
+     *
+     * @param eventosId
+     * @return
+     */
     @GET
     public List<CalificacionDTO> getCalificaciones(@PathParam("eventosId") Long eventosId) {
         List<CalificacionDTO> lista = listEntity2DTO(logica.getCalificaciones(eventosId));
         return lista;
     }
 
+    /**
+     *
+     * @param eventosId
+     * @param calificacionesId
+     * @return
+     * @throws BusinessLogicException
+     */
     @Path("{calificacionesId: \\d+}")
     public CalificacionDTO getCalificacion(@PathParam("eventosId") Long eventosId, @PathParam("calificacionesId") Long calificacionesId) throws BusinessLogicException {
         if (cl.findCalificacion(calificacionesId) == null) {
@@ -68,15 +87,21 @@ public class EventoCalificacionResource {
         return DTO;
     }
 
+    /**
+     *
+     * @param eventosId
+     * @param calificacionesId
+     * @param calificacion
+     * @return
+     */
     @PUT
     @Path("{calificacionesId: \\d+}")
     public CalificacionDTO replaceCalificacion(@PathParam("eventosId") Long eventosId, @PathParam("calificacionesId") Long calificacionesId, CalificacionDTO calificacion) {
-        System.out.println("-------------LLEGAA----------------");
+       ;
             if (cl.findCalificacion(calificacionesId) == null) {
                 throw new WebApplicationException("El recurso /calificaciones/" + calificacion.getId() + " no existe.", 404);
             }
-       //CalificacionEntity entity =calificacion.toEntity();
-
+       
 
 
        CalificacionEntity calif = logica.replaceCalificacion(eventosId, calificacionesId,calificacion.toEntity());
@@ -84,6 +109,11 @@ public class EventoCalificacionResource {
         return calificacion;
     }
 
+    /**
+     *
+     * @param eventosId
+     * @param calificacionesId
+     */
     @DELETE
     @Path("{calificacionesId: \\d+}")
     public void removeCalificacion(@PathParam("eventosId") Long eventosId, @PathParam("calificacionesId") Long calificacionesId) {

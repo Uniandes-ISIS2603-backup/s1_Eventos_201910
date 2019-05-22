@@ -28,6 +28,12 @@ public class UsuarioEntradasLogic {
     @Inject
     private UsuarioPersistence usuarioPersistence;
 
+    /**
+     *
+     * @param entradasId
+     * @param usuariosId
+     * @return
+     */
     public EntradaEntity addEntrada(Long entradasId, Long usuariosId) {
         LOGGER.log(Level.INFO, "Inicia proceso de agregarle una entrada al usuario con id = {0}", usuariosId);
         UsuarioEntity usuarioEntity = usuarioPersistence.find(usuariosId);
@@ -37,11 +43,23 @@ public class UsuarioEntradasLogic {
         return entradaEntity;
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @return
+     */
     public List<EntradaEntity> getEntradas(Long usuariosId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar los entradas asociados al usuario con id = {0}", usuariosId);
         return usuarioPersistence.find(usuariosId).getEntradas();
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @param entradasId
+     * @return
+     * @throws BusinessLogicException
+     */
     public EntradaEntity getEntrada(Long usuariosId, Long entradasId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar la entrada con id = {0} del usuario con id = " + usuariosId, entradasId);
         List<EntradaEntity> entradas = usuarioPersistence.find(usuariosId).getEntradas();
@@ -54,6 +72,12 @@ public class UsuarioEntradasLogic {
         throw new BusinessLogicException("El entrada no está asociada al usuario");
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @param entradas
+     * @return
+     */
     public List<EntradaEntity> replaceEntradas(Long usuariosId, List<EntradaEntity> entradas) {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar el usuario con id = {0}", usuariosId);
         UsuarioEntity usuarioEntity = usuarioPersistence.find(usuariosId);

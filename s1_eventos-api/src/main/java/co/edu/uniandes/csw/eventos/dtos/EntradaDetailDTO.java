@@ -37,6 +37,10 @@ public class EntradaDetailDTO extends EntradaDTO implements Serializable {
         super();
     }
    
+    /**
+     *
+     * @param entradaEntity
+     */
     public EntradaDetailDTO(EntradaEntity entradaEntity){
         super(entradaEntity);
        // if (entradaEntity != null) {

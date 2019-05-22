@@ -34,10 +34,18 @@ public class CalificacionDTO implements Serializable {
     
     private String deAcuerdo;
 
+    /**
+     *
+     * @return
+     */
     public String getDeAcuerdo() {
         return deAcuerdo;
     }
 
+    /**
+     *
+     * @param deAcuerdo
+     */
     public void setDeAcuerdo(String deAcuerdo) {
         this.deAcuerdo = deAcuerdo;
     }
@@ -45,6 +53,12 @@ public class CalificacionDTO implements Serializable {
     /*
         Constructor de la calificacion
     */
+
+    /**
+     *
+     * @param calificacionEntity
+     */
+
       public CalificacionDTO(CalificacionEntity calificacionEntity)
     {
         if(calificacionEntity !=null)

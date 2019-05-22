@@ -26,6 +26,12 @@ public class UsuarioLogic {
     @Inject
     private UsuarioPersistence persistence;
     
+    /**
+     *
+     * @param usuarioEntity
+     * @return
+     * @throws BusinessLogicException
+     */
     public UsuarioEntity createUsuario(UsuarioEntity usuarioEntity)throws BusinessLogicException{
         LOGGER.log(Level.INFO, "Inicia proceso de creación de usuario");
         
@@ -65,12 +71,20 @@ public class UsuarioLogic {
         return usuarioEntity;
     }
     
+    /**
+     *
+     * @param usuarioId
+     */
     public void deleteUsuario(Long usuarioId) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el usuario con id = {0}", usuarioId);
         persistence.delete(usuarioId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el usuario con id = {0}", usuarioId);
     }
     
+    /**
+     *
+     * @return
+     */
     public List<UsuarioEntity> getUsuarios() {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los usuarios");
         List<UsuarioEntity> lista = persistence.findAll();
@@ -78,7 +92,11 @@ public class UsuarioLogic {
         return lista;
     }
     
-    
+    /**
+     *
+     * @param usuarioId
+     * @return
+     */
     public UsuarioEntity getUsuario(Long usuarioId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el usuario con id = {0}", usuarioId);
         UsuarioEntity usuarioEntity = persistence.find(usuarioId);
@@ -89,7 +107,12 @@ public class UsuarioLogic {
         return usuarioEntity;
     }
     
-     
+    /**
+     *
+     * @param usuarioId
+     * @param usuarioEntity
+     * @return
+     */
     public UsuarioEntity updateUsuario(Long usuarioId, UsuarioEntity usuarioEntity) {
         
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar el usuario con id = {0}", usuarioId);

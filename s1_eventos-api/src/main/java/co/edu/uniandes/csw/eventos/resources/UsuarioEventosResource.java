@@ -38,6 +38,12 @@ public class UsuarioEventosResource {
     @Inject
     private EventoLogic eventoLogic;
     
+    /**
+     *
+     * @param usuariosId
+     * @param eventosId
+     * @return
+     */
     @POST
     @Path("{eventosId: \\d+}")
     public EventoDTO addEvento(@PathParam("usuariosId") Long usuariosId, @PathParam("eventosId") Long eventosId) {
@@ -50,6 +56,11 @@ public class UsuarioEventosResource {
         return eventoDTO;
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @return
+     */
     @GET
     public List<EventoDetailDTO> getEventos(@PathParam("usuariosId") Long usuariosId) {
         LOGGER.log(Level.INFO, "UsuarioEventosResource getEventos: input: {0}", usuariosId);
@@ -58,6 +69,13 @@ public class UsuarioEventosResource {
         return listaDetailDTOs;
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @param eventosId
+     * @return
+     * @throws BusinessLogicException
+     */
     @GET
     @Path("{eventosId: \\d+}")
     public EventoDetailDTO getEvento(@PathParam("usuariosId") Long usuariosId, @PathParam("eventosId") Long eventosId) throws BusinessLogicException {
@@ -70,6 +88,12 @@ public class UsuarioEventosResource {
         return eventoDetailDTO;
     }
 
+    /**
+     *
+     * @param usuariosId
+     * @param eventos
+     * @return
+     */
     @PUT
     public List<EventoDetailDTO> replaceEventos(@PathParam("usuariosId") Long usuariosId, List<EventoDetailDTO> eventos) {
         LOGGER.log(Level.INFO, "UsuarioEventosResource replaceEventos: input: usuariosId: {0} , eventos: {1}", new Object[]{usuariosId, eventos});

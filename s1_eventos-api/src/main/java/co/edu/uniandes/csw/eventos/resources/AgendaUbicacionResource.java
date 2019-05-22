@@ -28,27 +28,45 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class AgendaUbicacionResource {
 
+    /**
+     * Atributo donde se va a inyectar la logica de agenda
+     */
     @Inject
     private AgendaLogic al;
 
+    /**
+     * Atribut donde se va a inyectar la logica de ubicacion
+     */
     @Inject
     private UbicacionLogic ul;
 
+    /**
+     * Atributo donde se va a inyectar la logica de agendaubicacion
+     */
     @Inject
     private AgendaUbicacionLogic logica;
 
+    /**
+     * Metodo que crea una ubicacion a una agenda
+     * @param agendasId
+     * @param ubicacion
+     * @return 
+     */
     @POST
     public UbicacionDTO addUbicacion(@PathParam("agendasId") Long agendasId, UbicacionDTO ubicacion) {
-        System.out.println("LLEGA A ADD UBICACION");
-        // if (ul.findUbicacion(ubicacionesId) == null) {
-         //   throw new WebApplicationException("El recurso /ubicaciones/" + ubicacionesId + " no existe.", 404);
-       // }
+       
         UbicacionDTO DTO = new UbicacionDTO(logica.addUbicacion(agendasId, ubicacion.toEntity()));
         return DTO;
     }
 
    
-    
+    /**
+     * Metodo que obtiene una bucacion de una agenda por su id
+     * @param agendasId
+     * @param ubicacionesId
+     * @return
+     * @throws BusinessLogicException 
+     */
     @GET
     @Path("{ubicacionesId: \\d+}")
     public UbicacionDTO getUbicacion(@PathParam("agendasId") Long agendasId,@PathParam("ubicacionesId") Long ubicacionesId) throws BusinessLogicException {
@@ -59,19 +77,29 @@ public class AgendaUbicacionResource {
         return DTO;
     }
 
+    /**
+     * Metodo que actualiza una ubicacion dado su id
+     * @param agendasId
+     * @param ubicacionesId
+     * @param ubicacion
+     * @return 
+     */
     @PUT
     @Path("{ubicacionesId: \\d+}")
     public UbicacionDTO replaceUbicaciones(@PathParam("agendasId") Long agendasId,@PathParam("ubicacionesId") Long ubicacionesId ,UbicacionDTO ubicacion) {
-        System.out.println("TERRIBLE OREMOS");
         
         if (ul.findUbicacion(ubicacionesId) == null) {
             throw new WebApplicationException("El recurso /agendas/" + ubicacion.getId() + " no existe.", 404);
         }
         UbicacionEntity ubic = logica.replaceUbicacion(agendasId,ubicacionesId,ubicacion.toEntity());
-        System.out.println("-----------FIN DE LOS TIEMPOS-----------");
         return ubicacion;
     }
 
+    /**
+     * Metodo que borra una ubicacion de una agenda
+     * @param agendasId
+     * @param ubicacionesId 
+     */
     @DELETE
     @Path("{ubicacionesId: \\d+}")
     public void removeUbicacion(@PathParam("agendasId") Long agendasId, @PathParam("ubicacionesId") Long ubicacionesId) {

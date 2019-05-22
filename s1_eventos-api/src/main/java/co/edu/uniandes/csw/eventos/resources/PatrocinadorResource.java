@@ -125,6 +125,7 @@ public class PatrocinadorResource {
      * debe ser una cadena de dígitos.
      * @param patrocinador {@link PatrocinadorDetailDTO} El patrocinador que se desea guardar.
      * @return JSON {@link PatrocinadorDetailDTO} - El patrocinador guardado.
+     * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el patrocinador a
      * actualizar.

@@ -309,10 +309,18 @@ public class EventoEntity extends BaseEntity implements Serializable {
         this.organizadores = organizadores;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<MultimediaEntity> getMultimedia() {
         return multimedia;
     }
 
+    /**
+     *
+     * @param multimedia
+     */
     public void setMultimedia(List<MultimediaEntity> multimedia) {
         this.multimedia = multimedia;
     }
@@ -338,6 +346,7 @@ public class EventoEntity extends BaseEntity implements Serializable {
     }
 
     /**
+     * @param agendas
      * @param agenda the agenda to set
      */
     public void setAgendas(List<AgendaEntity> agendas) {

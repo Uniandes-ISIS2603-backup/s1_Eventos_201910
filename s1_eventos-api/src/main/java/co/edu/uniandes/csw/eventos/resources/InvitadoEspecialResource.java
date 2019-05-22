@@ -101,7 +101,13 @@ public class InvitadoEspecialResource {
         invitadoEspecialLogic.deleteInvitadoEspecial(invitadoEspecialId);
         LOGGER.info("InvitadoEspecialResource deleteInvitadoEspecial: output: void");
     }
-     @GET
+
+    /**
+     *
+     * @param invitadoEspecialId
+     * @return
+     */
+    @GET
    @Path("{invitadoespecialId: \\d+}")
    public InvitadoEspecialDTO getInvitadoEspecial(@PathParam("invitadoespecialId") Long invitadoEspecialId){
        InvitadoEspecialEntity invitadoEspecialEntity = invitadoEspecialLogic.getInvitadoEspecial(invitadoEspecialId);
@@ -112,7 +118,15 @@ public class InvitadoEspecialResource {
        InvitadoEspecialDTO InvitadoEspecialDTO = new InvitadoEspecialDTO(invitadoEspecialEntity);
        return InvitadoEspecialDTO;
    }
-   @PUT
+
+    /**
+     *
+     * @param invitadoespecialId
+     * @param invitadoespecial
+     * @return
+     * @throws BusinessLogicException
+     */
+    @PUT
    @Path("(invitadoespecialId: \\d+")
    public InvitadoEspecialDTO updateInvitadoEspecial (@PathParam("invitadoespecialId") Long invitadoespecialId, InvitadoEspecialDTO invitadoespecial)throws BusinessLogicException{
       LOGGER.log(Level.INFO, "InvitadoEspecialResource deleteInvitadoEspecial: input: {0}", invitadoespecialId);

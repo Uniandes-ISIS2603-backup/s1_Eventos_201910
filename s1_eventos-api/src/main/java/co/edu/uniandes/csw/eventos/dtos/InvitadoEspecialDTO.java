@@ -41,41 +41,78 @@ public class InvitadoEspecialDTO implements Serializable {
    private String info;
    private String nombre;
    
-   public InvitadoEspecialDTO()
+    /**
+     *
+     */
+    public InvitadoEspecialDTO()
    {
        
    }
-   public InvitadoEspecialDTO(InvitadoEspecialEntity invitadoEspecialEntity)
+
+    /**
+     *
+     * @param invitadoEspecialEntity
+     */
+    public InvitadoEspecialDTO(InvitadoEspecialEntity invitadoEspecialEntity)
    {
        this.info = invitadoEspecialEntity.getInfo();
        this.nombre = invitadoEspecialEntity.getNombre();
        this.id = invitadoEspecialEntity.getId();
    }
 
+    /**
+     *
+     * @return
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getInfo() {
         return info;
     }
 
+    /**
+     *
+     * @param info
+     */
     public void setInfo(String info) {
         this.info = info;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     *
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-   public InvitadoEspecialEntity toEntity()
+
+    /**
+     *
+     * @return
+     */
+    public InvitadoEspecialEntity toEntity()
    {
        InvitadoEspecialEntity i = new InvitadoEspecialEntity();
        i.setId(this.id);

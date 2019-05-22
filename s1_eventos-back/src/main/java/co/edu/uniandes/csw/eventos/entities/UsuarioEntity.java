@@ -25,6 +25,9 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     private Double latitud;
     private Boolean unialpino;
 
+    /**
+     *
+     */
     public UsuarioEntity(){
         
     }

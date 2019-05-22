@@ -21,6 +21,9 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class PatrocinadorPersistence {
     
+    /**
+     *
+     */
     @PersistenceContext(unitName = "eventosPU")
     protected EntityManager em;
     

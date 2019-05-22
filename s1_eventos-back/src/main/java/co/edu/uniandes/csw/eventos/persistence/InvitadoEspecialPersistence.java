@@ -19,6 +19,9 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class InvitadoEspecialPersistence {
     
+    /**
+     *
+     */
     @PersistenceContext(unitName = "eventosPU")
     protected EntityManager em;
     

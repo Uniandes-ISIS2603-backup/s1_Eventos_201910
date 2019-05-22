@@ -114,6 +114,7 @@ public class UbicacionResource {
      * debe ser una cadena de dígitos.
      * @param ubicacion {@link UbicacionDTO} El ubicacion que se desea guardar.
      * @return JSON {@link UbicacionDTO} - El ubicacion guardado.
+     * @throws co.edu.uniandes.csw.eventos.exceptions.BusinessLogicException
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el ubicacion a
      * actualizar.
